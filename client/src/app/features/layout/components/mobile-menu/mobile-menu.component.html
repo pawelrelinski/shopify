@@ -10,14 +10,16 @@
       <div class="border-b border-gray-200">
         <div class="-mb-px flex px-4 space-x-8" aria-orientation="horizontal" role="tablist">
           <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 border-transparent" -->
-          <button id="tabs-1-tab-1"
+          <button (click)="openWomenMenu()"
+                  id="tabs-1-tab-1"
                   class="text-gray-900 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium"
                   aria-controls="tabs-1-panel-1" role="tab" type="button">
             Women
           </button>
 
           <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 border-transparent" -->
-          <button id="tabs-1-tab-2"
+          <button (click)="openMenMenu()"
+                  id="tabs-1-tab-2"
                   class="text-gray-900 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium"
                   aria-controls="tabs-1-panel-2" role="tab" type="button">
             Men
@@ -26,7 +28,7 @@
       </div>
 
       <!-- 'Women' tab panel, show/hide based on tab state. -->
-      <div id="tabs-1-panel-1" class="pt-10 pb-8 px-4 space-y-10" aria-labelledby="tabs-1-tab-1" role="tabpanel"
+      <div *ngIf="womenMenuIsOpen" id="tabs-1-panel-1" class="pt-10 pb-8 px-4 space-y-10" aria-labelledby="tabs-1-tab-1" role="tabpanel"
            tabindex="0">
         <div class="grid grid-cols-2 gap-x-4">
           <div class="group relative text-sm">
@@ -199,7 +201,7 @@
       </div>
 
       <!-- 'Men' tab panel, show/hide based on tab state. -->
-      <div id="tabs-1-panel-2" class="pt-10 pb-8 px-4 space-y-10" aria-labelledby="tabs-1-tab-2" role="tabpanel"
+      <div *ngIf="menMenuIsOpen" id="tabs-1-panel-2" class="pt-10 pb-8 px-4 space-y-10" aria-labelledby="tabs-1-tab-2" role="tabpanel"
            tabindex="0">
         <div class="grid grid-cols-2 gap-x-4">
           <div class="group relative text-sm">

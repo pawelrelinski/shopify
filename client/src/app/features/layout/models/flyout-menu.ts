@@ -1,4 +1,5 @@
 export enum FlyoutMenu {
   WOMEN = 'women',
-  MEN = 'men'
+  MEN = 'men',
+  NONE = 'none'
 }

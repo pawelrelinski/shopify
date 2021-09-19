@@ -8,29 +8,32 @@ import {FlyoutMenu} from '@features/layout/models';
 })
 export class MenFlyoutMenuComponent implements OnInit {
   public flyoutMenuName!: FlyoutMenu;
-  public showFlyoutMenu!: boolean;
+  public showFlyoutMenu: boolean = false;
 
   constructor(private flyoutMenuService: FlyoutMenuService) {
   }
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();
-    this.checkFlyoutMenuName();
   }
 
-  public changeFlyoutMenuToMen(): void {
-    this.flyoutMenuService.changeFlyoutMenuState(FlyoutMenu.MEN);
+  public toggleFlyoutMenu(): void {
+    if (this.showFlyoutMenu) {
+      this.showFlyoutMenu = false;
+    } else {
+      this.flyoutMenuService.changeFlyoutMenuState(FlyoutMenu.MEN);
+      this.checkFlyoutMenuName();
+    }
   }
 
   private updateFlyoutMenuName(): void {
     this.flyoutMenuService.flyoutMenu.subscribe((flyoutMenuName: FlyoutMenu) => {
       this.flyoutMenuName = flyoutMenuName;
+      this.checkFlyoutMenuName();
     });
   }
 
   private checkFlyoutMenuName(): void {
-    if (this.flyoutMenuName === FlyoutMenu.MEN) {
-      this.showFlyoutMenu = true;
-    }
+    this.showFlyoutMenu = this.flyoutMenuName === FlyoutMenu.MEN;
   }
 }

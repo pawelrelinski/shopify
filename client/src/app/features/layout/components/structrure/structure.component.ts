@@ -4,8 +4,7 @@ import {MobileMenuService} from '@features/layout/services';
 
 @Component({
   selector: 'shopify-layout-structure',
-  templateUrl: './structure.component.html',
-  styleUrls: ['./structure.component.scss']
+  templateUrl: './structure.component.html'
 })
 export class StructureComponent implements OnInit {
   public mobileMenuIsOpen!: boolean;
