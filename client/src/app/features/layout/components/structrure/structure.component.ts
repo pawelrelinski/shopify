@@ -8,12 +8,17 @@ import {MobileMenuService} from '@features/layout/services';
 })
 export class StructureComponent implements OnInit {
   public mobileMenuIsOpen!: boolean;
+  public bannerIsOpen = true;
 
   constructor(private mobileMenuService: MobileMenuService) {
   }
 
   public ngOnInit(): void {
     this.updateMobileMenuState();
+  }
+
+  public closeBanner(): void {
+    this.bannerIsOpen = false;
   }
 
   private updateMobileMenuState(): void {

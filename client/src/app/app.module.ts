@@ -4,6 +4,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LayoutModule} from '@features/layout/layout.module';
+import {CoreModule} from '@core/core.module';
+import {ShopifyFooterModule} from '@shared/shopify-footer/shopify-footer.module';
 
 @NgModule({
   declarations: [
@@ -11,8 +13,10 @@ import {LayoutModule} from '@features/layout/layout.module';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    ShopifyFooterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
