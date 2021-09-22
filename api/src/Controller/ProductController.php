@@ -10,25 +10,32 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\ProductRepository;
 use App\Entity\Product;
 use App\Utils\IsEmpty;
+use App\Utils\ErrorJsonResponse;
 
 class ProductController extends AbstractController
 {
     private $productRepository;
-    const URL = 'http://127.0.0.1:8000/product/';
+    const URL = 'http://127.0.0.1:8000/products/';
 
     public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }
 
-    #[Route('/product/{id}', name: 'get_product_by_id', methods: 'GET')]
+    #[Route('/products/{id}', name: 'get_product_by_id', methods: 'GET')]
     public function getById(int|null $id): JsonResponse
     {
         $product = $this->getProductFromRepositoryById($id);
 
         if (IsEmpty::checkProperty($product))
         {
-            return $this->getNotFoundResponse('Product doesn\'t exist');
+            $errorResponse = new ErrorJsonResponse(
+                status: 404, 
+                pointer: '/products/' . (string)$id,
+                title: 'Not found product',
+                details: 'Probably the product does not exist or the id was entered incorrectly'
+            );
+            return $errorResponse->generate();
         }
 
         return new JsonResponse([
@@ -39,7 +46,7 @@ class ProductController extends AbstractController
         ], Response::HTTP_OK);
     }
 
-    #[Route('/product', name: 'get_all_products', methods: 'GET')]
+    #[Route('/products', name: 'get_all_products', methods: 'GET')]
     public function getAll(Request $request): JsonResponse
     {
         $products = $this->productRepository->findAll();
@@ -52,8 +59,13 @@ class ProductController extends AbstractController
 
         if (IsEmpty::checkProperty($data))
         {
-            // TODO: Create invalid response
-            return $this->getNotFoundResponse('Product doesn\'t exist');
+            $errorResponse = new ErrorJsonResponse(
+                status: 404, 
+                pointer: '/products/',
+                title: 'Not found products',
+                details: 'Probably the products does not exist'
+            );
+            return $errorResponse->generate();
         }
 
         return new JsonResponse(
@@ -67,7 +79,7 @@ class ProductController extends AbstractController
         );
     }
 
-    #[Route('/product', name: 'add_product', methods: 'POST')]
+    #[Route('/products', name: 'add_product', methods: 'POST')]
     public function add(Request $request): JsonResponse
     {   
         $data = json_decode($request->getContent(), true);
@@ -98,14 +110,20 @@ class ProductController extends AbstractController
         );
     }
 
-    #[Route('/product/{id}', name: 'delete_product_by_id', methods: 'DELETE')]
+    #[Route('/products/{id}', name: 'delete_product_by_id', methods: 'DELETE')]
     public function delete(int | string $id): JsonResponse
     {
         $product = $this->getProductFromRepositoryById($id);
 
         if (IsEmpty::checkProperty($product))
         {
-            return $this->getNotFoundResponse('Product doesn\'t exist');
+            $errorResponse = new ErrorJsonResponse(
+                status: 404, 
+                pointer: '/products/' . (string)$id,
+                title: 'Not found product',
+                details: 'Probably the product does not exist or the id was entered incorrectly'
+            );
+            return $errorResponse->generate();
         }
 
         $this->productRepository->remove($product);
@@ -116,7 +134,7 @@ class ProductController extends AbstractController
         );
     }
 
-    #[Route('/product/{id}', name: 'update_product_by_id', methods: 'PUT')]
+    #[Route('/products/{id}', name: 'update_product_by_id', methods: 'PUT')]
     public function update(int | string $id, Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -124,15 +142,26 @@ class ProductController extends AbstractController
 
         if (IsEmpty::checkSpecificArraysValues($data, $keysToCheck))
         {
-            return new JsonResponse(['message' => 'Excepting mandatory parameters!']);
+            $errorResponse = new ErrorJsonResponse(
+                status: 404, 
+                pointer: '/products/' . (string)$id,
+                title: 'Excepting mandatory parameters!',
+                details: 'One of excepting paramaters does not include to the request.'
+            );
+            return $errorResponse->generate();
         }
 
         $product = $this->getProductFromRepositoryById($id);
 
         if (IsEmpty::checkProperty($product))
         {
-            // TODO: Create invalid response
-            return $this->getNotFoundResponse('Product doesn\'t exist');
+            $errorResponse = new ErrorJsonResponse(
+                status: 404, 
+                pointer: '/products/' . (string)$id,
+                title: 'Not found product',
+                details: 'Probably the product does not exist or the id was entered incorrectly'
+            );
+            return $errorResponse->generate();
         }
 
         $updatedProduct = $this->productRepository->update($product);
@@ -142,16 +171,8 @@ class ProductController extends AbstractController
             Response::HTTP_OK
         );
     }
-
-    private function getNotFoundResponse(string $msg): JsonResponse
-    {
-        return new JsonResponse(
-            ['message' => $msg],
-            Response::HTTP_NOT_FOUND
-        );
-    }
     
-    private function getProductFromRepositoryById(int $id): Product
+    private function getProductFromRepositoryById(int $id): Product | null
     {
         return $this->productRepository->findOneBy(['id' => $id]);
     }

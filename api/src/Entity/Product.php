@@ -42,6 +42,21 @@ class Product
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $color;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $material;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +122,42 @@ class Product
         return $this;
     }
 
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getColor(): ?string 
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getMaterial(): ?string
+    {
+        return $this->material;
+    }
+
+    public function setMaterial(string $material): self
+    {
+        $this->material = $material;
+
+        return $this;
+    }
+
     public function toArray()
     {
         return [
@@ -115,7 +166,10 @@ class Product
             'description' => $this->getDescription(),
             'amount' => $this->getAmount(),
             'price' => $this->getPrice(),
-            'created_at' => $this->getCreatedAt()
+            'created_at' => $this->getCreatedAt(),
+            'category' => $this->getCategory(),
+            'color' => $this->getColor(),
+            'material' => $this->getMaterial()
         ];
     }
 }

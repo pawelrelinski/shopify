@@ -7,7 +7,7 @@ import {MobileMenuOpenBtnComponent} from './components/mobile-menu-open-btn/mobi
 import {MobileMenuCloseBtnComponent} from './components/mobile-menu-close-btn/mobile-menu-close-btn.component';
 import {MenFlyoutMenuComponent} from './components/men-flyout-menu/men-flyout-menu.component';
 import {WomenFlyoutMenuComponent} from '@features/layout/components/women-flyout-menu/women-flyout-menu.component';
-import { BannerComponent } from './components/banner/banner.component';
+import {BannerComponent} from './components/banner/banner.component';
 import {RouterModule} from "@angular/router";
 
 
@@ -21,12 +21,13 @@ import {RouterModule} from "@angular/router";
     WomenFlyoutMenuComponent,
     BannerComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
   exports: [
     StructureComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}
