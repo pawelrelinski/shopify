@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use App\Entity\Brand;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,7 +34,7 @@ class Product
     private $amount;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @ORM\Column(type="decimal", precision=6, scale=2, options={"default": 0.00})
      */
     private $price;
 
@@ -56,6 +57,12 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $material;
+
+    /**
+     *  @ORM\ManyToOne(targetEntity: Brand::class, inversedBy: "product"))
+     *  @JoinColumn(name="brand_id", referencedColumnName="id")
+     */
+    private $brand;
 
     public function getId(): ?int
     {
@@ -158,7 +165,7 @@ class Product
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->getId(),

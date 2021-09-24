@@ -5,8 +5,12 @@ import {ProductsPageComponent} from './products-page.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':category/:productsCategory',
     component: ProductsPageComponent
+  },
+  {
+    path: ':category/:productsCategory',
+    loadChildren: () => import('../product-overview-page/product-overview-page.module').then(m => m.ProductOverviewPageModule)
   }
 ];
 

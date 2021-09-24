@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FlyoutMenu} from '@features/layout/models';
-import {FlyoutMenuService} from '@features/layout/services';
+import {Category, FlyoutMenuService, ProductCategoriesService} from '@features/layout/services';
 
 @Component({
   selector: 'shopify-women-flyout-menu',
@@ -9,12 +9,15 @@ import {FlyoutMenuService} from '@features/layout/services';
 export class WomenFlyoutMenuComponent implements OnInit {
   public flyoutMenuName!: FlyoutMenu;
   public showFlyoutMenu: boolean = false;
+  public categoryDetails!: Category;
 
-  constructor(private flyoutMenuService: FlyoutMenuService) {
+  constructor(private flyoutMenuService: FlyoutMenuService,
+              private productCategoryService: ProductCategoriesService) {
   }
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();
+    this.getCategoryDetails();
   }
 
   public toggleFlyoutMenu(): void {
@@ -35,5 +38,9 @@ export class WomenFlyoutMenuComponent implements OnInit {
 
   private checkFlyoutMenuName(): void {
     this.showFlyoutMenu = this.flyoutMenuName === FlyoutMenu.WOMEN;
+  }
+
+  private getCategoryDetails(): void {
+    this.categoryDetails = this.productCategoryService.getWomenCategory();
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {MobileMenuService} from '@features/layout/services';
+import {BannerService, MobileMenuService} from '@features/layout/services';
 
 @Component({
   selector: 'shopify-layout-structure',
@@ -8,22 +8,30 @@ import {MobileMenuService} from '@features/layout/services';
 })
 export class StructureComponent implements OnInit {
   public mobileMenuIsOpen!: boolean;
-  public bannerIsOpen = true;
+  public bannerIsOpen!: boolean;
 
-  constructor(private mobileMenuService: MobileMenuService) {
+  constructor(private mobileMenuService: MobileMenuService,
+              private bannerService: BannerService) {
   }
 
   public ngOnInit(): void {
     this.updateMobileMenuState();
+    this.updateBannerState();
   }
 
   public closeBanner(): void {
-    this.bannerIsOpen = false;
+    this.bannerService.closeBanner();
   }
 
   private updateMobileMenuState(): void {
     this.mobileMenuService.isOpen.subscribe((state: boolean) => {
       this.mobileMenuIsOpen = state;
+    });
+  }
+
+  private updateBannerState(): void {
+    this.bannerService.isOpen.subscribe((state: boolean) => {
+      this.bannerIsOpen = state;
     });
   }
 }

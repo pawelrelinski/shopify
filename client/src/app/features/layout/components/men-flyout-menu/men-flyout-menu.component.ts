@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FlyoutMenuService} from '@features/layout/services';
+import {Category, FlyoutMenuService, ProductCategoriesService} from '@features/layout/services';
 import {FlyoutMenu} from '@features/layout/models';
 
 @Component({
@@ -9,12 +9,15 @@ import {FlyoutMenu} from '@features/layout/models';
 export class MenFlyoutMenuComponent implements OnInit {
   public flyoutMenuName!: FlyoutMenu;
   public showFlyoutMenu: boolean = false;
+  public categoryDetails!: Category;
 
-  constructor(private flyoutMenuService: FlyoutMenuService) {
+  constructor(private flyoutMenuService: FlyoutMenuService,
+              private productCategoryService: ProductCategoriesService) {
   }
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();
+    this.getCategoryDetails();
   }
 
   public toggleFlyoutMenu(): void {
@@ -35,5 +38,9 @@ export class MenFlyoutMenuComponent implements OnInit {
 
   private checkFlyoutMenuName(): void {
     this.showFlyoutMenu = this.flyoutMenuName === FlyoutMenu.MEN;
+  }
+
+  private getCategoryDetails(): void {
+    this.categoryDetails = this.productCategoryService.getMenCategory();
   }
 }

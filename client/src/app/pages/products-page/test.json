@@ -1,0 +1,91 @@
+[
+  [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "sku": "139613132-700-2",
+      "name": "KAMIZELKA Z TKANINY STRUKTURALNEJ W KRATĘ",
+      "mpn": "139613132-700-2",
+      "brand": "ZARA",
+      "description": "Kamizelka z dekoltem w serek. Bez rękawów. Kieszenie z lamowaniem w pasie. Asymetryczna długość. Zapięcie na guziki z przodu.",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "PLN",
+        "price": "199",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.zara.com/pl/pl/kamizelka-z-tkaniny-strukturalnej-w-krat%C4%99-p03057320.html",
+        "itemCondition": "https://schema.org/NewCondition"
+      },
+      "image": [
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_1_1_1.jpg?ts=1632148655861",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_1_1.jpg?ts=1632148669580",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_2_1.jpg?ts=1632148674388",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_3_1.jpg?ts=1632148657544",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_4_1.jpg?ts=1632148675302",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_5_1.jpg?ts=1632148671936",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_6_1.jpg?ts=1632148667845",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_1_1.jpg?ts=1631864548902",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_2_1.jpg?ts=1631864543584",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_3_1.jpg?ts=1631864608903"
+      ]
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "sku": "139613132-700-3",
+      "name": "KAMIZELKA Z TKANINY STRUKTURALNEJ W KRATĘ",
+      "mpn": "139613132-700-3",
+      "brand": "ZARA",
+      "description": "Kamizelka z dekoltem w serek. Bez rękawów. Kieszenie z lamowaniem w pasie. Asymetryczna długość. Zapięcie na guziki z przodu.",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "PLN",
+        "price": "199",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.zara.com/pl/pl/kamizelka-z-tkaniny-strukturalnej-w-krat%C4%99-p03057320.html",
+        "itemCondition": "https://schema.org/NewCondition"
+      },
+      "image": [
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_1_1_1.jpg?ts=1632148655861",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_1_1.jpg?ts=1632148669580",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_2_1.jpg?ts=1632148674388",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_3_1.jpg?ts=1632148657544",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_4_1.jpg?ts=1632148675302",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_5_1.jpg?ts=1632148671936",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_6_1.jpg?ts=1632148667845",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_1_1.jpg?ts=1631864548902",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_2_1.jpg?ts=1631864543584",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_3_1.jpg?ts=1631864608903"
+      ]
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "sku": "139613132-700-4",
+      "name": "KAMIZELKA Z TKANINY STRUKTURALNEJ W KRATĘ",
+      "mpn": "139613132-700-4",
+      "brand": "ZARA",
+      "description": "Kamizelka z dekoltem w serek. Bez rękawów. Kieszenie z lamowaniem w pasie. Asymetryczna długość. Zapięcie na guziki z przodu.",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "PLN",
+        "price": "199",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.zara.com/pl/pl/kamizelka-z-tkaniny-strukturalnej-w-krat%C4%99-p03057320.html",
+        "itemCondition": "https://schema.org/NewCondition"
+      },
+      "image": [
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_1_1_1.jpg?ts=1632148655861",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_1_1.jpg?ts=1632148669580",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_2_1.jpg?ts=1632148674388",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_3_1.jpg?ts=1632148657544",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_4_1.jpg?ts=1632148675302",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_5_1.jpg?ts=1632148671936",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/12/w/1920/3057320700_2_6_1.jpg?ts=1632148667845",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_1_1.jpg?ts=1631864548902",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_2_1.jpg?ts=1631864543584",
+        "https://static.zara.net/photos///2021/I/0/2/p/3057/320/700/2/w/1920/3057320700_6_3_1.jpg?ts=1631864608903"
+      ]
+    }
+  ]
+]
