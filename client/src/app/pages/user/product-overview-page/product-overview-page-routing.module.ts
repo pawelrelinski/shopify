@@ -4,7 +4,7 @@ import {ProductOverviewPageComponent} from './product-overview-page.component';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: '',
     component: ProductOverviewPageComponent
   }
 ];

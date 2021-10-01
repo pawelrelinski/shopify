@@ -47,7 +47,7 @@
               </p>
               <ul role="list" aria-labelledby="Clothing-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                 <li *ngFor="let clothesType of categoryDetails.clothes" class="flex">
-                  <a href="#" class="hover:text-gray-800">
+                  <a [routerLink]="['/products/women', clothesType]" class="hover:text-gray-800">
                     {{ clothesType | titlecase }}
                   </a>
                 </li>
@@ -66,7 +66,7 @@
               </p>
               <ul role="list" aria-labelledby="Accessories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                 <li *ngFor="let accessory of categoryDetails.accessories" class="flex">
-                  <a href="#" class="hover:text-gray-800">
+                  <a [routerLink]="['/products/women', accessory]" class="hover:text-gray-800">
                     {{ accessory | titlecase }}
                   </a>
                 </li>
@@ -79,7 +79,7 @@
               </p>
               <ul role="list" aria-labelledby="Brands-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                 <li *ngFor="let brand of categoryDetails.brands" class="flex">
-                  <a href="#" class="hover:text-gray-800">
+                  <a [routerLink]="['/products/women', brand]" class="hover:text-gray-800">
                     {{ brand | titlecase }}
                   </a>
                 </li>

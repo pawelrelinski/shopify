@@ -1,23 +1,31 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ProductsListComponent} from './components/products-list/products-list.component';
-import {ProductsListElementComponent} from './components/products-list-element/products-list-element.component';
-import {ProductOverviewComponent} from './components/product-overview/product-overview.component';
+import {RouterModule} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 
+
+import {ProductsListComponent} from '@features/product/components';
+import {ProductsListElementComponent} from '@features/product/components';
+import {ProductOverviewComponent} from '@features/product/components';
+import {ProductPathComponent} from '@features/product/components';
 
 
 @NgModule({
   declarations: [
     ProductsListComponent,
     ProductsListElementComponent,
-    ProductOverviewComponent
+    ProductOverviewComponent,
+    ProductPathComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    HttpClientModule
   ],
   exports: [
     ProductsListComponent,
     ProductOverviewComponent
   ]
 })
-export class ProductModule { }
+export class ProductModule {
+}
