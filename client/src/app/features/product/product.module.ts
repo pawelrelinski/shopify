@@ -8,6 +8,9 @@ import {ProductsListComponent} from '@features/product/components';
 import {ProductsListElementComponent} from '@features/product/components';
 import {ProductOverviewComponent} from '@features/product/components';
 import {ProductPathComponent} from '@features/product/components';
+import {ProductsListTableComponent} from '@features/product/components';
+import {ProductsListTableRowComponent} from '@features/product/components';
+import {StatusWidgetModule} from '@shared/status-widget/status-widget.module';
 
 
 @NgModule({
@@ -15,16 +18,20 @@ import {ProductPathComponent} from '@features/product/components';
     ProductsListComponent,
     ProductsListElementComponent,
     ProductOverviewComponent,
-    ProductPathComponent
+    ProductPathComponent,
+    ProductsListTableComponent,
+    ProductsListTableRowComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    StatusWidgetModule
   ],
   exports: [
     ProductsListComponent,
-    ProductOverviewComponent
+    ProductOverviewComponent,
+    ProductsListTableComponent
   ]
 })
 export class ProductModule {

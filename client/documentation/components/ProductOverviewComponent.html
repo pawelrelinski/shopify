@@ -148,6 +148,9 @@
                                     <a href="../components/ProductOverviewPageComponent.html" >ProductOverviewPageComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/ProductPathComponent.html" >ProductPathComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/ProductsListComponent.html" >ProductsListComponent</a>
                                 </li>
                                 <li class="link">
@@ -231,6 +234,9 @@
                                 <li class="link">
                                     <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                 </li>
+                                <li class="link">
+                                    <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                </li>
                         </ul>
                     </li>
             
@@ -247,6 +253,15 @@
                             >
                                 <li class="link">
                                     <a href="../interfaces/Category.html" >Category</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Response.html" >Response</a>
                                 </li>
                         </ul>
                     </li>
@@ -405,6 +420,9 @@
                                            <a href="../components/ProductOverviewPageComponent.html" >ProductOverviewPageComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/ProductPathComponent.html" >ProductPathComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/ProductsListComponent.html" >ProductsListComponent</a>
                                        </li>
                                        <li class="link">
@@ -488,6 +506,9 @@
                                        <li class="link">
                                            <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                        </li>
+                                       <li class="link">
+                                           <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                       </li>
                                </ul>
                            </li>
                    
@@ -504,6 +525,15 @@
                    >
                                        <li class="link">
                                            <a href="../interfaces/Category.html" >Category</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Response.html" >Response</a>
                                        </li>
                                </ul>
                            </li>
@@ -597,37 +627,37 @@
 
 
 
+
+
     <section>
-        <h3 id="constructor">Constructor</h3>
+        <h3 id="inputs">Properties</h3>
             <table class="table table-sm table-bordered">
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor()</code>
+                            <b><span class="modifier">Public</span> path</b>
                         </td>
                     </tr>
-    
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>path:     <code>string[]</code>
+    </bcode>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
-
-
 </div>
         <div class="tab-pane fade tab-source-code" id="source">
-            <pre><code class="hljs javascript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+            <pre><code class="hljs javascript">import {Component} from &#x27;@angular/core&#x27;;
 
 @Component({
   selector: &#x27;shopify-product-overview&#x27;,
   templateUrl: &#x27;./product-overview.component.html&#x27;,
   styleUrls: [&#x27;./product-overview.component.scss&#x27;]
 })
-export class ProductOverviewComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ProductOverviewComponent {
+  public path: Array&lt;string&gt; &#x3D; [&#x27;Men&#x27;, &#x27;Shirts&#x27;, &#x27;Black t-shirt&#x27;];
 }
 </code></pre>
         </div>

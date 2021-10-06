@@ -148,6 +148,9 @@
                                     <a href="../components/ProductOverviewPageComponent.html" >ProductOverviewPageComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/ProductPathComponent.html" >ProductPathComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/ProductsListComponent.html" >ProductsListComponent</a>
                                 </li>
                                 <li class="link">
@@ -231,6 +234,9 @@
                                 <li class="link">
                                     <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                 </li>
+                                <li class="link">
+                                    <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                </li>
                         </ul>
                     </li>
             
@@ -247,6 +253,15 @@
                             >
                                 <li class="link">
                                     <a href="../interfaces/Category.html" >Category</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Response.html" >Response</a>
                                 </li>
                         </ul>
                     </li>
@@ -405,6 +420,9 @@
                                            <a href="../components/ProductOverviewPageComponent.html" >ProductOverviewPageComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/ProductPathComponent.html" >ProductPathComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/ProductsListComponent.html" >ProductsListComponent</a>
                                        </li>
                                        <li class="link">
@@ -488,6 +506,9 @@
                                        <li class="link">
                                            <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                        </li>
+                                       <li class="link">
+                                           <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                       </li>
                                </ul>
                            </li>
                    
@@ -504,6 +525,15 @@
                    >
                                        <li class="link">
                                            <a href="../interfaces/Category.html" >Category</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Response.html" >Response</a>
                                        </li>
                                </ul>
                            </li>
@@ -610,15 +640,15 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre><code class="hljs javascript">import {NgModule} from &#x27;@angular/core&#x27;;
 import {CommonModule} from &#x27;@angular/common&#x27;;
+import {RouterModule} from &#x27;@angular/router&#x27;;
 
-import {StructureComponent} from &#x27;./components/structrure/structure.component&#x27;;
-import {MobileMenuComponent} from &#x27;@features/layout/components/mobile-menu/mobile-menu.component&#x27;;
-import {MobileMenuOpenBtnComponent} from &#x27;./components/mobile-menu-open-btn/mobile-menu-open-btn.component&#x27;;
-import {MobileMenuCloseBtnComponent} from &#x27;./components/mobile-menu-close-btn/mobile-menu-close-btn.component&#x27;;
-import {MenFlyoutMenuComponent} from &#x27;./components/men-flyout-menu/men-flyout-menu.component&#x27;;
-import {WomenFlyoutMenuComponent} from &#x27;@features/layout/components/women-flyout-menu/women-flyout-menu.component&#x27;;
-import {BannerComponent} from &#x27;./components/banner/banner.component&#x27;;
-import {RouterModule} from &quot;@angular/router&quot;;
+import {StructureComponent} from &#x27;@features/layout/components&#x27;;
+import {MobileMenuComponent} from &#x27;@features/layout/components&#x27;;
+import {MobileMenuOpenBtnComponent} from &#x27;@features/layout/components&#x27;;
+import {MobileMenuCloseBtnComponent} from &#x27;@features/layout/components&#x27;;
+import {MenFlyoutMenuComponent} from &#x27;@features/layout/components&#x27;;
+import {WomenFlyoutMenuComponent} from &#x27;@features/layout/components&#x27;;
+import {BannerComponent} from &#x27;@features/layout/components&#x27;;
 
 
 @NgModule({

@@ -148,6 +148,9 @@
                                     <a href="../components/ProductOverviewPageComponent.html" >ProductOverviewPageComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/ProductPathComponent.html" >ProductPathComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/ProductsListComponent.html"  class="active" >ProductsListComponent</a>
                                 </li>
                                 <li class="link">
@@ -231,6 +234,9 @@
                                 <li class="link">
                                     <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                 </li>
+                                <li class="link">
+                                    <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                </li>
                         </ul>
                     </li>
             
@@ -247,6 +253,15 @@
                             >
                                 <li class="link">
                                     <a href="../interfaces/Category.html" >Category</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Response.html" >Response</a>
                                 </li>
                         </ul>
                     </li>
@@ -405,6 +420,9 @@
                                            <a href="../components/ProductOverviewPageComponent.html" >ProductOverviewPageComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/ProductPathComponent.html" >ProductPathComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/ProductsListComponent.html"  class="active" >ProductsListComponent</a>
                                        </li>
                                        <li class="link">
@@ -488,6 +506,9 @@
                                        <li class="link">
                                            <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                        </li>
+                                       <li class="link">
+                                           <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                       </li>
                                </ul>
                            </li>
                    
@@ -504,6 +525,15 @@
                    >
                                        <li class="link">
                                            <a href="../interfaces/Category.html" >Category</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Response.html" >Response</a>
                                        </li>
                                </ul>
                            </li>
@@ -597,10 +627,245 @@
 
 
 
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(activatedRoute: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank" >ActivatedRoute</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank" >Router</a>, testProductService: any)</code>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+    </section>
 
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> isProducts</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play circle">
+                                    <span class="fa fa-circle"></span>
+                                </span>
+                            <code>isProducts()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>boolean</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> getDataFromUrl</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>getDataFromUrl()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> getAllProducts</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>getAllProducts()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> getProductsInfoFromUrl</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>getProductsInfoFromUrl()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code><a href="../classes/Product.html" target="_self" >ProductUrlData</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> cutOffFirstPartOfCurrentRoute</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>cutOffFirstPartOfCurrentRoute()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> getSeparatedUrlParts</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>getSeparatedUrlParts()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>string[]</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> setPathToProductArray</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>setPathToProductArray()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 
     <section>
         <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> currentRoute</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>currentRoute:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> pathToProducts</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>pathToProducts:     <code>string[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <table class="table table-sm table-bordered">
                 <tbody>
                     <tr>
@@ -616,21 +881,141 @@
                     </tr>
                 </tbody>
             </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> productsMetaData</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>productsMetaData:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> ProductUrlData</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>ProductUrlData:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> string</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>string:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
     </section>
 </div>
         <div class="tab-pane fade tab-source-code" id="source">
-            <pre><code class="hljs javascript">import {Component} from &#x27;@angular/core&#x27;;
-import {Product} from &#x27;@features/product/models&#x27;;
+            <pre><code class="hljs javascript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {ActivatedRoute, NavigationEnd, Params, Router} from &#x27;@angular/router&#x27;;
+import {filter, map} from &#x27;rxjs/operators&#x27;;
+
+import {Product, ProductResponse} from &#x27;@features/product/models&#x27;;
+import {TestProductService} from &#x27;@features/product/services&#x27;;
+import {Response} from &#x27;@core/interfaces&#x27;;
+
+interface ProductUrlData {
+  category: string | null;
+  productType: string | null;
+}
 
 @Component({
   selector: &#x27;shopify-products-list&#x27;,
   templateUrl: &#x27;./products-list.component.html&#x27;,
   styleUrls: [&#x27;./products-list.component.scss&#x27;]
 })
-export class ProductsListComponent {
-  public products: Array&lt;Product&gt; &#x3D; [
-    new Product(1, &#x27;T-shirt&#x27;, &#x27;This is shirt&#x27;, 4, 12.99)
-  ];
+export class ProductsListComponent implements OnInit {
+  public products: Array&lt;Product&gt; &#x3D; [];
+  public productsMetaData!: ProductUrlData;
+  public pathToProducts: Array&lt;string&gt; &#x3D; [];
+
+  private currentRoute!: string;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private testProductService: TestProductService) {
+  }
+
+  public ngOnInit(): void {
+    this.getDataFromUrl();
+  }
+
+  public isProducts(): boolean {
+    return !!(this.products);
+
+  }
+
+  private getDataFromUrl(): void {
+    this.router.events.pipe(
+      filter((routerEvent: any) &#x3D;&gt; routerEvent instanceof NavigationEnd),
+      map((routerEvent: NavigationEnd) &#x3D;&gt; routerEvent.url)
+    ).subscribe((routerEvent: string) &#x3D;&gt; {
+      this.currentRoute &#x3D; routerEvent;
+      this.productsMetaData &#x3D; this.getProductsInfoFromUrl();
+      this.getAllProducts();
+      this.setPathToProductArray();
+    });
+  }
+
+  private getAllProducts(): void {
+    this.testProductService.getAll().subscribe((res: Response&lt;ProductResponse&gt;) &#x3D;&gt; {
+      const productResponses &#x3D; res.data as Array&lt;ProductResponse&gt;;
+
+      this.products &#x3D; productResponses.map((val: ProductResponse) &#x3D;&gt; {
+        const {name, description, amount, price} &#x3D; val.attributes;
+        return new Product(val.id as number, name, description, amount, price);
+      });
+    });
+  }
+
+  private getProductsInfoFromUrl(): ProductUrlData {
+    this.cutOffFirstPartOfCurrentRoute();
+    const urlParts: Array&lt;string&gt; &#x3D; this.getSeparatedUrlParts();
+
+    return {
+      category: urlParts[1],
+      productType: urlParts[2]
+    };
+  }
+
+  private cutOffFirstPartOfCurrentRoute(): void {
+    const urlPartToCutOff: string &#x3D; &#x27;/products&#x27;;
+    if (this.currentRoute.startsWith(urlPartToCutOff)) {
+      this.currentRoute &#x3D; this.currentRoute.slice(urlPartToCutOff.length, this.currentRoute.length - 1);
+    }
+  }
+
+  private getSeparatedUrlParts(): Array&lt;string&gt; {
+    return this.currentRoute.split(&#x27;/&#x27;);
+  }
+
+  private setPathToProductArray(): void {
+    this.pathToProducts.push(this.productsMetaData.category as string);
+    this.pathToProducts.push(this.productsMetaData.productType as string);
+  }
 }
 </code></pre>
         </div>
