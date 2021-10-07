@@ -1,12 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {ProductStatus} from '@features/product/models';
+import {ProductSimple} from '@features/product/models';
 
-export interface InputProduct {
-  name: string;
-  price: number;
-  amount: ProductStatus | boolean;
-  date: Date;
-}
 
 @Component({
   selector: 'shopify-products-list-table-row',
@@ -15,19 +9,25 @@ export interface InputProduct {
 })
 export class ProductsListTableRowComponent {
   @Input()
-  set product(value: InputProduct) {
-    const { name, price, amount, date } = value;
-    this._product = {
-      name,
-      price,
-      amount: !!(ProductStatus.AVAILABLE),
-      date
-    };
+  set product(value: ProductSimple) {
+    this._product = value;
   }
 
-  get product(): InputProduct {
+  get product(): ProductSimple {
     return this._product;
   }
 
-  private _product!: InputProduct;
+  private _product!: ProductSimple;
+
+  public isSuccess(): boolean {
+    return this.product.amount >= 8;
+  }
+
+  public isWarning(): boolean {
+    return this.product.amount > 3 && this.product.amount < 8;
+  }
+
+  public isDanger(): boolean {
+    return this.product.amount <= 3;
+  }
 }

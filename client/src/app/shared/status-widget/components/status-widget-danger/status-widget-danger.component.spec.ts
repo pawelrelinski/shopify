@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatusWidgetErrorComponent } from './status-widget-error.component';
+import { StatusWidgetDangerComponent } from './status-widget-danger.component';
 
 describe('StatusWidgetErrorComponent', () => {
-  let component: StatusWidgetErrorComponent;
-  let fixture: ComponentFixture<StatusWidgetErrorComponent>;
+  let component: StatusWidgetDangerComponent;
+  let fixture: ComponentFixture<StatusWidgetDangerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StatusWidgetErrorComponent ]
+      declarations: [ StatusWidgetDangerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatusWidgetErrorComponent);
+    fixture = TestBed.createComponent(StatusWidgetDangerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
