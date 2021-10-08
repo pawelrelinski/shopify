@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
-use App\Entity\Brand;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,44 +28,30 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="integer", options={"default": 0})
+     * @ORM\Column(type="integer")
      */
     private $amount;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2, options={"default": 0.00})
+     * @ORM\Column(type="decimal", precision=10, scale=2)
      */
     private $price;
 
     /**
-     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(type="datetime_immutable")
      */
     private $created_at;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $category;
-
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $color;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $material;
-
-    /**
-     *  @ORM\ManyToOne(targetEntity: Brand::class, inversedBy: "product"))
-     *  @JoinColumn(name="brand_id", referencedColumnName="id")
-     */
-    private $brand;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        
+        return $this;
     }
 
     public function getName(): ?string
@@ -129,42 +114,6 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function getColor(): ?string 
-    {
-        return $this->color;
-    }
-
-    public function setColor(string $color): self
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    public function getMaterial(): ?string
-    {
-        return $this->material;
-    }
-
-    public function setMaterial(string $material): self
-    {
-        $this->material = $material;
-
-        return $this;
-    }
-
     public function toArray(): array
     {
         return [
@@ -172,11 +121,7 @@ class Product
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'amount' => $this->getAmount(),
-            'price' => $this->getPrice(),
-            'created_at' => $this->getCreatedAt(),
-            'category' => $this->getCategory(),
-            'color' => $this->getColor(),
-            'material' => $this->getMaterial()
+            'price' => $this->getPrice()
         ];
     }
 }
