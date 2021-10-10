@@ -208,13 +208,16 @@
                                     <a href="../components/SignInPageComponent.html" >SignInPageComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../components/StatusWidgetErrorComponent.html" >StatusWidgetErrorComponent</a>
+                                    <a href="../components/StatusWidgetDangerComponent.html" >StatusWidgetDangerComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/StatusWidgetNeutralComponent.html" >StatusWidgetNeutralComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/StatusWidgetSuccessComponent.html" >StatusWidgetSuccessComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StatusWidgetWarningComponent.html" >StatusWidgetWarningComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/StructureComponent.html" >StructureComponent</a>
@@ -309,9 +312,6 @@
                                     <a href="../interfaces/Category.html" >Category</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/InputProduct.html" >InputProduct</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/Order.html" >Order</a>
                                 </li>
                                 <li class="link">
@@ -319,6 +319,9 @@
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductSimple.html" >ProductSimple</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
@@ -543,13 +546,16 @@
                                            <a href="../components/SignInPageComponent.html" >SignInPageComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../components/StatusWidgetErrorComponent.html" >StatusWidgetErrorComponent</a>
+                                           <a href="../components/StatusWidgetDangerComponent.html" >StatusWidgetDangerComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/StatusWidgetNeutralComponent.html" >StatusWidgetNeutralComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/StatusWidgetSuccessComponent.html" >StatusWidgetSuccessComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StatusWidgetWarningComponent.html" >StatusWidgetWarningComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/StructureComponent.html" >StructureComponent</a>
@@ -644,9 +650,6 @@
                                            <a href="../interfaces/Category.html" >Category</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/InputProduct.html" >InputProduct</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/Order.html" >Order</a>
                                        </li>
                                        <li class="link">
@@ -654,6 +657,9 @@
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductSimple.html" >ProductSimple</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
@@ -753,7 +759,77 @@
 
 
 
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(testProductService: any)</code>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+    </section>
 
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> setAllProducts</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>setAllProducts()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> mappingArrayOfProductResponseToProductSimple</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play lock">
+                                    <span class="fa fa-lock"></span>
+                                </span>
+                            <code>mappingArrayOfProductResponseToProductSimple(value: any)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>any[]</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 
     <section>
         <h3 id="inputs">Properties</h3>
@@ -775,23 +851,42 @@
     </section>
 </div>
         <div class="tab-pane fade tab-source-code" id="source">
-            <pre><code class="hljs javascript">import {Component} from &#x27;@angular/core&#x27;;
-import {ProductStatus} from &#x27;@features/product/models&#x27;;
-import {InputProduct} from &#x27;@features/product/components&#x27;;
+            <pre><code class="hljs javascript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {map} from &#x27;rxjs/operators&#x27;;
+
+import {ProductResponse, ProductSimple} from &#x27;@features/product/models&#x27;;
+import {TestProductService} from &#x27;@features/product/services&#x27;;
+import {Response} from &#x27;@core/interfaces&#x27;;
+
 
 @Component({
   selector: &#x27;shopify-products-list-table&#x27;,
   templateUrl: &#x27;./products-list-table.component.html&#x27;,
   styleUrls: [&#x27;./products-list-table.component.scss&#x27;]
 })
-export class ProductsListTableComponent {
-  public products: Array&lt;InputProduct&gt; &#x3D; [
-    { name: &#x27;prod1&#x27;, price: 12.99, amount: ProductStatus.AVAILABLE, date: new Date() },
-    { name: &#x27;prod2&#x27;, price: 121.03, amount: ProductStatus.NOT_AVAILABLE, date: new Date() },
-    { name: &#x27;prod3&#x27;, price: 383.59, amount: ProductStatus.NOT_AVAILABLE, date: new Date() },
-    { name: &#x27;prod4&#x27;, price: 293.87, amount: ProductStatus.AVAILABLE, date: new Date() },
-    { name: &#x27;prod5&#x27;, price: 969.63, amount: ProductStatus.AVAILABLE, date: new Date() }
-  ];
+export class ProductsListTableComponent implements OnInit {
+  public products: Array&lt;ProductSimple&gt; &#x3D; [];
+
+  constructor(private testProductService: TestProductService) {
+  }
+
+  public ngOnInit(): void {
+    this.setAllProducts();
+  }
+
+  private setAllProducts(): void {
+    this.testProductService.getAll().pipe(
+      map(((value: Response&lt;Array&lt;ProductResponse&gt;&gt;) &#x3D;&gt; this.mappingArrayOfProductResponseToProductSimple(value)))
+    ).subscribe((products: Array&lt;ProductSimple&gt;) &#x3D;&gt; {
+      this.products &#x3D; products;
+    });
+  }
+
+  private mappingArrayOfProductResponseToProductSimple(value: Response&lt;Array&lt;ProductResponse&gt;&gt;): Array&lt;ProductSimple&gt; {
+    return value.data.map((product: ProductResponse) &#x3D;&gt; {
+      return  { id: product.id, ...product.attributes } as ProductSimple;
+    });
+  }
 }
 </code></pre>
         </div>

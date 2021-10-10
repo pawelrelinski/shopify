@@ -1,7 +1,7 @@
 import {Response} from '@core/interfaces';
 import {ProductResponse} from '@features/product/models';
 
-export const allProducts: Response<ProductResponse> = {
+export const allProducts: Response<Array<ProductResponse>> = {
   "links": {
     "self": "http://127.0.0.1:8000/products"
   },
@@ -14,7 +14,7 @@ export const allProducts: Response<ProductResponse> = {
         "description": "This is the black t-shirt",
         "amount": 5,
         "price": 12.99,
-        "created_at": "12-9-2021",
+        "createdAt": "12-9-2021",
         "category": "men",
         "color": "black",
         "material": "velour"
@@ -26,9 +26,9 @@ export const allProducts: Response<ProductResponse> = {
       "attributes": {
         "name": "Jeans",
         "description": "This is the blue jeans",
-        "amount": 5,
+        "amount": 12,
         "price": 10.99,
-        "created_at": "14-9-2021",
+        "createdAt": "14-9-2021",
         "category": "men",
         "color": "blue",
         "material": "jeans"
@@ -42,7 +42,7 @@ export const allProducts: Response<ProductResponse> = {
         "description": "This is the grey hoodie",
         "amount": 3,
         "price": 49.99,
-        "created_at": "12-7-2021",
+        "createdAt": "12-7-2021",
         "category": "men",
         "color": "gray",
         "material": "velour"
@@ -54,9 +54,9 @@ export const allProducts: Response<ProductResponse> = {
       "attributes": {
         "name": "Dress",
         "description": "This is the black dress",
-        "amount": 5,
+        "amount": 6,
         "price": 22.99,
-        "created_at": "12-9-2021",
+        "createdAt": "12-9-2021",
         "category": "women",
         "color": "black",
         "material": "velour"

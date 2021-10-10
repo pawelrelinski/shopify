@@ -6,6 +6,10 @@ module.exports = {
   },
   variants: {
     extend: {},
+    variants: {
+      textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+      backgroundColor: ['hover', 'focus']
+    }
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),

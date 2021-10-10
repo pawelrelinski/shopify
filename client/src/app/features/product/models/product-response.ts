@@ -6,7 +6,7 @@ export interface ProductResponse {
     description: string;
     amount: number;
     price: number;
-    created_at: string | Date;
+    createdAt: string | Date;
     category: string;
     color: string;
     material: string;

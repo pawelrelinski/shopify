@@ -4,5 +4,5 @@ export interface Response<T> {
     self?: string;
     next?: string;
   };
-  data: Array<T> | T;
+  data: T;
 }

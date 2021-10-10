@@ -1,5 +1,9 @@
-import {Component} from '@angular/core';
-import {ProductSimple} from '@features/product/models';
+import {Component, OnInit} from '@angular/core';
+import {map} from 'rxjs/operators';
+
+import {ProductResponse, ProductSimple} from '@features/product/models';
+import {TestProductService} from '@features/product/services';
+import {Response} from '@core/interfaces';
 
 
 @Component({
@@ -7,12 +11,27 @@ import {ProductSimple} from '@features/product/models';
   templateUrl: './products-list-table.component.html',
   styleUrls: ['./products-list-table.component.scss']
 })
-export class ProductsListTableComponent {
-  public products: Array<ProductSimple> = [
-    { id: 1, name: 'prod1', price: 12.99, amount: 12 },
-    { id: 2, name: 'prod2', price: 121.03, amount: 4 },
-    { id: 3, name: 'prod3', price: 383.59, amount: 0 },
-    { id: 4, name: 'prod4', price: 293.87, amount: 5 },
-    { id: 5, name: 'prod5', price: 969.63, amount: 2 }
-  ];
+export class ProductsListTableComponent implements OnInit {
+  public products: Array<ProductSimple> = [];
+
+  constructor(private testProductService: TestProductService) {
+  }
+
+  public ngOnInit(): void {
+    this.setAllProducts();
+  }
+
+  private setAllProducts(): void {
+    this.testProductService.getAll().pipe(
+      map(((value: Response<Array<ProductResponse>>) => this.mappingArrayOfProductResponseToProductSimple(value)))
+    ).subscribe((products: Array<ProductSimple>) => {
+      this.products = products;
+    });
+  }
+
+  private mappingArrayOfProductResponseToProductSimple(value: Response<Array<ProductResponse>>): Array<ProductSimple> {
+    return value.data.map((product: ProductResponse) => {
+      return  { id: product.id, ...product.attributes } as ProductSimple;
+    });
+  }
 }

@@ -208,13 +208,16 @@
                                     <a href="../components/SignInPageComponent.html" >SignInPageComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../components/StatusWidgetErrorComponent.html" >StatusWidgetErrorComponent</a>
+                                    <a href="../components/StatusWidgetDangerComponent.html" >StatusWidgetDangerComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/StatusWidgetNeutralComponent.html" >StatusWidgetNeutralComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/StatusWidgetSuccessComponent.html" >StatusWidgetSuccessComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/StatusWidgetWarningComponent.html" >StatusWidgetWarningComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/StructureComponent.html" >StructureComponent</a>
@@ -309,9 +312,6 @@
                                     <a href="../interfaces/Category.html" >Category</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/InputProduct.html" >InputProduct</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/Order.html" >Order</a>
                                 </li>
                                 <li class="link">
@@ -319,6 +319,9 @@
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ProductSimple.html" >ProductSimple</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
@@ -543,13 +546,16 @@
                                            <a href="../components/SignInPageComponent.html" >SignInPageComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../components/StatusWidgetErrorComponent.html" >StatusWidgetErrorComponent</a>
+                                           <a href="../components/StatusWidgetDangerComponent.html" >StatusWidgetDangerComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/StatusWidgetNeutralComponent.html" >StatusWidgetNeutralComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/StatusWidgetSuccessComponent.html" >StatusWidgetSuccessComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/StatusWidgetWarningComponent.html" >StatusWidgetWarningComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/StructureComponent.html" >StructureComponent</a>
@@ -644,9 +650,6 @@
                                            <a href="../interfaces/Category.html" >Category</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/InputProduct.html" >InputProduct</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/Order.html" >Order</a>
                                        </li>
                                        <li class="link">
@@ -654,6 +657,9 @@
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/ProductResponse.html" >ProductResponse</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ProductSimple.html" >ProductSimple</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/ProductUrlData.html" >ProductUrlData</a>
@@ -768,6 +774,90 @@
 
 
 
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> isSuccess</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play circle">
+                                    <span class="fa fa-circle"></span>
+                                </span>
+                            <code>isSuccess()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>boolean</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> isWarning</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play circle">
+                                    <span class="fa fa-circle"></span>
+                                </span>
+                            <code>isWarning()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>boolean</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> isDanger</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon method fa fa-play circle">
+                                    <span class="fa fa-circle"></span>
+                                </span>
+                            <code>isDanger()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>boolean</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 
     <section>
         <h3 id="inputs">Properties</h3>
@@ -790,12 +880,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> InputProduct</b>
+                            <b> product</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>InputProduct:     <code>any</code>
+                            <code>product:     <code>any</code>
     </bcode>
                         </td>
                     </tr>
@@ -805,12 +895,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> product</b>
+                            <b> ProductSimple</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>product:     <code><a href="../classes/Product.html" target="_self" >InputProduct</a></code>
+                            <code>ProductSimple:     <code>any</code>
     </bcode>
                         </td>
                     </tr>
@@ -820,14 +910,8 @@
 </div>
         <div class="tab-pane fade tab-source-code" id="source">
             <pre><code class="hljs javascript">import {Component, Input} from &#x27;@angular/core&#x27;;
-import {ProductStatus} from &#x27;@features/product/models&#x27;;
+import {ProductSimple} from &#x27;@features/product/models&#x27;;
 
-export interface InputProduct {
-  name: string;
-  price: number;
-  amount: ProductStatus | boolean;
-  date: Date;
-}
 
 @Component({
   selector: &#x27;shopify-products-list-table-row&#x27;,
@@ -836,21 +920,27 @@ export interface InputProduct {
 })
 export class ProductsListTableRowComponent {
   @Input()
-  set product(value: InputProduct) {
-    const { name, price, amount, date } &#x3D; value;
-    this._product &#x3D; {
-      name,
-      price,
-      amount: !!(ProductStatus.AVAILABLE),
-      date
-    };
+  set product(value: ProductSimple) {
+    this._product &#x3D; value;
   }
 
-  get product(): InputProduct {
+  get product(): ProductSimple {
     return this._product;
   }
 
-  private _product!: InputProduct;
+  private _product!: ProductSimple;
+
+  public isSuccess(): boolean {
+    return this.product.amount &gt;&#x3D; 8;
+  }
+
+  public isWarning(): boolean {
+    return this.product.amount &gt; 3 &amp;&amp; this.product.amount &lt; 8;
+  }
+
+  public isDanger(): boolean {
+    return this.product.amount &lt;&#x3D; 3;
+  }
 }
 </code></pre>
         </div>

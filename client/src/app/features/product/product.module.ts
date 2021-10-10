@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 import {ProductsListComponent} from '@features/product/components';
 import {ProductsListElementComponent} from '@features/product/components';
@@ -10,7 +10,12 @@ import {ProductOverviewComponent} from '@features/product/components';
 import {ProductPathComponent} from '@features/product/components';
 import {ProductsListTableComponent} from '@features/product/components';
 import {ProductsListTableRowComponent} from '@features/product/components';
+import {ProductCreateFormComponent} from '@features/product/components';
+import {ProductsListTableActionsComponent} from '@features/product/components'
+  ;
 import {StatusWidgetModule} from '@shared/status-widget/status-widget.module';
+import {ShopifyPaginationModule} from '@shared/shopify-pagination/shopify-pagination.module';
+import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.module';
 
 
 @NgModule({
@@ -20,18 +25,25 @@ import {StatusWidgetModule} from '@shared/status-widget/status-widget.module';
     ProductOverviewComponent,
     ProductPathComponent,
     ProductsListTableComponent,
-    ProductsListTableRowComponent
+    ProductsListTableRowComponent,
+    ProductCreateFormComponent,
+    ProductsListTableActionsComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    StatusWidgetModule
+    StatusWidgetModule,
+    ShopifyPaginationModule,
+    ShopifyButtonsModule
   ],
   exports: [
     ProductsListComponent,
     ProductOverviewComponent,
-    ProductsListTableComponent
+    ProductsListTableComponent,
+    ProductCreateFormComponent,
+    ProductsListTableActionsComponent
   ]
 })
 export class ProductModule {

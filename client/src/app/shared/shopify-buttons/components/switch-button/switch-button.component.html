@@ -1,0 +1,15 @@
+<div class="btn-status">
+  <input type="checkbox" name="checkbox" id="checkbox" class="hidden" [checked]="isChecked">
+  <label
+    (click)="toggle()"
+    for="checkbox"
+    class="btn-change bg-r flex items-center bg-red p-1 rounded-lg w-12 h-6 cursor-pointer transition delay-300"
+    [class.bg-red-300]="!isChecked"
+    [class.text-red-600]="!isChecked"
+    [class.bg-green-300]="isChecked"
+    [class.text-green-600]="isChecked"
+    [ngStyle]="{
+      '--bgColor': (isChecked) ? 'rgb(5, 150, 105)' : 'rgb(220, 38, 38)'
+    }"
+  ></label>
+</div>

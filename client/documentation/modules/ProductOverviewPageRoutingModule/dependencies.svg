@@ -14,13 +14,13 @@
 <title>cluster_ProductOverviewPageRoutingModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 254,-230.8 254,-32.8 8,-32.8"/>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_ProductOverviewPageRoutingModule_imports</title>
-<polygon fill="none" stroke="black" points="32,-40.8 32,-92.8 230,-92.8 230,-40.8 32,-40.8"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_ProductOverviewPageRoutingModule_exports</title>
 <polygon fill="none" stroke="black" points="72,-170.8 72,-222.8 190,-222.8 190,-170.8 72,-170.8"/>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_ProductOverviewPageRoutingModule_imports</title>
+<polygon fill="none" stroke="black" points="32,-40.8 32,-92.8 230,-92.8 230,-40.8 32,-40.8"/>
 </g>
 <!-- RouterModule.forChild(args) -->
 <g id="node1" class="node">

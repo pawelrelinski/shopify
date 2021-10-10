@@ -9,7 +9,7 @@ import {ProductResponse} from '@features/product/models';
   providedIn: 'root'
 })
 export class TestProductService {
-  public getAll(): Observable<Response<ProductResponse>> {
+  public getAll(): Observable<Response<Array<ProductResponse>>> {
     return of(allProducts);
   }
 }

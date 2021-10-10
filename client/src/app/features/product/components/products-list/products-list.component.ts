@@ -50,7 +50,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   private getAllProducts(): void {
-    this.testProductService.getAll().subscribe((res: Response<ProductResponse>) => {
+    this.testProductService.getAll().subscribe((res: Response<Array<ProductResponse>>) => {
       const productResponses = res.data as Array<ProductResponse>;
 
       this.products = productResponses.map((val: ProductResponse) => {

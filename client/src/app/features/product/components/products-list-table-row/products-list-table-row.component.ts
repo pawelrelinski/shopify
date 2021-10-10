@@ -19,6 +19,8 @@ export class ProductsListTableRowComponent {
 
   private _product!: ProductSimple;
 
+  public date = new Date();
+
   public isSuccess(): boolean {
     return this.product.amount >= 8;
   }
