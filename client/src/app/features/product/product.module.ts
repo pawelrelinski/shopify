@@ -10,7 +10,7 @@ import {ProductOverviewComponent} from '@features/product/components';
 import {ProductPathComponent} from '@features/product/components';
 import {ProductsListTableComponent} from '@features/product/components';
 import {ProductsListTableRowComponent} from '@features/product/components';
-import {ProductCreateFormComponent} from '@features/product/components';
+import {ProductFormComponent} from '@features/product/components';
 import {ProductsListTableActionsComponent} from '@features/product/components'
   ;
 import {StatusWidgetModule} from '@shared/status-widget/status-widget.module';
@@ -26,7 +26,7 @@ import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.modu
     ProductPathComponent,
     ProductsListTableComponent,
     ProductsListTableRowComponent,
-    ProductCreateFormComponent,
+    ProductFormComponent,
     ProductsListTableActionsComponent
   ],
   imports: [
@@ -42,7 +42,7 @@ import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.modu
     ProductsListComponent,
     ProductOverviewComponent,
     ProductsListTableComponent,
-    ProductCreateFormComponent,
+    ProductFormComponent,
     ProductsListTableActionsComponent
   ]
 })

@@ -12,4 +12,9 @@ export class TestProductService {
   public getAll(): Observable<Response<Array<ProductResponse>>> {
     return of(allProducts);
   }
+
+  public getById(id: number): Observable<ProductResponse> {
+    const product: ProductResponse = allProducts.data.find(product => product.id === +id) as ProductResponse;
+    return of(product);
+  }
 }

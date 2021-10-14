@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {Location} from '@angular/common';
 
 @Component({
@@ -9,7 +9,8 @@ export class PreviousPageComponent {
   constructor(private location: Location) {
   }
 
-  public goBack(): void {
+  @HostListener('click')
+  public onClick(): void {
     this.location.back();
   }
 }

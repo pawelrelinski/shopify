@@ -26,9 +26,13 @@
     {{ product.price }} PLN
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <a href="#" class="text-indigo-600 hover:text-indigo-900 text-right">Details</a>
+    <a [routerLink]="['/admin/product-details', product.id]" class="text-indigo-600 hover:text-indigo-900 text-right">
+      Details
+    </a>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-start">
-    <a href="#" class="text-indigo-600 hover:text-indigo-900 text-right">Edit</a>
+    <a [routerLink]="['/admin/edit-product', product.id]" class="text-indigo-600 hover:text-indigo-900 text-right">
+      Edit
+    </a>
   </td>
 </tr>

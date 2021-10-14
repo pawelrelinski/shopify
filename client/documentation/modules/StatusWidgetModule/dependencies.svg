@@ -14,13 +14,13 @@
 <title>cluster_StatusWidgetModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 1034,-230.8 1034,-32.8 8,-32.8"/>
 </g>
-<g id="clust7" class="cluster">
-<title>cluster_StatusWidgetModule_imports</title>
-<polygon fill="none" stroke="black" points="898,-40.8 898,-92.8 1026,-92.8 1026,-40.8 898,-40.8"/>
-</g>
 <g id="clust8" class="cluster">
 <title>cluster_StatusWidgetModule_exports</title>
 <polygon fill="none" stroke="black" points="77,-170.8 77,-222.8 965,-222.8 965,-170.8 77,-170.8"/>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_StatusWidgetModule_imports</title>
+<polygon fill="none" stroke="black" points="898,-40.8 898,-92.8 1026,-92.8 1026,-40.8 898,-40.8"/>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_StatusWidgetModule_declarations</title>
