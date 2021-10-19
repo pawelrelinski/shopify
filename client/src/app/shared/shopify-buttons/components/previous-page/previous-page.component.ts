@@ -1,6 +1,7 @@
 import {Component, HostListener} from '@angular/core';
 import {Location} from '@angular/common';
 
+
 @Component({
   selector: 'shopify-previous-page',
   templateUrl: './previous-page.component.html'
