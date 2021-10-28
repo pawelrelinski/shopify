@@ -44,11 +44,11 @@ These can be used alone like this
 
 | resource | description |
 -----------|-------------|
-`GET /products` | returns a list of all products |
-`GET /products/:id` | returns the product with the given id |
-`POST /products` | creates a single product based on the provided data |
-`PUT /products/:id` | change of product data with the given id |
-`DELETE /products/:id` | removes the product with the given id |
+`GET /v1/products` | returns a list of all products |
+`GET /v1/products/:id` | returns the product with the given id |
+`POST /v1/products` | creates a single product based on the provided data |
+`PUT /v1/products/:id` | change of product data with the given id |
+`DELETE /v1/products/:id` | removes the product with the given id |
 
 
 ### Client

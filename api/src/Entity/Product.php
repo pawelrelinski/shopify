@@ -5,10 +5,12 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Model\ProductInterface;
+
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Product
+class Product implements ProductInterface
 {
     /**
      * @ORM\Id
@@ -41,6 +43,16 @@ class Product
      * @ORM\Column(type="datetime_immutable")
      */
     private $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color;
 
     public function getId(): ?int
     {
@@ -114,6 +126,30 @@ class Product
         return $this;
     }
 
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [
@@ -121,7 +157,15 @@ class Product
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'amount' => $this->getAmount(),
-            'price' => $this->getPrice()
+            'price' => $this->getPrice(),
+            'category' => $this->getCategory(),
+            'color' => $this->getColor()
         ];
     }
 }
+
+/**
+ * Generate and run this migration version:
+ * bin/console make:migration
+ * bin/console doctrine:migrations:migrate
+ */

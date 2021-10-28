@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostBinding, HostListener, Input} from '@angular/core';
+
 import {ProductSimple} from '@features/product/models';
 
 
@@ -12,14 +13,28 @@ export class ProductsListTableRowComponent {
   set product(value: ProductSimple) {
     this._product = value;
   }
-
   get product(): ProductSimple {
     return this._product;
   }
 
+  @HostBinding('style.backgroundColor') bgColor!: string;
+  @HostBinding('style.cursor') cursor!: string;
+
   private _product!: ProductSimple;
 
   public date = new Date();
+
+  @HostListener('mouseover')
+  public onMouseOver(): void {
+    this.bgColor = 'rgb(215,215,215)';
+    this.cursor = 'pointer';
+  }
+
+  @HostListener('mouseleave')
+  public onMouseLeave(): void {
+    this.bgColor = 'rgb(255, 255, 255)';
+    this.cursor = '';
+  }
 
   public isSuccess(): boolean {
     return this.product.amount >= 8;
