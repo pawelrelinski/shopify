@@ -20,7 +20,7 @@ class AnnotationsConfig
     private $debug;
     
     /**
-     * @default false
+     * @default true
      * @param ParamConfigurator|bool $value
      * @return $this
      */
@@ -32,7 +32,7 @@ class AnnotationsConfig
     }
     
     /**
-     * @default 'none'
+     * @default 'php_array'
      * @param ParamConfigurator|mixed $value
      * @return $this
      */

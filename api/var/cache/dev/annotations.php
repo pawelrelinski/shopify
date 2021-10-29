@@ -66,6 +66,8 @@ return [[
 '[C]App%5CEntity%5CProduct' => 1,
 'App%5CEntity%5CProduct%23getId' => 0,
 '[C]App%5CEntity%5CProduct%23getId' => 1,
+'App%5CEntity%5CProduct%23setId' => 0,
+'[C]App%5CEntity%5CProduct%23setId' => 1,
 'App%5CEntity%5CProduct%23getName' => 0,
 '[C]App%5CEntity%5CProduct%23getName' => 1,
 'App%5CEntity%5CProduct%23setName' => 0,
@@ -86,6 +88,16 @@ return [[
 '[C]App%5CEntity%5CProduct%23getCreatedAt' => 1,
 'App%5CEntity%5CProduct%23setCreatedAt' => 0,
 '[C]App%5CEntity%5CProduct%23setCreatedAt' => 1,
+'App%5CEntity%5CProduct%23getCategory' => 0,
+'[C]App%5CEntity%5CProduct%23getCategory' => 1,
+'App%5CEntity%5CProduct%23setCategory' => 0,
+'[C]App%5CEntity%5CProduct%23setCategory' => 1,
+'App%5CEntity%5CProduct%23getColor' => 0,
+'[C]App%5CEntity%5CProduct%23getColor' => 1,
+'App%5CEntity%5CProduct%23setColor' => 0,
+'[C]App%5CEntity%5CProduct%23setColor' => 1,
+'App%5CEntity%5CProduct%23toArray' => 0,
+'[C]App%5CEntity%5CProduct%23toArray' => 1,
 'App%5CEntity%5CProduct%24id' => 3,
 '[C]App%5CEntity%5CProduct%24id' => 1,
 'App%5CEntity%5CProduct%24name' => 4,
@@ -98,6 +110,10 @@ return [[
 '[C]App%5CEntity%5CProduct%24price' => 1,
 'App%5CEntity%5CProduct%24created_at' => 8,
 '[C]App%5CEntity%5CProduct%24created_at' => 1,
+'App%5CEntity%5CProduct%24category' => 4,
+'[C]App%5CEntity%5CProduct%24category' => 1,
+'App%5CEntity%5CProduct%24color' => 4,
+'[C]App%5CEntity%5CProduct%24color' => 1,
 'Doctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController' => 0,
 '[C]Doctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController' => 1,
 'Doctrine%5CBundle%5CDoctrineBundle%5CController%5CProfilerController%23setContainer' => 0,
@@ -562,7 +578,7 @@ return [[
 ], [
 
 0 => [],
-1 => 1633531647,
+1 => 1635510584,
 2 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [

@@ -1,16 +1,17 @@
-<?php 
+<?php
 
 namespace App\Util;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class FormatJsonResponse
 {
-  public static function success(?string $type, ?array $data, ?array $links): JsonResponse
+  public static function success(?string $type, ?array $data, ?array $links, ?int $responseCode): JsonResponse
   {
-    if (!is_array(array_values($data)[0]))
-    {
+    if (!is_array(array_values($data)[0])) {
       return new JsonResponse([
+        'status' => $responseCode,
         'links' => $links,
         'data' => [
           'type' => $type,
@@ -21,7 +22,7 @@ class FormatJsonResponse
     }
 
     $arrayOfData = [];
-    for ($i = 0; $i < count($data); $i++) { 
+    for ($i = 0; $i < count($data); $i++) {
       array_push($arrayOfData, [
         'type' => $type,
         'id' => $data[$i]['id'],
@@ -30,15 +31,16 @@ class FormatJsonResponse
     }
 
     return new JsonResponse([
+      'status' => $responseCode,
       'links' => $links,
       'data' => $arrayOfData
     ]);
   }
 
-  public static function error(?int $status, ?string $pointer, ?string $title, ?string $details): JsonResponse
+  public static function error(?string $pointer, ?string $title, ?string $details, ?int $responseCode): JsonResponse
   {
     return new JsonResponse([
-      'status' => $status,
+      'status' => $responseCode,
       'source' => [
         'pointer' => $pointer
       ],

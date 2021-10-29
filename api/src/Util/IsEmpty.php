@@ -4,36 +4,24 @@ namespace App\Util;
 
 class IsEmpty
 {
-  public static function check(mixed $data, ?array $keys): bool 
+  public static function check(mixed $data, ?array $keys): array 
   {
-    if (!empty($keys)) 
-    {
-      for ($i = 0; $i < count($keys) - 1; $i++)
-      { 
-        if (empty($data[$keys[$i]]))
-          return true;
-        else {
-          return false;
-        }
-      }
-    }
-
-    if (is_array($data))
-    {
-      for ($i = 0; $i < count($data) - 1; $i++) { 
-        if (empty(array_values($data)[$i]))
-          return true;
-        else {
+    try {
+      foreach ($keys as $key => $value) {
+        if (!empty($data[$value])) {
           continue;
+        } else {
+          return [
+            'isEmpty' => true,
+            'invalidKey' => $value
+          ];
         }
       }
-      return false;
+      return [ 'isEmpty' => false];
+    } catch (\ErrorException $e) {
+      return [
+        'error' => $e
+      ];
     }
-
-    if(empty($data))
-    {
-      return true;
-    }
-    return false;
   }
 }

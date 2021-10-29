@@ -171,6 +171,7 @@
     <service id="App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Util\FormatJsonResponse" class="App\Util\FormatJsonResponse" autowire="true" autoconfigure="true"/>
     <service id="App\Util\IsEmpty" class="App\Util\IsEmpty" autowire="true" autoconfigure="true"/>

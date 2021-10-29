@@ -159,7 +159,8 @@ class Product implements ProductInterface
             'amount' => $this->getAmount(),
             'price' => $this->getPrice(),
             'category' => $this->getCategory(),
-            'color' => $this->getColor()
+            'color' => $this->getColor(),
+            'createdAt' => $this->getCreatedAt()
         ];
     }
 }

@@ -11,86 +11,102 @@ use App\Repository\ProductRepository;
 use App\Entity\Product;
 use App\Util\FormatJsonResponse;
 use App\Util\IsEmpty;
+use DateTimeImmutable;
+use ProxyManager\Factory\RemoteObject\Adapter\JsonRpc;
 
 class ProductController extends AbstractController
 {
   private $productRepository;
 
-  public $mockupProducts = [];
-
   public function __construct(ProductRepository $productRepository)
-    {
-        $this->productRepository = $productRepository;
+  {
+    $this->productRepository = $productRepository;
+  }
 
-        $this->setMockupProducts();
-    }
+  #[Route('/v1/products/', name: 'add_product', methods: 'POST')]
+  public function add(Request $request): JsonResponse
+  {
+    $data = json_decode($request->getContent(), true);
+    $isEmpty = IsEmpty::check(
+      data: $data,
+      keys: ['name', 'description', 'amount', 'price', 'category', 'color']
+    );
 
-    #[Route('/v1/products', name: 'add_product', methods: 'POST')]
-    public function add(Request $request): JsonResponse
-    {
-      $data = json_decode($request->getContent(), true);
-      $isEmpty = IsEmpty::check(
-        $data,
-        keys: ['name', 'description', 'amount', 'price', 'category', 'color']
-      );
-      
-      if ($isEmpty)
-      {
-        return FormatJsonResponse::error(
-          status: 404,
-          pointer: '/v1/products/',
-          title: 'Not added product',
-          details: 'Probably data was entered incorrectly'
-        );
-      }
-    }
-
-    #[Route('/v1/products', name: 'get_all_products', methods: 'GET')]
-    public function getAll(): JsonResponse
-    {
-      $links = ['self' => '/v1/products/'];
-
-      return FormatJsonResponse::success(
-        type: 'product',
-        data: $this->mockupProducts,
-        links: $links
+    if ($isEmpty['isEmpty']) {
+      return FormatJsonResponse::error(
+        responseCode: Response::HTTP_BAD_REQUEST,
+        pointer: '/v1/products/',
+        title: 'Did not add product',
+        details: 'Probabaly ' . $isEmpty['invalidKey'] . ' key was entered incorrectly.'
       );
     }
 
-    #[Route('/v1/products/{id}', name: 'get_product_by_id', methods: 'GET')]
-    public function getById(int|null $id): JsonResponse
-    {
-      $key = array_search($id, array_column($this->mockupProducts, 'id'));
-      if ($key == false)
-      {
-        return FormatJsonResponse::error(
-          status: 404,
-          pointer: '/v1/products/' . $id,
-          title: 'Not found product',
-          details: 'Probably the product does not exist or the id was entered incorrectly'
-        );
-      }
+    $product = new Product();
+    $product
+      ->setName($data['name'])
+      ->setDescription($data['description'])
+      ->setAmount($data['amount'])
+      ->setPrice($data['price'])
+      ->setCategory($data['category'])
+      ->setColor($data['color'])
+      ->setCreatedAt(new DateTimeImmutable());
 
-      $links = [ 'self' => 'http://127.0.0.1:8000/v1/products/' . $id ];
+    $this->productRepository->saveProduct($product);
 
-      return FormatJsonResponse::success(
-        type: 'product',
-        data: $this->mockupProducts[$key],
-        links: $links
+    return new JsonResponse([
+      'status' => Response::HTTP_CREATED,
+      'title' => 'Product created'
+    ]);
+  }
+
+  #[Route('/v1/products', name: 'get_all_products', methods: 'GET')]
+  public function getAll(): JsonResponse
+  {
+    $links = ['self' => '/v1/products/'];
+
+    $products = $this->productRepository->findAll();
+    if (!$products) {
+      return FormatJsonResponse::error(
+        responseCode: Response::HTTP_NOT_FOUND,
+        pointer: $links['self'],
+        title: 'Not found any products',
+        details: 'Probably the products do not exist'
       );
     }
-    
-    private function setMockupProducts(): void
-    {
-      for ($i=1; $i <= 10 ; $i++) { 
-        $product = new Product();
-        $product->setId($i);
-        $product->setName('T-shirt');
-        $product->setDescription('This is a tshirt');
-        $product->setAmount(12);
-        $product->setPrice('30.99');
 
-        array_push($this->mockupProducts, $product->toArray());
-      }
+    $data = [];
+    foreach ($products as $product) {
+      array_push($data, $product->toArray());
     }
+
+    return FormatJsonResponse::success(
+      responseCode: Response::HTTP_OK,
+      type: 'product',
+      data: $data,
+      links: $links
+    );
+  }
+
+  #[Route('/v1/products/{id}', name: 'get_product_by_id', methods: 'GET')]
+  public function getById(int|null $id): JsonResponse
+  {
+    $product = $this->productRepository->findOneBy(['id' => $id]);
+    if (!$product) {
+      return FormatJsonResponse::error(
+        responseCode: Response::HTTP_NOT_FOUND,
+        pointer: '/v1/products/' . $id,
+        title: 'Not found product',
+        details: 'Probably the product does not exist or the id was entered incorrectly'
+      );
+    }
+
+    $links = ['self' => 'http://127.0.0.1:8000/v1/products/' . $id];
+
+    return FormatJsonResponse::success(
+      responseCode: Response::HTTP_OK,
+      type: 'product',
+      data: $product->toArray(),
+      links: $links
+    );
+  }
 }
