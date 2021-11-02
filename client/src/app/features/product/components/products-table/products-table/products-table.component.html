@@ -6,7 +6,7 @@
           <thead class="bg-gray-50">
           <tr>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              ID.
+              No.
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Name
@@ -26,12 +26,13 @@
           </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-          <shopify-products-list-table-row *ngFor="let product of products"
-                                           [product]="product">
-          </shopify-products-list-table-row>
+          <shopify-products-table-row *ngFor="let product of products; trackBy:trackByProductId; let i = index"
+                                      [product]="product"
+                                      [index]="i">
+          </shopify-products-table-row>
           </tbody>
         </table>
-        <shopify-pagination></shopify-pagination>
+        <shopify-pagination [productCount]="productCount"></shopify-pagination>
       </div>
     </div>
   </div>

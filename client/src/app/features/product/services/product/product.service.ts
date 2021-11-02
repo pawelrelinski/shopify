@@ -37,6 +37,20 @@ export class ProductService {
     return this.http.post<{ status: number; title: string; }>(url, product);
   }
 
+  public delete(id: number): Observable<{ status: number; title: string; }> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push(id.toString());
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.delete<{ status: number; title: string; }>(url);
+  }
+
+  public getMetadata(): Observable<any> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('data');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get(url);
+  }
+
   private setDefaultUrlConfig(): void {
     this.segmentsUrl = new SegmentsUrl();
     this.urlBuilder = new UrlBuilder();

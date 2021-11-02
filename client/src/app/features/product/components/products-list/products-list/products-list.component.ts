@@ -50,7 +50,8 @@ export class ProductsListComponent implements OnInit {
 
   private setAllProducts(): void {
     this.productService.getAll().pipe(
-      retry(3)
+      retry(3),
+      take(1)
     ).subscribe((res: Response<Array<ProductResponse>>) => {
       const productResponses = res.data as Array<ProductResponse>;
 

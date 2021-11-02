@@ -8,15 +8,15 @@ import {ProductsListComponent} from '@features/product/components';
 import {ProductsListElementComponent} from '@features/product/components';
 import {ProductOverviewComponent} from '@features/product/components';
 import {ProductPathComponent} from '@features/product/components';
-import {ProductsListTableComponent} from '@features/product/components';
-import {ProductsListTableRowComponent} from '@features/product/components';
+import {ProductsTableComponent} from '@features/product/components';
+import {ProductsTableRowComponent} from '@features/product/components';
 import {ProductFormComponent} from '@features/product/components';
-import {ProductsListTableActionsComponent} from '@features/product/components'
+import {AvailableProductsWidgetComponent} from '@features/product/components';
+import {ProductsTableActionsComponent} from '@features/product/components'
   ;
 import {StatusWidgetModule} from '@shared/status-widget/status-widget.module';
 import {ShopifyPaginationModule} from '@shared/shopify-pagination/shopify-pagination.module';
 import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.module';
-import {AvailableProductsWidgetComponent} from '@features/product/components';
 
 
 @NgModule({
@@ -25,10 +25,10 @@ import {AvailableProductsWidgetComponent} from '@features/product/components';
     ProductsListElementComponent,
     ProductOverviewComponent,
     ProductPathComponent,
-    ProductsListTableComponent,
-    ProductsListTableRowComponent,
+    ProductsTableComponent,
+    ProductsTableRowComponent,
     ProductFormComponent,
-    ProductsListTableActionsComponent,
+    ProductsTableActionsComponent,
     AvailableProductsWidgetComponent
   ],
   imports: [
@@ -43,9 +43,9 @@ import {AvailableProductsWidgetComponent} from '@features/product/components';
   exports: [
     ProductsListComponent,
     ProductOverviewComponent,
-    ProductsListTableComponent,
+    ProductsTableComponent,
     ProductFormComponent,
-    ProductsListTableActionsComponent,
+    ProductsTableActionsComponent,
     AvailableProductsWidgetComponent
   ]
 })

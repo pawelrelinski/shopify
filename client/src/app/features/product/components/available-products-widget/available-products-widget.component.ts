@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {take} from 'rxjs/operators';
 
 import {ProductService} from '@features/product/services';
 
@@ -8,10 +9,20 @@ import {ProductService} from '@features/product/services';
   styleUrls: ['./available-products-widget.component.scss']
 })
 export class AvailableProductsWidgetComponent implements OnInit {
+  public count!: number;
 
-  constructor(private productService: ProductService) { }
-
-  ngOnInit(): void {
+  constructor(private productService: ProductService) {
   }
 
+  ngOnInit(): void {
+    this.setProductsCount();
+  }
+
+  private setProductsCount(): void {
+    this.productService.getMetadata()
+      .pipe(take(1))
+      .subscribe(data => {
+        this.count = data.count;
+      });
+  }
 }

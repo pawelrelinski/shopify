@@ -5,11 +5,11 @@ import {ProductResponse, ProductSimple} from '@features/product/models';
 export type AttributesOfProduct = ProductResponse['attributes'] & { id: number };
 
 @Component({
-  selector: 'shopify-products-list-table-row',
-  templateUrl: './products-list-table-row.component.html',
-  styleUrls: ['./products-list-table-row.component.scss']
+  selector: 'shopify-products-table-row',
+  templateUrl: './products-table-row.component.html',
+  styleUrls: ['./products-table-row.component.scss']
 })
-export class ProductsListTableRowComponent {
+export class ProductsTableRowComponent {
   @Input()
   set product(value: AttributesOfProduct) {
     this._product = value;
@@ -18,10 +18,19 @@ export class ProductsListTableRowComponent {
     return this._product;
   }
 
+  @Input()
+  set index(value: number) {
+    this._index = ++value;
+  }
+  public get index(): number {
+    return this._index;
+  }
+
   @HostBinding('style.backgroundColor') bgColor!: string;
   @HostBinding('style.cursor') cursor!: string;
 
   private _product!: AttributesOfProduct;
+  private _index!: number;
 
   public date = new Date();
 
