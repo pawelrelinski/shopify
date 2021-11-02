@@ -86,6 +86,12 @@
                                     <a href="../modules/DashboardRoutingModule.html" >DashboardRoutingModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/EditProductModule.html" >EditProductModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/EditProductRoutingModule.html" >EditProductRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/HomePageModule.html" >HomePageModule</a>
                                 </li>
                                 <li class="link">
@@ -176,6 +182,9 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/DashboardComponent.html" >DashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EditProductComponent.html" >EditProductComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/HomePageComponent.html" >HomePageComponent</a>
@@ -340,7 +349,7 @@
                                     <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                    <a href="../injectables/ProductService.html" >ProductService</a>
                                 </li>
                         </ul>
                     </li>
@@ -472,6 +481,12 @@
                                            <a href="../modules/DashboardRoutingModule.html" >DashboardRoutingModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/EditProductModule.html" >EditProductModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/EditProductRoutingModule.html" >EditProductRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/HomePageModule.html" >HomePageModule</a>
                                        </li>
                                        <li class="link">
@@ -562,6 +577,9 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/DashboardComponent.html" >DashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EditProductComponent.html" >EditProductComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/HomePageComponent.html" >HomePageComponent</a>
@@ -726,7 +744,7 @@
                                            <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                           <a href="../injectables/ProductService.html" >ProductService</a>
                                        </li>
                                </ul>
                            </li>
@@ -810,7 +828,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/features/product/components/product-create-form/product-form.component.ts</code>
+    <code>src/app/features/product/components/product-form/product-form.component.ts</code>
 </p>
 
 
@@ -879,7 +897,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(fb: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html" target="_blank" >FormBuilder</a>, testProductService: any, activatedRoute: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank" >ActivatedRoute</a>)</code>
+                            <code>constructor(fb: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html" target="_blank" >FormBuilder</a>, activatedRoute: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank" >ActivatedRoute</a>, productService: any)</code>
                         </td>
                     </tr>
     
@@ -920,7 +938,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b><span class="modifier">Private</span> setProductId</b>
+                            <b><span class="modifier">Private</span> setProductData</b>
                         </td>
                     </tr>
     
@@ -929,7 +947,7 @@
                                 <span class="modifier-icon method fa fa-play lock">
                                     <span class="fa fa-lock"></span>
                                 </span>
-                            <code>setProductId()</code>
+                            <code>setProductData()</code>
                         </td>
                     </tr>
     
@@ -947,7 +965,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b><span class="modifier">Private</span> setProduct</b>
+                            <b><span class="modifier">Private</span> setProductForm</b>
                         </td>
                     </tr>
     
@@ -956,7 +974,7 @@
                                 <span class="modifier-icon method fa fa-play lock">
                                     <span class="fa fa-lock"></span>
                                 </span>
-                            <code>setProduct()</code>
+                            <code>setProductForm()</code>
                         </td>
                     </tr>
     
@@ -974,7 +992,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b><span class="modifier">Private</span> setEditProductForm</b>
+                            <b><span class="modifier">Private</span> setValuesOfFormControls</b>
                         </td>
                     </tr>
     
@@ -983,34 +1001,7 @@
                                 <span class="modifier-icon method fa fa-play lock">
                                     <span class="fa fa-lock"></span>
                                 </span>
-                            <code>setEditProductForm()</code>
-                        </td>
-                    </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description">
-                                    <b>Returns: </b>    <code>void</code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <b><span class="modifier">Private</span> setAddNewProductForm</b>
-                        </td>
-                    </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                                <span class="modifier-icon method fa fa-play lock">
-                                    <span class="fa fa-lock"></span>
-                                </span>
-                            <code>setAddNewProductForm()</code>
+                            <code>setValuesOfFormControls(disabled: boolean)</code>
                         </td>
                     </tr>
     
@@ -1028,6 +1019,51 @@
 
     <section>
         <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> boolean</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>boolean:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> buttonIsShow</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>buttonIsShow:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> defaultProductFormConfig</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>defaultProductFormConfig:     <code>{ general: { name: { value: string; disabled: boolean; }; regularPrice: { value: number; disabled...</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <table class="table table-sm table-bordered">
                 <tbody>
                     <tr>
@@ -1138,10 +1174,12 @@
         <div class="tab-pane fade tab-source-code" id="source">
             <pre><code class="hljs javascript">import {Component, forwardRef, Input, OnInit} from &#x27;@angular/core&#x27;;
 import {ActivatedRoute} from &#x27;@angular/router&#x27;;
-import {FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from &#x27;@angular/forms&#x27;;
+import {mergeMap} from &#x27;rxjs/operators&#x27;;
 
-import {TestProductService} from &#x27;@features/product/services&#x27;;
+import {FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from &#x27;@angular/forms&#x27;;
 import {ProductFormMode, ProductResponse} from &#x27;@features/product/models&#x27;;
+import {ProductService} from &#x27;@features/product/services&#x27;;
+
 
 @Component({
   selector: &#x27;shopify-product-form&#x27;,
@@ -1156,132 +1194,153 @@ import {ProductFormMode, ProductResponse} from &#x27;@features/product/models&#x
 })
 export class ProductFormComponent implements OnInit {
   @Input()
-  formMode!: ProductFormMode;
+  public formMode!: ProductFormMode;
 
   public productForm!: FormGroup;
+  public buttonIsShow!: boolean;
 
   private productId!: number;
   private product!: ProductResponse;
+  private defaultProductFormConfig &#x3D; {
+    general: {
+      name: {value: &#x27;&#x27;, disabled: false},
+      regularPrice: {value: 0.00, disabled: false},
+      salePrice: {value: 0.00, disabled: false},
+      description: {value: &#x27;&#x27;, disabled: false}
+    },
+    inventory: {
+      stockQuantity: {value: 0, disabled: false}
+    },
+    shipping: {
+      weight: {value: 0.00, disabled: false},
+      shippingMethod: {value: &#x27;&#x27;, disabled: false}
+    },
+    variations: {
+      category: {value: &#x27;&#x27;, disabled: false},
+      color: {value: &#x27;&#x27;, disabled: false}
+    }
+  };
 
   constructor(private fb: FormBuilder,
-              private testProductService: TestProductService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private productService: ProductService) {
   }
 
   public ngOnInit(): void {
-    switch (this.formMode) {
-      case ProductFormMode.READONLY:
-        this.setProductId();
-        this.setProduct();
-        this.setAddNewProductForm();
-        break;
-      case ProductFormMode.EDIT:
-        this.setProductId();
-        this.setProduct();
-        break;
-      case ProductFormMode.CREATE:
-        this.setAddNewProductForm();
-        break;
-    }
+    this.setProductForm();
   }
 
   public onSubmit(): void {
-    console.log(this.productForm);
+    const {general, inventory, variations} &#x3D; this.productForm.controls;
+    const product &#x3D; {
+      name: general.get(&#x27;name&#x27;)?.value,
+      description: general.get(&#x27;description&#x27;)?.value,
+      price: general.get(&#x27;regularPrice&#x27;)?.value,
+      amount: inventory.get(&#x27;stockQuantity&#x27;)?.value,
+      category: variations.get(&#x27;category&#x27;)?.value,
+      color: variations.get(&#x27;color&#x27;)?.value
+    };
+
+    this.productService.create(product).subscribe(
+      (response) &#x3D;&gt; {
+        if (+response.status &#x3D;&#x3D;&#x3D; 200) {
+          console.log(&#x27;Product have been created&#x27;);
+        }
+      },
+      error &#x3D;&gt; {
+        if (!error.ok) {
+          console.log({
+            name: error.name,
+            message: error.message
+          });
+        }
+      });
   }
 
-  private setProductId(): void {
-    this.activatedRoute.params.subscribe(params &#x3D;&gt; {
-      this.productId &#x3D; params.productId as number;
-    });
-  }
-
-  private setProduct(): void {
-    this.testProductService.getById(this.productId).subscribe((product: ProductResponse) &#x3D;&gt; {
+  private setProductData(): void {
+    this.activatedRoute.params.pipe(
+      mergeMap(params &#x3D;&gt; {
+        this.productId &#x3D; params.productId as number;
+        return this.productService.getById(this.productId);
+      })
+    ).subscribe((product: ProductResponse) &#x3D;&gt; {
       this.product &#x3D; product;
     });
   }
 
-  private setEditProductForm(): void {
-    const { name, description, amount, price } &#x3D; this.product.attributes;
+  private setProductForm(): void {
+    if (this.formMode &#x3D;&#x3D;&#x3D; ProductFormMode.EDIT) {
+      this.setProductData();
+      this.setValuesOfFormControls();
+      this.buttonIsShow &#x3D; true;
+    }
+
+    if (this.formMode &#x3D;&#x3D;&#x3D; ProductFormMode.READONLY) {
+      this.setProductData();
+      this.setValuesOfFormControls(true);
+      this.buttonIsShow &#x3D; false;
+    }
+
+    this.buttonIsShow &#x3D; true;
+
     this.productForm &#x3D; this.fb.group({
       general: this.fb.group({
-        name: [name, [
+        name: [this.defaultProductFormConfig.general.name, [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(128)
         ]],
-        regularPrice: [price, [
+        regularPrice: [this.defaultProductFormConfig.general.regularPrice, [
           Validators.required,
           Validators.min(0.01),
           Validators.max(1_000_000)
         ]],
-        salePrice: [0.00, [
+        salePrice: [this.defaultProductFormConfig.general.salePrice, [
           Validators.min(0.01),
           Validators.max(1_000_000)
         ]],
-        description: [description, [
+        description: [this.defaultProductFormConfig.general.description, [
           Validators.required,
           Validators.minLength(3)
         ]]
       }),
       inventory: this.fb.group({
-        stockQuantity: [amount, [
+        stockQuantity: [this.defaultProductFormConfig.inventory.stockQuantity, [
           Validators.required,
           Validators.min(0)
         ]],
         allowBackorders: [false]
       }),
       shipping: this.fb.group({
-        weight: [0.00, [
+        weight: [this.defaultProductFormConfig.shipping.weight, [
           Validators.required,
           Validators.min(0.00)
         ]],
-        shippingMethod: [&#x27;&#x27;, [
+        shippingMethod: [this.defaultProductFormConfig.shipping.shippingMethod, [
           Validators.required
+        ]]
+      }),
+      variations: this.fb.group({
+        category: [this.defaultProductFormConfig.variations.category, [
+          Validators.maxLength(50),
+          Validators.minLength(3)
+        ]],
+        color: [this.defaultProductFormConfig.variations.color, [
+          Validators.maxLength(50),
+          Validators.minLength(3)
         ]]
       })
     });
   }
 
-  private setAddNewProductForm(): void {
-    this.productForm &#x3D; this.fb.group({
-      general: this.fb.group({
-        name: [&#x27;&#x27;, [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(128)
-        ]],
-        regularPrice: [0.00, [
-          Validators.required,
-          Validators.min(0.01),
-          Validators.max(1_000_000)
-        ]],
-        salePrice: [0.00, [
-          Validators.min(0.01),
-          Validators.max(1_000_000)
-        ]],
-        description: [&#x27;&#x27;, [
-          Validators.required,
-          Validators.minLength(3)
-        ]]
-      }),
-      inventory: this.fb.group({
-        stockQuantity: [0, [
-          Validators.required,
-          Validators.min(0)
-        ]],
-        allowBackorders: [false]
-      }),
-      shipping: this.fb.group({
-        weight: [0.00, [
-          Validators.required,
-          Validators.min(0.00)
-        ]],
-        shippingMethod: [&#x27;&#x27;, [
-          Validators.required
-        ]]
-      })
-    });
+  private setValuesOfFormControls(disabled: boolean &#x3D; false): void {
+    const {name, description, amount: stockQuantity, price: regularPrice, category, color} &#x3D; this.product.attributes;
+    this.defaultProductFormConfig.general.name &#x3D; {value: name, disabled};
+    this.defaultProductFormConfig.general.regularPrice &#x3D; {value: regularPrice, disabled};
+    this.defaultProductFormConfig.general.description &#x3D; {value: description, disabled};
+    this.defaultProductFormConfig.inventory.stockQuantity &#x3D; {value: stockQuantity, disabled};
+    this.defaultProductFormConfig.variations.category &#x3D; {value: category, disabled};
+    this.defaultProductFormConfig.variations.color &#x3D; {value: color, disabled};
   }
 }
 </code></pre>

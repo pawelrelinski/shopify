@@ -62,6 +62,22 @@ return [[
 '[C]Symfony%5CBundle%5CFrameworkBundle%5CController%5CAbstractController%23addLink' => 1,
 'Symfony%5CBundle%5CFrameworkBundle%5CController%5CAbstractController%24container' => 0,
 '[C]Symfony%5CBundle%5CFrameworkBundle%5CController%5CAbstractController%24container' => 1,
+'App%5CController%5CProductController' => 0,
+'[C]App%5CController%5CProductController' => 1,
+'App%5CController%5CProductController%23__construct' => 0,
+'[C]App%5CController%5CProductController%23__construct' => 1,
+'App%5CController%5CProductController%23add' => 0,
+'[C]App%5CController%5CProductController%23add' => 1,
+'App%5CController%5CProductController%23getAll' => 0,
+'[C]App%5CController%5CProductController%23getAll' => 1,
+'App%5CController%5CProductController%23getById' => 0,
+'[C]App%5CController%5CProductController%23getById' => 1,
+'App%5CController%5CProductController%23update' => 0,
+'[C]App%5CController%5CProductController%23update' => 1,
+'App%5CController%5CProductController%23delete' => 0,
+'[C]App%5CController%5CProductController%23delete' => 1,
+'App%5CController%5CProductController%24productRepository' => 0,
+'[C]App%5CController%5CProductController%24productRepository' => 1,
 'App%5CEntity%5CProduct' => 2,
 '[C]App%5CEntity%5CProduct' => 1,
 'App%5CEntity%5CProduct%23getId' => 0,
@@ -578,7 +594,7 @@ return [[
 ], [
 
 0 => [],
-1 => 1635510584,
+1 => 1635529584,
 2 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [

@@ -109,4 +109,54 @@ class ProductController extends AbstractController
       links: $links
     );
   }
+
+  #[Route('/v1/products/{id}', name: 'update_product_by_id', methods: 'PUT')]
+  public function update(int|null $id, Request $request): JsonResponse
+  {
+    $product = $this->productRepository->findOneBy(['id' => $id]);
+    $data = json_decode($request->getContent(), true);
+    $isEmpty = IsEmpty::check(
+      data: $data,
+      keys: ['name', 'description', 'amount', 'price', 'category', 'color']
+    );
+
+    if ($isEmpty['isEmpty']) {
+      return FormatJsonResponse::error(
+        responseCode: Response::HTTP_BAD_REQUEST,
+        pointer: '/v1/products/' . $id,
+        title: 'Did not edit product',
+        details: 'Probabaly ' . $isEmpty['invalidKey'] . ' key was entered incorrectly.'
+      );
+    }
+
+    $product
+      ->setName($data['name'])
+      ->setDescription($data['description'])
+      ->setAmount($data['amount'])
+      ->setPrice($data['price'])
+      ->setCategory($data['category'])
+      ->setColor($data['color']);
+
+    $updatedProduct = $this->productRepository->updateProduct($product);
+    $links = ['self' => 'http://127.0.0.1:8000/v1/products/' . $updatedProduct->getId()];
+
+    return FormatJsonResponse::success(
+      responseCode: Response::HTTP_OK,
+      type: 'product',
+      data: $updatedProduct->toArray(),
+      links: $links
+    );
+  }
+
+  #[Route('/v1/products/{id}', name: 'delete_product_by_id', methods: 'DELETE')]
+  public function delete(int|null $id): JsonResponse
+  {
+    $product = $this->productRepository->findOneBy(['id' => $id]);
+    $this->productRepository->removeProduct($product);
+
+    return new JsonResponse([
+      'status' => Response::HTTP_NO_CONTENT,
+      'title' => 'Product deleted'
+    ]);
+  }
 }

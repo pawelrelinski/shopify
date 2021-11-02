@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f45ac1d8018299bd46f23df0d0e138f4a1aecc33',
+        'reference' => 'b6405942e7e429e37b068c04d8ad6c139f1d171d',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f45ac1d8018299bd46f23df0d0e138f4a1aecc33',
+            'reference' => 'b6405942e7e429e37b068c04d8ad6c139f1d171d',
             'dev_requirement' => false,
         ),
         'composer/package-versions-deprecated' => array(
@@ -188,6 +188,15 @@
             'install_path' => __DIR__ . '/../laminas/laminas-code',
             'aliases' => array(),
             'reference' => 'bb324850d09dd437b6acb142c13e64fdc725b0e1',
+            'dev_requirement' => false,
+        ),
+        'nelmio/cors-bundle' => array(
+            'pretty_version' => '2.1.1',
+            'version' => '2.1.1.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../nelmio/cors-bundle',
+            'aliases' => array(),
+            'reference' => '0b964b665016dfb61dd0fd2bb8c24afb1ae45a93',
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(

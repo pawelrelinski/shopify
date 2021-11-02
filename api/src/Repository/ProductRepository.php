@@ -23,7 +23,8 @@ class ProductRepository extends ServiceEntityRepository
         $this->manager = $manager;
     }
 
-    public function saveProduct(Product $product) {
+    public function saveProduct(Product $product)
+    {
         $newProduct = new Product();
 
         $newProduct
@@ -36,6 +37,20 @@ class ProductRepository extends ServiceEntityRepository
             ->setCreatedAt($product->getCreatedAt());
 
         $this->manager->persist($newProduct);
+        $this->manager->flush();
+    }
+
+    public function updateProduct(Product $product): Product
+    {
+        $this->manager->persist($product);
+        $this->manager->flush();
+
+        return $product;
+    }
+
+    public function removeProduct(Product $product)
+    {
+        $this->manager->remove($product);
         $this->manager->flush();
     }
 

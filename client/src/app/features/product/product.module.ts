@@ -16,6 +16,7 @@ import {ProductsListTableActionsComponent} from '@features/product/components'
 import {StatusWidgetModule} from '@shared/status-widget/status-widget.module';
 import {ShopifyPaginationModule} from '@shared/shopify-pagination/shopify-pagination.module';
 import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.module';
+import {AvailableProductsWidgetComponent} from '@features/product/components';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.modu
     ProductsListTableComponent,
     ProductsListTableRowComponent,
     ProductFormComponent,
-    ProductsListTableActionsComponent
+    ProductsListTableActionsComponent,
+    AvailableProductsWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.modu
     ProductOverviewComponent,
     ProductsListTableComponent,
     ProductFormComponent,
-    ProductsListTableActionsComponent
+    ProductsListTableActionsComponent,
+    AvailableProductsWidgetComponent
   ]
 })
 export class ProductModule {

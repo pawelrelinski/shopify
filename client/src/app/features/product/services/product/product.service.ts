@@ -24,11 +24,11 @@ export class ProductService {
     return this.http.get<ArrayOfProducts>(url);
   }
 
-  public getById(id: number): Observable<ProductResponse> {
+  public getById(id: number): Observable<Response<ProductResponse>> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<ProductResponse>(url);
+    return this.http.get<Response<ProductResponse>>(url);
   }
 
   public create(product: any): Observable<{ status: number; title: string; }> {

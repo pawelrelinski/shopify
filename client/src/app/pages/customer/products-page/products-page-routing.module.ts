@@ -5,11 +5,11 @@ import {ProductsPageComponent} from './products-page.component';
 
 const routes: Routes = [
   {
-    path: ':category/:productType',
+    path: '',
     component: ProductsPageComponent
   },
   {
-    path: ':category/:productType/:productId',
+    path: ':productId',
     loadChildren: () => import('../product-overview-page/product-overview-page.module').then(m => m.ProductOverviewPageModule)
   }
 ];

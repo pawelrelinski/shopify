@@ -86,6 +86,12 @@
                                     <a href="../modules/DashboardRoutingModule.html" >DashboardRoutingModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/EditProductModule.html" >EditProductModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/EditProductRoutingModule.html" >EditProductRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/HomePageModule.html" >HomePageModule</a>
                                 </li>
                                 <li class="link">
@@ -176,6 +182,9 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/DashboardComponent.html" >DashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/EditProductComponent.html" >EditProductComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/HomePageComponent.html" >HomePageComponent</a>
@@ -340,7 +349,7 @@
                                     <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                    <a href="../injectables/ProductService.html" >ProductService</a>
                                 </li>
                         </ul>
                     </li>
@@ -472,6 +481,12 @@
                                            <a href="../modules/DashboardRoutingModule.html" >DashboardRoutingModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/EditProductModule.html" >EditProductModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/EditProductRoutingModule.html" >EditProductRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/HomePageModule.html" >HomePageModule</a>
                                        </li>
                                        <li class="link">
@@ -562,6 +577,9 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/DashboardComponent.html" >DashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/EditProductComponent.html" >EditProductComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/HomePageComponent.html" >HomePageComponent</a>
@@ -726,7 +744,7 @@
                                            <a href="../injectables/ProductCategoriesService.html" >ProductCategoriesService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/TestProductService.html" >TestProductService</a>
+                                           <a href="../injectables/ProductService.html" >ProductService</a>
                                        </li>
                                </ul>
                            </li>
@@ -820,6 +838,10 @@
     <table class="table table-sm table-hover">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -891,13 +913,14 @@
     </section>
 </div>
         <div class="tab-pane fade tab-source-code" id="source">
-            <pre><code class="hljs javascript">import {Component, Input} from &#x27;@angular/core&#x27;;
+            <pre><code class="hljs javascript">import {ChangeDetectionStrategy, Component, Input} from &#x27;@angular/core&#x27;;
 import {Product} from &#x27;@features/product/models&#x27;;
 
 @Component({
   selector: &#x27;shopify-products-list-element&#x27;,
   templateUrl: &#x27;./products-list-element.component.html&#x27;,
-  styleUrls: [&#x27;./products-list-element.component.scss&#x27;]
+  styleUrls: [&#x27;./products-list-element.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsListElementComponent {
   @Input()

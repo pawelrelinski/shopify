@@ -6,3 +6,4 @@ export * from './products-list-table/products-list-table.component';
 export * from './products-list-table-row/products-list-table-row.component';
 export * from './product-form/product-form.component';
 export * from './products-list-table-actions/products-list-table-actions.component';
+export * from './available-products-widget/available-products-widget.component';

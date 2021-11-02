@@ -5,6 +5,7 @@ import {mergeMap} from 'rxjs/operators';
 import {FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {ProductFormMode, ProductResponse} from '@features/product/models';
 import {ProductService} from '@features/product/services';
+import {Response} from "@core/interfaces";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ProductFormComponent implements OnInit {
   public buttonIsShow!: boolean;
 
   private productId!: number;
-  private product!: ProductResponse;
+  private product!: Response<ProductResponse>;
   private defaultProductFormConfig = {
     general: {
       name: {value: '', disabled: false},
@@ -89,7 +90,7 @@ export class ProductFormComponent implements OnInit {
         this.productId = params.productId as number;
         return this.productService.getById(this.productId);
       })
-    ).subscribe((product: ProductResponse) => {
+    ).subscribe((product: Response<ProductResponse>) => {
       this.product = product;
     });
   }
@@ -160,7 +161,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   private setValuesOfFormControls(disabled: boolean = false): void {
-    const {name, description, amount: stockQuantity, price: regularPrice, category, color} = this.product.attributes;
+    const {name, description, amount: stockQuantity, price: regularPrice, category, color} = this.product.data.attributes;
     this.defaultProductFormConfig.general.name = {value: name, disabled};
     this.defaultProductFormConfig.general.regularPrice = {value: regularPrice, disabled};
     this.defaultProductFormConfig.general.description = {value: description, disabled};

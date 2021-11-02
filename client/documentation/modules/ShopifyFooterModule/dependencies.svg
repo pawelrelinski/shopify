@@ -18,13 +18,13 @@
 <title>cluster_ShopifyFooterModule_imports</title>
 <polygon fill="none" stroke="black" points="202,-40.8 202,-92.8 330,-92.8 330,-40.8 202,-40.8"/>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_ShopifyFooterModule_declarations</title>
-<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 194,-92.8 194,-40.8 16,-40.8"/>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_ShopifyFooterModule_exports</title>
 <polygon fill="none" stroke="black" points="82,-170.8 82,-222.8 264,-222.8 264,-170.8 82,-170.8"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_ShopifyFooterModule_declarations</title>
+<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 194,-92.8 194,-40.8 16,-40.8"/>
 </g>
 <!-- ShopifyFooterComponent -->
 <g id="node1" class="node">

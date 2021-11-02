@@ -14,13 +14,13 @@
 <title>cluster_ShopifyButtonsModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 510,-230.8 510,-32.8 8,-32.8"/>
 </g>
-<g id="clust6" class="cluster">
-<title>cluster_ShopifyButtonsModule_exports</title>
-<polygon fill="none" stroke="black" points="81,-170.8 81,-222.8 438,-222.8 438,-170.8 81,-170.8"/>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_ShopifyButtonsModule_declarations</title>
 <polygon fill="none" stroke="black" points="152,-40.8 152,-92.8 502,-92.8 502,-40.8 152,-40.8"/>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_ShopifyButtonsModule_exports</title>
+<polygon fill="none" stroke="black" points="81,-170.8 81,-222.8 438,-222.8 438,-170.8 81,-170.8"/>
 </g>
 <g id="clust5" class="cluster">
 <title>cluster_ShopifyButtonsModule_imports</title>
