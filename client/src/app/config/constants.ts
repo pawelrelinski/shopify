@@ -1,3 +1,3 @@
 export class Constants {
-  public readonly API_ENDPOINT: string = 'http://localhost:8080/';
+  public readonly API_ENDPOINT: string = 'http://127.0.0.1:8000/v1';
 }

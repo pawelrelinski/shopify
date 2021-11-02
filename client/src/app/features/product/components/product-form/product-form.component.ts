@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
 
 import {FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {TestProductService} from '@features/product/services';
 import {ProductFormMode, ProductResponse} from '@features/product/models';
+import {ProductService} from '@features/product/services';
 
 
 @Component({
@@ -23,28 +23,33 @@ export class ProductFormComponent implements OnInit {
   public formMode!: ProductFormMode;
 
   public productForm!: FormGroup;
+  public buttonIsShow!: boolean;
 
   private productId!: number;
   private product!: ProductResponse;
   private defaultProductFormConfig = {
     general: {
-      name: { value: '', disabled: false },
-      regularPrice: { value: 0.00, disabled: false },
-      salePrice: { value: 0.00, disabled: false },
-      description: { value: '', disabled: false }
+      name: {value: '', disabled: false},
+      regularPrice: {value: 0.00, disabled: false},
+      salePrice: {value: 0.00, disabled: false},
+      description: {value: '', disabled: false}
     },
     inventory: {
-      stockQuantity: { value: 0, disabled: false }
+      stockQuantity: {value: 0, disabled: false}
     },
     shipping: {
-      weight: { value: 0.00, disabled: false },
-      shippingMethod: { value: '', disabled: false }
+      weight: {value: 0.00, disabled: false},
+      shippingMethod: {value: '', disabled: false}
+    },
+    variations: {
+      category: {value: '', disabled: false},
+      color: {value: '', disabled: false}
     }
   };
 
   constructor(private fb: FormBuilder,
-              private testProductService: TestProductService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private productService: ProductService) {
   }
 
   public ngOnInit(): void {
@@ -52,14 +57,37 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.productForm);
+    const {general, inventory, variations} = this.productForm.controls;
+    const product = {
+      name: general.get('name')?.value,
+      description: general.get('description')?.value,
+      price: general.get('regularPrice')?.value,
+      amount: inventory.get('stockQuantity')?.value,
+      category: variations.get('category')?.value,
+      color: variations.get('color')?.value
+    };
+
+    this.productService.create(product).subscribe(
+      (response) => {
+        if (+response.status === 200) {
+          console.log('Product have been created');
+        }
+      },
+      error => {
+        if (!error.ok) {
+          console.log({
+            name: error.name,
+            message: error.message
+          });
+        }
+      });
   }
 
   private setProductData(): void {
     this.activatedRoute.params.pipe(
       mergeMap(params => {
         this.productId = params.productId as number;
-        return this.testProductService.getById(this.productId);
+        return this.productService.getById(this.productId);
       })
     ).subscribe((product: ProductResponse) => {
       this.product = product;
@@ -70,12 +98,16 @@ export class ProductFormComponent implements OnInit {
     if (this.formMode === ProductFormMode.EDIT) {
       this.setProductData();
       this.setValuesOfFormControls();
+      this.buttonIsShow = true;
     }
 
     if (this.formMode === ProductFormMode.READONLY) {
       this.setProductData();
       this.setValuesOfFormControls(true);
+      this.buttonIsShow = false;
     }
+
+    this.buttonIsShow = true;
 
     this.productForm = this.fb.group({
       general: this.fb.group({
@@ -113,15 +145,27 @@ export class ProductFormComponent implements OnInit {
         shippingMethod: [this.defaultProductFormConfig.shipping.shippingMethod, [
           Validators.required
         ]]
+      }),
+      variations: this.fb.group({
+        category: [this.defaultProductFormConfig.variations.category, [
+          Validators.maxLength(50),
+          Validators.minLength(3)
+        ]],
+        color: [this.defaultProductFormConfig.variations.color, [
+          Validators.maxLength(50),
+          Validators.minLength(3)
+        ]]
       })
     });
   }
 
   private setValuesOfFormControls(disabled: boolean = false): void {
-    const { name, description, amount: stockQuantity, price: regularPrice } = this.product.attributes;
-    this.defaultProductFormConfig.general.name = { value: name, disabled };
-    this.defaultProductFormConfig.general.regularPrice = { value: regularPrice, disabled };
-    this.defaultProductFormConfig.general.description = { value: description, disabled };
-    this.defaultProductFormConfig.inventory.stockQuantity = { value: stockQuantity, disabled };
+    const {name, description, amount: stockQuantity, price: regularPrice, category, color} = this.product.attributes;
+    this.defaultProductFormConfig.general.name = {value: name, disabled};
+    this.defaultProductFormConfig.general.regularPrice = {value: regularPrice, disabled};
+    this.defaultProductFormConfig.general.description = {value: description, disabled};
+    this.defaultProductFormConfig.inventory.stockQuantity = {value: stockQuantity, disabled};
+    this.defaultProductFormConfig.variations.category = {value: category, disabled};
+    this.defaultProductFormConfig.variations.color = {value: color, disabled};
   }
 }

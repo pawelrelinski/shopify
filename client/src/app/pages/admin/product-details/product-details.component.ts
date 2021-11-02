@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {ProductFormMode} from "@features/product/models";
 
 @Component({
   selector: 'shopify-product-details',
@@ -6,4 +7,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent {
+  public formMode: ProductFormMode = ProductFormMode.EDIT;
 }

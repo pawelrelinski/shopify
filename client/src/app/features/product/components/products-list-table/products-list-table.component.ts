@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {map} from 'rxjs/operators';
 
-import {ProductResponse, ProductSimple} from '@features/product/models';
-import {TestProductService} from '@features/product/services';
+import {ProductResponse} from '@features/product/models';
 import {Response} from '@core/interfaces';
+import {ProductService} from '@features/product/services';
+import {AttributesOfProduct} from '@features/product/components';
 
 
 @Component({
@@ -12,9 +12,9 @@ import {Response} from '@core/interfaces';
   styleUrls: ['./products-list-table.component.scss']
 })
 export class ProductsListTableComponent implements OnInit {
-  public products: Array<ProductSimple> = [];
+  public products: Array<AttributesOfProduct> = [];
 
-  constructor(private testProductService: TestProductService) {
+  constructor(private productService: ProductService) {
   }
 
   public ngOnInit(): void {
@@ -22,16 +22,10 @@ export class ProductsListTableComponent implements OnInit {
   }
 
   private setAllProducts(): void {
-    this.testProductService.getAll().pipe(
-      map(((value: Response<Array<ProductResponse>>) => this.mappingArrayOfProductResponseToProductSimple(value)))
-    ).subscribe((products: Array<ProductSimple>) => {
-      this.products = products;
-    });
-  }
-
-  private mappingArrayOfProductResponseToProductSimple(value: Response<Array<ProductResponse>>): Array<ProductSimple> {
-    return value.data.map((product: ProductResponse) => {
-      return  { id: product.id, ...product.attributes } as ProductSimple;
+    this.productService.getAll().subscribe((products: Response<Array<ProductResponse>>) => {
+      this.products = products.data.map((product: ProductResponse): AttributesOfProduct => {
+        return { id: product.id, ...product.attributes } as AttributesOfProduct;
+      });
     });
   }
 }

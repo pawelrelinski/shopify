@@ -6,9 +6,12 @@ export interface ProductResponse {
     description: string;
     amount: number;
     price: number;
-    createdAt: string | Date;
+    createdAt: {
+      date: string;
+      timezone_type: number;
+      timezone: string;
+    };
     category: string;
     color: string;
-    material: string;
   };
 }

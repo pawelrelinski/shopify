@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
-import {filter, map} from 'rxjs/operators';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {filter, map, retry, take} from 'rxjs/operators';
 
 import {Product, ProductResponse} from '@features/product/models';
-import {TestProductService} from '@features/product/services';
+import {ProductService} from '@features/product/services';
 import {Response} from '@core/interfaces';
 
 interface ProductUrlData {
@@ -25,7 +25,7 @@ export class ProductsListComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
-              private testProductService: TestProductService) {
+              private productService: ProductService) {
   }
 
   public ngOnInit(): void {
@@ -34,7 +34,6 @@ export class ProductsListComponent implements OnInit {
 
   public isProducts(): boolean {
     return !!(this.products);
-
   }
 
   private getDataFromUrl(): void {
@@ -44,13 +43,15 @@ export class ProductsListComponent implements OnInit {
     ).subscribe((routerEvent: string) => {
       this.currentRoute = routerEvent;
       this.productsMetaData = this.getProductsInfoFromUrl();
-      this.getAllProducts();
+      this.setAllProducts();
       this.setPathToProductArray();
     });
   }
 
-  private getAllProducts(): void {
-    this.testProductService.getAll().subscribe((res: Response<Array<ProductResponse>>) => {
+  private setAllProducts(): void {
+    this.productService.getAll().pipe(
+      retry(3)
+    ).subscribe((res: Response<Array<ProductResponse>>) => {
       const productResponses = res.data as Array<ProductResponse>;
 
       this.products = productResponses.map((val: ProductResponse) => {

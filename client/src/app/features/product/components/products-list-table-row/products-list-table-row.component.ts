@@ -1,7 +1,8 @@
 import {Component, HostBinding, HostListener, Input} from '@angular/core';
 
-import {ProductSimple} from '@features/product/models';
+import {ProductResponse, ProductSimple} from '@features/product/models';
 
+export type AttributesOfProduct = ProductResponse['attributes'] & { id: number };
 
 @Component({
   selector: 'shopify-products-list-table-row',
@@ -10,17 +11,17 @@ import {ProductSimple} from '@features/product/models';
 })
 export class ProductsListTableRowComponent {
   @Input()
-  set product(value: ProductSimple) {
+  set product(value: AttributesOfProduct) {
     this._product = value;
   }
-  get product(): ProductSimple {
+  public get product(): AttributesOfProduct {
     return this._product;
   }
 
   @HostBinding('style.backgroundColor') bgColor!: string;
   @HostBinding('style.cursor') cursor!: string;
 
-  private _product!: ProductSimple;
+  private _product!: AttributesOfProduct;
 
   public date = new Date();
 

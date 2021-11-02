@@ -9,7 +9,7 @@
           {{ product.name }}
         </div>
         <div class="text-sm text-gray-500">
-          {{ date | date }} created
+          {{ product.createdAt.date | date }} created
         </div>
       </div>
     </div>
@@ -20,14 +20,14 @@
     <shopify-status-widget-danger *ngIf="isDanger()" [message]="product.amount.toString()"></shopify-status-widget-danger>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    Clothes
+    {{ product.category }}
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     {{ product.price }} PLN
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     <a [routerLink]="['/admin/product-details', product.id]" class="text-indigo-600 hover:text-indigo-900 text-right">
-      Details
+      Overview
     </a>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-start">
