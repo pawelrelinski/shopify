@@ -4,7 +4,7 @@ import {take} from 'rxjs/operators';
 import {ProductResponse} from '@features/product/models';
 import {Response} from '@core/interfaces';
 import {ProductService} from '@features/product/services';
-import {AttributesOfProduct} from '@features/product/components';
+import {AttributesOfProduct, SortOptions} from '@features/product/components';
 
 
 @Component({
@@ -16,6 +16,11 @@ export class ProductsTableComponent implements OnInit {
   public products: Array<AttributesOfProduct> = [];
   public productCount!: number;
 
+  public paginationPageCount!: number;
+  public paginationCurrentPage: number = 1;
+
+  private queryParams!: Map<string, string>;
+
   constructor(private productService: ProductService) {
   }
 
@@ -24,12 +29,16 @@ export class ProductsTableComponent implements OnInit {
     this.setProductsCount();
   }
 
+  public sortBy(sortOptions: SortOptions): void {
+    this.setAllProducts(sortOptions);
+  }
+
   public trackByProductId(index: number, product: AttributesOfProduct): AttributesOfProduct['id'] {
     return product.id;
   }
 
-  private setAllProducts(): void {
-    this.productService.getAll()
+  private setAllProducts(sortOptions: SortOptions = { by: 'id', method: 'asc' }): void {
+    this.productService.getAllBy(this.getQueryMap(sortOptions))
       .pipe(take(1))
       .subscribe((products: Response<Array<ProductResponse>>) => {
         this.products = products.data.map((product: ProductResponse): AttributesOfProduct => {
@@ -39,10 +48,33 @@ export class ProductsTableComponent implements OnInit {
   }
 
   private setProductsCount(): void {
-    this.productService.getMetadata()
+    const options = new Map<string, string>()
+      .set('category', 'men');
+
+    this.productService.getMetadata(options)
       .pipe(take(1))
       .subscribe(data => {
         this.productCount = data.count;
+        this.setPaginationPageCount();
       });
+  }
+
+  private getQueryMap(sortOptions: SortOptions): Map<string, string> {
+    this.queryParams = new Map<string, string>()
+      .set('category', 'men')
+      .set('sortBy', sortOptions.by)
+      .set('sortMethod', sortOptions.method)
+      .set('limit', '10')
+      .set('offset', (this.paginationCurrentPage - 1).toString());
+
+    return this.queryParams;
+  }
+
+  private setPaginationPageCount(): void {
+    this.paginationPageCount = +((this.productCount / 10).toFixed(0));
+    if (this.productCount % 10 > 0) {
+      this.paginationPageCount += 1;
+    }
+    console.log(this.paginationPageCount);
   }
 }

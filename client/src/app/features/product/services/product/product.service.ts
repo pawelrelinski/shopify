@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {Response} from '@core/interfaces';
 import {ProductResponse} from '@features/product/models';
-import {SegmentsUrl, UrlBuilder} from '@core/utils';
+import {QueryStringParameters, SegmentsUrl, UrlBuilder} from '@core/utils';
 
 type ArrayOfProducts = Response<Array<ProductResponse>>;
 
@@ -14,6 +14,7 @@ type ArrayOfProducts = Response<Array<ProductResponse>>;
 export class ProductService {
   private segmentsUrl!: SegmentsUrl;
   private urlBuilder!: UrlBuilder;
+  private queryStringParameters!: QueryStringParameters;
 
   constructor(private http: HttpClient) {
   }
@@ -21,6 +22,16 @@ export class ProductService {
   public getAll(): Observable<ArrayOfProducts> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get<ArrayOfProducts>(url);
+  }
+
+  public getAllBy(queryParams: Map<string, string>): Observable<ArrayOfProducts> {
+    this.setDefaultUrlConfig();
+    for (const [key, value] of queryParams) {
+      this.queryStringParameters.push(key, value)
+    }
+
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     return this.http.get<ArrayOfProducts>(url);
   }
 
@@ -44,16 +55,20 @@ export class ProductService {
     return this.http.delete<{ status: number; title: string; }>(url);
   }
 
-  public getMetadata(): Observable<any> {
+  public getMetadata(options: Map<string, string>): Observable<{ count: number; }> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('data');
-    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get(url);
+    if (options.has('category')) {
+      this.queryStringParameters.push('category', options.get('category'));
+    }
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
+    return this.http.get<{ count: number; }>(url);
   }
 
   private setDefaultUrlConfig(): void {
     this.segmentsUrl = new SegmentsUrl();
     this.urlBuilder = new UrlBuilder();
+    this.queryStringParameters = new QueryStringParameters();
     this.segmentsUrl.push('products');
   }
 }

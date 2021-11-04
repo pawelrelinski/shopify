@@ -20,7 +20,7 @@ Object.assign( EventDispatcher.prototype, {
 
 		if ( listeners[ type ].indexOf( listener ) === - 1 ) {
 
-			listeners[ type ].push( listener );
+			listeners[ type ].push(listener);
 
 		}
 

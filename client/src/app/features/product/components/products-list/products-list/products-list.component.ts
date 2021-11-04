@@ -22,6 +22,7 @@ export class ProductsListComponent implements OnInit {
   public pathToProducts: Array<string> = [];
 
   private currentRoute!: string;
+  private queryParams!: Map<string, string>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -49,7 +50,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   private setAllProducts(): void {
-    this.productService.getAll().pipe(
+    this.productService.getAllBy(this.getQueryMap()).pipe(
       retry(3),
       take(1)
     ).subscribe((res: Response<Array<ProductResponse>>) => {
@@ -86,5 +87,16 @@ export class ProductsListComponent implements OnInit {
   private setPathToProductArray(): void {
     this.pathToProducts.push(this.productsMetaData.category as string);
     this.pathToProducts.push(this.productsMetaData.productType as string);
+  }
+
+  private getQueryMap(): Map<string, string> {
+    this.queryParams = new Map<string, string>()
+      .set('category', 'men')
+      .set('sortBy', 'id')
+      .set('sortMethod', 'asc')
+      .set('limit', '100')
+      .set('offset', '0');
+
+    return this.queryParams;
   }
 }

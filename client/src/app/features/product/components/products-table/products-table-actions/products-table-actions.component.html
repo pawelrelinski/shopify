@@ -11,25 +11,21 @@
 
     <div *ngIf="isOpen" class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
       <div class="py-1" role="none">
-        <a href="#" class="font-medium text-gray-900 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
-          Most Popular
-        </a>
-
-        <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">
-          Best Rating
-        </a>
-
-        <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">
-          Newest
-        </a>
-
-        <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">
+        <button (click)="changeSortBy('price-asc')" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">
           Price: Low to High
-        </a>
+        </button>
 
-        <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">
+        <button (click)="changeSortBy('price-desc')" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">
           Price: High to Low
-        </a>
+        </button>
+
+        <button (click)="changeSortBy('amount-asc')" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">
+          Amount: Low to High
+        </button>
+
+        <button (click)="changeSortBy('amount-desc')" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">
+          Amount: High to Low
+        </button>
       </div>
     </div>
   </div>

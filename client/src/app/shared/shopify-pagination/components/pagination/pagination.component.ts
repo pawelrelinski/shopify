@@ -8,4 +8,10 @@ import {Component, Input} from '@angular/core';
 export class PaginationComponent {
   @Input()
   productCount!: number;
+
+  @Input()
+  pageCount!: number;
+
+  @Input()
+  currentPage!: number;
 }
