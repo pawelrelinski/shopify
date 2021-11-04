@@ -23,6 +23,17 @@ class ProductController extends AbstractController
     $this->productRepository = $productRepository;
   }
 
+  #[Route('/v1/products/data', name: 'get_metadata_about_products', methods: 'GET')]
+  public function getMetaData(Request $request)
+  {
+    $category = $request->query->get('category') ?? null;
+    $count = $this->productRepository->countProducts($category);
+    
+    return new JsonResponse([
+      'count' => $count[0]
+    ]);
+  }
+
   #[Route('/v1/products/', name: 'add_product', methods: 'POST')]
   public function add(Request $request): JsonResponse
   {
@@ -60,11 +71,22 @@ class ProductController extends AbstractController
   }
 
   #[Route('/v1/products', name: 'get_all_products', methods: 'GET')]
-  public function getAll(): JsonResponse
+  public function getAll(Request $request): JsonResponse
   {
+    $category = $request->query?->get('category');
+    $sortBy = $request->query?->get('sortBy');
+    $sortMethod = $request->query?->get('sortMethod');
+    $limit = $request->query?->get('limit');
+    $offset = $request->query?->get('offset');
+    
+    $criteria = ['category' => $category];
+    $orderBy = [$sortBy => $sortMethod];
+    $limit = $limit;
+    $offset = $offset;
+
     $links = ['self' => '/v1/products/'];
 
-    $products = $this->productRepository->findAll();
+    $products = $this->productRepository->findBy($criteria, $orderBy, $limit, $offset);
     if (!$products) {
       return FormatJsonResponse::error(
         responseCode: Response::HTTP_NOT_FOUND,

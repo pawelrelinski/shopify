@@ -8,6 +8,7 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
+        '/v1/products/data' => [[['_route' => 'get_metadata_about_products', '_controller' => 'App\\Controller\\ProductController::getMetaData'], null, ['GET' => 0], null, false, false, null]],
         '/v1/products' => [
             [['_route' => 'add_product', '_controller' => 'App\\Controller\\ProductController::add'], null, ['POST' => 0], null, true, false, null],
             [['_route' => 'get_all_products', '_controller' => 'App\\Controller\\ProductController::getAll'], null, ['GET' => 0], null, false, false, null],
