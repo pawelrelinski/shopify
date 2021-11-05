@@ -19,8 +19,7 @@ export class AvailableProductsWidgetComponent implements OnInit {
   }
 
   private setProductsCount(): void {
-    const options = new Map<string, string>()
-      .set('category', 'men');
+    const options = new Map<string, string>();
 
     this.productService.getMetadata(options)
       .pipe(take(1))

@@ -48,8 +48,7 @@ export class ProductsTableComponent implements OnInit {
   }
 
   private setProductsCount(): void {
-    const options = new Map<string, string>()
-      .set('category', 'men');
+    const options = new Map<string, string>();
 
     this.productService.getMetadata(options)
       .pipe(take(1))
@@ -61,7 +60,6 @@ export class ProductsTableComponent implements OnInit {
 
   private getQueryMap(sortOptions: SortOptions): Map<string, string> {
     this.queryParams = new Map<string, string>()
-      .set('category', 'men')
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
       .set('limit', '10')
