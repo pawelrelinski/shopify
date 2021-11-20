@@ -7,6 +7,11 @@ import {ProductFormMode, ProductResponse} from '@features/product/models';
 import {ProductService} from '@features/product/services';
 import {Response} from '@core/interfaces';
 
+interface ErrorResponse {
+  ok: boolean;
+  name: string;
+  message: string;
+}
 
 @Component({
   selector: 'shopify-product-form',
@@ -23,8 +28,9 @@ export class ProductFormComponent implements OnInit {
   @Input()
   public formMode!: ProductFormMode;
 
-  public productForm!: FormGroup;
-  public buttonIsShow!: boolean;
+  public form!: FormGroup;
+  public buttonsIsShow!: boolean;
+  public readonly categories: Array<string> = ['men', 'women'];
 
   private productId!: number;
   private product!: Response<ProductResponse>;
@@ -59,31 +65,17 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const {general, inventory, variations} = this.productForm.controls;
+    const {general, inventory, variations} = this.form.controls;
     const product = ProductFormComponent.createProductObjectToSend(general, inventory, variations);
 
     this.productService.create(product).subscribe(
-      (response) => {
-        if (+response.status === 200) {
-          this.navigateToProductsManagePage();
-        }
-      },
-      error => {
-        if (!error.ok) {
-          console.log({
-            name: error.name,
-            message: error.message
-          });
-        }
-      });
+      response => this.handleSuccessResponse(response.status),
+      (error: ErrorResponse) => this.handleErrorResponse(error));
   }
 
   public onDelete(): void {
-    this.productService.delete(this.productId).subscribe(response => {
-      if (response.status === 204) {
-        this.navigateToProductsManagePage();
-      }
-    });
+    this.productService.delete(this.productId)
+      .subscribe(response => this.handleSuccessResponse(response.status));
   }
 
   private setProductData(): void {
@@ -100,18 +92,18 @@ export class ProductFormComponent implements OnInit {
   private setProductForm(): void {
     switch (this.formMode) {
       case ProductFormMode.CREATE:
-        this.buttonIsShow = true;
-        this.productForm = this.getProductFormControlsConfig();
+        this.buttonsIsShow = true;
+        this.form = this.getProductFormControlsConfig();
         break;
       case ProductFormMode.EDIT:
         this.setProductData();
         this.setValuesOfFormControls();
-        this.buttonIsShow = true;
+        this.buttonsIsShow = true;
         break;
       case ProductFormMode.READONLY:
         this.setProductData();
         this.setValuesOfFormControls(true);
-        this.buttonIsShow = false;
+        this.buttonsIsShow = false;
         break;
     }
   }
@@ -196,6 +188,30 @@ export class ProductFormComponent implements OnInit {
       amount: inventory.get('stockQuantity')?.value,
       category: variations.get('category')?.value,
       color: variations.get('color')?.value
+    };
+  }
+
+  private handleSuccessResponse(code: number): void {
+    const codes: Map<number, () => void> = new Map<number, () => void>()
+      .set(200, () => this.navigateToProductsManagePage())
+      .set(204, () => this.navigateToProductsManagePage());
+
+    const action: () => void = codes.get(code) as () => void;
+    action();
+  }
+
+  private handleErrorResponse(error: ErrorResponse): void {
+    const booleans: Map<boolean, () => object> = new Map<boolean, () => object>()
+      .set(false, () => this.createSimpleErrorMessageObject(error));
+
+    const action: () => object = booleans.get(error.ok) as () => object;
+    action();
+  }
+
+  private createSimpleErrorMessageObject(error: ErrorResponse): object {
+    return {
+      name: error.name,
+      message: error.message
     };
   }
 

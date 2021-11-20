@@ -52,6 +52,11 @@ class Product implements ProductInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $productType;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $color;
 
     public function getId(): ?int
@@ -138,6 +143,18 @@ class Product implements ProductInterface
         return $this;
     }
 
+    public function getProductType(): ?string
+    {
+        return $this->productType;
+    }
+
+    public function setProductType(string $productType): self 
+    {
+        $this->productType = $productType;
+
+        return $this;
+    }
+
     public function getColor(): ?string
     {
         return $this->color;
@@ -159,6 +176,7 @@ class Product implements ProductInterface
             'amount' => $this->getAmount(),
             'price' => $this->getPrice(),
             'category' => $this->getCategory(),
+            'productType' => $this->getProductType(),
             'color' => $this->getColor(),
             'createdAt' => $this->getCreatedAt()
         ];

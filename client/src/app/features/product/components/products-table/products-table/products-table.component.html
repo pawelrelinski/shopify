@@ -29,11 +29,14 @@
           <tbody class="bg-white divide-y divide-gray-200">
           <shopify-products-table-row *ngFor="let product of products; trackBy:trackByProductId; let i = index"
                                       [product]="product"
-                                      [index]="i">
+                                      [index]="getIndexForTableRow(i)">
           </shopify-products-table-row>
           </tbody>
         </table>
-        <shopify-pagination [productCount]="productCount">
+        <shopify-pagination [productCount]="productCount"
+                            [pageCount]="pageCount"
+                            [currentPage]="currentPage"
+                            (onChangePage)="changePage($event)">
         </shopify-pagination>
       </div>
     </div>

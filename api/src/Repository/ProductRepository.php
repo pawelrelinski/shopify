@@ -48,9 +48,18 @@ class ProductRepository extends ServiceEntityRepository
         return $product;
     }
 
-    public function countProducts(?string $category = null)
+    public function countProducts(?string $category = null, ?string $productsType = null)
     {
-        if ($category !== null) {
+        if ($productsType) {
+            return $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->andWhere('p.category=\'' . $category . '\'')
+            ->andWhere('p.productType=\'' . $productsType . '\'')
+            ->getQuery()
+            ->getSingleColumnResult();
+        }
+
+        if ($category) {
             return $this->createQueryBuilder('p')
             ->select('count(p.id)')
             ->andWhere('p.category=\'' . $category . '\'')

@@ -14,67 +14,67 @@
 <title>cluster_ProductOverviewPageModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-157.8 754,-157.8 754,-32.8 8,-32.8"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_ProductOverviewPageModule_imports</title>
-<polygon fill="none" stroke="black" points="248,-40.8 248,-92.8 746,-92.8 746,-40.8 248,-40.8"/>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_ProductOverviewPageModule_declarations</title>
-<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 240,-92.8 240,-40.8 16,-40.8"/>
+<polygon fill="none" stroke="black" points="522,-40.8 522,-92.8 746,-92.8 746,-40.8 522,-40.8"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_ProductOverviewPageModule_imports</title>
+<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 514,-92.8 514,-40.8 16,-40.8"/>
 </g>
 <!-- ProductOverviewPageComponent -->
 <g id="node1" class="node">
 <title>ProductOverviewPageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="231.79,-84.8 24.21,-84.8 24.21,-48.8 231.79,-48.8 231.79,-84.8"/>
-<text text-anchor="middle" x="128" y="-62.6" font-family="Times,serif" font-size="14.00">ProductOverviewPageComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="737.79,-84.8 530.21,-84.8 530.21,-48.8 737.79,-48.8 737.79,-84.8"/>
+<text text-anchor="middle" x="634" y="-62.6" font-family="Times,serif" font-size="14.00">ProductOverviewPageComponent</text>
 </g>
 <!-- ProductOverviewPageModule -->
 <g id="node2" class="node">
 <title>ProductOverviewPageModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="492.5,-149.8 489.5,-153.8 468.5,-153.8 465.5,-149.8 307.5,-149.8 307.5,-113.8 492.5,-113.8 492.5,-149.8"/>
-<text text-anchor="middle" x="400" y="-127.6" font-family="Times,serif" font-size="14.00">ProductOverviewPageModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="447.5,-149.8 444.5,-153.8 423.5,-153.8 420.5,-149.8 262.5,-149.8 262.5,-113.8 447.5,-113.8 447.5,-149.8"/>
+<text text-anchor="middle" x="355" y="-127.6" font-family="Times,serif" font-size="14.00">ProductOverviewPageModule</text>
 </g>
 <!-- ProductOverviewPageComponent&#45;&gt;ProductOverviewPageModule -->
 <g id="edge1" class="edge">
 <title>ProductOverviewPageComponent&#45;&gt;ProductOverviewPageModule</title>
-<path fill="none" stroke="black" d="M128,-84.91C128,-104.14 128,-131.8 128,-131.8 128,-131.8 297.15,-131.8 297.15,-131.8"/>
-<polygon fill="black" stroke="black" points="297.15,-135.3 307.15,-131.8 297.15,-128.3 297.15,-135.3"/>
+<path fill="none" stroke="black" d="M634,-84.91C634,-104.14 634,-131.8 634,-131.8 634,-131.8 457.52,-131.8 457.52,-131.8"/>
+<polygon fill="black" stroke="black" points="457.52,-128.3 447.52,-131.8 457.52,-135.3 457.52,-128.3"/>
 </g>
 <!-- CommonModule -->
 <g id="node3" class="node">
 <title>CommonModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="737.67,-84.8 734.67,-88.8 713.67,-88.8 710.67,-84.8 626.33,-84.8 626.33,-48.8 737.67,-48.8 737.67,-84.8"/>
-<text text-anchor="middle" x="682" y="-62.6" font-family="Times,serif" font-size="14.00">CommonModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="505.67,-84.8 502.67,-88.8 481.67,-88.8 478.67,-84.8 394.33,-84.8 394.33,-48.8 505.67,-48.8 505.67,-84.8"/>
+<text text-anchor="middle" x="450" y="-62.6" font-family="Times,serif" font-size="14.00">CommonModule</text>
 </g>
 <!-- CommonModule&#45;&gt;ProductOverviewPageModule -->
 <g id="edge2" class="edge">
 <title>CommonModule&#45;&gt;ProductOverviewPageModule</title>
-<path fill="none" stroke="black" d="M682,-84.91C682,-104.14 682,-131.8 682,-131.8 682,-131.8 502.73,-131.8 502.73,-131.8"/>
-<polygon fill="black" stroke="black" points="502.73,-128.3 492.73,-131.8 502.73,-135.3 502.73,-128.3"/>
+<path fill="none" stroke="black" d="M420.96,-84.91C420.96,-84.91 420.96,-103.79 420.96,-103.79"/>
+<polygon fill="black" stroke="black" points="417.46,-103.79 420.96,-113.79 424.46,-103.79 417.46,-103.79"/>
 </g>
 <!-- ProductOverviewPageRoutingModule -->
 <g id="node4" class="node">
 <title>ProductOverviewPageRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="608.12,-84.8 605.12,-88.8 584.12,-88.8 581.12,-84.8 377.88,-84.8 377.88,-48.8 608.12,-48.8 608.12,-84.8"/>
-<text text-anchor="middle" x="493" y="-62.6" font-family="Times,serif" font-size="14.00">ProductOverviewPageRoutingModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="376.12,-84.8 373.12,-88.8 352.12,-88.8 349.12,-84.8 145.88,-84.8 145.88,-48.8 376.12,-48.8 376.12,-84.8"/>
+<text text-anchor="middle" x="261" y="-62.6" font-family="Times,serif" font-size="14.00">ProductOverviewPageRoutingModule</text>
 </g>
 <!-- ProductOverviewPageRoutingModule&#45;&gt;ProductOverviewPageModule -->
 <g id="edge3" class="edge">
 <title>ProductOverviewPageRoutingModule&#45;&gt;ProductOverviewPageModule</title>
-<path fill="none" stroke="black" d="M435.22,-84.91C435.22,-84.91 435.22,-103.79 435.22,-103.79"/>
-<polygon fill="black" stroke="black" points="431.72,-103.79 435.22,-113.79 438.72,-103.79 431.72,-103.79"/>
+<path fill="none" stroke="black" d="M319.28,-84.91C319.28,-84.91 319.28,-103.79 319.28,-103.79"/>
+<polygon fill="black" stroke="black" points="315.78,-103.79 319.28,-113.79 322.78,-103.79 315.78,-103.79"/>
 </g>
 <!-- ProductModule -->
 <g id="node5" class="node">
 <title>ProductModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="359.6,-84.8 356.6,-88.8 335.6,-88.8 332.6,-84.8 256.4,-84.8 256.4,-48.8 359.6,-48.8 359.6,-84.8"/>
-<text text-anchor="middle" x="308" y="-62.6" font-family="Times,serif" font-size="14.00">ProductModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="127.6,-84.8 124.6,-88.8 103.6,-88.8 100.6,-84.8 24.4,-84.8 24.4,-48.8 127.6,-48.8 127.6,-84.8"/>
+<text text-anchor="middle" x="76" y="-62.6" font-family="Times,serif" font-size="14.00">ProductModule</text>
 </g>
 <!-- ProductModule&#45;&gt;ProductOverviewPageModule -->
 <g id="edge4" class="edge">
 <title>ProductModule&#45;&gt;ProductOverviewPageModule</title>
-<path fill="none" stroke="black" d="M333.4,-84.91C333.4,-84.91 333.4,-103.79 333.4,-103.79"/>
-<polygon fill="black" stroke="black" points="329.9,-103.79 333.4,-113.79 336.9,-103.79 329.9,-103.79"/>
+<path fill="none" stroke="black" d="M76,-84.91C76,-104.14 76,-131.8 76,-131.8 76,-131.8 252.48,-131.8 252.48,-131.8"/>
+<polygon fill="black" stroke="black" points="252.48,-135.3 262.48,-131.8 252.48,-128.3 252.48,-135.3"/>
 </g>
 </g>
 </svg>

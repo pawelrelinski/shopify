@@ -5,6 +5,11 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/client/.angular/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/client/documentation/modules/ShoppingCartModule" />
+      <excludeFolder url="file://$MODULE_DIR$/client/documentation/modules/ShoppingCartPageModule" />
+      <excludeFolder url="file://$MODULE_DIR$/client/documentation/modules/ShoppingCartPageRoutingModule" />
+      <excludeFolder url="file://$MODULE_DIR$/client/.idea" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -16,6 +16,9 @@ use ProxyManager\Factory\RemoteObject\Adapter\JsonRpc;
 
 class ProductController extends AbstractController
 {
+  const API_POINTER = '/v1/products/';
+  const MODEL_TYPE = 'product';
+
   private $productRepository;
 
   public function __construct(ProductRepository $productRepository)
@@ -26,9 +29,23 @@ class ProductController extends AbstractController
   #[Route('/v1/products/data', name: 'get_metadata_about_products', methods: 'GET')]
   public function getMetaData(Request $request)
   {
-    $category = $request->query->get('category') ?? null;
-    $count = $this->productRepository->countProducts($category);
+    $category = $request->query->get('category');
+    $productTypes = $request->query->get('productsType');
+
+    if ($productTypes && $category) {
+      $count = $this->productRepository->countProducts($category, $productTypes);
+      return new JsonResponse([
+        'count' => $count[0]
+      ]);
+    }
+    if ($category) {
+      $count = $this->productRepository->countProducts($category);
+      return new JsonResponse([
+        'count' => $count[0]
+      ]);
+    }
     
+    $count = $this->productRepository->countProducts();
     return new JsonResponse([
       'count' => $count[0]
     ]);
@@ -46,7 +63,7 @@ class ProductController extends AbstractController
     if ($isEmpty['isEmpty']) {
       return FormatJsonResponse::error(
         responseCode: Response::HTTP_BAD_REQUEST,
-        pointer: '/v1/products/',
+        pointer: self::API_POINTER,
         title: 'Did not add product',
         details: 'Probabaly ' . $isEmpty['invalidKey'] . ' key was entered incorrectly.'
       );
@@ -74,39 +91,50 @@ class ProductController extends AbstractController
   public function getAll(Request $request): JsonResponse
   {
     $category = $request->query?->get('category');
+    $productTypes = $request->query?->get('productsType');
     $sortBy = $request->query?->get('sortBy');
     $sortMethod = $request->query?->get('sortMethod');
     $limit = $request->query?->get('limit');
-    $offset = $request->query?->get('offset');
-    
-    $criteria = ['category' => $category];
+    $offset = $request->query?->get('offset') * $limit;
+
     $orderBy = [$sortBy => $sortMethod];
-    $limit = $limit;
-    $offset = $offset;
+    $links = ['self' => self::API_POINTER];
 
-    $links = ['self' => '/v1/products/'];
+    if ($productTypes) {
+      $criteria = [
+        'category' => $category,
+        'productType' => $productTypes
+      ];
+      $products = $this->productRepository->findBy($criteria, $orderBy, $limit, $offset);
+      
+      if (!$products) {
+        return $this->getErrorResponseGetAllProducts($links);
+      }
+  
+      $data = $this->convertProductsToArray($products);
+      return $this->getSuccessResponseGetAllProducts($data, $links);
+    }
 
-    $products = $this->productRepository->findBy($criteria, $orderBy, $limit, $offset);
+    if ($category) {
+      $criteria = ['category' => $category];
+      $products = $this->productRepository->findBy($criteria, $orderBy, $limit, $offset);
+
+      if (!$products) {
+        return $this->getErrorResponseGetAllProducts($links);
+      }
+  
+      $data = $this->convertProductsToArray($products);
+      return $this->getSuccessResponseGetAllProducts($data, $links);
+    }
+    
+    $products = $this->productRepository->findBy([], $orderBy, $limit, $offset);
+
     if (!$products) {
-      return FormatJsonResponse::error(
-        responseCode: Response::HTTP_NOT_FOUND,
-        pointer: $links['self'],
-        title: 'Not found any products',
-        details: 'Probably the products do not exist'
-      );
+      return $this->getErrorResponseGetAllProducts($links);
     }
 
-    $data = [];
-    foreach ($products as $product) {
-      array_push($data, $product->toArray());
-    }
-
-    return FormatJsonResponse::success(
-      responseCode: Response::HTTP_OK,
-      type: 'product',
-      data: $data,
-      links: $links
-    );
+    $data = $this->convertProductsToArray($products);
+    return $this->getSuccessResponseGetAllProducts($data, $links);
   }
 
   #[Route('/v1/products/{id}', name: 'get_product_by_id', methods: 'GET')]
@@ -116,17 +144,17 @@ class ProductController extends AbstractController
     if (!$product) {
       return FormatJsonResponse::error(
         responseCode: Response::HTTP_NOT_FOUND,
-        pointer: '/v1/products/' . $id,
+        pointer: self::API_POINTER . $id,
         title: 'Not found product',
         details: 'Probably the product does not exist or the id was entered incorrectly'
       );
     }
 
-    $links = ['self' => 'http://127.0.0.1:8000/v1/products/' . $id];
+    $links = ['self' => 'http://127.0.0.1:8000' . self::API_POINTER . $id];
 
     return FormatJsonResponse::success(
       responseCode: Response::HTTP_OK,
-      type: 'product',
+      type: self::MODEL_TYPE,
       data: $product->toArray(),
       links: $links
     );
@@ -145,7 +173,7 @@ class ProductController extends AbstractController
     if ($isEmpty['isEmpty']) {
       return FormatJsonResponse::error(
         responseCode: Response::HTTP_BAD_REQUEST,
-        pointer: '/v1/products/' . $id,
+        pointer: self::API_POINTER . $id,
         title: 'Did not edit product',
         details: 'Probabaly ' . $isEmpty['invalidKey'] . ' key was entered incorrectly.'
       );
@@ -160,11 +188,11 @@ class ProductController extends AbstractController
       ->setColor($data['color']);
 
     $updatedProduct = $this->productRepository->updateProduct($product);
-    $links = ['self' => 'http://127.0.0.1:8000/v1/products/' . $updatedProduct->getId()];
+    $links = ['self' => 'http://127.0.0.1:8000' . self::API_POINTER . $updatedProduct->getId()];
 
     return FormatJsonResponse::success(
       responseCode: Response::HTTP_OK,
-      type: 'product',
+      type: self::MODEL_TYPE,
       data: $updatedProduct->toArray(),
       links: $links
     );
@@ -180,5 +208,35 @@ class ProductController extends AbstractController
       'status' => Response::HTTP_NO_CONTENT,
       'title' => 'Product deleted'
     ]);
+  }
+
+  private function convertProductsToArray(iterable $products): array
+  {
+    $data = [];
+    foreach ($products as $product) {
+      array_push($data, $product->toArray());
+    }
+    
+    return $data;
+  }
+
+  private function getErrorResponseGetAllProducts(): JsonResponse
+  {
+    return FormatJsonResponse::error(
+      responseCode: Response::HTTP_NOT_FOUND,
+      pointer: self::API_POINTER,
+      title: 'Not found any products',
+      details: 'Probably the products do not exist'
+    );
+  }
+
+  private function getSuccessResponseGetAllProducts($data, $links): JsonResponse
+  {
+    return FormatJsonResponse::success(
+      responseCode: Response::HTTP_OK,
+      type: self::MODEL_TYPE,
+      data: $data,
+      links: $links
+    );
   }
 }

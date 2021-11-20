@@ -12,7 +12,7 @@ export interface Category {
 export class ProductCategoriesService {
   private categories: { men: Category } & { women: Category } = {
     men: {
-      clothes: ['tops', 'pants', 'sweaters', 't-shirts', 'jackets', 'activewear'],
+      clothes: ['tops', 'pants', 'sweaters', 'trousers', 'jackets', 'activewear'],
       accessories: ['watches', 'wallets', 'bags', 'sunglasses', 'hats', 'bags'],
       brands: ['counterfeit', 'full nelson', 'my way']
     },

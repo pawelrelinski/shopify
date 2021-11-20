@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/documentation
 # Only exists if Bazel was run
 /bazel-out
 
@@ -31,6 +32,7 @@ chrome-profiler-events*.json
 .history/*
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage

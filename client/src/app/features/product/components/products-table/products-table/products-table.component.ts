@@ -15,11 +15,11 @@ import {AttributesOfProduct, SortOptions} from '@features/product/components';
 export class ProductsTableComponent implements OnInit {
   public products: Array<AttributesOfProduct> = [];
   public productCount!: number;
-
-  public paginationPageCount!: number;
-  public paginationCurrentPage: number = 1;
+  public pageCount!: number;
+  public currentPage: number = 1;
 
   private queryParams!: Map<string, string>;
+  private readonly defaultSortOptions: SortOptions = { by: 'id', method: 'asc' };
 
   constructor(private productService: ProductService) {
   }
@@ -37,14 +37,25 @@ export class ProductsTableComponent implements OnInit {
     return product.id;
   }
 
-  private setAllProducts(sortOptions: SortOptions = { by: 'id', method: 'asc' }): void {
+  public changePage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.setAllProducts();
+  }
+
+  public getIndexForTableRow(value: number): number {
+    return (this.currentPage > 1) ? value + ((this.currentPage - 1) * 10) : value;
+  }
+
+  private setAllProducts(sortOptions: SortOptions = this.defaultSortOptions): void {
     this.productService.getAllBy(this.getQueryMap(sortOptions))
       .pipe(take(1))
       .subscribe((products: Response<Array<ProductResponse>>) => {
-        this.products = products.data.map((product: ProductResponse): AttributesOfProduct => {
-          return {id: product.id, ...product.attributes} as AttributesOfProduct;
-        });
+        this.products = products.data.map(this.getProductsAttributes);
       });
+  }
+
+  private getProductsAttributes(product: ProductResponse): AttributesOfProduct {
+    return {id: product.id, ...product.attributes} as AttributesOfProduct;
   }
 
   private setProductsCount(): void {
@@ -63,16 +74,13 @@ export class ProductsTableComponent implements OnInit {
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
       .set('limit', '10')
-      .set('offset', (this.paginationCurrentPage - 1).toString());
+      .set('offset', (this.currentPage - 1).toString());
 
     return this.queryParams;
   }
 
   private setPaginationPageCount(): void {
-    this.paginationPageCount = +((this.productCount / 10).toFixed(0));
-    if (this.productCount % 10 > 0) {
-      this.paginationPageCount += 1;
-    }
-    console.log(this.paginationPageCount);
+    this.pageCount = +((this.productCount / 10).toFixed(0));
+    (this.productCount % 10 > 0) ? this.pageCount += 1 : null;
   }
 }

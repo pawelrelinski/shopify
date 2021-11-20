@@ -14,10 +14,6 @@
 <title>cluster_ShopifyPaginationModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 318,-230.8 318,-32.8 8,-32.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_ShopifyPaginationModule_exports</title>
-<polygon fill="none" stroke="black" points="83,-170.8 83,-222.8 243,-222.8 243,-170.8 83,-170.8"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_ShopifyPaginationModule_imports</title>
 <polygon fill="none" stroke="black" points="182,-40.8 182,-92.8 310,-92.8 310,-40.8 182,-40.8"/>
@@ -25,6 +21,10 @@
 <g id="clust2" class="cluster">
 <title>cluster_ShopifyPaginationModule_declarations</title>
 <polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 174,-92.8 174,-40.8 16,-40.8"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_ShopifyPaginationModule_exports</title>
+<polygon fill="none" stroke="black" points="83,-170.8 83,-222.8 243,-222.8 243,-170.8 83,-170.8"/>
 </g>
 <!-- PaginationComponent -->
 <g id="node1" class="node">

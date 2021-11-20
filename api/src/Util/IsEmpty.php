@@ -4,7 +4,7 @@ namespace App\Util;
 
 class IsEmpty
 {
-  public static function check(mixed $data, ?array $keys): array 
+  public static function check(mixed $data, ?iterable $keys): array 
   {
     try {
       foreach ($keys as $key => $value) {

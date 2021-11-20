@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FormatJsonResponse
 {
-  public static function success(?string $type, ?array $data, ?array $links, ?int $responseCode): JsonResponse
+  public static function success(?string $type, ?array $data, ?iterable $links, ?int $responseCode): JsonResponse
   {
     if (!is_array(array_values($data)[0])) {
       return new JsonResponse([
@@ -49,7 +49,7 @@ class FormatJsonResponse
     ]);
   }
 
-  private static function getAttributesAsArray(array $data): array
+  private static function getAttributesAsArray(iterable $data): array
   {
     unset($data['id']);
     $attributes = [];

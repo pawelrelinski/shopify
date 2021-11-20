@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ProductOverviewPageRoutingModule} from './product-overview-page-routing.module';
 import {ProductOverviewPageComponent} from './product-overview-page.component';
 import {ProductModule} from '@features/product/product.module';
+import {ShopifyButtonsModule} from '@shared/shopify-buttons/shopify-buttons.module';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import {ProductModule} from '@features/product/product.module';
   imports: [
     CommonModule,
     ProductOverviewPageRoutingModule,
-    ProductModule
+    ProductModule,
+    ShopifyButtonsModule
   ]
 })
-export class ProductOverviewPageModule { }
+export class ProductOverviewPageModule {
+}

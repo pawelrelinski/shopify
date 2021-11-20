@@ -1,21 +1,25 @@
 <div class="bg-white">
   <div *ngIf="isProducts(); else notFound" class="max-w-2xl mx-auto py-2 px-4 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8">
-    <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">
-      <shopify-product-path [path]="pathToProducts"></shopify-product-path>
-    </h2>
-
+    <shopify-product-path [path]="pathToProducts"></shopify-product-path>
+    <shopify-products-list-actions></shopify-products-list-actions>
     <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-
-      <shopify-products-list-element *ngFor="let product of products"
+      <shopify-products-list-element *ngFor="let product of products; trackBy:trackByProductId"
                                      [product]="product">
       </shopify-products-list-element>
-
     </div>
   </div>
   <ng-template #notFound>
-    <div class="h-96 flex items-center flex-col">
+    <div class="h-96 flex items-center flex-col justify-center">
       <h1 class="text-3xl mt-10">Not found any products...</h1>
       <p>Go to <a routerLink="/home" class="text-indigo-600 font-bold mt-10">home page</a></p>
+      <p>or</p>
+      <p (click)="refresh()" class="text-indigo-600 font-bold hover:cursor-pointer">refresh</p>
     </div>
   </ng-template>
+  <shopify-pagination *ngIf="isProducts()"
+                      [productCount]="productCount"
+                      [pageCount]="pageCount"
+                      [currentPage]="currentPage"
+                      (onChangePage)="changePage($event)">
+  </shopify-pagination>
 </div>

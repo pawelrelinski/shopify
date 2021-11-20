@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {filter, map, retry, take} from 'rxjs/operators';
 
 import {Product, ProductResponse} from '@features/product/models';
 import {ProductService} from '@features/product/services';
 import {Response} from '@core/interfaces';
+import {AttributesOfProduct} from "@features/product/components";
 
 interface ProductUrlData {
-  category: string | null;
-  productType: string | null;
+  category: string;
+  productType: string;
 }
 
 @Component({
@@ -21,6 +22,10 @@ export class ProductsListComponent implements OnInit {
   public productsMetaData!: ProductUrlData;
   public pathToProducts: Array<string> = [];
 
+  public productCount!: number;
+  public pageCount!: number;
+  public currentPage: number = 1;
+
   private currentRoute!: string;
   private queryParams!: Map<string, string>;
 
@@ -30,14 +35,27 @@ export class ProductsListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.getDataFromUrl();
+    this.setData();
   }
 
   public isProducts(): boolean {
-    return !!(this.products);
+    return (this.products.length !== 0);
   }
 
-  private getDataFromUrl(): void {
+  public trackByProductId(index: number, product: Product): Product['id'] {
+    return product.id;
+  }
+
+  public changePage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.setData();
+  }
+
+  public refresh(): void {
+    this.ngOnInit();
+  }
+
+  private setData(): void {
     this.router.events.pipe(
       filter((routerEvent: any) => routerEvent instanceof NavigationEnd),
       map((routerEvent: NavigationEnd) => routerEvent.url)
@@ -46,42 +64,74 @@ export class ProductsListComponent implements OnInit {
       this.productsMetaData = this.getProductsInfoFromUrl();
       this.setAllProducts();
       this.setPathToProductArray();
+      this.setProductsCount();
     });
+  }
+
+  private setProductsCount(): void {
+    const category: string = this.getSeparatedUrlParts().get('category') as string;
+    const productsType: string = this.getSeparatedUrlParts().get('productsType') as string;
+    const options = new Map<string, string>()
+      .set('category', category)
+      .set('productsType', productsType);
+
+    this.productService.getMetadata(options)
+      .pipe(take(1))
+      .subscribe(data => {
+        console.log(data);
+        this.productCount = data.count;
+        this.setPaginationPageCount();
+      });
+  }
+
+  private setPaginationPageCount(): void {
+    this.pageCount = +((this.productCount / 10).toFixed(0));
+    (this.productCount % 10 > 0) ? this.pageCount += 1 : null;
   }
 
   private setAllProducts(): void {
     this.productService.getAllBy(this.getQueryMap()).pipe(
       retry(3),
       take(1)
-    ).subscribe((res: Response<Array<ProductResponse>>) => {
-      const productResponses = res.data as Array<ProductResponse>;
-
-      this.products = productResponses.map((val: ProductResponse) => {
-        const {name, description, amount, price} = val.attributes;
-        return new Product(val.id as number, name, description, amount, price);
-      });
+    ).subscribe((response: Response<Array<ProductResponse>> | any) => {
+      if (+response.status === 404) {
+        this.isProducts();
+      } else {
+        const productResponses = response.data as Array<ProductResponse>;
+        this.products = productResponses.map(this.createProductObject);
+      }
     });
+  }
+
+  private createProductObject(value: ProductResponse): Product {
+    const {name, description, amount, price} = value.attributes;
+    return new Product(value.id as number, name, description, amount, price);
   }
 
   private getProductsInfoFromUrl(): ProductUrlData {
     this.cutOffFirstPartOfCurrentRoute();
-    const urlParts: Array<string> = this.getSeparatedUrlParts();
+    const urlParts: Map<string, string> = this.getSeparatedUrlParts();
 
     return {
-      category: urlParts[1],
-      productType: urlParts[2]
+      category: urlParts.get('category') as string,
+      productType: urlParts.get('productType') as string
     };
   }
 
   private cutOffFirstPartOfCurrentRoute(): void {
     const urlPartToCutOff: string = '/products';
-    if (this.currentRoute.startsWith(urlPartToCutOff)) {
-      this.currentRoute = this.currentRoute.slice(urlPartToCutOff.length, this.currentRoute.length - 1);
-    }
+    const lengthOfUrlPartToCutOff = urlPartToCutOff.length;
+    const lengthOfCurrentRoute = this.currentRoute.length;
+    const startWith = this.currentRoute.startsWith(urlPartToCutOff);
+
+    this.currentRoute = startWith ? this.currentRoute.slice(lengthOfUrlPartToCutOff, lengthOfCurrentRoute) : '';
   }
 
-  private getSeparatedUrlParts(): Array<string> {
-    return this.currentRoute.split('/');
+  private getSeparatedUrlParts(): Map<string, string> {
+    const urlParts = this.currentRoute.split('/');
+    return  new Map<string, string>()
+      .set('category', urlParts[1])
+      .set('productType', urlParts[2]);
   }
 
   private setPathToProductArray(): void {
@@ -90,12 +140,14 @@ export class ProductsListComponent implements OnInit {
   }
 
   private getQueryMap(): Map<string, string> {
+    this.setPathToProductArray();
     this.queryParams = new Map<string, string>()
-      .set('category', 'men')
+      .set('category', this.productsMetaData.category)
+      .set('productsType', this.productsMetaData.productType)
       .set('sortBy', 'id')
       .set('sortMethod', 'asc')
-      .set('limit', '100')
-      .set('offset', '0');
+      .set('limit', '10')
+      .set('offset', (this.currentPage - 1).toString());
 
     return this.queryParams;
   }

@@ -20,6 +20,14 @@ export class ProductsTableActionsComponent {
     this.isOpen = !this.isOpen;
   }
 
+  public showMenu(): void {
+    this.isOpen = true;
+  }
+
+  public hideMenu(): void {
+    this.isOpen = false;
+  }
+
   public changeSortBy(value: string): void {
     const splitValue: Array<string> = value.split('-');
     const sortEmitter: SortOptions = {
