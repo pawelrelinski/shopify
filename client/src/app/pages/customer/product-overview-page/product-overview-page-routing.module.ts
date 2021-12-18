@@ -1,16 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ProductOverviewPageComponent} from './product-overview-page.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductOverviewPageComponent } from './product-overview-page.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProductOverviewPageComponent
-  }
+	{
+		path: '',
+		component: ProductOverviewPageComponent,
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
 })
-export class ProductOverviewPageRoutingModule { }
+export class ProductOverviewPageRoutingModule {}

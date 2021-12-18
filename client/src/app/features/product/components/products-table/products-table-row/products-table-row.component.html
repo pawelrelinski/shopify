@@ -1,38 +1,49 @@
 <tr class="hover:divide-gray-400 hover:cursor-pointer">
-  <td class="px-6 py-4 w-10 whitespace-nowrap text-sm text-gray-500">
-    {{ index }}
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap">
-    <div class="flex items-center">
-      <div>
-        <div class="text-sm font-medium text-gray-900">
-          {{ product.name | truncate:[15] }}
-        </div>
-        <div class="text-sm text-gray-500">
-          {{ product.createdAt.date | date }} created
-        </div>
-      </div>
-    </div>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap">
-    <shopify-status-widget-success *ngIf="isSuccess()" [message]="product.amount.toString()"></shopify-status-widget-success>
-    <shopify-status-widget-warning *ngIf="isWarning()" [message]="product.amount.toString()"></shopify-status-widget-warning>
-    <shopify-status-widget-danger *ngIf="isDanger()" [message]="product.amount.toString()"></shopify-status-widget-danger>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    {{ product.category }}
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    {{ product.price }} PLN
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <a [routerLink]="['/products', product.id]" class="text-indigo-600 hover:text-indigo-900 text-right">
-      Overview
-    </a>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-start">
-    <a [routerLink]="['/admin/edit-product', product.id]" class="text-indigo-600 hover:text-indigo-900 text-right">
-      Edit
-    </a>
-  </td>
+	<td class="px-6 py-4 w-10 whitespace-nowrap text-sm text-gray-500">
+		{{ index }}
+	</td>
+	<td class="px-6 py-4 whitespace-nowrap">
+		<div class="flex items-center">
+			<div>
+				<div class="text-sm font-medium text-gray-900">
+					{{ product.name | truncate: [15] }}
+				</div>
+				<div class="text-sm text-gray-500">{{ product.createdAt.date | date }} created</div>
+			</div>
+		</div>
+	</td>
+	<td class="px-6 py-4 whitespace-nowrap">
+		<shopify-status-widget-success
+			*ngIf="isSuccess()"
+			[message]="product.amount.toString()"
+		></shopify-status-widget-success>
+		<shopify-status-widget-warning
+			*ngIf="isWarning()"
+			[message]="product.amount.toString()"
+		></shopify-status-widget-warning>
+		<shopify-status-widget-danger
+			*ngIf="isDanger()"
+			[message]="product.amount.toString()"
+		></shopify-status-widget-danger>
+	</td>
+	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+		{{ product.category }}
+	</td>
+	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.price }} PLN</td>
+	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+		<a
+			[routerLink]="['/products', product.id]"
+			class="text-indigo-600 hover:text-indigo-900 text-right"
+		>
+			Overview
+		</a>
+	</td>
+	<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-start">
+		<a
+			[routerLink]="['/admin/edit-product', product.id]"
+			class="text-indigo-600 hover:text-indigo-900 text-right"
+		>
+			Edit
+		</a>
+	</td>
 </tr>

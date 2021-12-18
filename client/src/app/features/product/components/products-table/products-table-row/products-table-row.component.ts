@@ -1,60 +1,62 @@
-import {Component, HostBinding, HostListener, Input} from '@angular/core';
+import { Component, HostBinding, HostListener, Input } from '@angular/core';
 
-import {ProductResponse, ProductSimple} from '@features/product/models';
+import { ProductResponse, ProductSimple } from '@features/product/models';
 
-export type AttributesOfProduct = ProductResponse['attributes'] & { id: number };
+export type AttributesOfProduct = ProductResponse['attributes'] & {
+	id: number;
+};
 
 @Component({
-  selector: 'shopify-products-table-row',
-  templateUrl: './products-table-row.component.html',
-  styleUrls: ['./products-table-row.component.scss']
+	selector: 'shopify-products-table-row',
+	templateUrl: './products-table-row.component.html',
+	styleUrls: ['./products-table-row.component.scss'],
 })
 export class ProductsTableRowComponent {
-  @Input()
-  set product(value: AttributesOfProduct) {
-    this._product = value;
-  }
-  public get product(): AttributesOfProduct {
-    return this._product;
-  }
+	@Input()
+	set product(value: AttributesOfProduct) {
+		this._product = value;
+	}
+	public get product(): AttributesOfProduct {
+		return this._product;
+	}
 
-  @Input()
-  set index(value: number) {
-    this._index = ++value;
-  }
-  public get index(): number {
-    return this._index;
-  }
+	@Input()
+	set index(value: number) {
+		this._index = ++value;
+	}
+	public get index(): number {
+		return this._index;
+	}
 
-  @HostBinding('style.backgroundColor') bgColor!: string;
-  @HostBinding('style.cursor') cursor!: string;
+	@HostBinding('style.backgroundColor') bgColor!: string;
+	@HostBinding('style.cursor') cursor!: string;
 
-  private _product!: AttributesOfProduct;
-  private _index!: number;
+	private _product!: AttributesOfProduct;
+	private _index!: number;
 
-  public date = new Date();
+	public date = new Date();
 
-  @HostListener('mouseover')
-  public onMouseOver(): void {
-    this.bgColor = 'rgb(215,215,215)';
-    this.cursor = 'pointer';
-  }
+	@HostListener('mouseover')
+	public onMouseOver(): void {
+		this.bgColor = 'rgb(215,215,215)';
+		this.cursor = 'pointer';
+	}
 
-  @HostListener('mouseleave')
-  public onMouseLeave(): void {
-    this.bgColor = 'rgb(255, 255, 255)';
-    this.cursor = '';
-  }
+	@HostListener('mouseleave')
+	public onMouseLeave(): void {
+		this.bgColor = 'rgb(255, 255, 255)';
+		this.cursor = '';
+	}
 
-  public isSuccess(): boolean {
-    return this.product.amount >= 8;
-  }
+	public isSuccess(): boolean {
+		return this.product.amount >= 8;
+	}
 
-  public isWarning(): boolean {
-    return this.product.amount > 3 && this.product.amount < 8;
-  }
+	public isWarning(): boolean {
+		return this.product.amount > 3 && this.product.amount < 8;
+	}
 
-  public isDanger(): boolean {
-    return this.product.amount <= 3;
-  }
+	public isDanger(): boolean {
+		return this.product.amount <= 3;
+	}
 }

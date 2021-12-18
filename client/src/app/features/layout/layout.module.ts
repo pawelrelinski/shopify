@@ -1,33 +1,22 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-import {StructureComponent} from '@features/layout/components';
-import {MobileMenuComponent} from '@features/layout/components';
-import {MobileMenuOpenBtnComponent} from '@features/layout/components';
-import {MobileMenuCloseBtnComponent} from '@features/layout/components';
-import {MenFlyoutMenuComponent} from '@features/layout/components';
-import {WomenFlyoutMenuComponent} from '@features/layout/components';
-import {BannerComponent} from '@features/layout/components';
-
+import { StructureComponent } from '@features/layout/components';
+import { BannerComponent } from '@features/layout/components';
+import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.component';
+import { MoreFlyoutMenuComponent } from './components/more-flyout-menu/more-flyout-menu.component';
+import { SolutionsFlyoutMenuComponent } from './components/solutions-flyout-menu/solutions-flyout-menu.component';
 
 @NgModule({
-  declarations: [
-    StructureComponent,
-    MobileMenuComponent,
-    MobileMenuOpenBtnComponent,
-    MobileMenuCloseBtnComponent,
-    MenFlyoutMenuComponent,
-    WomenFlyoutMenuComponent,
-    BannerComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    StructureComponent
-  ]
+	declarations: [
+		StructureComponent,
+		BannerComponent,
+		MobileMenuComponent,
+		MoreFlyoutMenuComponent,
+		SolutionsFlyoutMenuComponent,
+	],
+	imports: [CommonModule, RouterModule],
+	exports: [StructureComponent],
 })
-export class LayoutModule {
-}
+export class LayoutModule {}

@@ -1,12 +1,11 @@
-import {Component, Input} from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'shopify-product-path',
-  templateUrl: './product-path.component.html',
-  styleUrls: ['./product-path.component.scss']
+	selector: 'shopify-product-path',
+	templateUrl: './product-path.component.html',
+	styleUrls: ['./product-path.component.scss'],
 })
-export class ProductPathComponent  {
-  @Input()
-  path!: Array<string>;
+export class ProductPathComponent {
+	@Input()
+	path!: Array<string>;
 }

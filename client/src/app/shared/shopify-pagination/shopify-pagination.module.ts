@@ -1,18 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {PaginationComponent} from '@shared/shopify-pagination/components';
-
+import { PaginationComponent } from '@shared/shopify-pagination/components';
 
 @NgModule({
-  declarations: [
-    PaginationComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    PaginationComponent
-  ]
+	declarations: [PaginationComponent],
+	imports: [CommonModule],
+	exports: [PaginationComponent],
 })
-export class ShopifyPaginationModule { }
+export class ShopifyPaginationModule {}

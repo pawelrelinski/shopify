@@ -1,4 +1,4 @@
 export enum ProductStatus {
-  AVAILABLE,
-  NOT_AVAILABLE
+	AVAILABLE,
+	NOT_AVAILABLE,
 }
