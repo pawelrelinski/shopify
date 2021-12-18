@@ -25,6 +25,11 @@ const routes: Routes = [
 			import('./pages/customer/sign-in-page/sign-in-page.module').then((m) => m.SignInPageModule),
 	},
 	{
+		path: 'sign-up',
+		loadChildren: () =>
+			import('./pages/customer/sign-up-page/sign-up-page.module').then((m) => m.SignUpPageModule),
+	},
+	{
 		path: 'shopping-cart',
 		loadChildren: () =>
 			import('./pages/customer/shopping-cart-page/shopping-cart-page.module').then(
