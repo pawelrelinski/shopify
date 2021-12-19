@@ -4,19 +4,21 @@ import { RouterModule } from '@angular/router';
 
 import { StructureComponent } from '@features/layout/components';
 import { BannerComponent } from '@features/layout/components';
-import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.component';
-import { MoreFlyoutMenuComponent } from './components/more-flyout-menu/more-flyout-menu.component';
-import { SolutionsFlyoutMenuComponent } from './components/solutions-flyout-menu/solutions-flyout-menu.component';
+import { MobileMenuComponent } from '@features/layout/components';
+import { MoreFlyoutMenuComponent } from '@features/layout/components';
+import { SolutionsFlyoutMenuComponent } from '@features/layout/components';
+import { ProductsFlyoutMenuComponent } from '@features/layout/components';
 
 @NgModule({
-	declarations: [
-		StructureComponent,
-		BannerComponent,
-		MobileMenuComponent,
-		MoreFlyoutMenuComponent,
-		SolutionsFlyoutMenuComponent,
-	],
-	imports: [CommonModule, RouterModule],
-	exports: [StructureComponent],
+  declarations: [
+    StructureComponent,
+    BannerComponent,
+    MobileMenuComponent,
+    MoreFlyoutMenuComponent,
+    SolutionsFlyoutMenuComponent,
+    ProductsFlyoutMenuComponent,
+  ],
+  imports: [CommonModule, RouterModule],
+  exports: [StructureComponent],
 })
 export class LayoutModule {}

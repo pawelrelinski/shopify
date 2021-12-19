@@ -5,17 +5,27 @@
     <div class="pt-5 pb-6 px-5">
       <div class="flex items-center justify-between">
         <div>
-          <img
-            class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-            alt="Workflow"
-          />
+          <svg
+            class="w-8 text-green-600"
+            viewBox="0 0 24 24"
+            stroke-linejoin="round"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke="currentColor"
+            fill="none"
+          >
+            <rect x="3" y="1" width="7" height="12"></rect>
+            <rect x="3" y="17" width="7" height="6"></rect>
+            <rect x="14" y="1" width="7" height="6"></rect>
+            <rect x="14" y="11" width="7" height="12"></rect>
+          </svg>
         </div>
         <div class="-mr-2">
           <button
             (click)="close()"
             type="button"
-            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
           >
             <span class="sr-only">Close menu</span>
             <!-- Heroicon name: outline/x -->
@@ -42,7 +52,7 @@
           <a href="#" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
             <!-- Heroicon name: outline/chart-bar -->
             <svg
-              class="flex-shrink-0 h-6 w-6 text-indigo-600"
+              class="flex-shrink-0 h-6 w-6 text-green-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -62,7 +72,7 @@
           <a href="#" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
             <!-- Heroicon name: outline/cursor-click -->
             <svg
-              class="flex-shrink-0 h-6 w-6 text-indigo-600"
+              class="flex-shrink-0 h-6 w-6 text-green-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -82,7 +92,7 @@
           <a href="#" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
             <!-- Heroicon name: outline/shield-check -->
             <svg
-              class="flex-shrink-0 h-6 w-6 text-indigo-600"
+              class="flex-shrink-0 h-6 w-6 text-green-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -102,7 +112,7 @@
           <a href="#" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
             <!-- Heroicon name: outline/view-grid -->
             <svg
-              class="flex-shrink-0 h-6 w-6 text-indigo-600"
+              class="flex-shrink-0 h-6 w-6 text-green-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -122,7 +132,7 @@
           <a href="#" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
             <!-- Heroicon name: outline/refresh -->
             <svg
-              class="flex-shrink-0 h-6 w-6 text-indigo-600"
+              class="flex-shrink-0 h-6 w-6 text-green-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -137,6 +147,25 @@
               />
             </svg>
             <span class="ml-3 text-base font-medium text-gray-900"> Automations </span>
+          </a>
+
+          <a routerLink="/products" class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
+            <!-- Heroicon name: outline/refresh -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-green-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              />
+            </svg>
+            <span class="ml-3 text-base font-medium text-gray-900"> Products </span>
           </a>
         </nav>
       </div>
@@ -160,13 +189,13 @@
       <div>
         <a
           routerLink="/sign-up"
-          class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+          class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
         >
           Sign up
         </a>
         <p class="mt-6 text-center text-base font-medium text-gray-500">
           Existing customer?
-          <a routerLink="/sign-in" class="text-indigo-600 hover:text-indigo-500"> Sign in </a>
+          <a routerLink="/sign-in" class="text-green-600 hover:text-green-500"> Sign in </a>
         </p>
       </div>
     </div>
