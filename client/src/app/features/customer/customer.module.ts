@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignInFormComponent } from '@features/customer/components';
+import { CustomerSignInFormComponent } from '@features/customer/components';
 import { RouterModule } from '@angular/router';
-import { SignUpFormComponent } from '@features/customer/components';
+import { CustomerSignUpFormComponent } from '@features/customer/components';
 
 @NgModule({
-	declarations: [SignInFormComponent, SignUpFormComponent],
-	imports: [CommonModule, RouterModule],
-	exports: [SignInFormComponent, SignUpFormComponent],
+  declarations: [CustomerSignInFormComponent, CustomerSignUpFormComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [CustomerSignInFormComponent, CustomerSignUpFormComponent],
 })
 export class CustomerModule {}

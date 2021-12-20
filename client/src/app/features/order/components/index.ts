@@ -1,2 +1,2 @@
-export * from './orders-list-table/orders-list-table.component';
-export * from './orders-list-table-row/orders-list-table-row.component';
+export * from './order-list-table/order-list-table.component';
+export * from './order-list-table-row/order-list-table-row.component';

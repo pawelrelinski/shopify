@@ -4,27 +4,33 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ProductsTableComponent } from '@features/product/components';
-import { ProductsTableRowComponent } from '@features/product/components';
+import {
+  ProductListComponent,
+  ProductListElementComponent,
+  ProductTableComponent,
+} from '@features/product/components';
+import { ProductTableRowComponent } from '@features/product/components';
 import { ProductFormComponent } from '@features/product/components';
-import { AvailableProductsWidgetComponent } from '@features/product/components';
-import { ProductsTableActionsComponent } from '@features/product/components';
+import { ProductAvailableWidgetComponent } from '@features/product/components';
+import { ProductTableActionsComponent } from '@features/product/components';
 import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 import { ShopifyButtonsModule } from '@shared/shopify-buttons/shopify-buttons.module';
 import { PipesModule } from '@core/pipes/pipes.module';
-import { ProductsListComponent } from '@features/product/components';
-import { ProductsListElementComponent } from '@features/product/components';
+import { ProductListPaginationComponent } from '@features/product/components';
+import { ProductListHeaderComponent } from '@features/product/components';
 
 @NgModule({
   declarations: [
-    ProductsTableComponent,
-    ProductsTableRowComponent,
+    ProductTableComponent,
+    ProductTableRowComponent,
     ProductFormComponent,
-    ProductsTableActionsComponent,
-    AvailableProductsWidgetComponent,
-    ProductsListComponent,
-    ProductsListElementComponent,
+    ProductTableActionsComponent,
+    ProductAvailableWidgetComponent,
+    ProductListComponent,
+    ProductListElementComponent,
+    ProductListPaginationComponent,
+    ProductListHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -37,11 +43,11 @@ import { ProductsListElementComponent } from '@features/product/components';
     PipesModule,
   ],
   exports: [
-    ProductsTableComponent,
+    ProductTableComponent,
     ProductFormComponent,
-    ProductsTableActionsComponent,
-    AvailableProductsWidgetComponent,
-    ProductsListComponent,
+    ProductTableActionsComponent,
+    ProductAvailableWidgetComponent,
+    ProductListComponent,
   ],
 })
 export class ProductModule {}
