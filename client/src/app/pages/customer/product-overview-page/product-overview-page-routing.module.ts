@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductOverviewPageComponent } from './product-overview-page.component';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: ProductOverviewPageComponent,
-	},
+  {
+    path: '',
+    component: ProductOverviewPageComponent,
+  },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ProductOverviewPageRoutingModule {}

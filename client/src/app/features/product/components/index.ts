@@ -7,3 +7,4 @@ export * from './product-list/product-list.component';
 export * from './product-list-element/product-list-element.component';
 export * from './product-list-pagination/product-list-pagination.component';
 export * from './product-list-header/product-list-header.component';
+export * from './product-overview/product-overview.component';

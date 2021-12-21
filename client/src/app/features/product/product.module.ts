@@ -19,6 +19,7 @@ import { ShopifyButtonsModule } from '@shared/shopify-buttons/shopify-buttons.mo
 import { PipesModule } from '@core/pipes/pipes.module';
 import { ProductListPaginationComponent } from '@features/product/components';
 import { ProductListHeaderComponent } from '@features/product/components';
+import { ProductOverviewComponent } from '@features/product/components';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProductListHeaderComponent } from '@features/product/components';
     ProductListElementComponent,
     ProductListPaginationComponent,
     ProductListHeaderComponent,
+    ProductOverviewComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { ProductListHeaderComponent } from '@features/product/components';
     ProductTableActionsComponent,
     ProductAvailableWidgetComponent,
     ProductListComponent,
+    ProductOverviewComponent,
   ],
 })
 export class ProductModule {}
