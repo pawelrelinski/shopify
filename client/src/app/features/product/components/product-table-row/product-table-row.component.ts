@@ -1,6 +1,6 @@
 import { Component, HostBinding, HostListener, Input } from '@angular/core';
 
-import { ProductResponse, ProductSimple } from '@features/product/models';
+import { ProductResponse } from '@features/product/models';
 
 export type AttributesOfProduct = ProductResponse['attributes'] & {
   id: number;
