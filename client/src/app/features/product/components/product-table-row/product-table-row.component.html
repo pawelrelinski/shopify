@@ -8,7 +8,7 @@
         <div class="text-sm font-medium text-gray-900">
           {{ product.name | truncate: [15] }}
         </div>
-        <div class="text-sm text-gray-500">{{ product.createdAt.date | date }} created</div>
+        <div class="text-sm text-gray-500">{{ product.createdAt }} created</div>
       </div>
     </div>
   </td>
@@ -29,7 +29,7 @@
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     {{ product.category }}
   </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.price }} PLN</td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.defaultPrice }} PLN</td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     <a
       [routerLink]="['/products', product.id]"

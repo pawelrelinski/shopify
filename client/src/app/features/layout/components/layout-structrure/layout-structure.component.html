@@ -1,3 +1,4 @@
+<shopify-shopping-cart *ngIf="shoppingCartIsOpen == 1"></shopify-shopping-cart>
 <div class="relative bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div
@@ -91,6 +92,7 @@
           <shopify-layout-solutions-flyout-menu
             *ngIf="solutionsFlyoutMenuIsOpen"
             (click)="toggleSolutionsFlyoutMenu()"
+            [@flyoutMenu]="solutionsFlyoutMenuIsOpen"
           >
           </shopify-layout-solutions-flyout-menu>
         </div>
@@ -140,6 +142,7 @@
           <shopify-layout-products-flyout-menu
             *ngIf="productsFlyoutMenuIsOpen"
             (click)="toggleProductsFlyoutMenu()"
+            [@flyoutMenu]="productsFlyoutMenuIsOpen"
           >
           </shopify-layout-products-flyout-menu>
         </div>
@@ -183,7 +186,11 @@
               From: "opacity-100 translate-y-0"
               To: "opacity-0 translate-y-1"
           -->
-          <shopify-layout-more-flyout-menu *ngIf="moreFlyoutMenuIsOpen" (click)="toggleMoreFlyoutMenu()">
+          <shopify-layout-more-flyout-menu
+            *ngIf="moreFlyoutMenuIsOpen"
+            (click)="toggleMoreFlyoutMenu()"
+            [@flyoutMenu]="moreFlyoutMenuIsOpen ? 'show' : 'hide'"
+          >
           </shopify-layout-more-flyout-menu>
         </div>
       </nav>
@@ -200,6 +207,22 @@
         >
           Sign up
         </a>
+        <button (click)="openShoppingCart()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   </div>

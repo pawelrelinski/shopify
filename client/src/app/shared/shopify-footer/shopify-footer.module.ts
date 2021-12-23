@@ -4,8 +4,8 @@ import { ShopifyFooterComponent } from './components/shopify-footer/shopify-foot
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-	declarations: [ShopifyFooterComponent],
-	imports: [CommonModule, RouterModule],
-	exports: [ShopifyFooterComponent],
+  declarations: [ShopifyFooterComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [ShopifyFooterComponent],
 })
 export class ShopifyFooterModule {}

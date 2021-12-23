@@ -8,6 +8,7 @@ import { LayoutMobileMenuComponent } from '@features/layout/components';
 import { LayoutMoreFlyoutMenuComponent } from '@features/layout/components';
 import { LayoutSolutionsFlyoutMenuComponent } from '@features/layout/components';
 import { LayoutProductsFlyoutMenuComponent } from '@features/layout/components';
+import { ShoppingCartModule } from '@features/shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { LayoutProductsFlyoutMenuComponent } from '@features/layout/components';
     LayoutSolutionsFlyoutMenuComponent,
     LayoutProductsFlyoutMenuComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ShoppingCartModule],
   exports: [LayoutStructureComponent],
 })
 export class LayoutModule {}

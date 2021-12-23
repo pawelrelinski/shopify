@@ -1,3 +1,6 @@
+import { Producer } from '@features/producer/models';
+import { Review } from '@features/review/models';
+
 type Price = string | number;
 
 export interface Product {
@@ -8,10 +11,14 @@ export interface Product {
   isAvailable: boolean;
   amount: number;
   category: string;
-  producer: {
-    id: number | string;
-    name: string;
-  };
+  producer: Producer;
+  createdAt:
+    | Date
+    | {
+        date: string | Date;
+        timezone_type: number;
+        timezone: string;
+      };
   refNumber: string;
   images: {
     src: string;
@@ -21,19 +28,5 @@ export interface Product {
     name: string;
     value: string;
   }[];
-  reviews: {
-    user: {
-      id: string | number;
-      name: string;
-    };
-    cratedAt:
-      | Date
-      | {
-          date: string;
-          timezone_type: number;
-          timezone: string;
-        };
-    content: string;
-    rating: number;
-  }[];
+  reviews: Review[];
 }
