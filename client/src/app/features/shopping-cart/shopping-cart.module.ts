@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ShoppingCartComponent } from '@features/shopping-cart/components';
 import { ShoppingCartProductListComponent } from '@features/shopping-cart/components';
 import { ShoppingCartProductListElementComponent } from '@features/shopping-cart/components';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from '@features/shopping-cart/store/reducers/shopping-cart-item.reducers';
 
 @NgModule({
   declarations: [
