@@ -34,7 +34,7 @@ enum FlyoutMenuStates {
 })
 export class LayoutStructureComponent implements OnInit {
   public mobileMenuIsOpen!: boolean;
-  public shoppingCartIsOpen!: ShoppingCartVisiblity;
+  public shoppingCartIsOpen!: boolean;
 
   public solutionsFlyoutMenuIsOpen = false;
   public moreFlyoutMenuIsOpen = false;
@@ -48,6 +48,7 @@ export class LayoutStructureComponent implements OnInit {
 
   public ngOnInit(): void {
     this.updateMobileMenuState();
+    this.updateShoppingCartVisibility();
   }
 
   public openMobileMenu(): void {
@@ -55,7 +56,7 @@ export class LayoutStructureComponent implements OnInit {
   }
 
   public openShoppingCart(): void {
-    this.shoppingCartVisibility.changeShoppingCartVisibility(ShoppingCartVisiblity.SHOW);
+    this.shoppingCartVisibility.changeShoppingCartVisibility(true);
   }
 
   public toggleSolutionsFlyoutMenu(): void {
@@ -95,7 +96,7 @@ export class LayoutStructureComponent implements OnInit {
   }
 
   private updateShoppingCartVisibility(): void {
-    this.shoppingCartVisibility.isVisibility.subscribe((visibility: ShoppingCartVisiblity) => {
+    this.shoppingCartVisibility.isVisibility.subscribe((visibility: boolean) => {
       this.shoppingCartIsOpen = visibility;
     });
   }

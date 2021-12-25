@@ -6,13 +6,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ShoppingCartVisibilityService {
-  private _isVisibility: BehaviorSubject<ShoppingCartVisiblity> =
-    new BehaviorSubject<ShoppingCartVisiblity>(ShoppingCartVisiblity.HIDDEN);
+  private _isVisibility: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  public readonly isVisibility: Observable<ShoppingCartVisiblity> =
-    this._isVisibility.asObservable();
+  public readonly isVisibility: Observable<boolean> = this._isVisibility.asObservable();
 
-  public changeShoppingCartVisibility(value: ShoppingCartVisiblity): void {
+  public changeShoppingCartVisibility(value: boolean): void {
     this._isVisibility.next(value);
   }
 }
