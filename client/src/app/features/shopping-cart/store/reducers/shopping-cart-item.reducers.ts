@@ -3,7 +3,6 @@ import { createReducer, on } from '@ngrx/store';
 import * as ShoppingCartItemActions from '@features/shopping-cart/store/actions/shopping-cart-item.actions';
 
 export const initialState: Array<ShoppingCartItem> = [];
-type ActionsTypes = ShoppingCartItemActions.add | ShoppingCartItemActions.remove;
 
 const _shoppingCartItemReducer = createReducer(
   initialState,
@@ -16,11 +15,10 @@ const _shoppingCartItemReducer = createReducer(
       (item: ShoppingCartItem) => item.id === shoppingCartItemId
     );
     state.splice(itemIndex, 1);
-
     return state;
   })
 );
 
-export function shoppingCartItemReducer(state: Array<ShoppingCartItem>, action: ActionsTypes) {
+export function shoppingCartItemReducer(state: Array<ShoppingCartItem>, action: any) {
   return _shoppingCartItemReducer(state, action);
 }
