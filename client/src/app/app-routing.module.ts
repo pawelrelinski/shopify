@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@core/guards';
 
 const routes: Routes = [
   {
@@ -70,6 +71,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin-pages.module').then((m) => m.AdminPagesModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
@@ -83,5 +85,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}

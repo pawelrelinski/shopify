@@ -20,6 +20,10 @@ import { PipesModule } from '@core/pipes/pipes.module';
 import { ProductListPaginationComponent } from '@features/product/components';
 import { ProductListHeaderComponent } from '@features/product/components';
 import { ProductOverviewComponent } from '@features/product/components';
+import { ProductOverviewHeaderComponent } from '@features/product/components';
+import { ProductOverviewFeaturesComponent } from './components/product-overview-features/product-overview-features.component';
+import { ProductOverviewSpecificationComponent } from '@features/product/components';
+import { ProductQuantityCounterComponent } from '@features/product/components';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,10 @@ import { ProductOverviewComponent } from '@features/product/components';
     ProductListPaginationComponent,
     ProductListHeaderComponent,
     ProductOverviewComponent,
+    ProductOverviewHeaderComponent,
+    ProductOverviewFeaturesComponent,
+    ProductOverviewSpecificationComponent,
+    ProductQuantityCounterComponent,
   ],
   imports: [
     CommonModule,

@@ -3,12 +3,6 @@ import { FlyoutMenuService, MobileMenuService } from '@features/layout/services'
 import { FlyoutMenu } from '@features/layout/models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
-import { ShoppingCartVisiblity } from '@features/shopping-cart/models';
-
-enum FlyoutMenuStates {
-  SHOW = 'show',
-  HIDE = 'hide',
-}
 
 @Component({
   selector: 'shopify-layout-structure',
