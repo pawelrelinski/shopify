@@ -6,6 +6,6 @@ export const add = createAction(
   props<{ shoppingCartItem: ShoppingCartItem }>()
 );
 export const remove = createAction(
-  '[Shopping Cart Component ] Remove',
+  '[Shopping Cart Component] Remove',
   props<{ shoppingCartItemId: ShoppingCartItem['id'] }>()
 );

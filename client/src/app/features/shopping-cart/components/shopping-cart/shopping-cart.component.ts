@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
-import { ShoppingCartVisiblity } from '@features/shopping-cart/models';
 
 @Component({
   selector: 'shopify-shopping-cart',
