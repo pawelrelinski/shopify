@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ShoppingCartItem } from '@features/shopping-cart/models';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'shopify-shopping-cart-item-list-element',
