@@ -26,10 +26,11 @@ export const shoppingCartItemReducer = createReducer(
     return state;
   }),
   on(ShoppingCartItemActions.remove, (state, { shoppingCartItemId }): Array<ShoppingCartItem> => {
-    const itemIndex: number = state.findIndex(
-      (item: ShoppingCartItem) => item.id === shoppingCartItemId
+    const copyOfState = [...state];
+    const itemIndex: number = copyOfState.findIndex(
+      (item: ShoppingCartItem) => item.id == (shoppingCartItemId as number)
     );
-    state.splice(itemIndex, 1);
-    return state;
+    copyOfState.splice(itemIndex, 1);
+    return copyOfState;
   })
 );

@@ -4,6 +4,7 @@ import { ShoppingCartState } from '@features/shopping-cart/models/shopping-cart-
 import { Observable } from 'rxjs';
 import { ShoppingCartItem } from '@features/shopping-cart/models';
 import { remove } from '@features/shopping-cart/store/actions/shopping-cart-item.actions';
+import { ShoppingCartItemPropsRemove } from '@features/shopping-cart/models/shopping-cart-item-props-remove';
 
 @Component({
   selector: 'shopify-shopping-cart-item-list',
@@ -18,6 +19,7 @@ export class ShoppingCartItemListComponent {
   }
 
   public deleteShoppingCardItem(id: string | number) {
-    this.store.dispatch(remove({ shoppingCartItem: id }));
+    const props: ShoppingCartItemPropsRemove = { shoppingCartItemId: id };
+    this.store.dispatch(remove(props));
   }
 }

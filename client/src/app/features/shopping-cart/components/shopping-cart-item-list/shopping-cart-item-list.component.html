@@ -4,6 +4,7 @@
       <shopify-shopping-cart-item-list-element
         *ngFor="let item of shoppingCartItems | async"
         [item]="item"
+        (onDelete)="deleteShoppingCardItem($event)"
       >
       </shopify-shopping-cart-item-list-element>
     </ul>
