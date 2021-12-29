@@ -3,6 +3,7 @@ import { FlyoutMenuService, MobileMenuService } from '@features/layout/services'
 import { FlyoutMenu } from '@features/layout/models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
+import { AuthService } from '@core/services';
 
 @Component({
   selector: 'shopify-layout-structure',
@@ -34,6 +35,8 @@ export class LayoutStructureComponent implements OnInit {
   public moreFlyoutMenuIsOpen = false;
   public productsFlyoutMenuIsOpen = false;
 
+  public isLoggedIn!: boolean;
+
   constructor(
     private mobileMenuService: MobileMenuService,
     private flyoutMenuService: FlyoutMenuService,
@@ -43,6 +46,7 @@ export class LayoutStructureComponent implements OnInit {
   public ngOnInit(): void {
     this.updateMobileMenuState();
     this.updateShoppingCartVisibility();
+    this.setIsLoggedIn();
   }
 
   public openMobileMenu(): void {
@@ -100,5 +104,9 @@ export class LayoutStructureComponent implements OnInit {
     this.moreFlyoutMenuIsOpen = false;
     this.productsFlyoutMenuIsOpen = false;
     this.flyoutMenuService.changeFlyoutMenuState(FlyoutMenu.NONE);
+  }
+
+  private setIsLoggedIn(): void {
+    this.isLoggedIn = true;
   }
 }

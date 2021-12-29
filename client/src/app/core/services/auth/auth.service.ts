@@ -33,6 +33,10 @@ export class AuthService {
     this._currentUser.next(null);
   }
 
+  public isLoggedIn(): boolean {
+    return true;
+  }
+
   private getUserDataOrNullFromLocalStorage(): ReturnedLoginData {
     const localStorageItem = localStorage.getItem(this.localStorageUserKey);
     if (localStorageItem === null) {

@@ -69,6 +69,11 @@ const routes: Routes = [
       import('./pages/customer/pricing-page/pricing-page.module').then((m) => m.PricingPageModule),
   },
   {
+    path: 'profile',
+    loadChildren: () =>
+      import('./pages/customer/profile-page/profile-page.module').then((m) => m.ProfilePageModule),
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin-pages.module').then((m) => m.AdminPagesModule),
     canActivate: [AuthGuard],
