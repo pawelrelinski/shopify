@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { OrderListTableComponent } from '@features/order/components';
-import { OrderListTableRowComponent } from '@features/order/components';
+import {
+  OrderCardListComponent,
+  OrderCardListElementComponent,
+  OrderListTableComponent,
+  OrderListTableRowComponent,
+} from '@features/order/components';
 
 @NgModule({
-  declarations: [OrderListTableComponent, OrderListTableRowComponent],
+  declarations: [
+    OrderListTableComponent,
+    OrderListTableRowComponent,
+    OrderCardListComponent,
+    OrderCardListElementComponent,
+  ],
   imports: [CommonModule],
-  exports: [OrderListTableComponent],
+  exports: [OrderListTableComponent, OrderCardListComponent],
 })
 export class OrderModule {}

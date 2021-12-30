@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlyoutMenuService, MobileMenuService } from '@features/layout/services';
 import { FlyoutMenu } from '@features/layout/models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
-import { AuthService } from '@core/services';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'shopify-layout-structure',
@@ -27,7 +27,7 @@ import { AuthService } from '@core/services';
     ]),
   ],
 })
-export class LayoutStructureComponent implements OnInit {
+export class LayoutStructureComponent implements OnInit, OnDestroy {
   public mobileMenuIsOpen!: boolean;
   public shoppingCartIsOpen!: boolean;
 
@@ -36,6 +36,8 @@ export class LayoutStructureComponent implements OnInit {
   public productsFlyoutMenuIsOpen = false;
 
   public isLoggedIn!: boolean;
+
+  private readonly destroyed = new Subject<boolean>();
 
   constructor(
     private mobileMenuService: MobileMenuService,
@@ -47,6 +49,11 @@ export class LayoutStructureComponent implements OnInit {
     this.updateMobileMenuState();
     this.updateShoppingCartVisibility();
     this.setIsLoggedIn();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroyed.next(true);
+    this.destroyed.complete();
   }
 
   public openMobileMenu(): void {
@@ -88,15 +95,17 @@ export class LayoutStructureComponent implements OnInit {
   }
 
   private updateMobileMenuState(): void {
-    this.mobileMenuService.isOpen.subscribe((state: boolean) => {
+    this.mobileMenuService.isOpen.pipe(takeUntil(this.destroyed)).subscribe((state: boolean) => {
       this.mobileMenuIsOpen = state;
     });
   }
 
   private updateShoppingCartVisibility(): void {
-    this.shoppingCartVisibility.isVisibility.subscribe((visibility: boolean) => {
-      this.shoppingCartIsOpen = visibility;
-    });
+    this.shoppingCartVisibility.isVisibility
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((visibility: boolean) => {
+        this.shoppingCartIsOpen = visibility;
+      });
   }
 
   private hideAllFlyoutMenus(): void {

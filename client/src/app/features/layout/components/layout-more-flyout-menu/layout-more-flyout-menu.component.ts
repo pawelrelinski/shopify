@@ -1,20 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlyoutMenuService } from '@features/layout/services';
 import { FlyoutMenu } from '@features/layout/models';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'shopify-layout-more-flyout-menu',
   templateUrl: './layout-more-flyout-menu.component.html',
   styleUrls: ['./layout-more-flyout-menu.component.scss'],
 })
-export class LayoutMoreFlyoutMenuComponent {
+export class LayoutMoreFlyoutMenuComponent implements OnInit, OnDestroy {
   public flyoutMenuName!: FlyoutMenu;
   public showFlyoutMenu: boolean = false;
+
+  private readonly destroyed = new Subject<boolean>();
 
   constructor(private flyoutMenuService: FlyoutMenuService) {}
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroyed.next(true);
+    this.destroyed.complete();
   }
 
   public toggleFlyoutMenu(): void {
@@ -27,10 +35,12 @@ export class LayoutMoreFlyoutMenuComponent {
   }
 
   private updateFlyoutMenuName(): void {
-    this.flyoutMenuService.flyoutMenu.subscribe((flyoutMenuName: FlyoutMenu) => {
-      this.flyoutMenuName = flyoutMenuName;
-      this.checkFlyoutMenuName();
-    });
+    this.flyoutMenuService.flyoutMenu
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((flyoutMenuName: FlyoutMenu) => {
+        this.flyoutMenuName = flyoutMenuName;
+        this.checkFlyoutMenuName();
+      });
   }
 
   private checkFlyoutMenuName(): void {
