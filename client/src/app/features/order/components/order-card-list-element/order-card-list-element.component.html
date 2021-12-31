@@ -1,18 +1,99 @@
-<div class='px-8 py-4 mt-10 w-full bg-white rounded-lg shadow-md dark:bg-gray-800'>
+<div
+  *ngFor='let order of orders'
+  class='px-8 py-4 mt-10 w-full bg-white rounded-lg shadow-md dark:bg-gray-800'
+>
   <div class='mt-2 mb-5 lg:mt-0 lg:flex-1'>
     <div class='flex row gap-10'>
       <div>
         <p class='text-base'>Order number</p>
-        <p class='text-sm text-gray-400'>WU414343</p>
+        <p class='text-sm text-gray-400'>{{ order.orderNumber }}</p>
       </div>
       <div>
         <p class='text-base'>Date placed</p>
-        <p class='text-sm text-gray-400'>Jul 6, 2020</p>
+        <p class='text-sm text-gray-400'>{{ order.datePlaced }}</p>
       </div>
       <div>
         <p class='text-base'>Total amount</p>
-        <p class='text-sm text-gray-400'>$160.00</p>
+        <p class='text-sm text-gray-400'>${{ order.totalAmount }}</p>
       </div>
     </div>
+    <div class='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
+      <div class='inline-block min-w-full rounded-lg overflow-hidden'>
+        <table class='min-w-full leading-normal'>
+          <thead>
+          <tr>
+            <th
+              scope='col'
+              class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
+            >
+              Product
+            </th>
+            <th
+              scope='col'
+              class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
+            >
+              Price
+            </th>
+            <th
+              scope='col'
+              class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
+            >
+              Status
+            </th>
+            <th
+              scope='col'
+              class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
+            >
+              Info
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor='let product of order.products' class='w-full'>
+            <td class='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+              <div class='flex items-center'>
+                <div class='flex-shrink-0'>
+                  <a href='#' class='block relative'>
+                    <img
+                      alt='Photo of product'
+                      src='https://randomuser.me/api/portraits/lego/1.jpg'
+                      class='mx-auto object-cover h-10 w-10'
+                    >
+                  </a>
+                </div>
+                <div class='ml-3'>
+                  <p class='text-gray-900 font-medium whitespace-no-wrap'>
+                    {{ product.name }}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+              <p class='text-gray-500 whitespace-no-wrap'>${{ product.price }}</p>
+            </td>
+            <td class='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                <span
+                  class='relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
+                >
+                  <span
+                    aria-hidden='true'
+                    class='absolute inset-0 bg-green-200 opacity-50 rounded-full'
+                  ></span>
+                  <span class='relative'>{{ product.status }}</span>
+                </span>
+            </td>
+            <td class='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+              <a href='#' class='text-indigo-600 hover:text-indigo-900'> View Product </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button
+      class='py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50'
+    >
+      View Invoice
+    </button>
   </div>
 </div>
