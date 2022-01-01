@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomerProfileSettingsEditFirstNameDialogComponent } from '@features/customer/components';
 
 @Component({
   selector: 'shopify-customer-profile-settings',
   templateUrl: './customer-profile-settings.component.html',
-  styleUrls: ['./customer-profile-settings.component.scss']
+  styleUrls: ['./customer-profile-settings.component.scss'],
 })
-export class CustomerProfileSettingsComponent implements OnInit {
+export class CustomerProfileSettingsComponent {
+  public userInfo = {
+    firstName: 'Margot',
+    lastName: 'Foster',
+    email: 'margotfoster@example.com',
+    password: 'test123!@#',
+  };
 
-  constructor() { }
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
+  public openEditNameDialog(): void {
+    const dialogRef = this.dialog.open(CustomerProfileSettingsEditFirstNameDialogComponent, {
+      data: {
+        firstName: this.userInfo.firstName,
+        lastName: this.userInfo.lastName,
+        email: this.userInfo.email,
+        password: this.userInfo.password,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
   }
-
 }

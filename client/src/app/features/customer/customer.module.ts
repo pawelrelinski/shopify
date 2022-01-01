@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerSignInFormComponent } from '@features/customer/components';
+import {
+  CustomerProfileComponent,
+  CustomerProfileFavouritesComponent,
+  CustomerProfileOrdersComponent,
+  CustomerProfileReportingTilesComponent,
+  CustomerProfileSettingsComponent,
+  CustomerProfileSettingsEditFirstNameDialogComponent,
+  CustomerSignInFormComponent,
+  CustomerSignUpFormComponent,
+} from '@features/customer/components';
 import { RouterModule } from '@angular/router';
-import { CustomerSignUpFormComponent } from '@features/customer/components';
-import { CustomerProfileComponent } from '@features/customer/components';
-import { CustomerProfileReportingTilesComponent } from '@features/customer/components';
-import { CustomerProfileOrdersComponent } from '@features/customer/components';
-import { CustomerProfileFavouritesComponent } from '@features/customer/components';
-import { CustomerProfileSettingsComponent } from '@features/customer/components';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,8 +23,9 @@ import { CustomerProfileSettingsComponent } from '@features/customer/components'
     CustomerProfileOrdersComponent,
     CustomerProfileFavouritesComponent,
     CustomerProfileSettingsComponent,
+    CustomerProfileSettingsEditFirstNameDialogComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatDialogModule, FormsModule, ReactiveFormsModule],
   exports: [
     CustomerSignInFormComponent,
     CustomerSignUpFormComponent,
