@@ -27,10 +27,6 @@ export class CustomerProfileSettingsEditFirstNameDialogComponent implements OnIn
         [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
       ],
       email: [this.data.email, [Validators.required, Validators.email]],
-      password: [
-        this.data.password,
-        [Validators.required, Validators.minLength(8), Validators.maxLength(50)],
-      ],
     });
   }
 
