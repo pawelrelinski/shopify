@@ -1,115 +1,115 @@
-<div class="bg-white shadow overflow-hidden sm:rounded-lg">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">General</h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">Simple information's about product.</p>
+<div class='bg-white shadow overflow-hidden sm:rounded-lg'>
+  <form [formGroup]='form' (ngSubmit)='onSubmit()'>
+    <div class='px-4 py-5 sm:px-6'>
+      <h3 class='text-lg leading-6 font-medium text-gray-900'>General</h3>
+      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Simple information's about product.</p>
     </div>
-    <div formGroupName="general" class="border-t border-gray-200">
+    <div formGroupName='general' class='border-t border-gray-200'>
       <dl>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Name <span class="text-red-700">*</span>
+        <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Name <span class='text-red-700'>*</span>
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
               formControlName='name'
               placeholder='Solar panel'
               type='text'
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
+              class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
             />
           </dd>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Regular price (PLN) <span class="text-red-700">*</span>
+        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Regular price (PLN) <span class='text-red-700'>*</span>
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
               formControlName='regularPrice'
               placeholder='10.99'
               type='number'
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
+              class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
             />
           </dd>
         </div>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Sale price (PLN)</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>Sale price (PLN)</dt>
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
               formControlName='salePrice'
               placeholder='8.99'
               type='number'
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
+              class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
           </dd>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Description <span class="text-red-700">*</span>
+        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Description <span class='text-red-700'>*</span>
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <textarea formControlName="description" class="w-auto" rows="10" required></textarea>
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+            <textarea formControlName='description' class='w-auto' rows='10' required></textarea>
           </dd>
         </div>
       </dl>
     </div>
 
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">Inventory</h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">
+    <div class='px-4 py-5 sm:px-6'>
+      <h3 class='text-lg leading-6 font-medium text-gray-900'>Inventory</h3>
+      <p class='mt-1 max-w-2xl text-sm text-gray-500'>
         Information's about product inventory state
       </p>
     </div>
-    <div formGroupName="inventory" class="border-t border-gray-200">
+    <div formGroupName='inventory' class='border-t border-gray-200'>
       <dl>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Stock quantity <span class="text-red-700">*</span>
+        <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Stock quantity <span class='text-red-700'>*</span>
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
-              formControlName="stockQuantity"
-              type="number"
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
+              formControlName='stockQuantity'
+              type='number'
+              class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
-            />
+            >
           </dd>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Allow backorders?</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>Allow backorders?</dt>
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
-              formControlName="allowBackorders"
-              value="white"
+              formControlName='allowBackorders'
+              value='white'
               type='checkbox'
               class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-            />
+            >
           </dd>
         </div>
       </dl>
     </div>
 
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">Shipping</h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">Information's about shipping</p>
+    <div class='px-4 py-5 sm:px-6'>
+      <h3 class='text-lg leading-6 font-medium text-gray-900'>Shipping</h3>
+      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Information's about shipping</p>
     </div>
-    <div formGroupName="shipping" class="border-t border-gray-200">
+    <div formGroupName='shipping' class='border-t border-gray-200'>
       <dl>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Weight (kg)</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>Weight (kg)</dt>
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
               formControlName='weight'
               placeholder='3.5'
               type='number'
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
+              class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
           </dd>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Shipping methods</dt>
+        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>Shipping methods</dt>
           <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <div>
               <h3 class='-mx-2 -my-3 flow-root'>
@@ -162,42 +162,15 @@
                 id='filter-section-mobile-0'
               >
                 <div class='space-y-6'>
-                  <div class='flex items-center'>
+                  <div *ngFor='let shippingMethod of shippingMethods; let index = index' class='flex items-center'>
                     <input
-                      id='filter-mobile-color-0'
-                      name='color[]'
-                      value='white'
+                      [value]='shippingMethod.value'
+                      (change)='onCheckboxChange($event)'
                       type='checkbox'
                       class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-                    />
-                    <label for='filter-mobile-color-0' class='ml-3 min-w-0 flex-1 text-gray-500'>
-                      Collection in person
-                    </label>
-                  </div>
-
-                  <div class='flex items-center'>
-                    <input
-                      id='filter-mobile-color-1'
-                      name='color[]'
-                      value='beige'
-                      type='checkbox'
-                      class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-                    />
-                    <label for='filter-mobile-color-1' class='ml-3 min-w-0 flex-1 text-gray-500'>
-                      InPost parcel
-                    </label>
-                  </div>
-
-                  <div class='flex items-center'>
-                    <input
-                      id='filter-mobile-color-2'
-                      name='color[]'
-                      value='blue'
-                      type='checkbox'
-                      class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-                    />
-                    <label for='filter-mobile-color-2' class='ml-3 min-w-0 flex-1 text-gray-500'>
-                      Courier consignment
+                    >
+                    <label class='ml-3 min-w-0 flex-1 text-gray-500'>
+                      {{ shippingMethod.name }}
                     </label>
                   </div>
                 </div>
@@ -208,21 +181,21 @@
       </dl>
     </div>
 
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">Variations</h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">Variations of product</p>
+    <div class='px-4 py-5 sm:px-6'>
+      <h3 class='text-lg leading-6 font-medium text-gray-900'>Variations</h3>
+      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Variations of product</p>
     </div>
-    <div formGroupName="variations" class="border-t border-gray-200">
+    <div formGroupName='variations' class='border-t border-gray-200'>
       <dl>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Category <span class="text-red-700">*</span>
+        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Category <span class='text-red-700'>*</span>
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <select
-              formControlName="category"
-              name="category"
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
+              formControlName='category'
+              name='category'
+              class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
             >
               <option value='' selected disabled hidden class='text-gray-300'>Choose here</option>
@@ -239,7 +212,7 @@
       <h3 class='text-lg leading-6 font-medium text-gray-900'>Specification</h3>
       <p class='mt-1 max-w-2xl text-sm text-gray-500'>Product's specification</p>
     </div>
-    <div formGroupName='inventory' class='border-t border-gray-200'>
+    <div formArrayName='specification' class='border-t border-gray-200'>
       <dl>
         <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
           <dt class='text-sm font-medium text-gray-500'>
@@ -250,20 +223,30 @@
           >
             <div
               *ngFor='let specification of getSpecification().controls; let index = index'
+              [formGroupName]='index'
               class='flex flex-row justify-between sm:col-span-2 w-full'
             >
               <input
+                formControlName='key'
                 placeholder='Property name'
                 type='text'
                 class='bg-transparent rounded border-gray-300 border-2 properties-input-width'
                 required
-              />
+              >
               <input
+                formControlName='value'
                 placeholder='Property value'
                 type='text'
                 class='bg-transparent rounded border-gray-300 border-2 properties-input-width property-value-input'
                 required
-              /><br />
+              >
+              <div (click)='removeSpecification(index)' class='flex items-center hover:pointer'>
+                <svg xmlns='http://www.w3.org/2000/svg' class='h-8 w-8' fill='none' viewBox='0 0 24 24'
+                     stroke='rgb(239 68 68)'>
+                  <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
+                </svg>
+              </div>
+              <br>
             </div>
             <button
               (click)='addSpecification()'

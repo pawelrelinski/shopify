@@ -4,12 +4,12 @@ import {
   AbstractControl,
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
 import { ProductFormMode } from '@features/product/models';
-import { ProductService } from '@features/product/services';
 
 interface ErrorResponse {
   ok: boolean;
@@ -43,12 +43,16 @@ export class ProductFormComponent implements OnInit {
     'mounting-system',
     'accessories',
   ];
+  public readonly shippingMethods: Array<{ name: string; value: string }> = [
+    { name: 'Collection in person', value: 'collection-in-person' },
+    { name: 'InPost parcel', value: 'inpost-parcel' },
+    { name: 'Courier consignment', value: 'courier-consignment' },
+  ];
 
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private productService: ProductService
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -56,13 +60,24 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const { general, inventory, variations } = this.form.controls;
-    const product = ProductFormComponent.createProductObjectToSend(general, inventory, variations);
+    console.log(this.form);
+  }
 
-    this.productService.create(product).subscribe(
-      (response) => this.handleSuccessResponse(response.status),
-      (error: ErrorResponse) => this.handleErrorResponse(error)
-    );
+  public onCheckboxChange(event: any) {
+    const checkArray: FormArray = this.form.get('shipping')?.get('shippingMethods') as FormArray;
+
+    if (event.target.checked) {
+      checkArray.push(new FormControl(event.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item) => {
+        if (item.value == event.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   public toggleShippingMethodsOptions(): void {
@@ -82,11 +97,7 @@ export class ProductFormComponent implements OnInit {
           Validators.min(0.01),
           Validators.max(1_000_000),
         ]),
-        salePrice: this.fb.control(0.0, [
-          Validators.required,
-          Validators.min(0.01),
-          Validators.max(1_000_000),
-        ]),
+        salePrice: this.fb.control(0.0, [Validators.min(0.01), Validators.max(1_000_000)]),
         description: this.fb.control('', [Validators.required, Validators.maxLength(3)]),
       }),
       inventory: this.fb.group({
@@ -99,7 +110,7 @@ export class ProductFormComponent implements OnInit {
       }),
       shipping: this.fb.group({
         weight: this.fb.control(0.0, [Validators.required, Validators.min(0.01)]),
-        shippingMethods: this.fb.control([], [Validators.required]),
+        shippingMethods: this.fb.array([], [Validators.required]),
       }),
       variations: this.fb.group({
         category: this.fb.control('', [Validators.required]),
