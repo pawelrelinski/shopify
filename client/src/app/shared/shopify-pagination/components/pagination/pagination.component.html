@@ -51,7 +51,7 @@
           *ngFor="let page of getPageCount(); let i = index"
           (click)="changePage(plusOne(i))"
           [ngClass]="{
-            'z-10 bg-indigo-50 border-indigo-500 text-indigo-600 hover:bg-indigo-100':
+            'z-10 bg-green-50 border-green-500 text-green-600 hover:bg-green-100':
               plusOne(i) == currentPage
           }"
           class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"

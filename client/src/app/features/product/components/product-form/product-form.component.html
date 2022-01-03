@@ -12,9 +12,9 @@
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             <input
-              formControlName="name"
-              placeholder="T-shirt"
-              type="text"
+              formControlName='name'
+              placeholder='Solar panel'
+              type='text'
               class="bg-transparent rounded border-gray-300 border-2 w-full"
               required
             />
@@ -26,8 +26,9 @@
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             <input
-              formControlName="regularPrice"
-              type="number"
+              formControlName='regularPrice'
+              placeholder='10.99'
+              type='number'
               class="bg-transparent rounded border-gray-300 border-2 w-full"
               required
             />
@@ -37,8 +38,9 @@
           <dt class="text-sm font-medium text-gray-500">Sale price (PLN)</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             <input
-              formControlName="salePrice"
-              type="number"
+              formControlName='salePrice'
+              placeholder='8.99'
+              type='number'
               class="bg-transparent rounded border-gray-300 border-2 w-full"
             />
           </dd>
@@ -81,8 +83,8 @@
             <input
               formControlName="allowBackorders"
               value="white"
-              type="checkbox"
-              class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+              type='checkbox'
+              class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
             />
           </dd>
         </div>
@@ -99,21 +101,108 @@
           <dt class="text-sm font-medium text-gray-500">Weight (kg)</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             <input
-              formControlName="weight"
-              type="number"
+              formControlName='weight'
+              placeholder='3.5'
+              type='number'
               class="bg-transparent rounded border-gray-300 border-2 w-full"
             />
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">Shipping methods</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <input
-              formControlName="shippingMethod"
-              placeholder="InPost"
-              type="text"
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
-            />
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+            <div>
+              <h3 class='-mx-2 -my-3 flow-root'>
+                <button
+                  type='button'
+                  class='px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500'
+                  aria-controls='filter-section-mobile-0'
+                  aria-expanded='false'
+                >
+                  <span class='font-medium text-gray-700'> Methods </span>
+                  <span class='ml-6 flex items-center'>
+                    <svg
+                      *ngIf='!moreShippingMethodsOptionsIsShow'
+                      (click)='toggleShippingMethodsOptions()'
+                      xmlns='http://www.w3.org/2000/svg'
+                      class='h-6 w-6'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M19 9l-7 7-7-7'
+                      />
+                    </svg>
+                    <svg
+                      *ngIf='moreShippingMethodsOptionsIsShow'
+                      (click)='toggleShippingMethodsOptions()'
+                      xmlns='http://www.w3.org/2000/svg'
+                      class='h-6 w-6'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M5 15l7-7 7 7'
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <div
+                *ngIf='moreShippingMethodsOptionsIsShow'
+                class='pt-6'
+                id='filter-section-mobile-0'
+              >
+                <div class='space-y-6'>
+                  <div class='flex items-center'>
+                    <input
+                      id='filter-mobile-color-0'
+                      name='color[]'
+                      value='white'
+                      type='checkbox'
+                      class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
+                    />
+                    <label for='filter-mobile-color-0' class='ml-3 min-w-0 flex-1 text-gray-500'>
+                      Collection in person
+                    </label>
+                  </div>
+
+                  <div class='flex items-center'>
+                    <input
+                      id='filter-mobile-color-1'
+                      name='color[]'
+                      value='beige'
+                      type='checkbox'
+                      class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
+                    />
+                    <label for='filter-mobile-color-1' class='ml-3 min-w-0 flex-1 text-gray-500'>
+                      InPost parcel
+                    </label>
+                  </div>
+
+                  <div class='flex items-center'>
+                    <input
+                      id='filter-mobile-color-2'
+                      name='color[]'
+                      value='blue'
+                      type='checkbox'
+                      class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
+                    />
+                    <label for='filter-mobile-color-2' class='ml-3 min-w-0 flex-1 text-gray-500'>
+                      Courier consignment
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </dd>
         </div>
       </dl>
@@ -125,17 +214,6 @@
     </div>
     <div formGroupName="variations" class="border-t border-gray-200">
       <dl>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Color</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <input
-              formControlName="color"
-              placeholder="Skyblue"
-              type="text"
-              class="bg-transparent rounded border-gray-300 border-2 w-full"
-            />
-          </dd>
-        </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">
             Category <span class="text-red-700">*</span>
@@ -147,9 +225,9 @@
               class="bg-transparent rounded border-gray-300 border-2 w-full"
               required
             >
-              <option value="" selected disabled hidden class="text-gray-300">Choose here</option>
-              <option *ngFor="let category of categories" [value]="category">
-                {{ category | titlecase }}
+              <option value='' selected disabled hidden class='text-gray-300'>Choose here</option>
+              <option *ngFor='let category of categories' [value]='category'>
+                {{ category | firstLetterTitleCase }}
               </option>
             </select>
           </dd>
@@ -157,28 +235,73 @@
       </dl>
     </div>
 
+    <div class='px-4 py-5 sm:px-6'>
+      <h3 class='text-lg leading-6 font-medium text-gray-900'>Specification</h3>
+      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Product's specification</p>
+    </div>
+    <div formGroupName='inventory' class='border-t border-gray-200'>
+      <dl>
+        <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Properties <span class='text-red-700'>*</span>
+          </dt>
+          <dd
+            class='flex flex-column mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 properties-wrapper'
+          >
+            <div
+              *ngFor='let specification of getSpecification().controls; let index = index'
+              class='flex flex-row justify-between sm:col-span-2 w-full'
+            >
+              <input
+                placeholder='Property name'
+                type='text'
+                class='bg-transparent rounded border-gray-300 border-2 properties-input-width'
+                required
+              />
+              <input
+                placeholder='Property value'
+                type='text'
+                class='bg-transparent rounded border-gray-300 border-2 properties-input-width property-value-input'
+                required
+              /><br />
+            </div>
+            <button
+              (click)='addSpecification()'
+              type='button'
+              class='inline-flex items-center justify-center space-x-2 py-3 px-4 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-50 hover:bg-green-100 transition-colors'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                class='h-5 w-5'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+              >
+                <path
+                  fill-rule='evenodd'
+                  d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
+                  clip-rule='evenodd'
+                />
+              </svg>
+              <div>Add property</div>
+            </button>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
     <div
-      class="order-3 px-4 py-5 mr-auto flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto sm:px-6"
+      class='flex flex-row order-3 px-4 py-5 mr-auto flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto sm:px-6'
     >
       <button
-        *ngIf="buttonsIsShow"
-        class="flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 w-full sm:w-36 sm:flex-row hover:bg-indigo-700 transition delay-200"
-        type="submit"
+        class='flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 w-full sm:w-36 sm:flex-row hover:bg-green-700 transition delay-200'
+        type='submit'
       >
         Add
       </button>
       <button
-        *ngIf="buttonsIsShow"
-        class="flex items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-indigo-700 bg-indigo-100 hover:bg-indigo-200 w-full sm:w-36 transition delay-200"
+        class='flex items-center justify-center ml-5 w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-green-700 bg-green-100 hover:bg-green-200 w-full sm:w-36 transition delay-200'
       >
         Reset
-      </button>
-      <button
-        *ngIf="buttonsIsShow"
-        (click)="onDelete()"
-        class="flex items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-red-900 bg-red-100 hover:bg-red-200 w-full sm:w-36 transition delay-200"
-      >
-        Delete
       </button>
     </div>
   </form>

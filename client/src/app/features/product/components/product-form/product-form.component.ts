@@ -1,17 +1,15 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
-
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
-import { ProductFormMode, ProductResponse } from '@features/product/models';
+import { ProductFormMode } from '@features/product/models';
 import { ProductService } from '@features/product/services';
-import { Response } from '@core/interfaces';
 
 interface ErrorResponse {
   ok: boolean;
@@ -22,6 +20,7 @@ interface ErrorResponse {
 @Component({
   selector: 'shopify-product-form',
   templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -35,30 +34,15 @@ export class ProductFormComponent implements OnInit {
   public formMode!: ProductFormMode;
 
   public form!: FormGroup;
-  public buttonsIsShow!: boolean;
-  public readonly categories: Array<string> = ['men', 'women'];
-
-  private productId!: number;
-  private product!: Response<ProductResponse>;
-  private defaultProductFormConfig = {
-    general: {
-      name: { value: '', disabled: false },
-      regularPrice: { value: 0.0, disabled: false },
-      salePrice: { value: 0.0, disabled: false },
-      description: { value: '', disabled: false },
-    },
-    inventory: {
-      stockQuantity: { value: 0, disabled: false },
-    },
-    shipping: {
-      weight: { value: 0.0, disabled: false },
-      shippingMethod: { value: '', disabled: false },
-    },
-    variations: {
-      category: { value: '', disabled: false },
-      color: { value: '', disabled: false },
-    },
-  };
+  public moreShippingMethodsOptionsIsShow = false;
+  public readonly categories: Array<string> = [
+    'solar-panels',
+    'solar-inverters',
+    'solar-batteries',
+    'electric-car-charger',
+    'mounting-system',
+    'accessories',
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +52,7 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.setProductForm();
+    this.setControlsForForm();
   }
 
   public onSubmit(): void {
@@ -81,100 +65,66 @@ export class ProductFormComponent implements OnInit {
     );
   }
 
-  public onDelete(): void {
-    this.productService
-      .delete(this.productId)
-      .subscribe((response) => this.handleSuccessResponse(response.status));
+  public toggleShippingMethodsOptions(): void {
+    this.moreShippingMethodsOptionsIsShow = !this.moreShippingMethodsOptionsIsShow;
   }
 
-  private setProductData(): void {
-    this.activatedRoute.params
-      .pipe(
-        mergeMap((params) => {
-          this.productId = params.productId as number;
-          return this.productService.getById(this.productId);
-        })
-      )
-      .subscribe((product: Response<ProductResponse>) => {
-        this.product = product;
-      });
-  }
-
-  private setProductForm(): void {
-    switch (this.formMode) {
-      case ProductFormMode.CREATE:
-        this.buttonsIsShow = true;
-        this.form = this.getProductFormControlsConfig();
-        break;
-      case ProductFormMode.EDIT:
-        this.setProductData();
-        this.setValuesOfFormControls();
-        this.buttonsIsShow = true;
-        break;
-      case ProductFormMode.READONLY:
-        this.setProductData();
-        this.setValuesOfFormControls(true);
-        this.buttonsIsShow = false;
-        break;
-    }
-  }
-
-  private setValuesOfFormControls(disabled: boolean = false): void {
-    const {
-      name,
-      description,
-      amount: stockQuantity,
-      defaultPrice: regularPrice,
-      category,
-    } = this.product.data.attributes;
-    this.defaultProductFormConfig.general.name = { value: name, disabled };
-    this.defaultProductFormConfig.general.regularPrice = {
-      value: regularPrice as number,
-      disabled,
-    };
-    this.defaultProductFormConfig.general.description = {
-      value: description,
-      disabled,
-    };
-    this.defaultProductFormConfig.inventory.stockQuantity = {
-      value: stockQuantity,
-      disabled,
-    };
-    this.defaultProductFormConfig.variations.category = {
-      value: category,
-      disabled,
-    };
-  }
-
-  private getProductFormControlsConfig(): FormGroup {
-    const { general, inventory, shipping, variations } = this.defaultProductFormConfig;
-
-    return this.fb.group({
+  private setControlsForForm(): void {
+    this.form = this.fb.group({
       general: this.fb.group({
-        name: [
-          general.name,
-          [Validators.required, Validators.minLength(3), Validators.maxLength(128)],
-        ],
-        regularPrice: [
-          general.regularPrice,
-          [Validators.required, Validators.min(0.01), Validators.max(1_000_000)],
-        ],
-        salePrice: [general.salePrice, [Validators.min(0.01), Validators.max(1_000_000)]],
-        description: [general.description, [Validators.required, Validators.minLength(3)]],
+        name: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+        regularPrice: this.fb.control(0.0, [
+          Validators.required,
+          Validators.min(0.01),
+          Validators.max(1_000_000),
+        ]),
+        salePrice: this.fb.control(0.0, [
+          Validators.required,
+          Validators.min(0.01),
+          Validators.max(1_000_000),
+        ]),
+        description: this.fb.control('', [Validators.required, Validators.maxLength(3)]),
       }),
       inventory: this.fb.group({
-        stockQuantity: [inventory.stockQuantity, [Validators.required, Validators.min(0)]],
-        allowBackorders: [false],
+        stockQuantity: this.fb.control(0, [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(1_000_000),
+        ]),
+        allowBackorders: this.fb.control(false),
       }),
       shipping: this.fb.group({
-        weight: [shipping.weight, [Validators.required, Validators.min(0.0)]],
-        shippingMethod: [shipping.shippingMethod, [Validators.required]],
+        weight: this.fb.control(0.0, [Validators.required, Validators.min(0.01)]),
+        shippingMethods: this.fb.control([], [Validators.required]),
       }),
       variations: this.fb.group({
-        category: [variations.category, [Validators.maxLength(50), Validators.minLength(3)]],
-        color: [variations.color, [Validators.maxLength(50), Validators.minLength(3)]],
+        category: this.fb.control('', [Validators.required]),
       }),
+      specification: this.fb.array([]),
     });
+  }
+
+  public getSpecification(): FormArray {
+    return this.form.get('specification') as FormArray;
+  }
+
+  public newSpecification(): FormGroup {
+    return this.fb.group({
+      key: '',
+      value: '',
+    });
+  }
+
+  public addSpecification(): void {
+    this.getSpecification().push(this.newSpecification());
+  }
+
+  public removeSpecification(index: number): void {
+    this.getSpecification().removeAt(index);
   }
 
   private static createProductObjectToSend(

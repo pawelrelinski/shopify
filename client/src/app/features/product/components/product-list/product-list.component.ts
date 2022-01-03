@@ -13,13 +13,7 @@ export class ProductListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.categoryName = ProductListComponent.toTitleCase(params.category);
+      this.categoryName = params.category;
     });
-  }
-
-  private static toTitleCase(str: string): string {
-    let rest = [...str.split('-').join(' ')];
-    rest[0] = rest[0].toUpperCase();
-    return rest.join('');
   }
 }
