@@ -1,17 +1,22 @@
-<shopify-product-overview-header></shopify-product-overview-header>
+<shopify-product-overview-header [name]='product.name'
+                                 [description]='product.description'
+                                 [id]='product.id'
+                                 [price]='product.defaultPrice'
+                                 (onEmitItemData)='addItemToShoppingCart($event)'>
+</shopify-product-overview-header>
 <shopify-product-overview-features></shopify-product-overview-features>
-<shopify-product-overview-specification></shopify-product-overview-specification>
-<section class="text-gray-700 body-font relative">
-  <div class="absolute inset-0 bg-gray-300 rounded-lg">
+<shopify-product-overview-specification [specification]='product.properties'></shopify-product-overview-specification>
+<section class='text-gray-700 body-font relative'>
+  <div class='absolute inset-0 bg-gray-300 rounded-lg'>
     <iframe
-      width="100%"
-      height="100%"
-      title="map"
-      src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ5eDf19AcFkcREsEGjfKQjos&key=AIzaSyAYY_jj2lziVww3-WxeUdNUzQc1Lctm6hs"
-      style="filter: grayscale(1) contrast(1.2) opacity(0.4)"
+      width='100%'
+      height='100%'
+      title='map'
+      src='https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ5eDf19AcFkcREsEGjfKQjos&key=AIzaSyAYY_jj2lziVww3-WxeUdNUzQc1Lctm6hs'
+      style='filter: grayscale(1) contrast(1.2) opacity(0.4)'
     ></iframe>
   </div>
-  <div class="container px-5 py-24 mx-auto flex">
+  <div class='container px-5 py-24 mx-auto flex'>
     <div
       class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10"
     >

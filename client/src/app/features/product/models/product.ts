@@ -29,4 +29,5 @@ export interface Product {
     value: string;
   }[];
   reviews: Review[];
+  properties?: string;
 }

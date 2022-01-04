@@ -1,13 +1,14 @@
 <div>
-  <a routerLink="/products/solar-panels/1" class="block h-64 rounded-lg shadow-lg bg-white"></a>
-  <div class="flex items-center justify-between mt-3">
+  <a [routerLink]="['/products/', product.category, product.id]" class='block h-64 rounded-lg shadow-lg bg-white'></a>
+  <div class='flex items-center justify-between mt-3'>
     <div>
-      <a href="#" class="font-medium">Product Name</a>
-      <a class="flex items-center" href="#">
-        <span class="text-xs font-medium text-gray-600">by</span>
-        <span class="text-xs font-medium ml-1 text-green-500">Store Name</span>
+      <a href='#' class='font-medium'>{{ product.name | truncate:12 }}</a>
+      <a class='flex items-center' href='#'>
+        <span class='text-xs font-medium text-gray-600'>by</span>
+        <span class='text-xs font-medium ml-1 text-green-500'>Mzx Corp</span>
       </a>
     </div>
-    <span class="flex items-center h-8 bg-green-200 text-green-600 text-sm px-2 rounded">$34</span>
+    <span class='flex items-center h-8 bg-green-200 text-green-600 text-sm px-2 rounded'>{{ product.defaultPrice }}
+      PLN</span>
   </div>
 </div>

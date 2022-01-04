@@ -8,6 +8,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ProductService } from '@features/product/services';
 
 interface ErrorResponse {
   ok: boolean;
@@ -40,7 +41,8 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) {}
 
   public ngOnInit(): void {
@@ -49,7 +51,12 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.form);
+    console.log(this.createProductObjectToSend());
+    this.productService.create(this.createProductObjectToSend()).subscribe((res) => {
+      if (res.status === 201) {
+        this.router.navigate(['/admin/products-manage']);
+      }
+    });
   }
 
   public onCheckboxChange(event: any) {
@@ -147,19 +154,14 @@ export class ProductFormComponent implements OnInit {
     this.form.reset();
   }
 
-  private static createProductObjectToSend(
-    general: AbstractControl,
-    inventory: AbstractControl,
-    variations: AbstractControl,
-    specification: AbstractControl
-  ) {
+  private createProductObjectToSend() {
     return {
-      name: general.get('name')?.value,
-      description: general.get('description')?.value,
-      price: general.get('regularPrice')?.value,
-      amount: inventory.get('stockQuantity')?.value,
-      category: variations.get('category')?.value,
-      properties: specification.get('color')?.value,
+      name: this.getGeneral()?.get('name')?.value,
+      description: this.getGeneral()?.get('description')?.value,
+      price: this.getGeneral()?.get('regularPrice')?.value,
+      amount: this.getInventory()?.get('stockQuantity')?.value,
+      category: this.getVariations()?.get('category')?.value,
+      properties: JSON.stringify(this.getSpecification()?.value),
     };
   }
 

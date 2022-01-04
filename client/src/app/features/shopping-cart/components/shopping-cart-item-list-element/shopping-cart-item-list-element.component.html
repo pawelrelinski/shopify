@@ -11,9 +11,9 @@
     <div>
       <div class="flex justify-between text-base font-medium text-gray-900">
         <h3>
-          <a href="#"> {{ item.name }} </a>
+          <a [routerLink]="['/products', item.category, item.id]"> {{ item.name | truncate:20 }} </a>
         </h3>
-        <p class="ml-4">${{ item.price }}</p>
+        <p class='ml-4'>{{ item.price }} PLN</p>
       </div>
       <p class="mt-1 text-sm text-gray-500">{{ item.refNumber }} id: {{ item.id }}</p>
     </div>

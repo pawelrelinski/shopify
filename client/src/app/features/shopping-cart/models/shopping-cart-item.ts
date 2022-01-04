@@ -3,5 +3,6 @@ export interface ShoppingCartItem {
   name: string;
   price: number;
   quantity: number;
-  refNumber: string;
+  category: string;
+  refNumber?: string;
 }
