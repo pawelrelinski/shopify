@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AbstractControl,
@@ -6,10 +6,8 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
-import { ProductFormMode } from '@features/product/models';
 
 interface ErrorResponse {
   ok: boolean;
@@ -21,18 +19,8 @@ interface ErrorResponse {
   selector: 'shopify-product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ProductFormComponent),
-      multi: true,
-    },
-  ],
 })
 export class ProductFormComponent implements OnInit {
-  @Input()
-  public formMode!: ProductFormMode;
-
   public form!: FormGroup;
   public moreShippingMethodsOptionsIsShow = false;
   public readonly categories: Array<string> = [
@@ -57,6 +45,7 @@ export class ProductFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.setControlsForForm();
+    console.log(this.getGeneral());
   }
 
   public onSubmit(): void {
@@ -84,6 +73,22 @@ export class ProductFormComponent implements OnInit {
     this.moreShippingMethodsOptionsIsShow = !this.moreShippingMethodsOptionsIsShow;
   }
 
+  public getGeneral(): AbstractControl | null {
+    return this.form.get('general');
+  }
+
+  public getInventory(): AbstractControl | null {
+    return this.form.get('inventory');
+  }
+
+  public getShipping(): AbstractControl | null {
+    return this.form.get('shipping');
+  }
+
+  public getVariations(): AbstractControl | null {
+    return this.form.get('variations');
+  }
+
   private setControlsForForm(): void {
     this.form = this.fb.group({
       general: this.fb.group({
@@ -98,7 +103,7 @@ export class ProductFormComponent implements OnInit {
           Validators.max(1_000_000),
         ]),
         salePrice: this.fb.control(0.0, [Validators.min(0.01), Validators.max(1_000_000)]),
-        description: this.fb.control('', [Validators.required, Validators.maxLength(3)]),
+        description: this.fb.control('', [Validators.required, Validators.minLength(5)]),
       }),
       inventory: this.fb.group({
         stockQuantity: this.fb.control(0, [
@@ -138,10 +143,15 @@ export class ProductFormComponent implements OnInit {
     this.getSpecification().removeAt(index);
   }
 
+  public resetForm(): void {
+    this.form.reset();
+  }
+
   private static createProductObjectToSend(
     general: AbstractControl,
     inventory: AbstractControl,
-    variations: AbstractControl
+    variations: AbstractControl,
+    specification: AbstractControl
   ) {
     return {
       name: general.get('name')?.value,
@@ -149,7 +159,7 @@ export class ProductFormComponent implements OnInit {
       price: general.get('regularPrice')?.value,
       amount: inventory.get('stockQuantity')?.value,
       category: variations.get('category')?.value,
-      color: variations.get('color')?.value,
+      properties: specification.get('color')?.value,
     };
   }
 

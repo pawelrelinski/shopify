@@ -18,6 +18,21 @@
               class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
             />
+            <div
+              *ngIf="getGeneral()?.get('name')?.invalid && (getGeneral()?.get('name')?.dirty || getGeneral()?.get('name')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getGeneral()?.get('name')?.errors?.required" class='ml-1 text-xs'>Please enter name!</p>
+              <p *ngIf="getGeneral()?.get('name')?.errors?.minlength" class='ml-1 text-xs'>
+                Name is too short!
+                (min: {{ getGeneral()?.get('name')?.errors?.minlength?.requiredLength }},
+                actual: {{ getGeneral()?.get('name')?.errors?.minlength?.actualLength }})
+              </p>
+              <p *ngIf="getGeneral()?.get('name')?.errors?.maxlength" class='ml-1 text-xs'>
+                Name is too long!
+                (max: {{ getGeneral()?.get('name')?.errors?.maxlength?.requiredLength }},
+                actual: {{ getGeneral()?.get('name')?.errors?.maxlength?.actualLength }})
+              </p>
+            </div>
           </dd>
         </div>
         <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -32,6 +47,22 @@
               class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
             />
+            <div
+              *ngIf="getGeneral()?.get('regularPrice')?.invalid && (getGeneral()?.get('regularPrice')?.dirty || getGeneral()?.get('regularPrice')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.required" class='ml-1 text-xs'>Please enter regular
+                price!</p>
+              <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.min" class='ml-1 text-xs'>
+                Price is too low!
+                (min: {{ getGeneral()?.get('regularPrice')?.errors?.min?.min }},
+                actual: {{ getGeneral()?.get('regularPrice')?.errors?.min?.actual }})
+              </p>
+              <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.max" class='ml-1 text-xs'>
+                Price is too high!
+                (max: {{ getGeneral()?.get('regularPrice')?.errors?.max?.max }},
+                actual: {{ getGeneral()?.get('regularPrice')?.errors?.max?.actual }})
+              </p>
+            </div>
           </dd>
         </div>
         <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -43,6 +74,20 @@
               type='number'
               class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
+            <div
+              *ngIf="getGeneral()?.get('salePrice')?.invalid && (getGeneral()?.get('salePrice')?.dirty || getGeneral()?.get('salePrice')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getGeneral()?.get('salePrice')?.errors?.min" class='ml-1 text-xs'>
+                Price is too low!
+                (min: {{ getGeneral()?.get('salePrice')?.errors?.min?.min }},
+                actual: {{ getGeneral()?.get('salePrice')?.errors?.min?.actual }})
+              </p>
+              <p *ngIf="getGeneral()?.get('salePrice')?.errors?.max" class='ml-1 text-xs'>
+                Price is too high!
+                (max: {{ getGeneral()?.get('salePrice')?.errors?.max?.max }},
+                actual: {{ getGeneral()?.get('salePrice')?.errors?.max?.actual }})
+              </p>
+            </div>
           </dd>
         </div>
         <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -51,6 +96,17 @@
           </dt>
           <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <textarea formControlName='description' class='w-auto' rows='10' required></textarea>
+            <div
+              *ngIf="getGeneral()?.get('description')?.invalid && (getGeneral()?.get('description')?.dirty || getGeneral()?.get('description')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getGeneral()?.get('description')?.errors?.required" class='ml-1 text-xs'>Please enter
+                description!</p>
+              <p *ngIf="getGeneral()?.get('description')?.errors?.minlength" class='ml-1 text-xs'>
+                Description is too short!
+                (min: {{ getGeneral()?.get('description')?.errors?.minlength?.requiredLength }},
+                actual: {{ getGeneral()?.get('description')?.errors?.minlength?.actualLength }})
+              </p>
+            </div>
           </dd>
         </div>
       </dl>
@@ -75,6 +131,22 @@
               class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
             >
+            <div
+              *ngIf="getInventory()?.get('stockQuantity')?.invalid && (getInventory()?.get('stockQuantity')?.dirty || getInventory()?.get('stockQuantity')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getInventory()?.get('stockQuantity')?.errors?.required" class='ml-1 text-xs'>Please enter stock
+                quantity!</p>
+              <p *ngIf="getInventory()?.get('stockQuantity')?.errors?.min" class='ml-1 text-xs'>
+                Stock quantity is too low!
+                (min: {{ getInventory()?.get('stockQuantity')?.errors?.min?.min }},
+                actual: {{ getInventory()?.get('stockQuantity')?.errors?.min?.actual }})
+              </p>
+              <p *ngIf="getInventory()?.get('stockQuantity')?.errors?.max" class='ml-1 text-xs'>
+                Stock quantity is too high!
+                (max: {{ getInventory()?.get('stockQuantity')?.errors?.max?.max }},
+                actual: {{ getInventory()?.get('stockQuantity')?.errors?.max?.actual }})
+              </p>
+            </div>
           </dd>
         </div>
         <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -106,6 +178,16 @@
               type='number'
               class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
+            <div
+              *ngIf="getShipping()?.get('weight')?.invalid && (getShipping()?.get('weight')?.dirty || getShipping()?.get('weight')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getShipping()?.get('weight')?.errors?.required" class='ml-1 text-xs'>Please enter weight!</p>
+              <p *ngIf="getShipping()?.get('weight')?.errors?.min" class='ml-1 text-xs'>
+                Weight is too low!
+                (min: {{ getShipping()?.get('weight')?.errors?.min?.min }},
+                actual: {{ getShipping()?.get('weight')?.errors?.min?.actual }})
+              </p>
+            </div>
           </dd>
         </div>
         <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -176,6 +258,12 @@
                 </div>
               </div>
             </div>
+            <div
+              *ngIf="getShipping()?.get('shippingMethods')?.invalid && (getShipping()?.get('shippingMethods')?.dirty || getShipping()?.get('shippingMethods')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getShipping()?.get('shippingMethods')?.errors?.required" class='ml-1 text-xs'>Please enter
+                shipping methods!</p>
+            </div>
           </dd>
         </div>
       </dl>
@@ -203,6 +291,12 @@
                 {{ category | firstLetterTitleCase }}
               </option>
             </select>
+            <div
+              *ngIf="getVariations()?.get('category')?.invalid && (getVariations()?.get('category')?.dirty || getVariations()?.get('category')?.touched)"
+              class='flex items-center mt-1 text-red-700'>
+              <p *ngIf="getVariations()?.get('category')?.errors?.required" class='ml-1 text-xs'>Please enter
+                category!</p>
+            </div>
           </dd>
         </div>
       </dl>
@@ -226,27 +320,38 @@
               [formGroupName]='index'
               class='flex flex-row justify-between sm:col-span-2 w-full'
             >
-              <input
-                formControlName='key'
-                placeholder='Property name'
-                type='text'
-                class='bg-transparent rounded border-gray-300 border-2 properties-input-width'
-                required
-              >
-              <input
-                formControlName='value'
-                placeholder='Property value'
-                type='text'
-                class='bg-transparent rounded border-gray-300 border-2 properties-input-width property-value-input'
-                required
-              >
-              <div (click)='removeSpecification(index)' class='flex items-center hover:pointer'>
+              <div class='properties-input-width'>
+                <input
+                  formControlName='key'
+                  placeholder='Property name'
+                  type='text'
+                  class='bg-transparent rounded border-gray-300 border-2 w-full property-value-input'
+                  required
+                  #specificationInputKey
+                >
+                <p *ngIf="specificationInputKey.value === ''" class='ml-1 text-xs mt-1 text-red-700'>
+                  Please enter property name!
+                </p>
+              </div>
+              <div class='properties-input-width'>
+                <input
+                  formControlName='value'
+                  placeholder='Property value'
+                  type='text'
+                  class='bg-transparent rounded border-gray-300 border-2 w-full property-value-input'
+                  required
+                  #specificationInputValue
+                >
+                <p *ngIf="specificationInputValue.value === ''" class='ml-1 text-xs mt-1 text-red-700'>
+                  Please enter property value!
+                </p>
+              </div>
+              <div (click)='removeSpecification(index)' class='remove-spec-btn flex items-center'>
                 <svg xmlns='http://www.w3.org/2000/svg' class='h-8 w-8' fill='none' viewBox='0 0 24 24'
                      stroke='rgb(239 68 68)'>
                   <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
                 </svg>
               </div>
-              <br>
             </div>
             <button
               (click)='addSpecification()'
@@ -276,12 +381,14 @@
       class='flex flex-row order-3 px-4 py-5 mr-auto flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto sm:px-6'
     >
       <button
-        class='flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 w-full sm:w-36 sm:flex-row hover:bg-green-700 transition delay-200'
+        [disabled]='form.invalid'
+        class='submit-btn flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 w-full sm:w-36 sm:flex-row hover:bg-green-700 transition delay-200'
         type='submit'
       >
         Add
       </button>
       <button
+        (click)='resetForm()'
         class='flex items-center justify-center ml-5 w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-green-700 bg-green-100 hover:bg-green-200 w-full sm:w-36 transition delay-200'
       >
         Reset

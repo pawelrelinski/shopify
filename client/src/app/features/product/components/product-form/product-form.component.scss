@@ -3,11 +3,23 @@
 }
 
 .properties-wrapper {
-  flex-direction: column !important;
-  row-gap: 20px !important;
+  @apply flex-col gap-y-5;
 }
 
 .property-value-input {
-  margin-right: 0;
-  margin-left: auto;
+  @apply ml-auto mr-0;
+}
+
+.submit-btn:disabled {
+  @apply text-gray-700 bg-gray-300;
+
+  &:hover {
+    @apply cursor-not-allowed;
+  }
+}
+
+.remove-spec-btn {
+  &:hover {
+    @apply cursor-pointer;
+  }
 }
