@@ -4,7 +4,13 @@ import { take } from 'rxjs/operators';
 import { ProductResponse } from '@features/product/models';
 import { Response } from '@core/interfaces';
 import { ProductService } from '@features/product/services';
-import { AttributesOfProduct, SortOptions } from '@features/product/components';
+import {
+  AttributesOfProduct,
+  ProductRemoveDialogComponent,
+  SortOptions,
+} from '@features/product/components';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductResponseConverter } from '@core/utils';
 
 @Component({
   selector: 'shopify-product-table',
@@ -22,7 +28,7 @@ export class ProductTableComponent implements OnInit {
     method: 'asc',
   };
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.setAllProducts();
@@ -46,17 +52,28 @@ export class ProductTableComponent implements OnInit {
     return this.currentPage > 1 ? value + (this.currentPage - 1) * 10 : value;
   }
 
+  public deleteProduct(id: number): void {
+    const dialogRef = this.dialog.open(ProductRemoveDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'delete') {
+        this.productService.delete(id).subscribe((res: { status: number; title: string }) => {
+          if (res.status === 204) {
+            this.setAllProducts();
+            this.setProductsCount();
+          }
+        });
+      }
+    });
+  }
+
   private setAllProducts(sortOptions: SortOptions = this.defaultSortOptions): void {
     this.productService
       .getAllBy(this.getQueryMap(sortOptions))
       .pipe(take(1))
       .subscribe((products: Response<Array<ProductResponse>>) => {
-        this.products = products.data.map(this.getProductsAttributes);
+        this.products = products.data.map(ProductResponseConverter.toAttributesOfProduct);
       });
-  }
-
-  private getProductsAttributes(product: ProductResponse): AttributesOfProduct {
-    return { id: product.id, ...product.attributes } as AttributesOfProduct;
   }
 
   private setProductsCount(): void {

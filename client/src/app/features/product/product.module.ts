@@ -5,25 +5,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {
+  ProductAvailableWidgetComponent,
+  ProductFormComponent,
   ProductListComponent,
   ProductListElementComponent,
+  ProductListHeaderComponent,
+  ProductListPaginationComponent,
+  ProductOverviewComponent,
+  ProductOverviewHeaderComponent,
+  ProductOverviewSpecificationComponent,
+  ProductQuantityCounterComponent,
+  ProductRemoveDialogComponent,
+  ProductTableActionsComponent,
   ProductTableComponent,
+  ProductTableRowComponent,
 } from '@features/product/components';
-import { ProductTableRowComponent } from '@features/product/components';
-import { ProductFormComponent } from '@features/product/components';
-import { ProductAvailableWidgetComponent } from '@features/product/components';
-import { ProductTableActionsComponent } from '@features/product/components';
 import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 import { ShopifyButtonsModule } from '@shared/shopify-buttons/shopify-buttons.module';
 import { PipesModule } from '@core/pipes/pipes.module';
-import { ProductListPaginationComponent } from '@features/product/components';
-import { ProductListHeaderComponent } from '@features/product/components';
-import { ProductOverviewComponent } from '@features/product/components';
-import { ProductOverviewHeaderComponent } from '@features/product/components';
 import { ProductOverviewFeaturesComponent } from './components/product-overview-features/product-overview-features.component';
-import { ProductOverviewSpecificationComponent } from '@features/product/components';
-import { ProductQuantityCounterComponent } from '@features/product/components';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ProductQuantityCounterComponent } from '@features/product/components';
     ProductOverviewFeaturesComponent,
     ProductOverviewSpecificationComponent,
     ProductQuantityCounterComponent,
+    ProductRemoveDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,7 @@ import { ProductQuantityCounterComponent } from '@features/product/components';
     ShopifyPaginationModule,
     ShopifyButtonsModule,
     PipesModule,
+    MatDialogModule,
   ],
   exports: [
     ProductTableComponent,

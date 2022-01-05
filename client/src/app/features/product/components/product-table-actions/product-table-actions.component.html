@@ -27,48 +27,104 @@
     </div>
 
     <div
-      *ngIf="isOpen"
-      class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-      role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="menu-button"
-      tabindex="-1"
+      *ngIf='isOpen'
+      class='origin-top-right absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
+      role='menu'
+      aria-orientation='vertical'
+      aria-labelledby='menu-button'
+      tabindex='-1'
     >
-      <div class="py-1" role="none">
+      <div class='py-1' role='none'>
         <button
           (click)="changeSortBy('price-asc')"
-          class="text-gray-500 block px-4 py-2 text-sm"
-          role="menuitem"
-          tabindex="-1"
+          class='flex flex-row justify-between w-full gap-x-0.5 px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          role='menuitem'
+          tabindex='-1'
         >
-          Price: Low to High
+          <span class='font-bold'>Price:</span>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12'
+            />
+          </svg>
         </button>
 
         <button
           (click)="changeSortBy('price-desc')"
-          class="text-gray-500 block px-4 py-2 text-sm"
-          role="menuitem"
-          tabindex="-1"
+          class='flex flex-row justify-between w-full gap-x-0.5 px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          role='menuitem'
+          tabindex='-1'
         >
-          Price: High to Low
+          <span class='font-bold'>Price:</span>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4'
+            />
+          </svg>
         </button>
 
         <button
           (click)="changeSortBy('amount-asc')"
-          class="text-gray-500 block px-4 py-2 text-sm"
-          role="menuitem"
-          tabindex="-1"
+          class='flex flex-row justify-between w-full px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          role='menuitem'
+          tabindex='-1'
         >
-          Amount: Low to High
+          <span class='font-bold'>Amount:</span>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12'
+            />
+          </svg>
         </button>
 
         <button
           (click)="changeSortBy('amount-desc')"
-          class="text-gray-500 block px-4 py-2 text-sm"
-          role="menuitem"
-          tabindex="-1"
+          class='flex flex-row justify-between w-full px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          role='menuitem'
+          tabindex='-1'
         >
-          Amount: High to Low
+          <span class='font-bold'>Amount:</span>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4'
+            />
+          </svg>
         </button>
       </div>
     </div>

@@ -19,18 +19,24 @@
               required
             />
             <div
-              *ngIf="getGeneral()?.get('name')?.invalid && (getGeneral()?.get('name')?.dirty || getGeneral()?.get('name')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getGeneral()?.get('name')?.errors?.required" class='ml-1 text-xs'>Please enter name!</p>
+              *ngIf="
+                getGeneral()?.get('name')?.invalid &&
+                (getGeneral()?.get('name')?.dirty || getGeneral()?.get('name')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="getGeneral()?.get('name')?.errors?.required" class='ml-1 text-xs'>
+                Please enter name!
+              </p>
               <p *ngIf="getGeneral()?.get('name')?.errors?.minlength" class='ml-1 text-xs'>
-                Name is too short!
-                (min: {{ getGeneral()?.get('name')?.errors?.minlength?.requiredLength }},
-                actual: {{ getGeneral()?.get('name')?.errors?.minlength?.actualLength }})
+                Name is too short! (min:
+                {{ getGeneral()?.get('name')?.errors?.minlength?.requiredLength }}, actual:
+                {{ getGeneral()?.get('name')?.errors?.minlength?.actualLength }})
               </p>
               <p *ngIf="getGeneral()?.get('name')?.errors?.maxlength" class='ml-1 text-xs'>
-                Name is too long!
-                (max: {{ getGeneral()?.get('name')?.errors?.maxlength?.requiredLength }},
-                actual: {{ getGeneral()?.get('name')?.errors?.maxlength?.actualLength }})
+                Name is too long! (max:
+                {{ getGeneral()?.get('name')?.errors?.maxlength?.requiredLength }}, actual:
+                {{ getGeneral()?.get('name')?.errors?.maxlength?.actualLength }})
               </p>
             </div>
           </dd>
@@ -48,18 +54,22 @@
               required
             />
             <div
-              *ngIf="getGeneral()?.get('regularPrice')?.invalid && (getGeneral()?.get('regularPrice')?.dirty || getGeneral()?.get('regularPrice')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.required" class='ml-1 text-xs'>Please enter regular
-                price!</p>
+              *ngIf="
+                getGeneral()?.get('regularPrice')?.invalid &&
+                (getGeneral()?.get('regularPrice')?.dirty ||
+                  getGeneral()?.get('regularPrice')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.required" class='ml-1 text-xs'>
+                Please enter regular price!
+              </p>
               <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.min" class='ml-1 text-xs'>
-                Price is too low!
-                (min: {{ getGeneral()?.get('regularPrice')?.errors?.min?.min }},
+                Price is too low! (min: {{ getGeneral()?.get('regularPrice')?.errors?.min?.min }},
                 actual: {{ getGeneral()?.get('regularPrice')?.errors?.min?.actual }})
               </p>
               <p *ngIf="getGeneral()?.get('regularPrice')?.errors?.max" class='ml-1 text-xs'>
-                Price is too high!
-                (max: {{ getGeneral()?.get('regularPrice')?.errors?.max?.max }},
+                Price is too high! (max: {{ getGeneral()?.get('regularPrice')?.errors?.max?.max }},
                 actual: {{ getGeneral()?.get('regularPrice')?.errors?.max?.actual }})
               </p>
             </div>
@@ -75,16 +85,18 @@
               class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
             <div
-              *ngIf="getGeneral()?.get('salePrice')?.invalid && (getGeneral()?.get('salePrice')?.dirty || getGeneral()?.get('salePrice')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
+              *ngIf="
+                getGeneral()?.get('salePrice')?.invalid &&
+                (getGeneral()?.get('salePrice')?.dirty || getGeneral()?.get('salePrice')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
               <p *ngIf="getGeneral()?.get('salePrice')?.errors?.min" class='ml-1 text-xs'>
-                Price is too low!
-                (min: {{ getGeneral()?.get('salePrice')?.errors?.min?.min }},
+                Price is too low! (min: {{ getGeneral()?.get('salePrice')?.errors?.min?.min }},
                 actual: {{ getGeneral()?.get('salePrice')?.errors?.min?.actual }})
               </p>
               <p *ngIf="getGeneral()?.get('salePrice')?.errors?.max" class='ml-1 text-xs'>
-                Price is too high!
-                (max: {{ getGeneral()?.get('salePrice')?.errors?.max?.max }},
+                Price is too high! (max: {{ getGeneral()?.get('salePrice')?.errors?.max?.max }},
                 actual: {{ getGeneral()?.get('salePrice')?.errors?.max?.actual }})
               </p>
             </div>
@@ -97,14 +109,20 @@
           <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <textarea formControlName='description' class='w-auto' rows='10' required></textarea>
             <div
-              *ngIf="getGeneral()?.get('description')?.invalid && (getGeneral()?.get('description')?.dirty || getGeneral()?.get('description')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getGeneral()?.get('description')?.errors?.required" class='ml-1 text-xs'>Please enter
-                description!</p>
+              *ngIf="
+                getGeneral()?.get('description')?.invalid &&
+                (getGeneral()?.get('description')?.dirty ||
+                  getGeneral()?.get('description')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="getGeneral()?.get('description')?.errors?.required" class='ml-1 text-xs'>
+                Please enter description!
+              </p>
               <p *ngIf="getGeneral()?.get('description')?.errors?.minlength" class='ml-1 text-xs'>
-                Description is too short!
-                (min: {{ getGeneral()?.get('description')?.errors?.minlength?.requiredLength }},
-                actual: {{ getGeneral()?.get('description')?.errors?.minlength?.actualLength }})
+                Description is too short! (min:
+                {{ getGeneral()?.get('description')?.errors?.minlength?.requiredLength }}, actual:
+                {{ getGeneral()?.get('description')?.errors?.minlength?.actualLength }})
               </p>
             </div>
           </dd>
@@ -130,21 +148,30 @@
               type='number'
               class='bg-transparent rounded border-gray-300 border-2 w-full'
               required
-            >
+            />
             <div
-              *ngIf="getInventory()?.get('stockQuantity')?.invalid && (getInventory()?.get('stockQuantity')?.dirty || getInventory()?.get('stockQuantity')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getInventory()?.get('stockQuantity')?.errors?.required" class='ml-1 text-xs'>Please enter stock
-                quantity!</p>
+              *ngIf="
+                getInventory()?.get('stockQuantity')?.invalid &&
+                (getInventory()?.get('stockQuantity')?.dirty ||
+                  getInventory()?.get('stockQuantity')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p
+                *ngIf="getInventory()?.get('stockQuantity')?.errors?.required"
+                class='ml-1 text-xs'
+              >
+                Please enter stock quantity!
+              </p>
               <p *ngIf="getInventory()?.get('stockQuantity')?.errors?.min" class='ml-1 text-xs'>
-                Stock quantity is too low!
-                (min: {{ getInventory()?.get('stockQuantity')?.errors?.min?.min }},
-                actual: {{ getInventory()?.get('stockQuantity')?.errors?.min?.actual }})
+                Stock quantity is too low! (min:
+                {{ getInventory()?.get('stockQuantity')?.errors?.min?.min }}, actual:
+                {{ getInventory()?.get('stockQuantity')?.errors?.min?.actual }})
               </p>
               <p *ngIf="getInventory()?.get('stockQuantity')?.errors?.max" class='ml-1 text-xs'>
-                Stock quantity is too high!
-                (max: {{ getInventory()?.get('stockQuantity')?.errors?.max?.max }},
-                actual: {{ getInventory()?.get('stockQuantity')?.errors?.max?.actual }})
+                Stock quantity is too high! (max:
+                {{ getInventory()?.get('stockQuantity')?.errors?.max?.max }}, actual:
+                {{ getInventory()?.get('stockQuantity')?.errors?.max?.actual }})
               </p>
             </div>
           </dd>
@@ -157,7 +184,7 @@
               value='white'
               type='checkbox'
               class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-            >
+            />
           </dd>
         </div>
       </dl>
@@ -179,12 +206,17 @@
               class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
             <div
-              *ngIf="getShipping()?.get('weight')?.invalid && (getShipping()?.get('weight')?.dirty || getShipping()?.get('weight')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getShipping()?.get('weight')?.errors?.required" class='ml-1 text-xs'>Please enter weight!</p>
+              *ngIf="
+                getShipping()?.get('weight')?.invalid &&
+                (getShipping()?.get('weight')?.dirty || getShipping()?.get('weight')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="getShipping()?.get('weight')?.errors?.required" class='ml-1 text-xs'>
+                Please enter weight!
+              </p>
               <p *ngIf="getShipping()?.get('weight')?.errors?.min" class='ml-1 text-xs'>
-                Weight is too low!
-                (min: {{ getShipping()?.get('weight')?.errors?.min?.min }},
+                Weight is too low! (min: {{ getShipping()?.get('weight')?.errors?.min?.min }},
                 actual: {{ getShipping()?.get('weight')?.errors?.min?.actual }})
               </p>
             </div>
@@ -244,13 +276,16 @@
                 id='filter-section-mobile-0'
               >
                 <div class='space-y-6'>
-                  <div *ngFor='let shippingMethod of shippingMethods; let index = index' class='flex items-center'>
+                  <div
+                    *ngFor='let shippingMethod of shippingMethods; let index = index'
+                    class='flex items-center'
+                  >
                     <input
                       [value]='shippingMethod.value'
                       (change)='onCheckboxChange($event)'
                       type='checkbox'
                       class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-                    >
+                    />
                     <label class='ml-3 min-w-0 flex-1 text-gray-500'>
                       {{ shippingMethod.name }}
                     </label>
@@ -259,10 +294,19 @@
               </div>
             </div>
             <div
-              *ngIf="getShipping()?.get('shippingMethods')?.invalid && (getShipping()?.get('shippingMethods')?.dirty || getShipping()?.get('shippingMethods')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getShipping()?.get('shippingMethods')?.errors?.required" class='ml-1 text-xs'>Please enter
-                shipping methods!</p>
+              *ngIf="
+                getShipping()?.get('shippingMethods')?.invalid &&
+                (getShipping()?.get('shippingMethods')?.dirty ||
+                  getShipping()?.get('shippingMethods')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p
+                *ngIf="getShipping()?.get('shippingMethods')?.errors?.required"
+                class='ml-1 text-xs'
+              >
+                Please enter shipping methods!
+              </p>
             </div>
           </dd>
         </div>
@@ -292,10 +336,16 @@
               </option>
             </select>
             <div
-              *ngIf="getVariations()?.get('category')?.invalid && (getVariations()?.get('category')?.dirty || getVariations()?.get('category')?.touched)"
-              class='flex items-center mt-1 text-red-700'>
-              <p *ngIf="getVariations()?.get('category')?.errors?.required" class='ml-1 text-xs'>Please enter
-                category!</p>
+              *ngIf="
+                getVariations()?.get('category')?.invalid &&
+                (getVariations()?.get('category')?.dirty ||
+                  getVariations()?.get('category')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="getVariations()?.get('category')?.errors?.required" class='ml-1 text-xs'>
+                Please enter category!
+              </p>
             </div>
           </dd>
         </div>
@@ -328,8 +378,11 @@
                   class='bg-transparent rounded border-gray-300 border-2 w-full property-value-input'
                   required
                   #specificationInputKey
+                />
+                <p
+                  *ngIf="specificationInputKey.value === ''"
+                  class='ml-1 text-xs mt-1 text-red-700'
                 >
-                <p *ngIf="specificationInputKey.value === ''" class='ml-1 text-xs mt-1 text-red-700'>
                   Please enter property name!
                 </p>
               </div>
@@ -341,15 +394,28 @@
                   class='bg-transparent rounded border-gray-300 border-2 w-full property-value-input'
                   required
                   #specificationInputValue
+                />
+                <p
+                  *ngIf="specificationInputValue.value === ''"
+                  class='ml-1 text-xs mt-1 text-red-700'
                 >
-                <p *ngIf="specificationInputValue.value === ''" class='ml-1 text-xs mt-1 text-red-700'>
                   Please enter property value!
                 </p>
               </div>
               <div (click)='removeSpecification(index)' class='remove-spec-btn flex items-center'>
-                <svg xmlns='http://www.w3.org/2000/svg' class='h-8 w-8' fill='none' viewBox='0 0 24 24'
-                     stroke='rgb(239 68 68)'>
-                  <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  class='h-8 w-8'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='rgb(239 68 68)'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M6 18L18 6M6 6l12 12'
+                  />
                 </svg>
               </div>
             </div>

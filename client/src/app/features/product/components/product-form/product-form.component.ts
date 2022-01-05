@@ -47,15 +47,11 @@ export class ProductFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.setControlsForForm();
-    console.log(this.getGeneral());
   }
 
   public onSubmit(): void {
-    console.log(this.createProductObjectToSend());
     this.productService.create(this.createProductObjectToSend()).subscribe((res) => {
-      if (res.status === 201) {
-        this.router.navigate(['/admin/products-manage']);
-      }
+      this.handleSuccessResponse(res.status);
     });
   }
 
@@ -168,6 +164,7 @@ export class ProductFormComponent implements OnInit {
   private handleSuccessResponse(code: number): void {
     const codes: Map<number, () => void> = new Map<number, () => void>()
       .set(200, () => this.navigateToProductsManagePage())
+      .set(201, () => this.navigateToProductsManagePage())
       .set(204, () => this.navigateToProductsManagePage());
 
     const action: () => void = codes.get(code) as () => void;

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '@features/product/services';
 import { AttributesOfProduct, SortOptions } from '@features/product/components';
-import { Response } from '@core/interfaces';
-import { ProductResponse } from '@features/product/models';
+import { switchMap } from 'rxjs';
+import { ProductResponseConverter } from '@core/utils';
 
 @Component({
   selector: 'shopify-product-list',
@@ -26,15 +26,16 @@ export class ProductListComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) {}
 
   public ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.categoryName = params.category;
-      this.productService
-        .getAllBy(this.getQueryMap(this.defaultSortOptions))
-        .subscribe((products: Response<Array<ProductResponse>>) => {
-          this.products = products.data.map(this.getProductsAttributes);
-          console.log(this.products);
-        });
-    });
+    this.activatedRoute.params
+      .pipe(
+        switchMap((params: Params) => {
+          this.categoryName = params.category;
+          return this.productService.getAllBy(this.getQueryMap(this.defaultSortOptions));
+        })
+      )
+      .subscribe((products) => {
+        this.products = products.data.map(ProductResponseConverter.toAttributesOfProduct);
+      });
   }
 
   private getQueryMap(sortOptions: SortOptions): Map<string, string> {
@@ -46,9 +47,5 @@ export class ProductListComponent implements OnInit {
       .set('category', this.categoryName);
 
     return this.queryParams;
-  }
-
-  private getProductsAttributes(product: ProductResponse): AttributesOfProduct {
-    return { id: product.id, ...product.attributes } as AttributesOfProduct;
   }
 }

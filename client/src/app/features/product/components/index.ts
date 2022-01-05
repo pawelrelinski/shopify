@@ -11,3 +11,4 @@ export * from './product-overview/product-overview.component';
 export * from './product-overview-header/product-overview-header.component';
 export * from './product-overview-specification/product-overview-specification.component';
 export * from './product-quantity-counter/product-quantity-counter.component';
+export * from './product-remove-dialog/product-remove-dialog.component';

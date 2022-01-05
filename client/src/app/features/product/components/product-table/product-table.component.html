@@ -50,6 +50,7 @@
               *ngFor="let product of products; trackBy: trackByProductId; let i = index"
               [product]="product"
               [index]="getIndexForTableRow(i)"
+              (onDelete)='deleteProduct($event)'
             >
             </shopify-product-table-row>
           </tbody>

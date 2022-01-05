@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 import { ProductResponse } from '@features/product/models';
 
@@ -30,6 +30,8 @@ export class ProductTableRowComponent {
     return this._index;
   }
 
+  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
+
   @HostBinding('style.backgroundColor') bgColor!: string;
   @HostBinding('style.cursor') cursor!: string;
 
@@ -37,6 +39,7 @@ export class ProductTableRowComponent {
   private _index!: number;
 
   public date = new Date();
+  public dropdownMenuIsShow = false;
 
   @HostListener('mouseover')
   public onMouseOver(): void {
@@ -60,5 +63,13 @@ export class ProductTableRowComponent {
 
   public isDanger(): boolean {
     return this.product.amount <= 3;
+  }
+
+  public toggleDropdownMenu(): void {
+    this.dropdownMenuIsShow = !this.dropdownMenuIsShow;
+  }
+
+  public delete(): void {
+    this.onDelete.emit(this.product.id);
   }
 }
