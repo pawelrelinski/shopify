@@ -7,43 +7,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   ProductAvailableWidgetComponent,
   ProductFormComponent,
-  ProductListComponent,
-  ProductListElementComponent,
-  ProductListHeaderComponent,
-  ProductListPaginationComponent,
-  ProductOverviewComponent,
-  ProductOverviewHeaderComponent,
-  ProductOverviewSpecificationComponent,
   ProductQuantityCounterComponent,
-  ProductRemoveDialogComponent,
-  ProductTableActionsComponent,
-  ProductTableComponent,
-  ProductTableRowComponent,
 } from '@features/product/components';
 import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 import { ShopifyButtonsModule } from '@shared/shopify-buttons/shopify-buttons.module';
 import { PipesModule } from '@core/pipes/pipes.module';
-import { ProductOverviewFeaturesComponent } from './components/product-overview-features/product-overview-features.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductOverviewModule } from '@features/product/components/product-overview/product-overview.module';
+import { ProductListModule } from '@features/product/components/product-list/product-list.module';
+import { ProductTableModule } from '@features/product/components/product-table/product-table.module';
 
 @NgModule({
   declarations: [
-    ProductTableComponent,
-    ProductTableRowComponent,
     ProductFormComponent,
-    ProductTableActionsComponent,
     ProductAvailableWidgetComponent,
-    ProductListComponent,
-    ProductListElementComponent,
-    ProductListPaginationComponent,
-    ProductListHeaderComponent,
-    ProductOverviewComponent,
-    ProductOverviewHeaderComponent,
-    ProductOverviewFeaturesComponent,
-    ProductOverviewSpecificationComponent,
     ProductQuantityCounterComponent,
-    ProductRemoveDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -55,14 +34,17 @@ import { MatDialogModule } from '@angular/material/dialog';
     ShopifyButtonsModule,
     PipesModule,
     MatDialogModule,
+    ProductOverviewModule,
+    ProductListModule,
+    ProductTableModule,
   ],
   exports: [
-    ProductTableComponent,
     ProductFormComponent,
-    ProductTableActionsComponent,
     ProductAvailableWidgetComponent,
-    ProductListComponent,
-    ProductOverviewComponent,
+    ProductOverviewModule,
+    ProductQuantityCounterComponent,
+    ProductListModule,
+    ProductTableModule,
   ],
 })
 export class ProductModule {}

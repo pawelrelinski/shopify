@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '@features/product/services';
-import { AttributesOfProduct, SortOptions } from '@features/product/components';
 import { switchMap } from 'rxjs';
 import { ProductResponseConverter } from '@core/utils';
+import { AttributesOfProduct, SortOptions } from '@features/product/models';
 
 @Component({
   selector: 'shopify-product-list',

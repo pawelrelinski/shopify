@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { ProductResponse } from '@features/product/models';
+import { AttributesOfProduct, ProductResponse, SortOptions } from '@features/product/models';
 import { Response } from '@core/interfaces';
 import { ProductService } from '@features/product/services';
-import {
-  AttributesOfProduct,
-  ProductRemoveDialogComponent,
-  SortOptions,
-} from '@features/product/components';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductResponseConverter } from '@core/utils';
+import { ProductTableRemoveDialogComponent } from '@features/product/components/product-table/product-table-remove-dialog/product-table-remove-dialog.component';
 
 @Component({
   selector: 'shopify-product-table',
@@ -53,7 +49,7 @@ export class ProductTableComponent implements OnInit {
   }
 
   public deleteProduct(id: number): void {
-    const dialogRef = this.dialog.open(ProductRemoveDialogComponent);
+    const dialogRef = this.dialog.open(ProductTableRemoveDialogComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'delete') {

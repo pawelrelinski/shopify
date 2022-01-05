@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AttributesOfProduct } from '@features/product/components';
+import { AttributesOfProduct } from '@features/product/models';
 
 @Component({
   selector: 'shopify-product-list-element[product]',

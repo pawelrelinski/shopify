@@ -1,10 +1,5 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-
-import { ProductResponse } from '@features/product/models';
-
-export type AttributesOfProduct = ProductResponse['attributes'] & {
-  id: number;
-};
+import { AttributesOfProduct } from '@features/product/models';
 
 @Component({
   selector: 'shopify-product-table-row',

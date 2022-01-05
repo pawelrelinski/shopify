@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-
-export interface SortOptions {
-  by: string;
-  method: string;
-}
+import { SortOptions } from '@features/product/models';
 
 @Component({
   selector: 'shopify-product-table-actions',
