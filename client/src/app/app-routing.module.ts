@@ -38,6 +38,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./pages/customer/checkout-page/checkout-page.module').then(
+        (m) => m.CheckoutPageModule
+      ),
+  },
+  {
     path: 'articles',
     loadChildren: () =>
       import('./pages/customer/articles-page/articles-page.module').then(

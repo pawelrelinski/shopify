@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import {
+  LayoutAdminNavigationComponent,
   LayoutBannerComponent,
   LayoutMobileMenuComponent,
   LayoutMoreFlyoutMenuComponent,
   LayoutProductsFlyoutMenuComponent,
   LayoutSolutionsFlyoutMenuComponent,
   LayoutStructureComponent,
+  LayoutUserNavigationComponent,
 } from '@features/layout/components';
 import { ShoppingCartModule } from '@features/shopping-cart/shopping-cart.module';
-import { LayoutUserNavigationComponent } from './components/layout-user-navigation/layout-user-navigation.component';
-import { LayoutAdminNavigationComponent } from './components/layout-admin-navigation/layout-admin-navigation.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,6 @@ import { LayoutAdminNavigationComponent } from './components/layout-admin-naviga
     LayoutAdminNavigationComponent,
   ],
   imports: [CommonModule, RouterModule, ShoppingCartModule],
-  exports: [LayoutStructureComponent],
+  exports: [LayoutStructureComponent, LayoutAdminNavigationComponent],
 })
 export class LayoutModule {}
