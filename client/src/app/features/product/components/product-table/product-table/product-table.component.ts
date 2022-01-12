@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { AttributesOfProduct, ProductResponse, SortOptions } from '@features/product/models';
+import {
+  AttributesOfProduct,
+  MatDialogCloseRemoveDialog,
+  ProductResponse,
+  SortOptions,
+} from '@features/product/models';
 import { Response } from '@core/interfaces';
 import { ProductService } from '@features/product/services';
 import { MatDialog } from '@angular/material/dialog';
@@ -51,8 +56,8 @@ export class ProductTableComponent implements OnInit {
   public deleteProduct(id: number): void {
     const dialogRef = this.dialog.open(ProductTableRemoveDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'delete') {
+    dialogRef.afterClosed().subscribe((result: MatDialogCloseRemoveDialog) => {
+      if (result === MatDialogCloseRemoveDialog.DELETE) {
         this.productService.delete(id).subscribe((res: { status: number; title: string }) => {
           if (res.status === 204) {
             this.setAllProducts();
@@ -69,6 +74,7 @@ export class ProductTableComponent implements OnInit {
       .pipe(take(1))
       .subscribe((products: Response<Array<ProductResponse>>) => {
         this.products = products.data.map(ProductResponseConverter.toAttributesOfProduct);
+        console.log(this.products);
       });
   }
 
