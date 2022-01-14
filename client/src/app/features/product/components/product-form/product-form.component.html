@@ -176,17 +176,6 @@
             </div>
           </dd>
         </div>
-        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-          <dt class='text-sm font-medium text-gray-500'>Allow backorders?</dt>
-          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-            <input
-              formControlName='allowBackorders'
-              value='white'
-              type='checkbox'
-              class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
-            />
-          </dd>
-        </div>
       </dl>
     </div>
 
@@ -197,27 +186,33 @@
     <div formGroupName='shipping' class='border-t border-gray-200'>
       <dl>
         <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-          <dt class='text-sm font-medium text-gray-500'>Weight (kg)</dt>
+          <dt class='text-sm font-medium text-gray-500'>Expected delivery time (days)</dt>
           <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
             <input
-              formControlName='weight'
-              placeholder='3.5'
+              formControlName='expectedDeliveryTime'
+              placeholder='1'
               type='number'
               class='bg-transparent rounded border-gray-300 border-2 w-full'
             />
             <div
               *ngIf="
-                getShipping()?.get('weight')?.invalid &&
-                (getShipping()?.get('weight')?.dirty || getShipping()?.get('weight')?.touched)
+                getShipping()?.get('expectedDeliveryTime')?.invalid &&
+                (getShipping()?.get('expectedDeliveryTime')?.dirty || getShipping()?.get('expectedDeliveryTime')?.touched)
               "
               class='flex items-center mt-1 text-red-700'
             >
-              <p *ngIf="getShipping()?.get('weight')?.errors?.required" class='ml-1 text-xs'>
-                Please enter weight!
+              <p *ngIf="getShipping()?.get('expectedDeliveryTime')?.errors?.required" class='ml-1 text-xs'>
+                Please enter expected delivery time!
               </p>
-              <p *ngIf="getShipping()?.get('weight')?.errors?.min" class='ml-1 text-xs'>
-                Weight is too low! (min: {{ getShipping()?.get('weight')?.errors?.min?.min }},
-                actual: {{ getShipping()?.get('weight')?.errors?.min?.actual }})
+              <p *ngIf="getShipping()?.get('expectedDeliveryTime')?.errors?.min" class='ml-1 text-xs'>
+                Expected delivery time is too low! (min:
+                {{ getShipping()?.get('expectedDeliveryTime')?.errors?.min?.min }}, actual:
+                {{ getShipping()?.get('expectedDeliveryTime')?.errors?.min?.actual }})
+              </p>
+              <p *ngIf="getShipping()?.get('expectedDeliveryTime')?.errors?.max" class='ml-1 text-xs'>
+                Expected delivery time is too long! (min:
+                {{ getShipping()?.get('expectedDeliveryTime')?.errors?.max?.max }}, actual:
+                {{ getShipping()?.get('expectedDeliveryTime')?.errors?.max?.actual }})
               </p>
             </div>
           </dd>
@@ -344,7 +339,7 @@
               class='flex items-center mt-1 text-red-700'
             >
               <p *ngIf="getVariations()?.get('category')?.errors?.required" class='ml-1 text-xs'>
-                Please enter category!
+                Please choose category!
               </p>
             </div>
           </dd>

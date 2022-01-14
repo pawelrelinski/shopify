@@ -25,6 +25,7 @@ export class Product {
     type: 'decimal',
     precision: 9,
     scale: 2,
+    default: 0,
   })
   promotionPrice: number;
 
@@ -47,9 +48,12 @@ export class Product {
   createdAt: string;
 
   @Column()
-  refNumber: string;
+  expectedDeliveryTime: number;
 
   @Column()
+  refNumber: string;
+
+  @Column('json')
   dataSheet: string;
 
   @Column({

@@ -55,19 +55,19 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  public onCheckboxChange(event: any) {
+  public onCheckboxChange(event: any): void {
     const checkArray: FormArray = this.form.get('shipping')?.get('shippingMethods') as FormArray;
 
     if (event.target.checked) {
       checkArray.push(new FormControl(event.target.value));
     } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item) => {
+      let index: number = 0;
+      checkArray.controls.forEach((item: AbstractControl) => {
         if (item.value == event.target.value) {
-          checkArray.removeAt(i);
+          checkArray.removeAt(index);
           return;
         }
-        i++;
+        index++;
       });
     }
   }
@@ -114,10 +114,13 @@ export class ProductFormComponent implements OnInit {
           Validators.min(0),
           Validators.max(1_000_000),
         ]),
-        allowBackorders: this.fb.control(false),
       }),
       shipping: this.fb.group({
-        weight: this.fb.control(0.0, [Validators.required, Validators.min(0.01)]),
+        expectedDeliveryTime: this.fb.control(0, [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(99),
+        ]),
         shippingMethods: this.fb.array([], [Validators.required]),
       }),
       variations: this.fb.group({

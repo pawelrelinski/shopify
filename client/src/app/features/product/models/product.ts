@@ -10,7 +10,7 @@ export interface Product {
   producer: string;
   createdAt: string;
   refNumber: string;
-  dataSheet: string;
+  dataSheet: object;
   views: number;
   isPublished: boolean;
 }
