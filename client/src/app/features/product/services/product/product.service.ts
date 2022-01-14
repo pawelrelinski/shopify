@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Response } from '@core/interfaces';
-import { ProductResponse } from '@features/product/models';
+import { Product, ProductGetAllByResponse } from '@features/product/models';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
-
-type ArrayOfProducts = Response<Array<ProductResponse>>;
-type ErrorResponse = {
-  msg: string;
-  code: number | null;
-};
 
 @Injectable({
   providedIn: 'root',
@@ -22,27 +15,28 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  public getAll(): Observable<ArrayOfProducts> {
+  public getAll(): Observable<Array<Product>> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<ArrayOfProducts>(url);
+    return this.http.get<Array<Product>>(url);
   }
 
-  public getAllBy(queryParams: Map<string, string>): Observable<ArrayOfProducts> {
+  public getAllBy(queryParams: Map<string, string>): Observable<ProductGetAllByResponse> {
     this.setDefaultUrlConfig();
+    this.segmentsUrl.push('findByFilter');
     for (const [key, value] of queryParams) {
       this.queryStringParameters.push(key, value);
     }
 
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
-    return this.http.get<ArrayOfProducts>(url);
+    return this.http.get<ProductGetAllByResponse>(url);
   }
 
-  public getById(id: number): Observable<Response<ProductResponse>> {
+  public getById(id: number): Observable<Product> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<Response<ProductResponse>>(url);
+    return this.http.get<Product>(url);
   }
 
   public create(product: any): Observable<{ status: number; title: string }> {
@@ -85,22 +79,5 @@ export class ProductService {
     this.urlBuilder = new UrlBuilder();
     this.queryStringParameters = new QueryStringParameters();
     this.segmentsUrl.push('products');
-  }
-
-  private getServerErrorMessage(error: HttpErrorResponse): string {
-    switch (error.status) {
-      case 404: {
-        return `Not Found: ${error.message}`;
-      }
-      case 403: {
-        return `Access Denied: ${error.message}`;
-      }
-      case 500: {
-        return `Internal Server Error: ${error.message}`;
-      }
-      default: {
-        return `Unknown Server Error: ${error.message}`;
-      }
-    }
   }
 }

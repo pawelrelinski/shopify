@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@features/product/services';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AttributesOfProduct, ProductResponse } from '@features/product/models';
+import { Product } from '@features/product/models';
 import { Store } from '@ngrx/store';
 import { ShoppingCartState } from '@features/shopping-cart/models';
 import { add } from '@features/shopping-cart/store/actions/shopping-cart-item.actions';
 import { ShoppingCartItemPropsAdd } from '@features/shopping-cart/models/shopping-cart-item-props-add';
 import { switchMap } from 'rxjs';
-import { Response } from '@core/interfaces';
-import { ProductResponseConverter } from '@core/utils';
 import { EmitItemData } from '@features/product/components/product-overview/product-overview-header/product-overview-header.component';
 
 @Component({
@@ -16,7 +14,7 @@ import { EmitItemData } from '@features/product/components/product-overview/prod
   templateUrl: './product-overview.component.html',
 })
 export class ProductOverviewComponent implements OnInit {
-  public product!: AttributesOfProduct;
+  public product!: Product;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -49,8 +47,8 @@ export class ProductOverviewComponent implements OnInit {
           return this.productService.getById(id);
         })
       )
-      .subscribe((product: Response<ProductResponse>) => {
-        this.product = ProductResponseConverter.toAttributesOfProduct(product.data);
+      .subscribe((product: Product) => {
+        this.product = product;
       });
   }
 }

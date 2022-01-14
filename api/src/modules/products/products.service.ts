@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
+import { ListAllProductsDto } from './dto/list-all-products.dto';
 
 @Injectable()
 export class ProductsService {
@@ -15,6 +16,21 @@ export class ProductsService {
     return this.productsRepository.find();
   }
 
+  public async findAllByFilter(
+    sortBy: ListAllProductsDto['sortBy'],
+    sortMethod: ListAllProductsDto['sortMethod'],
+    take: ListAllProductsDto['take'],
+    skip: ListAllProductsDto['skip'],
+  ): Promise<Product[]> {
+    return this.productsRepository.find({
+      order: {
+        [sortBy]: sortMethod,
+      },
+      skip,
+      take,
+    });
+  }
+
   public async findOne(id: string): Promise<Product> {
     return this.productsRepository.findOne(id);
   }
@@ -23,7 +39,7 @@ export class ProductsService {
     return this.productsRepository.save(product);
   }
 
-  public async remove(id: string): Promise<void> {
-    await this.productsRepository.delete(id);
+  public async remove(id: string): Promise<DeleteResult> {
+    return this.productsRepository.delete(id);
   }
 }

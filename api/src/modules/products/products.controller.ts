@@ -20,22 +20,42 @@ export class ProductsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async findAll(@Query() query: ListAllProductsDto): Promise<Product[]> {
-    return this.productsService.findAll();
+  public async findAll(): Promise<{ products: Product[] }> {
+    const products: Product[] = await this.productsService.findAll();
+    return {
+      products: products,
+    };
+  }
+
+  @Get('findByFilter')
+  @HttpCode(HttpStatus.OK)
+  public async findAllByFilter(
+    @Query('sortBy') sortBy: ListAllProductsDto['sortBy'],
+    @Query('sortMethod') sortMethod: ListAllProductsDto['sortMethod'],
+    @Query('limit') take: ListAllProductsDto['take'],
+    @Query('offset') skip: ListAllProductsDto['skip'],
+  ): Promise<{ products: Product[] }> {
+    const products: Product[] = await this.productsService.findAllByFilter(
+      sortBy,
+      sortMethod,
+      take,
+      skip,
+    );
+    return {
+      products: products,
+    };
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  public async findOne(@Param() params: FindOneParams): Promise<Product> {
+  public findOne(@Param() params: FindOneParams): Promise<Product> {
     const { id } = params;
     return this.productsService.findOne(id);
   }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  public async create(
-    @Body() createProductDto: CreateProductDto,
-  ): Promise<Product> {
+  public create(@Body() createProductDto: CreateProductDto): Promise<Product> {
     return this.productsService.create(createProductDto);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { AttributesOfProduct } from '@features/product/models';
+import { Product } from '@features/product/models';
 
 @Component({
   selector: 'shopify-product-table-row',
@@ -8,11 +8,11 @@ import { AttributesOfProduct } from '@features/product/models';
 })
 export class ProductTableRowComponent {
   @Input()
-  set product(value: AttributesOfProduct) {
+  set product(value: Product) {
     this._product = value;
   }
 
-  public get product(): AttributesOfProduct {
+  public get product(): Product {
     return this._product;
   }
 
@@ -30,7 +30,7 @@ export class ProductTableRowComponent {
   @HostBinding('style.backgroundColor') bgColor!: string;
   @HostBinding('style.cursor') cursor!: string;
 
-  private _product!: AttributesOfProduct;
+  private _product!: Product;
   private _index!: number;
 
   public date = new Date();
@@ -49,15 +49,15 @@ export class ProductTableRowComponent {
   }
 
   public isSuccess(): boolean {
-    return this.product.amount >= 8;
+    return this.product.quantity >= 8;
   }
 
   public isWarning(): boolean {
-    return this.product.amount > 3 && this.product.amount < 8;
+    return this.product.quantity > 3 && this.product.quantity < 8;
   }
 
   public isDanger(): boolean {
-    return this.product.amount <= 3;
+    return this.product.quantity <= 3;
   }
 
   public toggleDropdownMenu(): void {

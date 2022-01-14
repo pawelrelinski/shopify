@@ -8,22 +8,22 @@
         <div class="text-sm font-medium text-gray-900">
           {{ product.name | truncate: [15] }}
         </div>
-        <div class="text-sm text-gray-500">{{ product.createdAt }} created</div>
+        <div class="text-sm text-gray-500">created at {{ product.createdAt | date:'longDate' }}</div>
       </div>
     </div>
   </td>
   <td class="px-6 py-4 whitespace-nowrap">
     <shopify-status-widget-success
       *ngIf="isSuccess()"
-      [message]="product.amount.toString()"
+      [message]="product.quantity.toString()"
     ></shopify-status-widget-success>
     <shopify-status-widget-warning
       *ngIf="isWarning()"
-      [message]='product.amount.toString()'
+      [message]='product.quantity.toString()'
     ></shopify-status-widget-warning>
     <shopify-status-widget-danger
       *ngIf='isDanger()'
-      [message]='product.amount.toString()'
+      [message]='product.quantity.toString()'
     ></shopify-status-widget-danger>
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>

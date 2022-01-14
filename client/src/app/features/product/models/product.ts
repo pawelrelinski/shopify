@@ -1,33 +1,16 @@
-import { Producer } from '@features/producer/models';
-import { Review } from '@features/review/models';
-
-type Price = string | number;
-
 export interface Product {
+  id: number;
   name: string;
   description: string;
-  defaultPrice: Price;
-  promoPrice: Price;
+  defaultPrice: number;
+  promotionPrice: number;
   isAvailable: boolean;
-  amount: number;
   category: string;
-  producer: Producer;
-  createdAt:
-    | Date
-    | {
-        date: string | Date;
-        timezone_type: number;
-        timezone: string;
-      };
+  quantity: number;
+  producer: string;
+  createdAt: string;
   refNumber: string;
-  images: {
-    src: string;
-    alt: string;
-  }[];
-  dataSheet: {
-    name: string;
-    value: string;
-  }[];
-  reviews: Review[];
-  properties?: string;
+  dataSheet: string;
+  views: number;
+  isPublished: boolean;
 }

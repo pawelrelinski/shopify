@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import {
-  AttributesOfProduct,
   MatDialogCloseRemoveDialog,
-  ProductResponse,
+  Product,
+  ProductGetAllByResponse,
   SortOptions,
 } from '@features/product/models';
-import { Response } from '@core/interfaces';
 import { ProductService } from '@features/product/services';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductResponseConverter } from '@core/utils';
 import { ProductTableRemoveDialogComponent } from '@features/product/components/product-table/product-table-remove-dialog/product-table-remove-dialog.component';
 
 @Component({
@@ -18,7 +16,7 @@ import { ProductTableRemoveDialogComponent } from '@features/product/components/
   templateUrl: './product-table.component.html',
 })
 export class ProductTableComponent implements OnInit {
-  public products: Array<AttributesOfProduct> = [];
+  public products: Array<Product> = [];
   public productCount!: number;
   public pageCount!: number;
   public currentPage: number = 1;
@@ -40,7 +38,7 @@ export class ProductTableComponent implements OnInit {
     this.setAllProducts(sortOptions);
   }
 
-  public trackByProductId(index: number, product: AttributesOfProduct): AttributesOfProduct['id'] {
+  public trackByProductId(index: number, product: Product): Product['id'] {
     return product.id;
   }
 
@@ -72,8 +70,8 @@ export class ProductTableComponent implements OnInit {
     this.productService
       .getAllBy(this.getQueryMap(sortOptions))
       .pipe(take(1))
-      .subscribe((products: Response<Array<ProductResponse>>) => {
-        this.products = products.data.map(ProductResponseConverter.toAttributesOfProduct);
+      .subscribe((response: ProductGetAllByResponse) => {
+        this.products = response.products;
         console.log(this.products);
       });
   }
