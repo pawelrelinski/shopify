@@ -1,6 +1,7 @@
 export interface Product {
   id: number;
   name: string;
+  shortDescription: string;
   description: string;
   defaultPrice: number;
   promotionPrice: number;
@@ -10,7 +11,7 @@ export interface Product {
   producer: string;
   createdAt: string;
   refNumber: string;
-  dataSheet: object;
+  dataSheet: Array<{ key: string; value: string }>;
   views: number;
   isPublished: boolean;
 }

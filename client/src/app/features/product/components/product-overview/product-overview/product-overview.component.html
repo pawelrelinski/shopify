@@ -1,12 +1,14 @@
+<ng-template shopifyNotification></ng-template>
 <shopify-product-overview-header
   [name]='product.name'
-  [description]='product.description'
+  [shortDescription]='product.shortDescription'
   [id]='product.id'
   [price]='product.defaultPrice'
   (onEmitItemData)='addItemToShoppingCart($event)'
 >
 </shopify-product-overview-header>
-<shopify-product-overview-features></shopify-product-overview-features>
+<shopify-product-full-description [description]='product.description'>
+</shopify-product-full-description>
 <shopify-product-overview-specification
   [specification]='product.dataSheet'
 ></shopify-product-overview-specification>

@@ -1,10 +1,11 @@
-<section class="text-gray-700 body-font border-t border-gray-200">
-  <div class="container rounded-lg px-5 py-24 mx-auto flex flex-wrap">
-    <div class="bg-white w-full overflow-hidden sm:rounded-lg">
+<section class='text-gray-700 body-font border-t border-gray-200'>
+  <h1 class='text-3xl mt-10'>Specification</h1>
+  <div class='container rounded-lg pb-10 pt-5 mx-auto flex flex-wrap'>
+    <div class='bg-white w-full overflow-hidden sm:rounded-lg'>
       <div>
         <dl>
           <div
-            *ngFor='let spec of specificationAsArrayOfObject; odd as isOdd; even as isEven'
+            *ngFor='let spec of specification; odd as isOdd; even as isEven'
             [class.bg-gray-50]='isEven'
             [class.bg-white]='isOdd'
             class='px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'
