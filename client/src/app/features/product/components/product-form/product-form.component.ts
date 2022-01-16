@@ -9,6 +9,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProductService } from '@features/product/services';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
 
 interface ErrorResponse {
   ok: boolean;
@@ -37,6 +39,11 @@ export class ProductFormComponent implements OnInit {
     { name: 'InPost parcel', value: 'inpost-parcel' },
     { name: 'Courier consignment', value: 'courier-consignment' },
   ];
+  public readonly editorConfig: AngularEditorConfig = {
+    editable: true,
+    minHeight: '100px',
+    placeholder: 'Enter description here...',
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -50,9 +57,11 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.productService.create(this.createProductObjectToSend()).subscribe((res) => {
-      this.handleSuccessResponse(res.status);
-    });
+    this.productService
+      .create(this.createProductObjectToSend())
+      .subscribe((res: ProductCreateResponse) => {
+        this.handleSuccessResponse(res.status);
+      });
   }
 
   public onCheckboxChange(event: any): void {
@@ -106,7 +115,22 @@ export class ProductFormComponent implements OnInit {
           Validators.max(1_000_000),
         ]),
         salePrice: this.fb.control(0.0, [Validators.min(0.01), Validators.max(1_000_000)]),
+        shortDescription: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(255),
+        ]),
         description: this.fb.control('', [Validators.required, Validators.minLength(5)]),
+        producer: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+        refNumber: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(15),
+        ]),
       }),
       inventory: this.fb.group({
         stockQuantity: this.fb.control(0, [
@@ -153,15 +177,23 @@ export class ProductFormComponent implements OnInit {
     this.form.reset();
   }
 
-  private createProductObjectToSend() {
+  private createProductObjectToSend(): ProductCreateDto {
     return {
       name: this.getGeneral()?.get('name')?.value,
+      shortDescription: this.getGeneral()?.get('shortDescription')?.value,
       description: this.getGeneral()?.get('description')?.value,
-      price: this.getGeneral()?.get('regularPrice')?.value,
-      amount: this.getInventory()?.get('stockQuantity')?.value,
+      defaultPrice: this.getGeneral()?.get('regularPrice')?.value,
+      promotionPrice: this.getGeneral()?.get('salePrice')?.value
+        ? this.getGeneral()?.get('salePrice')?.value
+        : 0.0,
       category: this.getVariations()?.get('category')?.value,
-      properties: JSON.stringify(this.getSpecification()?.value),
-    };
+      quantity: this.getInventory()?.get('stockQuantity')?.value,
+      producer: this.getGeneral()?.get('producer')?.value,
+      expectedDeliveryTime: this.getShipping()?.get('expectedDeliveryTime')?.value,
+      refNumber: this.getGeneral()?.get('refNumber')?.value,
+      dataSheet: JSON.stringify(this.getSpecification()?.value),
+      shippingMethods: JSON.stringify(this.getShipping()?.get('shippingMethods')?.value),
+    } as ProductCreateDto;
   }
 
   private handleSuccessResponse(code: number): void {

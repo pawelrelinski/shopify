@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Product, ProductGetAllByResponse } from '@features/product/models';
+import {
+  Product,
+  ProductCreateDto,
+  ProductCreateResponse,
+  ProductGetAllByResponse,
+} from '@features/product/models';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 
 @Injectable({
@@ -39,10 +44,10 @@ export class ProductService {
     return this.http.get<Product>(url);
   }
 
-  public create(product: any): Observable<{ status: number; title: string }> {
+  public create(product: ProductCreateDto): Observable<ProductCreateResponse> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl) + '/';
-    return this.http.post<{ status: number; title: string }>(url, product);
+    return this.http.post<ProductCreateResponse>(url, product);
   }
 
   public delete(id: number): Observable<{ status: number; title: string }> {

@@ -27,7 +27,9 @@
     ></shopify-status-widget-danger>
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-    <a [routerLink]="['/products', product.category]">{{ product.category }}</a>
+    <a [routerLink]="['/products', product.category]">
+      {{ product.category | firstLetterTitleCase }}
+    </a>
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
     {{ product.defaultPrice | currency }}

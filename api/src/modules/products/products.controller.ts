@@ -13,6 +13,7 @@ import { Product } from './product.entity';
 import { FindOneParams } from './classes/find-one-params';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ListAllProductsDto } from './dto/list-all-products.dto';
+import { CreateProductResponseDto } from './dto/create-product-response.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -48,14 +49,22 @@ export class ProductsController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  public findOne(@Param() params: FindOneParams): Promise<Product> {
-    const { id } = params;
+  public findOne(@Param('id') id: FindOneParams['id']): Promise<Product> {
     return this.productsService.findOne(id);
   }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  public create(@Body() createProductDto: CreateProductDto): Promise<Product> {
-    return this.productsService.create(createProductDto);
+  public async create(
+    @Body() createProductDto: CreateProductDto,
+  ): Promise<CreateProductResponseDto> {
+    const product: Product = await this.productsService.create(
+      createProductDto,
+    );
+    return {
+      product: product,
+      status: HttpStatus.CREATED,
+      title: 'Product has been created',
+    };
   }
 }

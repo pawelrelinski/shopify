@@ -26,6 +26,7 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@kolkov/angular-editor": "^2.0.0",
     "@ngrx/store": "^13.0.2",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "class-validator": "^0.13.2",

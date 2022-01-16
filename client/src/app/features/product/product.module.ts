@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import {
   ProductAvailableWidgetComponent,
@@ -29,6 +30,7 @@ import { ProductTableModule } from '@features/product/components/product-table/p
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AngularEditorModule,
     StatusWidgetModule,
     ShopifyPaginationModule,
     ShopifyButtonsModule,

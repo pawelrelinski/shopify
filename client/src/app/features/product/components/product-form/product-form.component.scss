@@ -23,3 +23,7 @@
     @apply cursor-pointer;
   }
 }
+
+.textarea-w-full {
+  width: -webkit-fill-available;
+}

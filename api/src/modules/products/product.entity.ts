@@ -12,6 +12,9 @@ export class Product {
   name: string;
 
   @Column('text')
+  shortDescription: string;
+
+  @Column('text')
   description: string;
 
   @Column({
@@ -29,7 +32,9 @@ export class Product {
   })
   promotionPrice: number;
 
-  @Column()
+  @Column({
+    default: true,
+  })
   isAvailable: boolean;
 
   @Column()
@@ -62,6 +67,11 @@ export class Product {
   })
   views: number;
 
-  @Column()
+  @Column({
+    default: true,
+  })
   isPublished: boolean;
+
+  @Column('json')
+  shippingMethods: string;
 }
