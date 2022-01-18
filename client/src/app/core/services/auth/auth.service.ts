@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginData } from '@core/interfaces';
+import { LoginData } from '@core/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export type ReturnedLoginData = LoginData | null;

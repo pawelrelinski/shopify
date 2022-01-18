@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ProductOverviewModule } from '@features/product/components/product-overview/product-overview.module';
 import { ProductListModule } from '@features/product/components/product-list/product-list.module';
 import { ProductTableModule } from '@features/product/components/product-table/product-table.module';
+import { NotificationModule } from '@features/notification/notification.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ProductTableModule } from '@features/product/components/product-table/p
     ProductOverviewModule,
     ProductListModule,
     ProductTableModule,
+    NotificationModule,
   ],
   exports: [
     ProductFormComponent,

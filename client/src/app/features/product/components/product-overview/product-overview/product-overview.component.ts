@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@features/product/services';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from '@features/product/models';
@@ -8,8 +8,7 @@ import { add } from '@features/shopping-cart/store/actions/shopping-cart-item.ac
 import { ShoppingCartItemPropsAdd } from '@features/shopping-cart/models/shopping-cart-item-props-add';
 import { switchMap } from 'rxjs';
 import { EmitItemData } from '@features/product/components/product-overview/product-overview-header/product-overview-header.component';
-import { NotificationDirective } from '@core/directives/notification/notification.directive';
-import { NotificationComponent } from '@shared/shopify-notifications/components/notification/notification.component';
+import { NotificationService } from '@features/notification/services';
 
 @Component({
   selector: 'shopify-product-overview',
@@ -18,12 +17,11 @@ import { NotificationComponent } from '@shared/shopify-notifications/components/
 export class ProductOverviewComponent implements OnInit {
   public product!: Product;
 
-  @ViewChild(NotificationDirective, { static: true }) notificationHost!: NotificationDirective;
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private store: Store<ShoppingCartState>
+    private store: Store<ShoppingCartState>,
+    private notificationService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -41,7 +39,10 @@ export class ProductOverviewComponent implements OnInit {
       },
     };
     this.store.dispatch(add(shoppingCartItem));
-    this.loadNotificationComponent(this.product.name, event.quantity);
+    this.notificationService.show({
+      title: 'Add item to basket',
+      message: this.product.name,
+    });
   }
 
   private getProduct(): void {
@@ -55,18 +56,5 @@ export class ProductOverviewComponent implements OnInit {
       .subscribe((product: Product) => {
         this.product = product;
       });
-  }
-
-  private loadNotificationComponent(productName: string, quantity: number): void {
-    const productWord = quantity === 1 ? 'product' : 'products';
-    const viewContainerRef = this.notificationHost.viewContainerRef;
-    viewContainerRef.clear();
-
-    const componentRef =
-      viewContainerRef.createComponent<NotificationComponent>(NotificationComponent);
-    componentRef.instance.data = {
-      title: `Add ${quantity} ${productWord} to basket`,
-      message: productName,
-    };
   }
 }

@@ -11,6 +11,7 @@ import {
 import { ProductService } from '@features/product/services';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
+import { NotificationService } from '@features/notification/services';
 
 interface ErrorResponse {
   ok: boolean;
@@ -49,7 +50,8 @@ export class ProductFormComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private notificationService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -61,6 +63,10 @@ export class ProductFormComponent implements OnInit {
       .create(this.createProductObjectToSend())
       .subscribe((res: ProductCreateResponse) => {
         this.handleSuccessResponse(res.status);
+        this.notificationService.show({
+          title: 'A new product has been successfully added',
+          message: res.product.name,
+        });
       });
   }
 

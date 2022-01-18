@@ -8,6 +8,8 @@ import { LayoutModule } from '@features/layout/layout.module';
 import { CoreModule } from '@core/core.module';
 import { ShopifyFooterModule } from '@shared/shopify-footer/shopify-footer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DirectivesModule } from '@core/directives/directives.module';
+import { NotificationModule } from '@features/notification/notification.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,8 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     CoreModule,
     AppRoutingModule,
+    DirectivesModule,
     LayoutModule,
     ShopifyFooterModule,
+    NotificationModule,
   ],
   providers: [
     {

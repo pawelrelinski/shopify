@@ -4,6 +4,7 @@ import { take } from 'rxjs/operators';
 import {
   MatDialogCloseRemoveDialog,
   Product,
+  ProductDeleteResponse,
   ProductGetAllByResponse,
   SortOptions,
 } from '@features/product/models';
@@ -56,10 +57,15 @@ export class ProductTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: MatDialogCloseRemoveDialog) => {
       if (result === MatDialogCloseRemoveDialog.DELETE) {
-        this.productService.delete(id).subscribe((res: { status: number; title: string }) => {
-          if (res.status === 204) {
-            this.setAllProducts();
-            this.setProductsCount();
+        this.productService.delete(id).subscribe((res: ProductDeleteResponse) => {
+          switch (res.status) {
+            case 204:
+              this.setAllProducts();
+              this.setProductsCount();
+              break;
+            case 404:
+              console.log('dupa dupa');
+              break;
           }
         });
       }
@@ -72,7 +78,6 @@ export class ProductTableComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response: ProductGetAllByResponse) => {
         this.products = response.products;
-        console.log(this.products);
       });
   }
 

@@ -9,8 +9,8 @@
       <h2 class='mb-2 text-lg font-semibold font-extrabold tracking-wide text-gray-700 uppercase'>
         <span class='text-green-600'>{{ price | currency }}</span>
       </h2>
-      <p class='mb-8 leading-relaxed' [innerHTML]='shortDescription'>
-      </p>
+      <div class='mb-8 leading-relaxed' [innerHTML]='shortDescription'>
+      </div>
       <div class='flex justify-center'>
         <button
           (click)='emitItemId()'

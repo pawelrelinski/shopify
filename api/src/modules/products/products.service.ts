@@ -39,7 +39,8 @@ export class ProductsService {
     return this.productsRepository.save(product);
   }
 
-  public async remove(id: string): Promise<DeleteResult> {
-    return this.productsRepository.delete(id);
+  public async delete(id: string): Promise<DeleteResult> {
+    const product: Product = await this.findOne(id);
+    return this.productsRepository.delete({ id: product.id });
   }
 }

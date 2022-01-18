@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificationDirective } from '@core/directives/notification/notification.directive';
 
 @NgModule({
-  declarations: [NotificationDirective],
+  declarations: [],
   imports: [CommonModule],
-  exports: [NotificationDirective],
+  exports: [],
 })
 export class DirectivesModule {}

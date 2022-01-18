@@ -1,13 +1,13 @@
-export class CreateProductDto {
-  public name: string;
-  public description: string;
-  public defaultPrice: number;
-  public promotionPrice?: number;
-  public category: string;
-  public quantity: number;
-  public producer: string;
-  public expectedDeliveryTime: number;
-  public refNumber: string;
-  public dataSheet: string;
-  public isPublished: boolean;
+export interface CreateProductDto {
+  name: string;
+  description: string;
+  defaultPrice: number;
+  promotionPrice?: number;
+  category: string;
+  quantity: number;
+  producer: string;
+  expectedDeliveryTime: number;
+  refNumber: string;
+  dataSheet: string;
+  isPublished: boolean;
 }

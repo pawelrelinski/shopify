@@ -6,6 +6,7 @@ import {
   Product,
   ProductCreateDto,
   ProductCreateResponse,
+  ProductDeleteResponse,
   ProductGetAllByResponse,
 } from '@features/product/models';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
@@ -50,11 +51,11 @@ export class ProductService {
     return this.http.post<ProductCreateResponse>(url, product);
   }
 
-  public delete(id: number): Observable<{ status: number; title: string }> {
+  public delete(id: number): Observable<ProductDeleteResponse> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.delete<{ status: number; title: string }>(url);
+    return this.http.delete<ProductDeleteResponse>(url);
   }
 
   public getMetadata(options: Map<string, string>): Observable<{ count: number }> {

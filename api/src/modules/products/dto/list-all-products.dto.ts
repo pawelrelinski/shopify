@@ -1,6 +1,6 @@
-export class ListAllProductsDto {
-  public sortBy: string;
-  public sortMethod: 'asc' | 'desc';
-  public take: number;
-  public skip: number;
+export interface ListAllProductsDto {
+  sortBy: string;
+  sortMethod: 'asc' | 'desc';
+  take: number;
+  skip: number;
 }
