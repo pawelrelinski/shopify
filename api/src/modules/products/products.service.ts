@@ -9,10 +9,10 @@ import { ListAllProductsDto } from './dto/list-all-products.dto';
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
-    private productsRepository: Repository<Product>,
+    private readonly productsRepository: Repository<Product>,
   ) {}
 
-  public async findAll(): Promise<Product[]> {
+  public findAll(): Promise<Product[]> {
     return this.productsRepository.find();
   }
 
