@@ -69,7 +69,6 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin-pages.module').then((m) => m.AdminPagesModule),
-    canActivate: [AuthGuard],
   },
   {
     path: '**',

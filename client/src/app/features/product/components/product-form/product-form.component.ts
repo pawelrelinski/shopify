@@ -120,7 +120,7 @@ export class ProductFormComponent implements OnInit {
           Validators.min(0.01),
           Validators.max(1_000_000),
         ]),
-        salePrice: this.fb.control(0.0, [Validators.min(0.01), Validators.max(1_000_000)]),
+        salePrice: this.fb.control(null, [Validators.min(0.0), Validators.max(1_000_000)]),
         shortDescription: this.fb.control('', [
           Validators.required,
           Validators.minLength(5),

@@ -1,4 +1,4 @@
-import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,12 +23,6 @@ import { NotificationModule } from '@features/notification/notification.module';
     LayoutModule,
     ShopifyFooterModule,
     NotificationModule,
-  ],
-  providers: [
-    {
-      provide: DEFAULT_CURRENCY_CODE,
-      useValue: 'PLN',
-    },
   ],
   bootstrap: [AppComponent],
 })
