@@ -6,3 +6,4 @@ export * from './layout-products-flyout-menu/layout-products-flyout-menu.compone
 export * from './layout-solutions-flyout-menu/layout-solutions-flyout-menu.component';
 export * from './layout-user-navigation/layout-user-navigation.component';
 export * from './layout-admin-navigation/layout-admin-navigation.component';
+export * from './layout-profile-flyout-menu/layout-profile-flyout-menu.component';

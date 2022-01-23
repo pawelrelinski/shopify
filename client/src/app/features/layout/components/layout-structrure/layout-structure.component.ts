@@ -4,6 +4,8 @@ import { FlyoutMenu } from '@features/layout/models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '@core/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'shopify-layout-structure',
@@ -34,26 +36,38 @@ export class LayoutStructureComponent implements OnInit, OnDestroy {
   public solutionsFlyoutMenuIsOpen = false;
   public moreFlyoutMenuIsOpen = false;
   public productsFlyoutMenuIsOpen = false;
+  public profileFlyoutMenuIsOpen = false;
 
-  public isLoggedIn!: boolean;
+  public isLoggedIn = false;
 
   private readonly destroyed = new Subject<boolean>();
 
   constructor(
     private mobileMenuService: MobileMenuService,
     private flyoutMenuService: FlyoutMenuService,
-    private shoppingCartVisibility: ShoppingCartVisibilityService
+    private shoppingCartVisibility: ShoppingCartVisibilityService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
+    this.setIsLoggedIn();
     this.updateMobileMenuState();
     this.updateShoppingCartVisibility();
-    this.setIsLoggedIn();
   }
 
   public ngOnDestroy(): void {
     this.destroyed.next(true);
     this.destroyed.complete();
+  }
+
+  public signOut(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  public toggleProfileFlyoutMenu(): void {
+    this.profileFlyoutMenuIsOpen = !this.profileFlyoutMenuIsOpen;
   }
 
   public openMobileMenu(): void {
@@ -116,6 +130,9 @@ export class LayoutStructureComponent implements OnInit, OnDestroy {
   }
 
   private setIsLoggedIn(): void {
-    this.isLoggedIn = true;
+    this.authService.isLoggedIn().subscribe((isLogged: boolean) => {
+      this.isLoggedIn = isLogged;
+      console.log(isLogged);
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginData, LoginResponse, RegisterData, RegisterResponse } from '@core/models';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 import * as moment from 'moment';
 
@@ -17,6 +17,8 @@ export class AuthService {
   private segmentsUrl!: SegmentsUrl;
   private urlBuilder!: UrlBuilder;
   private queryStringParameters!: QueryStringParameters;
+
+  private _isLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -37,14 +39,20 @@ export class AuthService {
   public logout(): void {
     localStorage.removeItem(AuthLocalStorageItem.ACCESS_TOKEN);
     localStorage.removeItem(AuthLocalStorageItem.EXPIRES_IN);
+
+    this._isLoggedIn.next(false);
   }
 
-  public isLoggedIn(): boolean {
-    return moment().isBefore(this.getExpiration());
+  public isLoggedIn(): Observable<boolean> {
+    const nextValue: boolean = !!localStorage.getItem(AuthLocalStorageItem.ACCESS_TOKEN);
+    this._isLoggedIn.next(nextValue);
+    return this._isLoggedIn;
   }
 
-  public isLoggedOut(): boolean {
-    return !this.isLoggedIn();
+  public isLoggedOut(): Observable<boolean> {
+    const nextValue: boolean = !!localStorage.getItem(AuthLocalStorageItem.ACCESS_TOKEN);
+    this._isLoggedIn.next(nextValue);
+    return this._isLoggedIn;
   }
 
   public getExpiration(): moment.Moment {
@@ -58,6 +66,12 @@ export class AuthService {
 
     localStorage.setItem(AuthLocalStorageItem.ACCESS_TOKEN, authResult.accessToken);
     localStorage.setItem(AuthLocalStorageItem.EXPIRES_IN, JSON.stringify(expiresAt.valueOf()));
+
+    this._isLoggedIn.next(true);
+  }
+
+  private isBeforeExpiration(): boolean {
+    return moment().isBefore(this.getExpiration());
   }
 
   private setDefaultUrlConfig(): void {

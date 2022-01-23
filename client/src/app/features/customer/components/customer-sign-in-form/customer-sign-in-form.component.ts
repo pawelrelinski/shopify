@@ -26,7 +26,7 @@ export class CustomerSignInFormComponent implements OnInit {
     this.authService.login(loginData).subscribe((response: LoginResponse) => {
       if (response.accessToken) {
         this.authService.setSession(response);
-        // this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']);
       }
     });
   }
