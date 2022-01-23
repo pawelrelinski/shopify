@@ -132,7 +132,6 @@ export class LayoutStructureComponent implements OnInit, OnDestroy {
   private setIsLoggedIn(): void {
     this.authService.isLoggedIn().subscribe((isLogged: boolean) => {
       this.isLoggedIn = isLogged;
-      console.log(isLogged);
     });
   }
 }

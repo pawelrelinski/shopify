@@ -36,6 +36,7 @@ const routes: Routes = [
       import('./pages/customer/shopping-cart-page/shopping-cart-page.module').then(
         (m) => m.ShoppingCartPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'checkout',
@@ -43,6 +44,7 @@ const routes: Routes = [
       import('./pages/customer/checkout-page/checkout-page.module').then(
         (m) => m.CheckoutPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'articles',
@@ -65,10 +67,12 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () =>
       import('./pages/customer/profile-page/profile-page.module').then((m) => m.ProfilePageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin-pages.module').then((m) => m.AdminPagesModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
