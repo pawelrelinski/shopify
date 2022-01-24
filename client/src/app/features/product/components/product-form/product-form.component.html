@@ -230,6 +230,17 @@
             </div>
           </dd>
         </div>
+        <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+          <dt class='text-sm font-medium text-gray-500'>
+            Product image <span class='text-red-700'>*</span>
+          </dt>
+          <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+            <shopify-product-file-upload formControlName="image"
+                                         (onFile)='updateImageValue($event)'
+                                         [progress]='imageProgressBar'>
+            </shopify-product-file-upload>
+          </dd>
+        </div>
       </dl>
     </div>
 

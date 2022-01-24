@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import {
   ProductAvailableWidgetComponent,
   ProductFormComponent,
   ProductQuantityCounterComponent,
+  ProductFileUploadComponent,
 } from '@features/product/components';
 import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
@@ -25,12 +27,14 @@ import { NotificationModule } from '@features/notification/notification.module';
     ProductFormComponent,
     ProductAvailableWidgetComponent,
     ProductQuantityCounterComponent,
+    ProductFileUploadComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatProgressBarModule,
     AngularEditorModule,
     StatusWidgetModule,
     ShopifyPaginationModule,

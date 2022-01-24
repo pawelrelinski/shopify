@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import {
@@ -45,10 +45,13 @@ export class ProductService {
     return this.http.get<Product>(url);
   }
 
-  public create(product: ProductCreateDto): Observable<ProductCreateResponse> {
+  public create(product: ProductCreateDto): Observable<HttpEvent<ProductCreateResponse>> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl) + '/';
-    return this.http.post<ProductCreateResponse>(url, product);
+    return this.http.post<ProductCreateResponse>(url, product, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 
   public delete(id: number): Observable<ProductDeleteResponse> {

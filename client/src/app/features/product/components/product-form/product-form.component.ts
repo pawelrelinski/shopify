@@ -12,6 +12,7 @@ import { ProductService } from '@features/product/services';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
 import { NotificationService } from '@features/notification/services';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 interface ErrorResponse {
   ok: boolean;
@@ -45,6 +46,7 @@ export class ProductFormComponent implements OnInit {
     minHeight: '100px',
     placeholder: 'Enter description here...',
   };
+  public imageProgressBar = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -59,14 +61,22 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    console.log(this.createProductObjectToSend());
     this.productService
       .create(this.createProductObjectToSend())
-      .subscribe((res: ProductCreateResponse) => {
-        this.handleSuccessResponse(res.status);
-        this.notificationService.show({
-          title: 'A new product has been successfully added',
-          message: res.product.name,
-        });
+      .subscribe((event: HttpEvent<ProductCreateResponse>) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.imageProgressBar = Math.round((100 * event.loaded) / (event.total as number));
+        }
+
+        if (event.type === HttpEventType.Response) {
+          const body = event.body as ProductCreateResponse;
+          this.handleSuccessResponse(body.status);
+          this.notificationService.show({
+            title: 'A new product has been successfully added',
+            message: body.product.name,
+          });
+        }
       });
   }
 
@@ -89,6 +99,11 @@ export class ProductFormComponent implements OnInit {
 
   public toggleShippingMethodsOptions(): void {
     this.moreShippingMethodsOptionsIsShow = !this.moreShippingMethodsOptionsIsShow;
+  }
+
+  public updateImageValue(file: File): void {
+    this.getGeneral()?.get('image')?.setValue(file);
+    console.log(this.getGeneral()?.get('image')?.value);
   }
 
   public getGeneral(): AbstractControl | null {
@@ -137,6 +152,7 @@ export class ProductFormComponent implements OnInit {
           Validators.minLength(5),
           Validators.maxLength(15),
         ]),
+        image: this.fb.control(null, [Validators.required]),
       }),
       inventory: this.fb.group({
         stockQuantity: this.fb.control(0, [
@@ -199,6 +215,7 @@ export class ProductFormComponent implements OnInit {
       refNumber: this.getGeneral()?.get('refNumber')?.value,
       dataSheet: JSON.stringify(this.getSpecification()?.value),
       shippingMethods: JSON.stringify(this.getShipping()?.get('shippingMethods')?.value),
+      image: this.getGeneral()?.get('image')?.value,
     } as ProductCreateDto;
   }
 

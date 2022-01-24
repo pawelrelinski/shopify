@@ -11,4 +11,5 @@ export interface ProductCreateDto {
   refNumber: string;
   dataSheet: string;
   shippingMethods: string;
+  image: File;
 }
