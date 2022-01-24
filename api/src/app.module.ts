@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Connection } from 'typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -22,6 +23,9 @@ import { AuthModule } from './modules/auth/auth.module';
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
+    }),
+    MulterModule.register({
+      dest: './uploads',
     }),
     ProductsModule,
     UsersModule,

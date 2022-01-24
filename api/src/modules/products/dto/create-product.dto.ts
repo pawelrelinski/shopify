@@ -10,4 +10,5 @@ export interface CreateProductDto {
   refNumber: string;
   dataSheet: string;
   isPublished: boolean;
+  image: any;
 }
