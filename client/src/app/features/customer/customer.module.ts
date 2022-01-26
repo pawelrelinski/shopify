@@ -9,10 +9,13 @@ import {
   CustomerProfileSettingsEditFirstNameDialogComponent,
   CustomerSignInFormComponent,
   CustomerSignUpFormComponent,
+  CustomerTableComponent,
+  CustomerTableRowComponent,
 } from '@features/customer/components';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +27,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CustomerProfileFavouritesComponent,
     CustomerProfileSettingsComponent,
     CustomerProfileSettingsEditFirstNameDialogComponent,
+    CustomerTableComponent,
+    CustomerTableRowComponent,
   ],
-  imports: [CommonModule, RouterModule, MatDialogModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ShopifyPaginationModule,
+  ],
   exports: [
     CustomerSignInFormComponent,
     CustomerSignUpFormComponent,
@@ -33,6 +45,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CustomerProfileOrdersComponent,
     CustomerProfileFavouritesComponent,
     CustomerProfileSettingsComponent,
+    CustomerTableComponent,
   ],
 })
 export class CustomerModule {}

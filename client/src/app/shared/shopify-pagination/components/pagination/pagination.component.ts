@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'shopify-pagination',
+  selector: 'shopify-pagination[itemCount][pageCount][currentPage]',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnInit {
   @Input()
-  productCount!: number;
+  itemCount!: number;
 
   @Input()
   pageCount!: number;
@@ -70,7 +70,7 @@ export class PaginationComponent implements OnInit {
 
   private getRangeTo(): number {
     if (this.currentPage === this.pageCount) {
-      return this.productCount;
+      return this.itemCount;
     } else {
       return (this.currentPage - 1) * 10 + 10;
     }

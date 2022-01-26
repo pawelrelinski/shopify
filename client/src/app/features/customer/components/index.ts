@@ -6,3 +6,5 @@ export * from './customer-profile-orders/customer-profile-orders.component';
 export * from './customer-profile-favourites/customer-profile-favourites.component';
 export * from './customer-profile-settings/customer-profile-settings.component';
 export * from './customer-profile-settings-edit-first-name-dialog/customer-profile-settings-edit-first-name-dialog.component';
+export * from './customer-table/customer-table.component';
+export * from './customer-table-row/customer-table-row.component';

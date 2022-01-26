@@ -1,4 +1,3 @@
-<shopify-product-table-actions (onSortBy)='sortBy($event)'></shopify-product-table-actions>
 <div class='max-w-7xl mx-auto px-4 mt-10 mb-32 sm:px-6 lg:px-8'>
   <div class='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
     <div class='align-middle inline-block min-w-full'>
@@ -16,48 +15,33 @@
               scope='col'
               class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
-              Name
+              First name
             </th>
             <th
               scope='col'
               class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
-              Amount
+              Last name
             </th>
             <th
               scope='col'
               class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
-              Category
-            </th>
-            <th
-              scope='col'
-              class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-            >
-              Price (PLN)
-            </th>
-            <th
-              scope='col'
-              class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-            >
-              Actions
+              Email
             </th>
           </tr>
           </thead>
           <tbody class='bg-white divide-y divide-gray-200'>
-          <shopify-product-table-row
-            *ngFor='let product of products; trackBy: trackByProductId; let i = index'
-            [product]='product'
-            [index]='getIndexForTableRow(i)'
-            (onDelete)='deleteProduct($event)'
-          >
-          </shopify-product-table-row>
+          <shopify-customer-table-row *ngFor='let customer of customers; let index = i'
+                                      [customer]='customer'
+                                      [index]='index'>
+          </shopify-customer-table-row>
           </tbody>
         </table>
         <shopify-pagination
-          [itemCount]='productCount'
-          [pageCount]='pageCount'
-          [currentPage]='currentPage'
+          [itemCount]='shopifyPaginationData.itemCount'
+          [pageCount]='shopifyPaginationData.pageCount'
+          [currentPage]='shopifyPaginationData.currentPage'
           (onChangePage)='changePage($event)'
         >
         </shopify-pagination>
@@ -65,3 +49,4 @@
     </div>
   </div>
 </div>
+

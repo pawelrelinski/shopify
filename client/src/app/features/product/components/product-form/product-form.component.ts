@@ -103,7 +103,6 @@ export class ProductFormComponent implements OnInit {
 
   public updateImageValue(file: File): void {
     this.getGeneral()?.get('image')?.setValue(file);
-    console.log(this.getGeneral()?.get('image')?.value);
   }
 
   public getGeneral(): AbstractControl | null {

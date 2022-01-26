@@ -5,10 +5,11 @@
   <td class="px-6 py-4 whitespace-nowrap">
     <div class="flex items-center">
       <div>
-        <div class="text-sm font-medium text-gray-900">
+        <a [routerLink]="['/products', product.category, product.id]"
+           class='text-sm font-medium text-gray-900'>
           {{ product.name | truncate: [15] }}
-        </div>
-        <div class="text-sm text-gray-500">created at {{ product.createdAt | date:'longDate' }}</div>
+        </a>
+        <div class='text-sm text-gray-500'>created at {{ product.createdAt | date:'longDate' }}</div>
       </div>
     </div>
   </td>
@@ -32,15 +33,7 @@
     </a>
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-    {{ product.defaultPrice | currency }}
-  </td>
-  <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-    <a
-      [routerLink]="['/products', product.category, product.id]"
-      class='text-green-600 hover:text-green-900 text-right'
-    >
-      Overview
-    </a>
+    {{ product.defaultPrice }}
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-start'>
     <div class='flex items-center justify-center h-full'>
