@@ -11,20 +11,42 @@ export class UserTableComponent implements OnInit {
   public shopifyPaginationData = {
     itemCount: 0,
     pageCount: 0,
-    currentPage: 0,
+    currentPage: 1,
   };
 
-  constructor(private customerService: UserService) {}
+  constructor(private userService: UserService) {}
 
   public ngOnInit(): void {
-    this.setCustomers();
+    this.setUsers();
+    this.setUsersCount();
   }
 
-  public changePage(event: any): void {}
+  public trackByUserId(index: number, user: User): User['id'] {
+    return user.id;
+  }
 
-  private setCustomers(): void {
-    this.customerService.getAll().subscribe((customers: Array<User>) => {
+  public changePage(pageNumber: number): void {
+    this.shopifyPaginationData.currentPage = pageNumber;
+    this.setUsers();
+  }
+
+  private setUsers(): void {
+    this.userService.getAll().subscribe((customers: Array<User>) => {
       this.customers = customers;
     });
+  }
+
+  private setUsersCount(): void {
+    this.userService.getCount().subscribe(({ count }) => {
+      this.shopifyPaginationData.itemCount = count;
+      this.setPaginationPageCount();
+    });
+  }
+
+  private setPaginationPageCount(): void {
+    this.shopifyPaginationData.pageCount = +(this.shopifyPaginationData.itemCount / 10).toFixed(0);
+    this.shopifyPaginationData.itemCount % 10 > 0
+      ? (this.shopifyPaginationData.pageCount += 1)
+      : null;
   }
 }

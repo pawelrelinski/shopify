@@ -85,10 +85,10 @@ export class ProductTableComponent implements OnInit {
     const options = new Map<string, string>();
 
     this.productService
-      .getMetadata(options)
+      .getCount(options)
       .pipe(take(1))
-      .subscribe((data) => {
-        this.productCount = data.count;
+      .subscribe(({ count }) => {
+        this.productCount = count;
         this.setPaginationPageCount();
       });
   }

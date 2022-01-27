@@ -20,6 +20,13 @@ export class UserService {
     return this.http.get<Array<User>>(url);
   }
 
+  public getCount(): Observable<{ count: number }> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('count');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get<{ count: number }>(url);
+  }
+
   private setDefaultUrlConfig(): void {
     this.segmentsUrl = new SegmentsUrl();
     this.urlBuilder = new UrlBuilder();

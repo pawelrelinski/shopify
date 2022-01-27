@@ -21,7 +21,7 @@ export class ProductAvailableWidgetComponent implements OnInit {
     const options = new Map<string, string>();
 
     this.productService
-      .getMetadata(options)
+      .getCount(options)
       .pipe(take(1))
       .subscribe((data) => {
         this.count = data.count;

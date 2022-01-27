@@ -61,25 +61,17 @@ export class ProductService {
     return this.http.delete<ProductDeleteResponse>(url);
   }
 
-  public getMetadata(options: Map<string, string>): Observable<{ count: number }> {
+  public getCount(options: Map<string, string>): Observable<{ count: number }> {
     this.setDefaultUrlConfig();
-    this.segmentsUrl.push('data');
-
-    if (options.has('productsType')) {
-      this.queryStringParameters.push('category', options.get('category'));
-      this.queryStringParameters.push('productsType', options.get('productsType'));
-      const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
-      console.log(url);
-      return this.http.get<{ count: number }>(url);
-    }
+    this.segmentsUrl.push('count');
+    let url!: string;
 
     if (options.has('category')) {
       this.queryStringParameters.push('category', options.get('category'));
-      const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
-      return this.http.get<{ count: number }>(url);
+      url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     }
 
-    const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
+    url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     return this.http.get<{ count: number }>(url);
   }
 

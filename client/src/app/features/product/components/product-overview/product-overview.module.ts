@@ -7,6 +7,7 @@ import { ProductOverviewFeaturesComponent } from './product-overview-features/pr
 import { ProductOverviewSpecificationComponent } from './product-overview-specification/product-overview-specification.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { ProductOverviewFullDescriptionComponent } from './product-overview-full-description/product-overview-full-description.component';
+import { ProductOverviewMapComponent } from './product-overview-map/product-overview-map.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ProductOverviewFullDescriptionComponent } from './product-overview-full
     ProductOverviewFeaturesComponent,
     ProductOverviewSpecificationComponent,
     ProductOverviewFullDescriptionComponent,
+    ProductOverviewMapComponent,
   ],
   imports: [CommonModule, ShopifyCounterModule, DirectivesModule],
   exports: [ProductOverviewComponent],

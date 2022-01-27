@@ -11,6 +11,7 @@ import {
   UserSignUpFormComponent,
   UserTableComponent,
   UserTableRowComponent,
+  UserCountWidgetComponent,
 } from '@features/user/components';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -29,6 +30,7 @@ import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagi
     UserProfileSettingsEditFirstNameDialogComponent,
     UserTableComponent,
     UserTableRowComponent,
+    UserCountWidgetComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagi
     UserProfileFavouritesComponent,
     UserProfileSettingsComponent,
     UserTableComponent,
+    UserCountWidgetComponent,
   ],
 })
 export class UserModule {}
