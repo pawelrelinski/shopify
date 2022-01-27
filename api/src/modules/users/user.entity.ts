@@ -1,5 +1,13 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Order } from '../orders/order.entity';
 
 @Entity()
 export class User {
@@ -27,6 +35,9 @@ export class User {
     type: 'timestamp',
   })
   createdAt: string;
+
+  @OneToMany(() => Order, (order: Order) => order.user)
+  orders: Order[];
 
   @BeforeInsert()
   public async hashPassword(): Promise<void> {
