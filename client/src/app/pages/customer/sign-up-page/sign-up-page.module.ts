@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { SignUpPageRoutingModule } from './sign-up-page-routing.module';
 import { SignUpPageComponent } from './sign-up-page.component';
-import { CustomerModule } from '@features/customer/customer.module';
+import { UserModule } from '@features/user/user.module';
 
 @NgModule({
-	declarations: [SignUpPageComponent],
-	imports: [CommonModule, SignUpPageRoutingModule, CustomerModule],
+  declarations: [SignUpPageComponent],
+  imports: [CommonModule, SignUpPageRoutingModule, UserModule],
 })
 export class SignUpPageModule {}

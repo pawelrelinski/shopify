@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileSettingsPageRoutingModule } from './profile-settings-page-routing.module';
 import { ProfileSettingsPageComponent } from './profile-settings-page.component';
-import { CustomerModule } from '@features/customer/customer.module';
+import { UserModule } from '@features/user/user.module';
 
 @NgModule({
   declarations: [ProfileSettingsPageComponent],
-  imports: [CommonModule, ProfileSettingsPageRoutingModule, CustomerModule],
+  imports: [CommonModule, ProfileSettingsPageRoutingModule, UserModule],
 })
 export class ProfileSettingsPageModule {}

@@ -1,7 +1,7 @@
-import { Customer } from '@features/customer/models';
+import { User } from '@features/user/models';
 
 export interface Review {
-  customer: Customer;
+  customer: User;
   cratedAt:
     | Date
     | {

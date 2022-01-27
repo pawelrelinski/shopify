@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { SignInPageRoutingModule } from './sign-in-page-routing.module';
 import { SignInPageComponent } from './sign-in-page.component';
-import { CustomerModule } from '@features/customer/customer.module';
+import { UserModule } from '@features/user/user.module';
 
 @NgModule({
-	declarations: [SignInPageComponent],
-	imports: [CommonModule, SignInPageRoutingModule, CustomerModule],
+  declarations: [SignInPageComponent],
+  imports: [CommonModule, SignInPageRoutingModule, UserModule],
 })
 export class SignInPageModule {}
