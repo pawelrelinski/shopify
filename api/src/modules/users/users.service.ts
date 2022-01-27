@@ -48,6 +48,10 @@ export class UsersService {
     });
   }
 
+  public count(): Promise<number> {
+    return this.userRepository.count();
+  }
+
   public async create(userDto: CreateUserDto): Promise<UserDto> {
     const { email, password } = userDto;
     const userInDb = await this.userRepository.findOne({

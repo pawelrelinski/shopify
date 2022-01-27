@@ -17,7 +17,15 @@ export class UsersController {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        createdAt: user.createdAt,
       };
     });
+  }
+
+  @Get('count')
+  @HttpCode(HttpStatus.OK)
+  public async count(): Promise<{ count: number }> {
+    const count: number = await this.usersService.count();
+    return { count };
   }
 }

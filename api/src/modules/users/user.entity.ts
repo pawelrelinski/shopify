@@ -22,6 +22,12 @@ export class User {
   @Column()
   password: string;
 
+  @Column({
+    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
+  })
+  createdAt: string;
+
   @BeforeInsert()
   public async hashPassword(): Promise<void> {
     this.password = await bcrypt.hash(this.password, 10);

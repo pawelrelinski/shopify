@@ -55,6 +55,15 @@ export class ProductsController {
     };
   }
 
+  @Get('count')
+  @HttpCode(HttpStatus.OK)
+  public async count(
+    @Query('category') category: string,
+  ): Promise<{ count: number }> {
+    const count: number = await this.productsService.count(category);
+    return { count };
+  }
+
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   public findOne(@Param('id') id: FindOneParams['id']): Promise<Product> {
@@ -92,28 +101,6 @@ export class ProductsController {
       message: 'Product has been created',
     };
   }
-
-  // @Post('image')
-  // @UseInterceptors(
-  //   FileInterceptor('image', {
-  //     storage: diskStorage({
-  //       destination: './uploads',
-  //       filename: (req, file, cb) => {
-  //         const randomName = Array(32)
-  //           .fill(null)
-  //           .map(() => Math.round(Math.random() * 16).toString(16))
-  //           .join('');
-  //         cb(null, `${randomName}${extname(file.originalname)}`);
-  //       },
-  //     }),
-  //   }),
-  // )
-  // public img(
-  //   @Body() body: { image: any },
-  //   @UploadedFile() image: Express.Multer.File,
-  // ): any {
-  //   console.log(image);
-  // }
 
   @Delete()
   @HttpCode(HttpStatus.OK)

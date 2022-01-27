@@ -35,6 +35,11 @@ export class ProductsService {
     return this.productsRepository.findOne(id);
   }
 
+  public async count(category?: string): Promise<number> {
+    const options = category ? { where: { category } } : {};
+    return this.productsRepository.count(options);
+  }
+
   public async create(product: CreateProductDto): Promise<Product> {
     return this.productsRepository.save(product);
   }
