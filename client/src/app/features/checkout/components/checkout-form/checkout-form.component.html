@@ -1,0 +1,327 @@
+<mat-stepper orientation='vertical' linear='true' #stepper>
+  <mat-step [stepControl]='shippingAddressGroup'>
+    <form [formGroup]='shippingAddressGroup'>
+      <ng-template matStepLabel>Shipping address</ng-template>
+      <div class='flex flex-col gap-5'>
+        <div>
+          <label class='block text-sm font-medium text-gray-700'>Address</label>
+          <div class='mt-1 relative rounded-md shadow-sm'>
+            <input formControlName='address'
+                   type='text'
+                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                   [class.border-red-500]="shippingAddressGroup?.get('address')?.invalid &&
+                                          (shippingAddressGroup?.get('address')?.dirty || shippingAddressGroup?.get('address')?.touched)"
+                   required
+            >
+          </div>
+          <div
+            *ngIf="
+                shippingAddressGroup?.get('address')?.invalid &&
+                (shippingAddressGroup?.get('address')?.dirty || shippingAddressGroup?.get('address')?.touched)
+              "
+            class='flex items-center mt-1 text-red-700'
+          >
+            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.required" class='ml-1 text-xs'>
+              Please enter address!
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.minlength" class='ml-1 text-xs'>
+              Address is too short! (min:
+              {{ shippingAddressGroup?.get('address')?.errors?.minlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('address')?.errors?.minlength?.actualLength }})
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.maxlength" class='ml-1 text-xs'>
+              Address is too long! (min:
+              {{ shippingAddressGroup?.get('address')?.errors?.maxlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('address')?.errors?.maxlength?.actualLength }})
+            </p>
+          </div>
+        </div>
+        <div>
+          <label class='block text-sm font-medium text-gray-700'>City</label>
+          <div class='mt-1 relative rounded-md shadow-sm'>
+            <input formControlName='city'
+                   type='text'
+                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                   [class.border-red-500]="shippingAddressGroup?.get('city')?.invalid &&
+                                          (shippingAddressGroup?.get('city')?.dirty || shippingAddressGroup?.get('city')?.touched)"
+                   required
+            >
+          </div>
+          <div
+            *ngIf="
+                shippingAddressGroup?.get('city')?.invalid &&
+                (shippingAddressGroup?.get('city')?.dirty || shippingAddressGroup?.get('city')?.touched)
+              "
+            class='flex items-center mt-1 text-red-700'
+          >
+            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.required" class='ml-1 text-xs'>
+              Please enter city name!
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.minlength" class='ml-1 text-xs'>
+              City name is too short! (min:
+              {{ shippingAddressGroup?.get('city')?.errors?.minlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('city')?.errors?.minlength?.actualLength }})
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.maxlength" class='ml-1 text-xs'>
+              City name is too long! (min:
+              {{ shippingAddressGroup?.get('city')?.errors?.maxlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('city')?.errors?.maxlength?.actualLength }})
+            </p>
+          </div>
+        </div>
+        <div>
+          <label class='block text-sm font-medium text-gray-700'>Postal code</label>
+          <div class='mt-1 relative rounded-md shadow-sm'>
+            <input formControlName='postalCode'
+                   type='text'
+                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                   [class.border-red-500]="shippingAddressGroup?.get('postalCode')?.invalid &&
+                                          (shippingAddressGroup?.get('postalCode')?.dirty || shippingAddressGroup?.get('postalCode')?.touched)"
+                   required
+            >
+          </div>
+          <div
+            *ngIf="
+                shippingAddressGroup?.get('postalCode')?.invalid &&
+                (shippingAddressGroup?.get('postalCode')?.dirty || shippingAddressGroup?.get('postalCode')?.touched)
+              "
+            class='flex items-center mt-1 text-red-700'
+          >
+            <p *ngIf="shippingAddressGroup?.get('postalCode')?.errors?.required" class='ml-1 text-xs'>
+              Please enter postal code!
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('postalCode')?.errors?.pattern" class='ml-1 text-xs'>
+              Postal code is invalid!
+            </p>
+          </div>
+        </div>
+        <div>
+          <label class='block text-sm font-medium text-gray-700'>Flat number</label>
+          <div class='mt-1 relative rounded-md shadow-sm'>
+            <input formControlName='flatNumber'
+                   type='text'
+                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                   [class.border-red-500]="shippingAddressGroup?.get('flatNumber')?.invalid &&
+                                          (shippingAddressGroup?.get('flatNumber')?.dirty || shippingAddressGroup?.get('flatNumber')?.touched)"
+                   required
+            >
+          </div>
+          <div
+            *ngIf="
+                shippingAddressGroup?.get('flatNumber')?.invalid &&
+                (shippingAddressGroup?.get('flatNumber')?.dirty || shippingAddressGroup?.get('flatNumber')?.touched)
+              "
+            class='flex items-center mt-1 text-red-700'
+          >
+            <p *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.required" class='ml-1 text-xs'>
+              Please enter city name!
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.minlength" class='ml-1 text-xs'>
+              City name is too short! (min:
+              {{ shippingAddressGroup?.get('flatNumber')?.errors?.minlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('flatNumber')?.errors?.minlength?.actualLength }})
+            </p>
+            <p *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.maxlength" class='ml-1 text-xs'>
+              City name is too long! (min:
+              {{ shippingAddressGroup?.get('flatNumber')?.errors?.maxlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('flatNumber')?.errors?.maxlength?.actualLength }})
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='mt-5'>
+        <button matStepperNext
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+          <div>Next</div>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]='paymentDetailsGroup'>
+    <form [formGroup]='paymentDetailsGroup'>
+      <ng-template matStepLabel>Payment details</ng-template>
+      <div class='flex flex-col gap-5'>
+        <div>
+          <label class='block text-sm font-medium text-gray-700'>Card number</label>
+          <div class='mt-1 relative rounded-md shadow-sm'>
+            <input formControlName='cardNumber'
+                   type='number'
+                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                   [class.border-red-500]="paymentDetailsGroup?.get('cardNumber')?.invalid &&
+                                          (paymentDetailsGroup?.get('cardNumber')?.dirty || paymentDetailsGroup?.get('cardNumber')?.touched)"
+                   required
+            >
+          </div>
+          <div
+            *ngIf="
+                paymentDetailsGroup?.get('cardNumber')?.invalid &&
+                (paymentDetailsGroup?.get('cardNumber')?.dirty || paymentDetailsGroup?.get('cardNumber')?.touched)
+              "
+            class='flex items-center mt-1 text-red-700'
+          >
+            <p *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.required" class='ml-1 text-xs'>
+              Please enter card number!
+            </p>
+            <p *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.minlength" class='ml-1 text-xs'>
+              Card number is too short! (min:
+              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.minlength?.requiredLength }}, actual:
+              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.minlength?.actualLength }})
+            </p>
+            <p *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.minlength" class='ml-1 text-xs'>
+              Card number is too long! (min:
+              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.maxlength?.requiredLength }}, actual:
+              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.maxlength?.actualLength }})
+            </p>
+          </div>
+        </div>
+        <div class='flex flex-row gap-5'>
+          <div class='w-full'>
+            <label class='block text-sm font-medium text-gray-700'>Expiration date</label>
+            <div class='mt-1 relative rounded-md shadow-sm'>
+              <input formControlName='expirationDate'
+                     type='text'
+                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                     [class.border-red-500]="paymentDetailsGroup?.get('expirationDate')?.invalid &&
+                                          (paymentDetailsGroup?.get('expirationDate')?.dirty || paymentDetailsGroup?.get('expirationDate')?.touched)"
+                     required
+              >
+            </div>
+            <div
+              *ngIf="
+                paymentDetailsGroup?.get('expirationDate')?.invalid &&
+                (paymentDetailsGroup?.get('expirationDate')?.dirty || paymentDetailsGroup?.get('expirationDate')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="paymentDetailsGroup?.get('expirationDate')?.errors?.required" class='ml-1 text-xs'>
+                Please enter expiration date!
+              </p>
+              <p *ngIf="paymentDetailsGroup?.get('expirationDate')?.errors?.pattern" class='ml-1 text-xs'>
+                Expiration date is invalid!
+              </p>
+            </div>
+          </div>
+          <div class='w-full'>
+            <label class='block text-sm font-medium text-gray-700'>CVV</label>
+            <div class='mt-1 relative rounded-md shadow-sm'>
+              <input formControlName='cvv'
+                     type='number'
+                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                     [class.border-red-500]="paymentDetailsGroup?.get('cvv')?.invalid &&
+                                          (paymentDetailsGroup?.get('cvv')?.dirty || paymentDetailsGroup?.get('cvv')?.touched)"
+                     required
+              >
+            </div>
+            <div
+              *ngIf="
+                paymentDetailsGroup?.get('cvv')?.invalid &&
+                (paymentDetailsGroup?.get('cvv')?.dirty || paymentDetailsGroup?.get('cvv')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="paymentDetailsGroup?.get('cvv')?.errors?.required" class='ml-1 text-xs'>
+                Please enter CVV number!
+              </p>
+              <p *ngIf="paymentDetailsGroup?.get('cvv')?.errors?.pattern" class='ml-1 text-xs'>
+                CVV number is invalid!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-row mt-5 gap-5'>
+        <button matStepperPrevious
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors'>
+          <div>Previous</div>
+        </button>
+        <button matStepperNext
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+          <div>Next</div>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]='contactInformationGroup'>
+    <form [formGroup]='contactInformationGroup'>
+      <ng-template matStepLabel>Contact information</ng-template>
+      <div class='flex flex-col gap-5'>
+        <div class='flex flex-row gap-5'>
+          <div class='w-full'>
+            <label class='block text-sm font-medium text-gray-700'>Email</label>
+            <div class='mt-1 relative rounded-md shadow-sm'>
+              <input formControlName='email'
+                     type='email'
+                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                     placeholder='john@gmail.com'
+                     [class.border-red-500]="contactInformationGroup?.get('email')?.invalid &&
+                                          (contactInformationGroup?.get('email')?.dirty || contactInformationGroup?.get('email')?.touched)"
+                     required
+              >
+            </div>
+            <div
+              *ngIf="
+                contactInformationGroup?.get('email')?.invalid &&
+                (contactInformationGroup?.get('email')?.dirty || contactInformationGroup?.get('email')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="contactInformationGroup?.get('email')?.errors?.required" class='ml-1 text-xs'>
+                Please enter email!
+              </p>
+              <p *ngIf="contactInformationGroup?.get('email')?.errors?.email" class='ml-1 text-xs'>
+                Email is invalid!
+              </p>
+            </div>
+          </div>
+          <div class='w-full'>
+            <label class='block text-sm font-medium text-gray-700'>Phone number</label>
+            <div class='mt-1 relative rounded-md shadow-sm'>
+              <input formControlName='phoneNumber'
+                     type='text'
+                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                     placeholder='111-222-333'
+                     [class.border-red-500]="contactInformationGroup?.get('phoneNumber')?.invalid &&
+                                          (contactInformationGroup?.get('phoneNumber')?.dirty || contactInformationGroup?.get('phoneNumber')?.touched)"
+                     required
+              >
+            </div>
+            <div
+              *ngIf="
+                contactInformationGroup?.get('phoneNumber')?.invalid &&
+                (contactInformationGroup?.get('phoneNumber')?.dirty || contactInformationGroup?.get('phoneNumber')?.touched)
+              "
+              class='flex items-center mt-1 text-red-700'
+            >
+              <p *ngIf="contactInformationGroup?.get('phoneNumber')?.errors?.required" class='ml-1 text-xs'>
+                Please enter phone number!
+              </p>
+              <p *ngIf="contactInformationGroup?.get('phoneNumber')?.errors?.pattern" class='ml-1 text-xs'>
+                Phone number is invalid!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-row mt-5 gap-5'>
+        <button matStepperPrevious
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors'>
+          <div>Previous</div>
+        </button>
+        <button matStepperNext
+                (click)='setCheckoutData()'
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+          <div>Next</div>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)='stepper.reset()'>Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
