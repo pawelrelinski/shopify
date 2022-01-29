@@ -2,3 +2,11 @@
   --tw-bg-opacity: 1;
   background-color: rgba(4, 120, 87, var(--tw-bg-opacity)) !important;
 }
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.border-green {
+  border: 1px solid rgb(5, 150, 105);
+}

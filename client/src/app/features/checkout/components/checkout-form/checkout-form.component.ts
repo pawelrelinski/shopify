@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Checkout } from '@features/checkout/models';
+import { Checkout, DeliveryMethod } from '@features/checkout/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'shopify-checkout-form',
@@ -9,18 +10,30 @@ import { Checkout } from '@features/checkout/models';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckoutFormComponent implements OnInit {
+  @Output() onCheckoutData: EventEmitter<Checkout> = new EventEmitter<Checkout>();
+
   public shippingAddressGroup!: FormGroup;
   public paymentDetailsGroup!: FormGroup;
   public contactInformationGroup!: FormGroup;
 
   public checkoutData!: Checkout;
+  public deliveryMethods: DeliveryMethod[] = [
+    { name: 'Standard', deliveryTime: '4-10', price: 5.0 },
+    { name: 'Express', deliveryTime: '2-5', price: 16.0 },
+  ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   public ngOnInit(): void {
     this.setShippingAddressGroup();
     this.setPaymentDetailsGroup();
     this.setContactInformationGroup();
+  }
+
+  public confirmCheckoutData(): void {
+    this.setCheckoutData();
+    this.onCheckoutData.emit(this.checkoutData);
+    // this.router.navigate(['']);
   }
 
   public setCheckoutData(): void {

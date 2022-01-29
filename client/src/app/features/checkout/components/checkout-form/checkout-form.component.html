@@ -1,4 +1,4 @@
-<mat-stepper orientation='vertical' linear='true' #stepper>
+<mat-stepper orientation='vertical' linear='false' #stepper>
   <mat-step [stepControl]='shippingAddressGroup'>
     <form [formGroup]='shippingAddressGroup'>
       <ng-template matStepLabel>Shipping address</ng-template>
@@ -316,12 +316,162 @@
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)='stepper.reset()'>Reset</button>
+    <form>
+      <ng-template matStepLabel>Delivery method</ng-template>
+      <div class='flex flex-col gap-5'>
+        <div class='flex flex-row gap-5'>
+          <div class='w-full flex flex-col gap-5'>
+            <label *ngFor='let method of deliveryMethods'>
+              <input checked type='radio' name='deliveryMethod' [id]='method.name' class='hidden' />
+              <div
+                class='label-checked:bg-green-50 label-checked:border-green-600 p-5 pr-12 rounded-md border-green px-5 cursor-pointer transition'>
+                <p class='text-gray-800 text-xl font-medium'>
+                  {{ method.name }}
+                </p>
+                <p class='text-gray-400  mb-4'>
+                  {{ method.deliveryTime }} business days
+                </p>
+                <p>{{ method.price | currency }}</p>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-row mt-5 gap-5'>
+        <button matStepperPrevious
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors'>
+          <div>Previous</div>
+        </button>
+        <button matStepperNext
+                (click)='setCheckoutData()'
+                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+          <div>Next</div>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Confirm shipping information</ng-template>
+    <div class='bg-white shadow mt-5 overflow-hidden sm:rounded-lg'>
+      <div class='px-4 py-5 sm:px-6'>
+        <h3 class='text-lg leading-6 font-medium text-gray-900'>
+          Shipping address
+        </h3>
+        <p class='mt-1 max-w-2xl text-sm text-gray-500'>
+          Address, city, postal number and flat number
+        </p>
+      </div>
+      <div class='border-t border-gray-200'>
+        <dl>
+          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Address
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ shippingAddressGroup?.get('address')?.value }}
+            </dd>
+          </div>
+          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              City
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ shippingAddressGroup?.get('city')?.value }}
+            </dd>
+          </div>
+          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Postal code
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ shippingAddressGroup?.get('postalCode')?.value }}
+            </dd>
+          </div>
+          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Flat number
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ shippingAddressGroup?.get('flatNumber')?.value }}
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class='px-4 py-5 sm:px-6'>
+        <h3 class='text-lg leading-6 font-medium text-gray-900'>
+          Payment details
+        </h3>
+        <p class='mt-1 max-w-2xl text-sm text-gray-500'>
+          Card number, expiration date and CVV number
+        </p>
+      </div>
+      <div class='border-t border-gray-200'>
+        <dl>
+          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Card number
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ paymentDetailsGroup?.get('cardNumber')?.value }}
+            </dd>
+          </div>
+          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Expiration date
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ paymentDetailsGroup?.get('expirationDate')?.value }}
+            </dd>
+          </div>
+          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              CVV number
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ paymentDetailsGroup?.get('cvv')?.value }}
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class='px-4 py-5 sm:px-6'>
+        <h3 class='text-lg leading-6 font-medium text-gray-900'>
+          Contact information
+        </h3>
+        <p class='mt-1 max-w-2xl text-sm text-gray-500'>
+          Email and phone number
+        </p>
+      </div>
+      <div class='border-t border-gray-200'>
+        <dl>
+          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Email
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ contactInformationGroup?.get('email')?.value }}
+            </dd>
+          </div>
+          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+            <dt class='text-sm font-medium text-gray-500'>
+              Phone number
+            </dt>
+            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+              {{ contactInformationGroup?.get('phoneNumber')?.value }}
+            </dd>
+          </div>
+        </dl>
+      </div>
     </div>
+
+    <button matStepperNext
+            (click)='confirmCheckoutData()'
+            class='inline-flex items-center justify-center space-x-2 py-3 px-7 mt-5 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+      <div>Confirm data</div>
+    </button>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>End shopping</ng-template>
   </mat-step>
 </mat-stepper>
-

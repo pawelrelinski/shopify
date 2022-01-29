@@ -18,9 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.shoppingCartSubtotalPriceService.get().subscribe((data) => {
-      this.subtotalPrice = data.reduce((sum, val) => sum + val);
-      this.subtotalPrice = this.subtotalPrice.toFixed(2);
+    this.shoppingCartSubtotalPriceService.get().subscribe((data: number) => {
+      this.subtotalPrice = data.toFixed(2);
     });
   }
 
