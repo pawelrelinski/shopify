@@ -43,12 +43,14 @@ export class ProductsController {
     @Query('sortMethod') sortMethod: ListAllProductsDto['sortMethod'],
     @Query('limit') take: ListAllProductsDto['take'],
     @Query('offset') skip: ListAllProductsDto['skip'],
+    @Query('category') category: ListAllProductsDto['category'],
   ): Promise<{ products: Product[] }> {
     const products: Product[] = await this.productsService.findAllByFilter(
       sortBy,
-      sortMethod,
+      sortMethod.toUpperCase() as ListAllProductsDto['sortMethod'],
       take,
       skip,
+      category,
     );
     return {
       products: products,

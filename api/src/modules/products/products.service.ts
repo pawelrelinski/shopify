@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, FindManyOptions, getManager, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ListAllProductsDto } from './dto/list-all-products.dto';
 
@@ -21,14 +21,20 @@ export class ProductsService {
     sortMethod: ListAllProductsDto['sortMethod'],
     take: ListAllProductsDto['take'],
     skip: ListAllProductsDto['skip'],
+    category: ListAllProductsDto['category'],
   ): Promise<Product[]> {
-    return this.productsRepository.find({
+    const whereClauseCondition = category ? { category } : {};
+    const recordsToSkip = skip * take;
+    const findOptions: FindManyOptions<Product> = {
+      where: whereClauseCondition,
       order: {
         [sortBy]: sortMethod,
       },
-      skip,
+      skip: recordsToSkip,
       take,
-    });
+    };
+
+    return this.productsRepository.find(findOptions);
   }
 
   public async findOne(id: string): Promise<Product> {

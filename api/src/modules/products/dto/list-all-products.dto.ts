@@ -1,6 +1,7 @@
 export interface ListAllProductsDto {
   sortBy: string;
-  sortMethod: 'asc' | 'desc';
+  sortMethod: 'ASC' | 'DESC';
   take: number;
   skip: number;
+  category: string;
 }

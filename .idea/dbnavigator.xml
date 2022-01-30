@@ -24,15 +24,22 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2">
+        <schema name="mysql" object-types="table, view" />
+        <schema name="shopify" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2">
-      <console name="Shopify" type="STANDARD" schema="mysql" session="Main" />
+      <console name="Shopify" type="STANDARD" schema="shopify" session="Main"><![CDATA[select * from product p;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2" object-ref="consoles/Shopify" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2" />
@@ -280,8 +287,6 @@
           <content-type name="JavaScript" enabled="true" />
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
-          <content-type name="JSP" enabled="true" />
-          <content-type name="JSPx" enabled="true" />
           <content-type name="YAML" enabled="true" />
         </content-types>
       </qualified-text-editor>
