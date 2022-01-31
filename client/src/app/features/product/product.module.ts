@@ -8,9 +8,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import {
   ProductAvailableWidgetComponent,
-  ProductFormComponent,
-  ProductQuantityCounterComponent,
   ProductFileUploadComponent,
+  ProductQuantityCounterComponent,
 } from '@features/product/components';
 import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
@@ -21,10 +20,10 @@ import { ProductOverviewModule } from '@features/product/components/product-over
 import { ProductListModule } from '@features/product/components/product-list/product-list.module';
 import { ProductTableModule } from '@features/product/components/product-table/product-table.module';
 import { NotificationModule } from '@features/notification/notification.module';
+import { ProductCreateFormModule } from '@features/product/components/product-create-form/product-create-form.module';
 
 @NgModule({
   declarations: [
-    ProductFormComponent,
     ProductAvailableWidgetComponent,
     ProductQuantityCounterComponent,
     ProductFileUploadComponent,
@@ -45,14 +44,15 @@ import { NotificationModule } from '@features/notification/notification.module';
     ProductListModule,
     ProductTableModule,
     NotificationModule,
+    ProductCreateFormModule,
   ],
   exports: [
-    ProductFormComponent,
     ProductAvailableWidgetComponent,
     ProductOverviewModule,
     ProductQuantityCounterComponent,
     ProductListModule,
     ProductTableModule,
+    ProductCreateFormModule,
   ],
 })
 export class ProductModule {}

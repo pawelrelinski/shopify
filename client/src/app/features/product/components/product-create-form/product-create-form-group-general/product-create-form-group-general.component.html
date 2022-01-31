@@ -1,0 +1,242 @@
+<div [formGroup]='generalForm' class='border-t border-gray-200'>
+  <dl>
+    <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Name <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <input
+          formControlName='name'
+          placeholder='Solar panel'
+          type='text'
+          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          required
+        />
+        <div
+          *ngIf="
+                generalForm?.get('name')?.invalid &&
+                (generalForm?.get('name')?.dirty || generalForm?.get('name')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('name')?.errors?.required" class='ml-1 text-xs'>
+            Please enter name!
+          </p>
+          <p *ngIf="generalForm?.get('name')?.errors?.minlength" class='ml-1 text-xs'>
+            Name is too short! (min:
+            {{ generalForm?.get('name')?.errors?.minlength?.requiredLength }}, actual:
+            {{ generalForm?.get('name')?.errors?.minlength?.actualLength }})
+          </p>
+          <p *ngIf="generalForm?.get('name')?.errors?.maxlength" class='ml-1 text-xs'>
+            Name is too long! (max:
+            {{ generalForm?.get('name')?.errors?.maxlength?.requiredLength }}, actual:
+            {{ generalForm?.get('name')?.errors?.maxlength?.actualLength }})
+          </p>
+        </div>
+      </dd>
+    </div>
+    <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Regular price (PLN) <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <input
+          formControlName='regularPrice'
+          placeholder='10.99'
+          type='number'
+          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          required
+        />
+        <div
+          *ngIf="
+                generalForm?.get('regularPrice')?.invalid &&
+                (generalForm?.get('regularPrice')?.dirty ||
+                  generalForm?.get('regularPrice')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('regularPrice')?.errors?.required" class='ml-1 text-xs'>
+            Please enter regular price!
+          </p>
+          <p *ngIf="generalForm?.get('regularPrice')?.errors?.min" class='ml-1 text-xs'>
+            Price is too low! (min: {{ generalForm?.get('regularPrice')?.errors?.min?.min }},
+            actual: {{ generalForm?.get('regularPrice')?.errors?.min?.actual }})
+          </p>
+          <p *ngIf="generalForm?.get('regularPrice')?.errors?.max" class='ml-1 text-xs'>
+            Price is too high! (max: {{ generalForm?.get('regularPrice')?.errors?.max?.max }},
+            actual: {{ generalForm?.get('regularPrice')?.errors?.max?.actual }})
+          </p>
+        </div>
+      </dd>
+    </div>
+    <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>Sale price (PLN)</dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <input
+          formControlName='salePrice'
+          placeholder='8.99'
+          type='number'
+          class='bg-transparent rounded border-gray-300 border-2 w-full'
+        />
+        <div
+          *ngIf="
+                generalForm?.get('salePrice')?.invalid &&
+                (generalForm?.get('salePrice')?.dirty || generalForm?.get('salePrice')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('salePrice')?.errors?.min" class='ml-1 text-xs'>
+            Price is too low! (min: {{ generalForm?.get('salePrice')?.errors?.min?.min }},
+            actual: {{ generalForm?.get('salePrice')?.errors?.min?.actual }})
+          </p>
+          <p *ngIf="generalForm?.get('salePrice')?.errors?.max" class='ml-1 text-xs'>
+            Price is too high! (max: {{ generalForm?.get('salePrice')?.errors?.max?.max }},
+            actual: {{ generalForm?.get('salePrice')?.errors?.max?.actual }})
+          </p>
+        </div>
+      </dd>
+    </div>
+    <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Short description <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <angular-editor formControlName='shortDescription' [config]='editorConfig'>
+        </angular-editor>
+        <div
+          *ngIf="
+                generalForm?.get('shortDescription')?.invalid &&
+                (generalForm?.get('shortDescription')?.dirty ||
+                  generalForm?.get('shortDescription')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('shortDescription')?.errors?.required" class='ml-1 text-xs'>
+            Please enter description!
+          </p>
+          <p *ngIf="generalForm?.get('shortDescription')?.errors?.minlength" class='ml-1 text-xs'>
+            Description is too short! (min:
+            {{ generalForm?.get('shortDescription')?.errors?.minlength?.requiredLength }}, actual:
+            {{ generalForm?.get('shortDescription')?.errors?.minlength?.actualLength }})
+          </p>
+          <p *ngIf="generalForm?.get('shortDescription')?.errors?.maxlength" class='ml-1 text-xs'>
+            Description is too long! (max:
+            {{ generalForm?.get('shortDescription')?.errors?.maxlength?.requiredLength }}, actual:
+            {{ generalForm?.get('shortDescription')?.errors?.maxlength?.actualLength }})
+          </p>
+
+        </div>
+      </dd>
+    </div>
+    <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Full description <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <angular-editor formControlName='description' [config]='editorConfig'>
+        </angular-editor>
+        <div
+          *ngIf="
+                generalForm?.get('description')?.invalid &&
+                (generalForm?.get('description')?.dirty ||
+                  generalForm?.get('description')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('description')?.errors?.required" class='ml-1 text-xs'>
+            Please enter description!
+          </p>
+          <p *ngIf="generalForm?.get('description')?.errors?.minlength" class='ml-1 text-xs'>
+            Description is too short! (min:
+            {{ generalForm?.get('description')?.errors?.minlength?.requiredLength }}, actual:
+            {{ generalForm?.get('description')?.errors?.minlength?.actualLength }})
+          </p>
+        </div>
+      </dd>
+    </div>
+    <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Producer <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <input
+          formControlName='producer'
+          placeholder='Sp.zoo'
+          type='text'
+          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          required
+        />
+        <div
+          *ngIf="
+                generalForm?.get('producer')?.invalid &&
+                (generalForm?.get('producer')?.dirty || generalForm?.get('producer')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('producer')?.errors?.required" class='ml-1 text-xs'>
+            Please enter producer name!
+          </p>
+          <p *ngIf="generalForm?.get('producer')?.errors?.minlength" class='ml-1 text-xs'>
+            Producer name is too short! (min:
+            {{ generalForm?.get('producer')?.errors?.minlength?.requiredLength }}, actual:
+            {{ generalForm?.get('producer')?.errors?.minlength?.actualLength }})
+          </p>
+          <p *ngIf="generalForm?.get('producer')?.errors?.maxlength" class='ml-1 text-xs'>
+            Producer name is too long! (max:
+            {{ generalForm?.get('producer')?.errors?.maxlength?.requiredLength }}, actual:
+            {{ generalForm?.get('producer')?.errors?.maxlength?.actualLength }})
+          </p>
+        </div>
+      </dd>
+    </div>
+    <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Reference number <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <input
+          formControlName='refNumber'
+          placeholder='FBA3159'
+          type='text'
+          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          required
+        />
+        <div
+          *ngIf="
+                generalForm?.get('refNumber')?.invalid &&
+                (generalForm?.get('refNumber')?.dirty || generalForm?.get('refNumber')?.touched)
+              "
+          class='flex items-center mt-1 text-red-700'
+        >
+          <p *ngIf="generalForm?.get('refNumber')?.errors?.required" class='ml-1 text-xs'>
+            Please enter reference number!
+          </p>
+          <p *ngIf="generalForm?.get('refNumber')?.errors?.minlength" class='ml-1 text-xs'>
+            Reference number is too short! (min:
+            {{ generalForm?.get('refNumber')?.errors?.minlength?.requiredLength }}, actual:
+            {{ generalForm?.get('refNumber')?.errors?.minlength?.actualLength }})
+          </p>
+          <p *ngIf="generalForm?.get('producer')?.errors?.maxlength" class='ml-1 text-xs'>
+            Reference number is too long! (max:
+            {{ generalForm?.get('refNumber')?.errors?.maxlength?.requiredLength }}, actual:
+            {{ generalForm?.get('refNumber')?.errors?.maxlength?.actualLength }})
+          </p>
+        </div>
+      </dd>
+    </div>
+    <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+      <dt class='text-sm font-medium text-gray-500'>
+        Product image <span class='text-red-700'>*</span>
+      </dt>
+      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+        <label class='image-upload-container btn btn-bwm'>
+          <span>Select Image</span>
+          <input #imageInput
+                 type='file'
+                 accept='image/*'
+                 (change)='processFile(imageInput)'>
+        </label>
+      </dd>
+    </div>
+  </dl>
+</div>

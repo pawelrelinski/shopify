@@ -26,11 +26,11 @@ class ImageSnippet {
 }
 
 @Component({
-  selector: 'shopify-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss'],
+  selector: 'shopify-create-product-form',
+  templateUrl: './product-create-form.component.html',
+  styleUrls: ['./product-create-form.component.scss'],
 })
-export class ProductFormComponent implements OnInit {
+export class ProductCreateFormComponent implements OnInit {
   public form!: FormGroup;
   public moreShippingMethodsOptionsIsShow = false;
   public categories: Category[] = [];

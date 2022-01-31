@@ -8,3 +8,4 @@ export * from './product-create-dto';
 export * from './product-create-response';
 export * from './product-delete-response';
 export * from './sort-action';
+export * from './shipping-method';
