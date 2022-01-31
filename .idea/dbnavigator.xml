@@ -26,20 +26,17 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2">
-        <schema name="mysql" object-types="table, view" />
         <schema name="shopify" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2">
-      <console name="Shopify" type="STANDARD" schema="shopify" session="Main"><![CDATA[select * from product p;]]></console>
+      <console name="Shopify" type="STANDARD" schema="shopify" session="Main"><![CDATA[select * from product;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2" object-ref="consoles/Shopify" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2" />

@@ -1,8 +1,10 @@
+import { Category } from '@features/category/models';
+
 export interface ShoppingCartItem {
   id: number | string;
   name: string;
   price: number;
   quantity: number;
-  category: string;
+  category: Category;
   refNumber?: string;
 }

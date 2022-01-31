@@ -25,7 +25,9 @@ export class ProductTableComponent implements OnInit {
   private queryParams!: Map<string, string>;
   private readonly defaultSortOptions: SortOptions = {
     by: 'id',
-    method: 'asc',
+    method: 'ASC',
+    take: 10,
+    skip: 0,
   };
 
   constructor(private productService: ProductService, private dialog: MatDialog) {}

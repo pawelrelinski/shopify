@@ -1,6 +1,6 @@
 <div>
   <a
-    [routerLink]="['/products/', product.category, product.id]"
+    [routerLink]="['/products/', product.category.formatName, product.id]"
     class='block h-64 rounded-lg shadow-lg bg-white'
   ></a>
   <div class='flex items-center justify-between mt-3'>

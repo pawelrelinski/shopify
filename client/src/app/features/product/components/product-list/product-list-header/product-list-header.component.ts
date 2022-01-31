@@ -7,7 +7,15 @@ import { Component } from '@angular/core';
 export class ProductListHeaderComponent {
   public dropDownMenuIsOpen = false;
 
-  public toggleDropDownMenu(): void {
+  public toggleMenu(): void {
     this.dropDownMenuIsOpen = !this.dropDownMenuIsOpen;
+  }
+
+  public showMenu(): void {
+    this.dropDownMenuIsOpen = true;
+  }
+
+  public hideMenu(): void {
+    this.dropDownMenuIsOpen = false;
   }
 }

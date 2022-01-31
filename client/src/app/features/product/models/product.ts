@@ -1,12 +1,15 @@
+import { Category } from '@features/category/models';
+import { SafeHtml } from '@angular/platform-browser';
+
 export interface Product {
   id: number;
   name: string;
-  shortDescription: string;
-  description: string;
+  shortDescription: string | SafeHtml;
+  description: string | SafeHtml;
   defaultPrice: number;
   promotionPrice: number;
   isAvailable: boolean;
-  category: string;
+  category: Category;
   quantity: number;
   producer: string;
   createdAt: string;

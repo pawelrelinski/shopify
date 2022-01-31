@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlyoutMenu } from '@features/layout/models';
 import { FlyoutMenuService } from '@features/layout/services';
 import { Subject, takeUntil } from 'rxjs';
+import { CategoryService } from '@features/category/services';
+import { Category } from '@features/category/models';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'shopify-layout-products-flyout-menu',
@@ -12,12 +15,19 @@ export class LayoutProductsFlyoutMenuComponent implements OnInit, OnDestroy {
   public flyoutMenuName!: FlyoutMenu;
   public showFlyoutMenu: boolean = false;
 
+  public categories: Category[] = [];
+
   private readonly destroyed = new Subject<boolean>();
 
-  constructor(private flyoutMenuService: FlyoutMenuService) {}
+  constructor(
+    private flyoutMenuService: FlyoutMenuService,
+    private categoryService: CategoryService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();
+    this.setCategories();
   }
 
   public ngOnDestroy(): void {
@@ -45,5 +55,20 @@ export class LayoutProductsFlyoutMenuComponent implements OnInit, OnDestroy {
 
   private checkFlyoutMenuName(): void {
     this.showFlyoutMenu = this.flyoutMenuName === FlyoutMenu.PRODUCTS;
+  }
+
+  private setCategories(): void {
+    this.categoryService.getAll().subscribe((categories: Category[]) => {
+      this.categories = categories;
+      this.setTrustedHTMLIcons();
+    });
+  }
+
+  private setTrustedHTMLIcons() {
+    for (const category of this.categories) {
+      category.heroIconAsSvg = this.sanitizer.bypassSecurityTrustHtml(
+        category.heroIconAsSvg as string
+      );
+    }
   }
 }

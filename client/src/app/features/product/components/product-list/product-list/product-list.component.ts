@@ -19,7 +19,9 @@ export class ProductListComponent implements OnInit {
   private queryParams!: Map<string, string>;
   private readonly defaultSortOptions: SortOptions = {
     by: 'id',
-    method: 'asc',
+    method: 'ASC',
+    take: 10,
+    skip: 0,
   };
 
   constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) {}
@@ -41,8 +43,8 @@ export class ProductListComponent implements OnInit {
     this.queryParams = new Map<string, string>()
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
-      .set('limit', '10')
-      .set('offset', (this.currentPage - 1).toString())
+      .set('take', sortOptions.take + '')
+      .set('skip', (this.currentPage - 1).toString())
       .set('category', this.categoryName);
 
     return this.queryParams;

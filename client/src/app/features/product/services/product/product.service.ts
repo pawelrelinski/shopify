@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import {
   Product,
@@ -10,6 +10,7 @@ import {
   ProductGetAllByResponse,
 } from '@features/product/models';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +20,12 @@ export class ProductService {
   private urlBuilder!: UrlBuilder;
   private queryStringParameters!: QueryStringParameters;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
-  public getAll(): Observable<Array<Product>> {
+  public getAll(): Observable<Product[]> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<Array<Product>>(url);
+    return this.http.get<Product[]>(url);
   }
 
   public getAllBy(queryParams: Map<string, string>): Observable<ProductGetAllByResponse> {
@@ -42,7 +43,21 @@ export class ProductService {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<Product>(url);
+    return this.http.get<Product>(url).pipe(
+      map((product: Product) => {
+        const trustedHTMLShortDescription = this.sanitizer.bypassSecurityTrustHtml(
+          product.shortDescription as string
+        );
+        const trustedHTMLDescription = this.sanitizer.bypassSecurityTrustHtml(
+          product.description as string
+        );
+
+        product.shortDescription = trustedHTMLShortDescription;
+        product.description = trustedHTMLDescription;
+
+        return product;
+      })
+    );
   }
 
   public create(product: ProductCreateDto): Observable<HttpEvent<ProductCreateResponse>> {

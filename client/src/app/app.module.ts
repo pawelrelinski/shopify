@@ -10,6 +10,7 @@ import { ShopifyFooterModule } from '@shared/shopify-footer/shopify-footer.modul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DirectivesModule } from '@core/directives/directives.module';
 import { NotificationModule } from '@features/notification/notification.module';
+import { CategoryModule } from '@features/category/category.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { NotificationModule } from '@features/notification/notification.module';
     LayoutModule,
     ShopifyFooterModule,
     NotificationModule,
+    CategoryModule,
   ],
   bootstrap: [AppComponent],
 })
