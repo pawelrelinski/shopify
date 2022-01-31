@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '@features/user/models';
+import { map, Observable } from 'rxjs';
+import { GetOneById, User } from '@features/user/models';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +25,19 @@ export class UserService {
     this.segmentsUrl.push('count');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
     return this.http.get<{ count: number }>(url);
+  }
+
+  public updateOneAttribute(id: number, attributeName: string, attributeValue: string) {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('attribute');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+  }
+
+  public getOneById(id: number): Observable<GetOneById['user']> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push(id.toString());
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get<GetOneById>(url).pipe(map((user: GetOneById) => user.user));
   }
 
   private setDefaultUrlConfig(): void {

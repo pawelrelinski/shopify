@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  UserCountWidgetComponent,
   UserProfileComponent,
   UserProfileFavouritesComponent,
   UserProfileOrdersComponent,
@@ -11,10 +12,10 @@ import {
   UserSignUpFormComponent,
   UserTableComponent,
   UserTableRowComponent,
-  UserCountWidgetComponent,
 } from '@features/user/components';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 
@@ -39,6 +40,7 @@ import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagi
     FormsModule,
     ReactiveFormsModule,
     ShopifyPaginationModule,
+    MatTooltipModule,
   ],
   exports: [
     UserSignInFormComponent,

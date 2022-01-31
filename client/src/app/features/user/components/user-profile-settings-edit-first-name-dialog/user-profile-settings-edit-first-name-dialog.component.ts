@@ -16,6 +16,23 @@ export class UserProfileSettingsEditFirstNameDialogComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.setUserInfoForm();
+  }
+
+  public close(): void {
+    this.dialogRef.close();
+  }
+
+  public updateProfileData(): void {
+    const updatedUserData = {
+      firstName: this.userInfoForm.get('firstName')?.value,
+      lastName: this.userInfoForm.get('lastName')?.value,
+      email: this.userInfoForm.get('email')?.value,
+    };
+    this.dialogRef.close(updatedUserData);
+  }
+
+  private setUserInfoForm(): void {
     this.userInfoForm = this.fb.group({
       firstName: [
         this.data.firstName,
@@ -27,9 +44,5 @@ export class UserProfileSettingsEditFirstNameDialogComponent implements OnInit {
       ],
       email: [this.data.email, [Validators.required, Validators.email]],
     });
-  }
-
-  public close(): void {
-    this.dialogRef.close();
   }
 }

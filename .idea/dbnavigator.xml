@@ -32,7 +32,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="592aaa41-8992-4c0f-bb4b-12caaf8db9d2">
-      <console name="Shopify" type="STANDARD" schema="shopify" session="Main"><![CDATA[select * from product;]]></console>
+      <console name="Shopify" type="STANDARD" schema="shopify" session="Main"><![CDATA[select p.`name`, p.`views` 
+from product p
+order by p.`views` desc;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
