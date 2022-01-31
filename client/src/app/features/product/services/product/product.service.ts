@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 
 import {
   Product,
@@ -63,10 +63,15 @@ export class ProductService {
   public create(product: ProductCreateDto): Observable<HttpEvent<ProductCreateResponse>> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl) + '/';
-    return this.http.post<ProductCreateResponse>(url, product, {
-      reportProgress: true,
-      observe: 'events',
-    });
+    return this.addImage(product.image).pipe(
+      switchMap((image: any) => {
+        product.image = image.filename;
+        return this.http.post<ProductCreateResponse>(url, product, {
+          reportProgress: true,
+          observe: 'events',
+        });
+      })
+    );
   }
 
   public delete(id: number): Observable<ProductDeleteResponse> {
@@ -88,6 +93,15 @@ export class ProductService {
 
     url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     return this.http.get<{ count: number }>(url);
+  }
+
+  private addImage(image: Blob): Observable<Object> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('image');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post(url, formData);
   }
 
   private setDefaultUrlConfig(): void {

@@ -21,6 +21,9 @@ interface ErrorResponse {
   name: string;
   message: string;
 }
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 
 @Component({
   selector: 'shopify-product-form',
@@ -58,7 +61,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.createProductObjectToSend());
     this.productService
       .create(this.createProductObjectToSend())
       .subscribe((event: HttpEvent<ProductCreateResponse>) => {
@@ -75,6 +77,20 @@ export class ProductFormComponent implements OnInit {
           });
         }
       });
+  }
+
+  selectedFile!: ImageSnippet;
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.updateImageValue(this.selectedFile.file);
+    });
+
+    reader.readAsDataURL(file);
   }
 
   public onCheckboxChange(event: any): void {
@@ -98,7 +114,7 @@ export class ProductFormComponent implements OnInit {
     this.moreShippingMethodsOptionsIsShow = !this.moreShippingMethodsOptionsIsShow;
   }
 
-  public updateImageValue(file: File): void {
+  public updateImageValue(file: any): void {
     this.getGeneral()?.get('image')?.setValue(file);
   }
 

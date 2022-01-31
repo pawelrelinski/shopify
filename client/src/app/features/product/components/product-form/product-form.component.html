@@ -235,10 +235,13 @@
             Product image <span class='text-red-700'>*</span>
           </dt>
           <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-            <shopify-product-file-upload formControlName="image"
-                                         (onFile)='updateImageValue($event)'
-                                         [progress]='imageProgressBar'>
-            </shopify-product-file-upload>
+            <label class='image-upload-container btn btn-bwm'>
+              <span>Select Image</span>
+              <input #imageInput
+                     type='file'
+                     accept='image/*'
+                     (change)='processFile(imageInput)'>
+            </label>
           </dd>
         </div>
       </dl>
