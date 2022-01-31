@@ -1,7 +1,16 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Query,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { FindAllUsersDto } from './dto/find-all-users.dto';
 import { User } from './user.entity';
+import { FindOneById } from './dto/find-one-by-id.dto';
 
 @Controller('users')
 export class UsersController {
@@ -27,5 +36,26 @@ export class UsersController {
   public async count(): Promise<{ count: number }> {
     const count: number = await this.usersService.count();
     return { count };
+  }
+
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  public async findOneById(@Param('id') id: User['id']): Promise<FindOneById> {
+    const user: FindOneById['user'] = await this.usersService.findOneById(id);
+    return { user };
+  }
+
+  @Patch(':id/attribute')
+  @HttpCode(HttpStatus.OK)
+  public async updateAttribute(
+    @Param('id') id: User['id'],
+    @Query('attrName') attrName: string,
+    @Query('attrValue') attrValue: string,
+  ): Promise<User> {
+    return this.usersService.findOneByIdAndUpdateOperation(
+      id,
+      attrName,
+      attrValue,
+    );
   }
 }

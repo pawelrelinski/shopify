@@ -36,6 +36,28 @@ export class ProductsController {
     };
   }
 
+  @Post('image')
+  @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const randomName = Array(32)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 16).toString(16))
+            .join('');
+          cb(null, `${randomName}${extname(file.originalname)}`);
+        },
+      }),
+    }),
+  )
+  public async addImage(
+    @UploadedFile() image: Express.Multer.File,
+  ): Promise<Express.Multer.File> {
+    return image;
+  }
+
   @Get('findByFilter')
   @HttpCode(HttpStatus.OK)
   public async findAllByFilter(
@@ -74,29 +96,12 @@ export class ProductsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, cb) => {
-          const randomName = Array(32)
-            .fill(null)
-            .map(() => Math.round(Math.random() * 16).toString(16))
-            .join('');
-          cb(null, `${randomName}${extname(file.originalname)}`);
-        },
-      }),
-    }),
-  )
   public async create(
     @Body() createProductDto: CreateProductDto,
-    @UploadedFile() image: Express.Multer.File,
   ): Promise<CreateProductResponseDto> {
     const product: Product = await this.productsService.create(
       createProductDto,
     );
-    console.log(image);
-    console.log(createProductDto);
     return {
       product: product,
       status: HttpStatus.CREATED,

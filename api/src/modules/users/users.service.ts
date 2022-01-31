@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
+import { FindOneById } from './dto/find-one-by-id.dto';
 
 @Injectable()
 export class UsersService {
@@ -17,8 +18,22 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  public findOne(options: object): Promise<UserDto> {
+  public findOne(options: FindOneOptions<User>): Promise<UserDto> {
     return this.userRepository.findOne(options);
+  }
+
+  public findOneById(id: User['id']): Promise<User> {
+    return this.userRepository.findOne(id);
+  }
+
+  public async findOneByIdAndUpdateOperation(
+    id: User['id'],
+    attributeName: string,
+    attributeValue: string,
+  ): Promise<User> {
+    const user: User = await this.userRepository.findOne(id);
+    user[attributeName] = attributeValue;
+    return this.userRepository.save(user);
   }
 
   public async findByEmail({

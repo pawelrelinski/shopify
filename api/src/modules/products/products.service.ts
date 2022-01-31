@@ -49,10 +49,12 @@ export class ProductsService {
   }
 
   public async findOne(id: string): Promise<Product> {
-    return this.productsRepository.findOne({
+    const product = await this.productsRepository.findOne({
       where: { id },
       relations: ['category'],
     });
+    product.views += 1;
+    return await this.productsRepository.save(product);
   }
 
   public async count(category?: string): Promise<number> {

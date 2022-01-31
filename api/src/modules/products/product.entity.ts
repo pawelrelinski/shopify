@@ -33,6 +33,9 @@ export class Product {
   })
   defaultPrice: number;
 
+  @Column()
+  image: string;
+
   @Column({
     type: 'decimal',
     precision: 9,
