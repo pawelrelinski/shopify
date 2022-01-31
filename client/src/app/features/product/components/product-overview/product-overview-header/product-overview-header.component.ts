@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 
 export interface EmitItemData {
   id: number;
@@ -12,7 +13,7 @@ export interface EmitItemData {
 })
 export class ProductOverviewHeaderComponent {
   @Input() name!: string;
-  @Input() shortDescription!: string;
+  @Input() shortDescription!: SafeHtml;
   @Input() id!: number;
   @Input() price!: number | string;
   @Output() onEmitItemData: EventEmitter<EmitItemData> = new EventEmitter<EmitItemData>();

@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SortOptions } from '@features/product/models';
+import { SortAction } from '@features/product/models';
 
 @Component({
   selector: 'shopify-product-table-actions',
   templateUrl: './product-table-actions.component.html',
 })
 export class ProductTableActionsComponent {
-  @Output('onSortBy')
-  sortEmitter: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
+  @Output() onSort: EventEmitter<SortAction> = new EventEmitter<SortAction>();
 
   public isOpen: boolean = false;
 
@@ -23,12 +22,7 @@ export class ProductTableActionsComponent {
     this.isOpen = false;
   }
 
-  public changeSortBy(value: string): void {
-    const splitValue: Array<string> = value.split('-');
-    const sortEmitter: SortOptions = {
-      by: splitValue[0],
-      method: splitValue[1],
-    };
-    this.sortEmitter.emit(sortEmitter);
+  public emitSort(name: SortAction['name'], method: SortAction['method']): void {
+    this.onSort.emit({ name, method });
   }
 }

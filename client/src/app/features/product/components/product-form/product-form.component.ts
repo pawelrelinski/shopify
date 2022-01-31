@@ -13,6 +13,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
 import { NotificationService } from '@features/notification/services';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { CategoryService } from '@features/category/services';
+import { Category } from '@features/category/models';
 
 interface ErrorResponse {
   ok: boolean;
@@ -28,15 +30,8 @@ interface ErrorResponse {
 export class ProductFormComponent implements OnInit {
   public form!: FormGroup;
   public moreShippingMethodsOptionsIsShow = false;
-  public readonly categories: Array<string> = [
-    'solar-panels',
-    'solar-inverters',
-    'solar-batteries',
-    'electric-car-charger',
-    'mounting-system',
-    'accessories',
-  ];
-  public readonly shippingMethods: Array<{ name: string; value: string }> = [
+  public categories: Category[] = [];
+  public readonly shippingMethods: { name: string; value: string }[] = [
     { name: 'Collection in person', value: 'collection-in-person' },
     { name: 'InPost parcel', value: 'inpost-parcel' },
     { name: 'Courier consignment', value: 'courier-consignment' },
@@ -53,10 +48,12 @@ export class ProductFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private categoryService: CategoryService
   ) {}
 
   public ngOnInit(): void {
+    this.setCategories();
     this.setControlsForForm();
   }
 
@@ -121,6 +118,29 @@ export class ProductFormComponent implements OnInit {
     return this.form.get('variations');
   }
 
+  public getSpecification(): FormArray {
+    return this.form.get('specification') as FormArray;
+  }
+
+  public newSpecification(): FormGroup {
+    return this.fb.group({
+      key: '',
+      value: '',
+    });
+  }
+
+  public addSpecification(): void {
+    this.getSpecification().push(this.newSpecification());
+  }
+
+  public removeSpecification(index: number): void {
+    this.getSpecification().removeAt(index);
+  }
+
+  public resetForm(): void {
+    this.form.reset();
+  }
+
   private setControlsForForm(): void {
     this.form = this.fb.group({
       general: this.fb.group({
@@ -175,27 +195,10 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  public getSpecification(): FormArray {
-    return this.form.get('specification') as FormArray;
-  }
-
-  public newSpecification(): FormGroup {
-    return this.fb.group({
-      key: '',
-      value: '',
+  private setCategories(): void {
+    this.categoryService.getAll().subscribe((categories: Category[]) => {
+      this.categories = categories;
     });
-  }
-
-  public addSpecification(): void {
-    this.getSpecification().push(this.newSpecification());
-  }
-
-  public removeSpecification(index: number): void {
-    this.getSpecification().removeAt(index);
-  }
-
-  public resetForm(): void {
-    this.form.reset();
   }
 
   private createProductObjectToSend(): ProductCreateDto {

@@ -36,7 +36,7 @@
     >
       <div class='py-1' role='none'>
         <button
-          (click)="changeSortBy('price-asc')"
+          (click)="emitSort('defaultPrice', 'ASC')"
           class='flex flex-row justify-between w-full gap-x-0.5 px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
           role='menuitem'
           tabindex='-1'
@@ -59,7 +59,7 @@
         </button>
 
         <button
-          (click)="changeSortBy('price-desc')"
+          (click)="emitSort('defaultPrice', 'DESC')"
           class='flex flex-row justify-between w-full gap-x-0.5 px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
           role='menuitem'
           tabindex='-1'
@@ -82,12 +82,12 @@
         </button>
 
         <button
-          (click)="changeSortBy('amount-asc')"
+          (click)="emitSort('quantity', 'ASC')"
           class='flex flex-row justify-between w-full px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
           role='menuitem'
           tabindex='-1'
         >
-          <span class='font-bold'>Amount:</span>
+          <span class='font-bold'>Quantity:</span>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             class='h-6 w-6'
@@ -105,12 +105,12 @@
         </button>
 
         <button
-          (click)="changeSortBy('amount-desc')"
+          (click)="emitSort('quantity', 'DESC')"
           class='flex flex-row justify-between w-full px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
           role='menuitem'
           tabindex='-1'
         >
-          <span class='font-bold'>Amount:</span>
+          <span class='font-bold'>Quantity:</span>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             class='h-6 w-6'

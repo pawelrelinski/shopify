@@ -6,6 +6,7 @@ import {
   Product,
   ProductDeleteResponse,
   ProductGetAllByResponse,
+  SortAction,
   SortOptions,
 } from '@features/product/models';
 import { ProductService } from '@features/product/services';
@@ -23,7 +24,7 @@ export class ProductTableComponent implements OnInit {
   public currentPage: number = 1;
 
   private queryParams!: Map<string, string>;
-  private readonly defaultSortOptions: SortOptions = {
+  private sortOptions: SortOptions = {
     by: 'id',
     method: 'ASC',
     take: 10,
@@ -37,8 +38,11 @@ export class ProductTableComponent implements OnInit {
     this.setProductsCount();
   }
 
-  public sortBy(sortOptions: SortOptions): void {
-    this.setAllProducts(sortOptions);
+  public sortProducts(sort: SortAction): void {
+    this.sortOptions.by = sort.name;
+    this.sortOptions.method = sort.method;
+
+    this.setAllProducts();
   }
 
   public trackByProductId(index: number, product: Product): Product['id'] {
@@ -74,10 +78,9 @@ export class ProductTableComponent implements OnInit {
     });
   }
 
-  private setAllProducts(sortOptions: SortOptions = this.defaultSortOptions): void {
+  private setAllProducts(sortOptions: SortOptions = this.sortOptions): void {
     this.productService
       .getAllBy(this.getQueryMap(sortOptions))
-      .pipe(take(1))
       .subscribe((response: ProductGetAllByResponse) => {
         this.products = response.products;
       });
@@ -95,7 +98,7 @@ export class ProductTableComponent implements OnInit {
       });
   }
 
-  private getQueryMap(sortOptions: SortOptions): Map<string, string> {
+  private getQueryMap(sortOptions: SortOptions = this.sortOptions): Map<string, string> {
     this.queryParams = new Map<string, string>()
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)

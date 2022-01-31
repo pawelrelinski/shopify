@@ -444,8 +444,8 @@
               required
             >
               <option value='' selected disabled hidden class='text-gray-300'>Choose here</option>
-              <option *ngFor='let category of categories' [value]='category'>
-                {{ category | firstLetterTitleCase }}
+              <option *ngFor='let category of categories' [value]='category.formatName'>
+                {{ category.name | firstLetterTitleCase }}
               </option>
             </select>
             <div
