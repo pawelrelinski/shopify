@@ -41,8 +41,8 @@ export class ProductsController {
   public async findAllByFilter(
     @Query('sortBy') sortBy: ListAllProductsDto['sortBy'],
     @Query('sortMethod') sortMethod: ListAllProductsDto['sortMethod'],
-    @Query('limit') take: ListAllProductsDto['take'],
-    @Query('offset') skip: ListAllProductsDto['skip'],
+    @Query('take') take: ListAllProductsDto['take'],
+    @Query('skip') skip: ListAllProductsDto['skip'],
     @Query('category') category: ListAllProductsDto['category'],
   ): Promise<{ products: Product[] }> {
     const products: Product[] = await this.productsService.findAllByFilter(

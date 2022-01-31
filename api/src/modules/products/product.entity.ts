@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Category } from '../categories/category.entity';
 
 @Entity()
 export class Product {
@@ -37,8 +46,8 @@ export class Product {
   })
   isAvailable: boolean;
 
-  @Column()
-  category: string;
+  @ManyToOne(() => Category, (category: Category) => category)
+  category: Category;
 
   @Column()
   quantity: number;

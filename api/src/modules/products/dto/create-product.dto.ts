@@ -3,7 +3,7 @@ export interface CreateProductDto {
   description: string;
   defaultPrice: number;
   promotionPrice?: number;
-  category: string;
+  category: any;
   quantity: number;
   producer: string;
   expectedDeliveryTime: number;
