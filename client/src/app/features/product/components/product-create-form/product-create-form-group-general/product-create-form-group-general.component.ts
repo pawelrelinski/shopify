@@ -13,7 +13,7 @@ interface ImageSnippet {
   styleUrls: ['./product-create-form-group-general.component.scss'],
 })
 export class ProductCreateFormGroupGeneralComponent implements OnInit {
-  @Output() onFormReady = new EventEmitter();
+  @Output() onFormReady = new EventEmitter<FormGroup>();
 
   public generalForm!: FormGroup;
   public selectedFile!: ImageSnippet;

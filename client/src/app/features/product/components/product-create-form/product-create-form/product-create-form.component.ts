@@ -1,28 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ProductService } from '@features/product/services';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
 import { NotificationService } from '@features/notification/services';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { CategoryService } from '@features/category/services';
-import { Category } from '@features/category/models';
 
 interface ErrorResponse {
   ok: boolean;
   name: string;
   message: string;
-}
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
 }
 
 @Component({
@@ -31,43 +18,25 @@ class ImageSnippet {
   styleUrls: ['./product-create-form.component.scss'],
 })
 export class ProductCreateFormComponent implements OnInit {
-  public form!: FormGroup;
-  public moreShippingMethodsOptionsIsShow = false;
-  public categories: Category[] = [];
-  public readonly shippingMethods: { name: string; value: string }[] = [
-    { name: 'Collection in person', value: 'collection-in-person' },
-    { name: 'InPost parcel', value: 'inpost-parcel' },
-    { name: 'Courier consignment', value: 'courier-consignment' },
-  ];
-  public readonly editorConfig: AngularEditorConfig = {
-    editable: true,
-    minHeight: '100px',
-    placeholder: 'Enter description here...',
-  };
-  public imageProgressBar = 0;
+  public createProductForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private notificationService: NotificationService,
-    private categoryService: CategoryService
+    private notificationService: NotificationService
   ) {}
 
   public ngOnInit(): void {
-    this.setCategories();
-    this.setControlsForForm();
+    this.setCreateProductForm();
   }
 
   public onSubmit(): void {
+    console.log(this.createProductForm);
     this.productService
       .create(this.createProductObjectToSend())
       .subscribe((event: HttpEvent<ProductCreateResponse>) => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.imageProgressBar = Math.round((100 * event.loaded) / (event.total as number));
-        }
-
         if (event.type === HttpEventType.Response) {
           const body = event.body as ProductCreateResponse;
           this.handleSuccessResponse(body.status);
@@ -79,63 +48,14 @@ export class ProductCreateFormComponent implements OnInit {
       });
   }
 
-  selectedFile!: ImageSnippet;
-
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.updateImageValue(this.selectedFile.file);
+  public setCreateProductForm(): void {
+    this.createProductForm = this.fb.group({
+      specification: this.fb.array([]),
     });
-
-    reader.readAsDataURL(file);
   }
 
-  public onCheckboxChange(event: any): void {
-    const checkArray: FormArray = this.form.get('shipping')?.get('shippingMethods') as FormArray;
-
-    if (event.target.checked) {
-      checkArray.push(new FormControl(event.target.value));
-    } else {
-      let index: number = 0;
-      checkArray.controls.forEach((item: AbstractControl) => {
-        if (item.value == event.target.value) {
-          checkArray.removeAt(index);
-          return;
-        }
-        index++;
-      });
-    }
-  }
-
-  public toggleShippingMethodsOptions(): void {
-    this.moreShippingMethodsOptionsIsShow = !this.moreShippingMethodsOptionsIsShow;
-  }
-
-  public updateImageValue(file: any): void {
-    this.getGeneral()?.get('image')?.setValue(file);
-  }
-
-  public getGeneral(): AbstractControl | null {
-    return this.form.get('general');
-  }
-
-  public getInventory(): AbstractControl | null {
-    return this.form.get('inventory');
-  }
-
-  public getShipping(): AbstractControl | null {
-    return this.form.get('shipping');
-  }
-
-  public getVariations(): AbstractControl | null {
-    return this.form.get('variations');
-  }
-
-  public getSpecification(): FormArray {
-    return this.form.get('specification') as FormArray;
+  public addChildForm(name: string, group: FormGroup): void {
+    this.createProductForm.addControl(name, group);
   }
 
   public newSpecification(): FormGroup {
@@ -153,87 +73,37 @@ export class ProductCreateFormComponent implements OnInit {
     this.getSpecification().removeAt(index);
   }
 
+  public getSpecification(): FormArray {
+    return this.createProductForm.get('specification') as FormArray;
+  }
+
   public resetForm(): void {
-    this.form.reset();
-  }
-
-  private setControlsForForm(): void {
-    this.form = this.fb.group({
-      general: this.fb.group({
-        name: this.fb.control('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ]),
-        regularPrice: this.fb.control(0.0, [
-          Validators.required,
-          Validators.min(0.01),
-          Validators.max(1_000_000),
-        ]),
-        salePrice: this.fb.control(null, [Validators.min(0.0), Validators.max(1_000_000)]),
-        shortDescription: this.fb.control('', [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(255),
-        ]),
-        description: this.fb.control('', [Validators.required, Validators.minLength(5)]),
-        producer: this.fb.control('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ]),
-        refNumber: this.fb.control('', [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(15),
-        ]),
-        image: this.fb.control(null, [Validators.required]),
-      }),
-      inventory: this.fb.group({
-        stockQuantity: this.fb.control(0, [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(1_000_000),
-        ]),
-      }),
-      shipping: this.fb.group({
-        expectedDeliveryTime: this.fb.control(0, [
-          Validators.required,
-          Validators.min(1),
-          Validators.max(99),
-        ]),
-        shippingMethods: this.fb.array([], [Validators.required]),
-      }),
-      variations: this.fb.group({
-        category: this.fb.control('', [Validators.required]),
-      }),
-      specification: this.fb.array([]),
-    });
-  }
-
-  private setCategories(): void {
-    this.categoryService.getAll().subscribe((categories: Category[]) => {
-      this.categories = categories;
-    });
+    this.createProductForm.reset();
+    while (this.getSpecification().length !== 0) {
+      this.getSpecification().removeAt(0);
+    }
   }
 
   private createProductObjectToSend(): ProductCreateDto {
+    const general = this.createProductForm.get('general');
+    const variations = this.createProductForm.get('variations');
+    const inventory = this.createProductForm.get('inventory');
+    const shipping = this.createProductForm.get('shipping');
+
     return {
-      name: this.getGeneral()?.get('name')?.value,
-      shortDescription: this.getGeneral()?.get('shortDescription')?.value,
-      description: this.getGeneral()?.get('description')?.value,
-      defaultPrice: this.getGeneral()?.get('regularPrice')?.value,
-      promotionPrice: this.getGeneral()?.get('salePrice')?.value
-        ? this.getGeneral()?.get('salePrice')?.value
-        : 0.0,
-      category: this.getVariations()?.get('category')?.value,
-      quantity: this.getInventory()?.get('stockQuantity')?.value,
-      producer: this.getGeneral()?.get('producer')?.value,
-      expectedDeliveryTime: this.getShipping()?.get('expectedDeliveryTime')?.value,
-      refNumber: this.getGeneral()?.get('refNumber')?.value,
+      name: general?.get('name')?.value,
+      shortDescription: general?.get('shortDescription')?.value,
+      description: general?.get('description')?.value,
+      defaultPrice: general?.get('regularPrice')?.value,
+      promotionPrice: general?.get('salePrice')?.value ? general?.get('salePrice')?.value : 0.0,
+      category: variations?.get('category')?.value,
+      quantity: inventory?.get('stockQuantity')?.value,
+      producer: general?.get('producer')?.value,
+      expectedDeliveryTime: shipping?.get('expectedDeliveryTime')?.value,
+      refNumber: general?.get('refNumber')?.value,
       dataSheet: JSON.stringify(this.getSpecification()?.value),
-      shippingMethods: JSON.stringify(this.getShipping()?.get('shippingMethods')?.value),
-      image: this.getGeneral()?.get('image')?.value,
+      shippingMethods: JSON.stringify(shipping?.get('shippingMethods')?.value),
+      image: general?.get('image')?.value,
     } as ProductCreateDto;
   }
 

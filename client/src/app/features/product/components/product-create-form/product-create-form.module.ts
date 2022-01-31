@@ -13,12 +13,12 @@ import { ProductCreateFormGroupSpecificationComponent } from './product-create-f
 
 @NgModule({
   declarations: [
-    ProductCreateFormComponent,
     ProductCreateFormGroupGeneralComponent,
     ProductCreateFormGroupInventoryComponent,
     ProductCreateFormGroupShippingComponent,
     ProductCreateFormGroupVariationsComponent,
     ProductCreateFormGroupSpecificationComponent,
+    ProductCreateFormComponent,
   ],
   imports: [
     CommonModule,
