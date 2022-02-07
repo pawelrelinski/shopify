@@ -1,17 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
-import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
+import {
+  DeleteResult,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ListAllProductsDto } from './dto/list-all-products.dto';
 import { Category } from '../categories/category.entity';
 import { CategoriesService } from '../categories/categories.service';
+import { View } from './view.entity';
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productsRepository: Repository<Product>,
+    @InjectRepository(View)
+    private readonly viewsRepository: Repository<View>,
     private readonly categoriesService: CategoriesService,
   ) {}
 
@@ -49,12 +57,15 @@ export class ProductsService {
   }
 
   public async findOne(id: string): Promise<Product> {
-    const product = await this.productsRepository.findOne({
+    const options: FindOneOptions<Product> = {
       where: { id },
-      relations: ['category'],
-    });
-    product.views += 1;
-    return await this.productsRepository.save(product);
+      relations: ['category', 'views'],
+    };
+    const product = await this.productsRepository.findOne(options);
+    const view = new View();
+    view.product = product;
+    await this.viewsRepository.save(view);
+    return this.productsRepository.findOne(options);
   }
 
   public async count(category?: string): Promise<number> {

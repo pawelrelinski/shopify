@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   HttpCode,
   HttpStatus,
   Param,
@@ -22,15 +23,20 @@ import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { HOST_ADDRESS } from '../../config/configuration';
 
 @Controller('products')
 export class ProductsController {
+  private uploadsUrl: string = `http://${HOST_ADDRESS}:${process.env.SERVER_PORT}/uploads/`;
   constructor(private productsService: ProductsService) {}
 
   @Get()
   @HttpCode(HttpStatus.OK)
   public async findAll(): Promise<{ products: Product[] }> {
     const products: Product[] = await this.productsService.findAll();
+    products.forEach((product: Product) => {
+      product.image = `${this.uploadsUrl}${product.image}`;
+    });
     return {
       products: products,
     };
@@ -74,6 +80,9 @@ export class ProductsController {
       skip,
       category,
     );
+    products.forEach((product: Product) => {
+      product.image = `${this.uploadsUrl}${product.image}`;
+    });
     return {
       products: products,
     };
@@ -89,9 +98,12 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @Header('Cross-Origin-Embedder-Policy', 'unsafe-none')
   @HttpCode(HttpStatus.OK)
-  public findOne(@Param('id') id: FindOneParams['id']): Promise<Product> {
-    return this.productsService.findOne(id);
+  public async findOne(@Param('id') id: FindOneParams['id']): Promise<Product> {
+    const product: Product = await this.productsService.findOne(id);
+    product.image = `${this.uploadsUrl}${product.image}`;
+    return product;
   }
 
   @Post()

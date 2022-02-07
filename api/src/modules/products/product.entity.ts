@@ -1,4 +1,5 @@
 import {
+  AfterLoad,
   Column,
   Entity,
   JoinColumn,
@@ -8,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Category } from '../categories/category.entity';
+import { View } from './view.entity';
 
 @Entity()
 export class Product {
@@ -73,11 +75,9 @@ export class Product {
   @Column('json')
   dataSheet: string;
 
-  @Column({
-    type: 'int',
-    default: 0,
-  })
-  views: number;
+  @OneToMany(() => View, (view: View) => view.product)
+  @JoinColumn()
+  views: View[];
 
   @Column({
     default: true,
