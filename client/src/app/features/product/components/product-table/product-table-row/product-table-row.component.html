@@ -1,9 +1,9 @@
-<tr class="hover:divide-gray-400 hover:cursor-pointer">
-  <td class="px-6 py-4 w-10 whitespace-nowrap text-sm text-gray-500">
+<tr class='hover:divide-gray-400 hover:cursor-pointer'>
+  <td class='px-6 py-4 w-10 whitespace-nowrap text-sm text-gray-500'>
     {{ index }}
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
-    <div class="flex items-center">
+  <td class='px-6 py-4 whitespace-nowrap'>
+    <div class='flex items-center'>
       <div>
         <a [routerLink]="['/products', product.category.formatName, product.id]"
            class='text-sm font-medium text-gray-900'>
@@ -13,13 +13,13 @@
       </div>
     </div>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class='px-6 py-4 whitespace-nowrap'>
     <shopify-status-widget-success
-      *ngIf="isSuccess()"
-      [message]="product.quantity.toString()"
+      *ngIf='isSuccess()'
+      [message]='product.quantity.toString()'
     ></shopify-status-widget-success>
     <shopify-status-widget-warning
-      *ngIf="isWarning()"
+      *ngIf='isWarning()'
       [message]='product.quantity.toString()'
     ></shopify-status-widget-warning>
     <shopify-status-widget-danger
@@ -60,6 +60,17 @@
           *ngIf='dropdownMenuIsShow'
           class='absolute right-0 z-20 w-36 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800'
         >
+          <a
+            [routerLink]="['/admin/product-details', product.id]"
+            class='flex flex-row justify-between px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          >
+            Details
+            <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24'
+                 stroke='currentColor'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2'
+                    d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' />
+            </svg>
+          </a>
           <a
             [routerLink]="['/admin/edit-product', product.id]"
             class='flex flex-row justify-between px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'

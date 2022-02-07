@@ -21,6 +21,7 @@ import { ProductListModule } from '@features/product/components/product-list/pro
 import { ProductTableModule } from '@features/product/components/product-table/product-table.module';
 import { NotificationModule } from '@features/notification/notification.module';
 import { ProductCreateFormModule } from '@features/product/components/product-create-form/product-create-form.module';
+import { ProductDetailsModule } from '@features/product/components/product-details/product-details.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ProductCreateFormModule } from '@features/product/components/product-cr
     ProductTableModule,
     NotificationModule,
     ProductCreateFormModule,
+    ProductDetailsModule,
   ],
   exports: [
     ProductAvailableWidgetComponent,
@@ -53,6 +55,7 @@ import { ProductCreateFormModule } from '@features/product/components/product-cr
     ProductListModule,
     ProductTableModule,
     ProductCreateFormModule,
+    ProductDetailsModule,
   ],
 })
 export class ProductModule {}

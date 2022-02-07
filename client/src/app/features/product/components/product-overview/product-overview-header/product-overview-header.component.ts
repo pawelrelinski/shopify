@@ -7,7 +7,7 @@ export interface EmitItemData {
 }
 
 @Component({
-  selector: 'shopify-product-overview-header[name][shortDescription][id][price]',
+  selector: 'shopify-product-overview-header[name][shortDescription][id][price][image]',
   templateUrl: './product-overview-header.component.html',
   styleUrls: ['./product-overview-header.component.scss'],
 })
@@ -16,6 +16,7 @@ export class ProductOverviewHeaderComponent {
   @Input() shortDescription!: SafeHtml;
   @Input() id!: number;
   @Input() price!: number | string;
+  @Input() image!: string;
   @Output() onEmitItemData: EventEmitter<EmitItemData> = new EventEmitter<EmitItemData>();
 
   private item: EmitItemData = {

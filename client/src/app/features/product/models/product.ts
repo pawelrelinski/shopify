@@ -1,5 +1,6 @@
 import { Category } from '@features/category/models';
 import { SafeHtml } from '@angular/platform-browser';
+import { View } from '@features/product/models/view';
 
 export interface Product {
   id: number;
@@ -14,7 +15,8 @@ export interface Product {
   producer: string;
   createdAt: string;
   refNumber: string;
-  dataSheet: Array<{ key: string; value: string }>;
-  views: number;
+  dataSheet: { key: string; value: string }[];
+  views: View[];
   isPublished: boolean;
+  image: string;
 }

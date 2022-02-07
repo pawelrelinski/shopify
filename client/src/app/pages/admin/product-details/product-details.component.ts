@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { ProductFormMode } from '@features/product/models';
 
 @Component({
-  selector: 'shopify-product-details',
+  selector: 'shopify-product-details-page',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class ProductDetailsComponent {
-  public formMode: ProductFormMode = ProductFormMode.EDIT;
-}
+export class ProductDetailsComponent {}
