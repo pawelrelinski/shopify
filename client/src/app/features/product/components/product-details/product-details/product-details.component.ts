@@ -12,7 +12,6 @@ import { Product, View } from '@features/product/models';
 export class ProductDetailsComponent implements OnInit {
   public viewsData!: { name: string; value: number }[];
   public isSuccessfulLoadedData = false;
-  public colorSchema = { domain: ['#079669'] };
 
   private product!: Product;
 
@@ -42,10 +41,19 @@ export class ProductDetailsComponent implements OnInit {
     const newViewData: { name: string; value: number }[] = [];
 
     for (let i = 0; i < lastSevenDays.length; i++) {
-      const name: string = this.getDayName(lastSevenDays[lastSevenDays.length - (i + 1)].getDay());
+      const currentDayIndex: number = lastSevenDays.length - (i + 1);
+      const currentDayName: string = this.getDayName(lastSevenDays[currentDayIndex].getDay());
+      let viewCountInCurrentDay: number = 0;
+
+      for (let j = 0; j < orderDates.length; j++) {
+        if (this.dateIsEqual(lastSevenDays[currentDayIndex], orderDates[j])) {
+          viewCountInCurrentDay += 1;
+        }
+      }
+
       newViewData.push({
-        name,
-        value: 0,
+        name: currentDayName,
+        value: viewCountInCurrentDay,
       });
     }
 
@@ -79,5 +87,23 @@ export class ProductDetailsComponent implements OnInit {
       'Saturday',
     ];
     return daysNames[day];
+  }
+
+  private dateIsEqual(dateOne: Date, dateTwo: Date): boolean {
+    const formattedDateOne = {
+      year: dateOne.getFullYear(),
+      month: dateOne.getMonth(),
+      day: dateOne.getDay(),
+    };
+    const formattedDateTwo = {
+      year: dateTwo.getFullYear(),
+      month: dateTwo.getMonth(),
+      day: dateTwo.getDay(),
+    };
+    if (JSON.stringify(formattedDateOne) === JSON.stringify(formattedDateTwo)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
