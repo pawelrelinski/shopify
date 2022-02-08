@@ -1,2 +1,9 @@
-<shopify-product-details-views-stats [viewsData]='viewsData'>
-</shopify-product-details-views-stats>
+<div *ngIf='views; else loading'>
+  <shopify-product-details-views-stats [views]='views'>
+  </shopify-product-details-views-stats>
+</div>
+<ng-template #loading>
+  <div class='w-full flex justify-center align-center pt-24'>
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
