@@ -11,6 +11,8 @@ import { Product, View } from '@features/product/models';
 })
 export class ProductDetailsComponent implements OnInit {
   public views!: View[];
+  public viewsCount!: number;
+  public productQuantity!: number;
 
   private product!: Product;
 
@@ -30,7 +32,10 @@ export class ProductDetailsComponent implements OnInit {
       )
       .subscribe((product: Product) => {
         this.product = product;
+
         this.views = product.views;
+        this.viewsCount = this.views.length;
+        this.productQuantity = this.product.quantity;
       });
   }
 }
