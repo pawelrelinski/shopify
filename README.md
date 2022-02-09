@@ -102,6 +102,10 @@ These can be used alone like this
 -----------|--------------------------------|
 `GET /categories` | returns a list of all categories |
 
+<h4>Database Diahgram</h4>
+
+![Imgur](https://i.imgur.com/QJaLl1m.png)
+
 <br>
 
 ### Client
@@ -111,6 +115,7 @@ Angular application for users with admin dashboard to manage. <br>
 #### Features
 
 ##### User has following features:
+
 1. Products by category
 2. Products overview
 3. Add/remove to shopping cart
