@@ -12,6 +12,7 @@ import {
 import { ProductService } from '@features/product/services';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductTableRemoveDialogComponent } from '@features/product/components/product-table/product-table-remove-dialog/product-table-remove-dialog.component';
+import { NotificationService } from '@features/notification/services';
 
 @Component({
   selector: 'shopify-product-table',
@@ -23,7 +24,7 @@ export class ProductTableComponent implements OnInit {
   public pageCount!: number;
   public currentPage: number = 1;
 
-  private queryParams!: Map<string, string>;
+  private queryParams!: Map<string, string | number>;
   private sortOptions: SortOptions = {
     by: 'id',
     method: 'ASC',
@@ -31,7 +32,11 @@ export class ProductTableComponent implements OnInit {
     skip: 0,
   };
 
-  constructor(private productService: ProductService, private dialog: MatDialog) {}
+  constructor(
+    private productService: ProductService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService
+  ) {}
 
   public ngOnInit(): void {
     this.setAllProducts();
@@ -65,12 +70,20 @@ export class ProductTableComponent implements OnInit {
       if (result === MatDialogCloseRemoveDialog.DELETE) {
         this.productService.delete(id).subscribe((res: ProductDeleteResponse) => {
           switch (res.status) {
+            case 200:
+              this.notificationService.show({
+                title: 'Product has been deleted',
+                message: '',
+              });
+              this.setAllProducts();
+              this.setProductsCount();
+              break;
             case 204:
               this.setAllProducts();
               this.setProductsCount();
               break;
             case 404:
-              console.log('dupa dupa');
+              //! TODO
               break;
           }
         });
@@ -98,12 +111,12 @@ export class ProductTableComponent implements OnInit {
       });
   }
 
-  private getQueryMap(sortOptions: SortOptions = this.sortOptions): Map<string, string> {
-    this.queryParams = new Map<string, string>()
+  private getQueryMap(sortOptions: SortOptions = this.sortOptions): Map<string, string | number> {
+    this.queryParams = new Map<string, string | number>()
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
-      .set('limit', '10')
-      .set('offset', (this.currentPage - 1).toString());
+      .set('take', sortOptions.take as number)
+      .set('skip', this.currentPage - 1);
 
     return this.queryParams;
   }

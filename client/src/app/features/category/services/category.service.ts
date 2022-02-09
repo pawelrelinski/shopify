@@ -22,6 +22,13 @@ export class CategoryService {
       .pipe(map((value: GetAllCategories) => value.categories));
   }
 
+  public getCount(): Observable<number> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('count');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get<{ count: number }>(url).pipe(map((res: { count: number }) => res.count));
+  }
+
   private setDefaultUrlConfig(): void {
     this.segmentsUrl = new SegmentsUrl();
     this.urlBuilder = new UrlBuilder();

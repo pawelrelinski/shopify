@@ -9,6 +9,8 @@ import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
 import { PipesModule } from '@core/pipes/pipes.module';
 import { ProductTableRemoveDialogComponent } from '@features/product/components/product-table/product-table-remove-dialog/product-table-remove-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NotificationModule } from '@features/notification/notification.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     StatusWidgetModule,
     PipesModule,
     MatDialogModule,
+    NotificationModule,
+    MatProgressSpinnerModule,
   ],
   exports: [ProductTableComponent],
 })

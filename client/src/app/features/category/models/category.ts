@@ -6,4 +6,5 @@ export interface Category {
   formatName: string;
   description: string | null;
   heroIconAsSvg: string | SafeHtml;
+  createdAt: string;
 }

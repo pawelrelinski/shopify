@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagi
     ReactiveFormsModule,
     ShopifyPaginationModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     UserSignInFormComponent,

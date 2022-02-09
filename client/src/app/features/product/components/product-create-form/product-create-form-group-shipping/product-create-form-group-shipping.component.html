@@ -39,7 +39,7 @@
         Shipping methods<span class='text-red-700'>*</span>
       </dt>
       <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-        <div>
+        <div (click)='toggleShippingMethodsOptions()'>
           <h3 class='-mx-2 -my-3 flow-root'>
             <button
               type='button'
@@ -51,7 +51,6 @@
               <span class='ml-6 flex items-center'>
                     <svg
                       *ngIf='!moreShippingMethodsOptionsIsShow'
-                      (click)='toggleShippingMethodsOptions()'
                       xmlns='http://www.w3.org/2000/svg'
                       class='h-6 w-6'
                       fill='none'

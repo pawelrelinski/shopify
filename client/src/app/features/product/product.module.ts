@@ -22,6 +22,7 @@ import { ProductTableModule } from '@features/product/components/product-table/p
 import { NotificationModule } from '@features/notification/notification.module';
 import { ProductCreateFormModule } from '@features/product/components/product-create-form/product-create-form.module';
 import { ProductDetailsModule } from '@features/product/components/product-details/product-details.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ProductDetailsModule } from '@features/product/components/product-detai
     NotificationModule,
     ProductCreateFormModule,
     ProductDetailsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     ProductAvailableWidgetComponent,

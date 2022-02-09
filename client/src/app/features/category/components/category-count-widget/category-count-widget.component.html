@@ -1,4 +1,7 @@
-<a routerLink='/admin/customers-manage' class='w-full sm:w-2/5 xl:w-1/3 hover:shadow-md transition'>
+<a
+  routerLink='/admin/categories-manage'
+  class='w-full sm:w-2/5 xl:w-1/3 xl:mt-0 hover:shadow-md transition'
+>
   <div class='flex items-center px-5 py-6 shadow-sm rounded-md bg-white'>
     <div class='p-3 bg-gray-100 rounded-full'>
       <svg
@@ -9,19 +12,20 @@
         stroke='grey'
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
         />
       </svg>
     </div>
+
     <div class='mx-5'>
       <h4 *ngIf='count; else loading' class='text-2xl font-semibold text-gray-700'>{{ count }}</h4>
       <ng-template #loading>
         <mat-spinner diameter='32'></mat-spinner>
       </ng-template>
-      <div class='text-gray-500'>Users</div>
+      <div class='text-gray-500'>Categories Count</div>
     </div>
   </div>
 </a>

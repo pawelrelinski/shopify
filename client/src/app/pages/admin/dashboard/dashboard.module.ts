@@ -5,9 +5,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { ProductModule } from '@features/product/product.module';
 import { UserModule } from '@features/user/user.module';
+import { CategoryModule } from '@features/category/category.module';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule, ProductModule, UserModule],
+  imports: [CommonModule, DashboardRoutingModule, ProductModule, UserModule, CategoryModule],
 })
 export class DashboardModule {}

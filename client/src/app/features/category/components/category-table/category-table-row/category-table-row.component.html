@@ -1,0 +1,101 @@
+<tr class='hover:divide-gray-400 hover:cursor-pointer'>
+  <td class='px-6 py-4 w-10 whitespace-nowrap text-sm text-gray-500'>
+    {{ index }}
+  </td>
+  <td class='px-6 py-4 whitespace-nowrap'>
+    <div class='flex items-center'>
+      <div>
+        <a class='text-sm font-medium text-gray-900'>
+          {{ category.name }}
+        </a>
+        <div class='text-sm text-gray-500'>created at {{ category.createdAt | date:'longDate' }}</div>
+      </div>
+    </div>
+  </td>
+  <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+    <a [routerLink]="['/products', category.formatName]">
+      {{ category.formatName }}
+    </a>
+  </td>
+  <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+    {{ (category.description) ? category.description : 'No description' }}
+  </td>
+  <td class='px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-start'>
+    <div class='flex items-center justify-center h-full'>
+      <div class='relative inline-block'>
+        <button
+          (click)='toggleDropdownMenu()'
+          class='relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none'
+        >
+          <svg
+            class='w-5 h-5 text-gray-800 dark:text-white'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 20 20'
+            fill='currentColor'
+          >
+            <path
+              fill-rule='evenodd'
+              d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+              clip-rule='evenodd'
+            />
+          </svg>
+        </button>
+
+        <div
+          *ngIf='dropdownMenuIsShow'
+          class='absolute right-0 z-20 w-36 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800'
+        >
+          <a
+            class='flex flex-row justify-between px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          >
+            Details
+            <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24'
+                 stroke='currentColor'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2'
+                    d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' />
+            </svg>
+          </a>
+          <a
+            class='flex flex-row justify-between px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          >
+            Edit
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              class='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+              />
+            </svg>
+          </a>
+          <a
+            class='flex flex-row justify-between px-4 py-3 text-sm text-red-600 capitalize transition-colors duration-200 transform dark:text-red-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white'
+          >
+            Delete
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              class='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>
+

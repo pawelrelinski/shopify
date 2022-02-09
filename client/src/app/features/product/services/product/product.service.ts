@@ -28,11 +28,11 @@ export class ProductService {
     return this.http.get<Product[]>(url);
   }
 
-  public getAllBy(queryParams: Map<string, string>): Observable<ProductGetAllByResponse> {
+  public getAllBy(queryParams: Map<string, string | number>): Observable<ProductGetAllByResponse> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('findByFilter');
     for (const [key, value] of queryParams) {
-      this.queryStringParameters.push(key, value);
+      this.queryStringParameters.push(key, value.toString());
     }
 
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
