@@ -1,34 +1,61 @@
-# Shopify
+<span id='top'></span>
+<h1 align='center'>Shopify</h1>
+<p align='center'>
+  Fullstack e-commerce application with products related to renewable energy.
+</p>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#applications">Applications</a>
+      <ul>
+        <li><a href="#api">API</a></li>
+        <li><a href="#client">Client</a></li>
+      </ul>
+    </li>
+    <li><a href='#models'>Models</a></li>
+  </ol>
+</details>
+
+<hr>
+## About The Project
 
 Fullstack application as project to school. E-commerce shop with products related to renewable energy.
 
-## Technologies Reference
-### Client
+### Built With
 
+#### Client
 - [Angular 13](https://angular.io)
 - [Tailwind](https://tailwindcss.com)
 - [NGRX](https://ngrx.io)
 
-### Server
-
+#### API
 - [NestJS 8](https://docs.nestjs.com)
 - [TypeORM](https://typeorm.delightful.studio)
 - [Passport JWT](http://www.passportjs.org/packages/passport-jwt/)
+#### Database
+- [MySQL](https://www.mysql.com)
 
-### Documentation
-
+#### Documentation
 - [Compodoc](https://compodoc.github.io/compodoc/)
 
-### Database
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-- [MySQL](https://www.mysql.com)
+<hr>
 
 ## Applications
 
-### Api
+### API
 
-Provides REST Api with which you can communicate with the MySql database. <br>
-It is written in NestJS. <br>
+Provides REST Api with which you can communicate with the MySQL database. <br>
+It's written in NestJS. <br>
 The API is generally RESTFULL and return results in JSON. <br>
 
 #### Resource components
@@ -38,201 +65,115 @@ Major resource components supported by the API are:
 - Products
 - Users
 - Auth
+- Categories
 
 These can be used alone like this
+
+<h4>Products</h4>
 
 | resource | description |
 -----------|-------------|
 `GET /products` | returns a list of all products |
 `GET /products/:id` | returns the product with the given id |
+`GET /products/findByFilter` | returns products through the given filters |
+`GET /products/count` | Return count of all products or products from given category |
 `POST /products` | creates a single product based on the provided data |
 `DELETE /products/:id` | removes the product with the given id |
 
+<h4>Users</h4>
+
 | resource | description                    |
 -----------|--------------------------------|
-`POST /auth/register` | create new user account        |
+`GET /users` | returns a list of all users |
+`GET /users/:id` | returns the users with the given id |
+`GET /users/count` | Return count of all users |
+`PATCH /users/:id/attribute` | update given attribute |
+
+<h4>Auth</h4>
+
+| resource | description                    |
+-----------|--------------------------------|
+`POST /auth/register` | create new user account |
 `POST /auth/login` | returns email and access token |
+
+<h4>Categories</h4>
+
+| resource | description                    |
+-----------|--------------------------------|
+`GET /categories` | returns a list of all categories |
+
+<br>
 
 ### Client
 
-Angular application for users. <br>
+Angular application for users with admin dashboard to manage. <br>
 
-#### Modules
+#### Features
 
-- Articles
-- Customer
-- Faq
-- Layout
-- Notification
-- Order
-- Producer
-- Review
-- Shopping-card
+##### User has following features:
+1. Products by category
+2. Products overview
+3. Add/remove to shopping cart
+4. Notifications when add product to shopping cart
+5. Checkout
+6. Profile page
+7. Favourite products
+8. Orders
+9. Profile settings
+10. Sign In/Sign Up
 
-#### REST API responses
-
-Api example responses for the client
 <br>
+##### Admin has following features:
+1. Add/remove products
+2. Product details (stats etc)
+3. Users list
+4. Orders manage
 
-Successfully response
 
-```json
-{
-  "products": [
-    {
-      "id": 5,
-      "name": "Solarland Solar Panel 60W 12V - SLP060-12U",
-      "shortDescription": "<p>example description as HTML</p>",
-      "description": "<p>example description as HTML</p>",
-      "defaultPrice": "139.99",
-      "promotionPrice": "120.99",
-      "isAvailable": true,
-      "category": "solar-panels",
-      "quantity": 53,
-      "producer": "Sp.zoo Companies",
-      "createdAt": "2022-01-16T14:29:24.000Z",
-      "expectedDeliveryTime": 4,
-      "refNumber": "FAFA0781B",
-      "dataSheet": [
-        {
-          "key": "Peak Power (Pmpp)",
-          "value": "60 W"
-        },
-        {
-          "key": "Peak Power Voltage (Vmpp)",
-          "value": "17.2 V"
-        },
-        {
-          "key": "Peak Power Current (Impp)",
-          "value": "3.49 A"
-        },
-        {
-          "key": "Open Circuit Voltage (Voc)",
-          "value": "21.6 V"
-        },
-        {
-          "key": "Short Circuit Current:",
-          "value": "3.86 A"
-        },
-        {
-          "key": "Weight",
-          "value": "12.46 lbs."
-        },
-        {
-          "key": "Cable length",
-          "value": "No Cable"
-        },
-        {
-          "key": "Length",
-          "value": "25.75 in"
-        },
-        {
-          "key": "Width",
-          "value": "26.57 in"
-        },
-        {
-          "key": "Depth incl. jbox",
-          "value": "1.18 in"
-        },
-        {
-          "key": "Nominal Voltage",
-          "value": "12 V"
-        },
-        {
-          "key": "Limited Warranty",
-          "value": "25 year"
-        }
-      ],
-      "views": 0,
-      "isPublished": true,
-      "shippingMethods": [
-        "courier-consignment",
-        "collection-in-person"
-      ]
-    },
-    {
-      "id": 7,
-      "name": "Enphase IQ 7A Microinverter 295-460W 60-72 cell - IQ7A-72-2-US",
-      "shortDescription": "<p>example description as HTML</p>",
-      "description": "<p>example description as HTML</p>",
-      "defaultPrice": "850.49",
-      "promotionPrice": "0.00",
-      "isAvailable": true,
-      "category": "solar-inverters",
-      "quantity": 3,
-      "producer": "Sp.zoo Enphase",
-      "createdAt": "2022-01-17T20:28:17.000Z",
-      "expectedDeliveryTime": 3,
-      "refNumber": "FA80DAWD",
-      "dataSheet": [
-        {
-          "key": "Commonly used module pairings¹",
-          "value": "295 W–460 W +"
-        },
-        {
-          "key": "Module compatibility",
-          "value": "60-cell and 72-cell PV modules"
-        },
-        {
-          "key": "Maximum input DC voltage",
-          "value": "58 V"
-        },
-        {
-          "key": "Maximum input DC current",
-          "value": "10.2 A"
-        },
-        {
-          "key": "Peak power tracking voltage",
-          "value": "38 V–43 V"
-        },
-        {
-          "key": "Operating range",
-          "value": "18 V–58 V"
-        },
-        {
-          "key": "Min/Max start voltage",
-          "value": "30 V / 58 V"
-        },
-        {
-          "key": "Max DC short circuit current (module Isc)",
-          "value": "15 A"
-        }
-      ],
-      "views": 0,
-      "isPublished": true,
-      "shippingMethods": [
-        "courier-consignment",
-        "collection-in-person",
-        "inpost-parcel"
-      ]
-    },
-    {
-      "id": 10,
-      "name": "General Specialties Side-Of-Pole Solar Mount for 2X 36-Cell Panel - SOP-S-A",
-      "shortDescription": "<p>example description as HTML</p>",
-      "description": "<p>example description as HTML</p>",
-      "defaultPrice": "1099.99",
-      "promotionPrice": "850.00",
-      "isAvailable": true,
-      "category": "mounting-system",
-      "quantity": 10,
-      "producer": "Sp.zoo General Specialties",
-      "createdAt": "2022-01-18T07:33:41.000Z",
-      "expectedDeliveryTime": 4,
-      "refNumber": "DAJ1341ONJ",
-      "dataSheet": [
-        {
-          "key": "height X width",
-          "value": "26.5\" X 59.5\" "
-        }
-      ],
-      "views": 0,
-      "isPublished": true,
-      "shippingMethods": [
-        "courier-consignment",
-        "collection-in-person"
-      ]
-    }
-  ]
+### Models
+
+#### Product
+
+```typescript
+interface Product {
+  id: number;
+  name: string;
+  shortDescription: string | SafeHtml;
+  description: string | SafeHtml;
+  defaultPrice: number;
+  promotionPrice: number;
+  isAvailable: boolean;
+  category: {
+    id: number;
+    name: string;
+    formatName: string;
+    description: string | SafeHtml | null;
+    heroIconAsSvg: SafeHtml;
+  };
+  quantity: number;
+  producer: string;
+  createdAt: string;
+  refNumber: string;
+  dataSheet: {
+    key: string; value: string
+    }[];
+  views: {
+    id: number;
+    createdAt: string;
+  }[];
+  isPublished: boolean;
+  image: string;
+}
+```
+
+#### User
+
+```typescript
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt: string;
 }
 ```
