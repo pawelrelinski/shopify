@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Category } from '@features/category/models';
+import { CategoryWithProductsCount } from '@features/category/models';
 
 @Component({
   selector: 'shopify-category-table-row',
@@ -7,7 +7,7 @@ import { Category } from '@features/category/models';
   styleUrls: ['./category-table-row.component.scss'],
 })
 export class CategoryTableRowComponent {
-  @Input() category!: Category;
+  @Input() category!: CategoryWithProductsCount;
 
   @Input()
   set index(value: number) {

@@ -48,8 +48,8 @@ export class ProductListComponent implements OnInit {
     this.queryParams = new Map<string, string>()
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
-      .set('take', sortOptions.take + '')
-      .set('skip', (this.currentPage - 1).toString())
+      .set('limit', sortOptions.take + '')
+      .set('offset', (this.currentPage - 1).toString())
       .set('category', this.categoryName);
 
     return this.queryParams;

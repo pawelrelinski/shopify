@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '@features/category/services';
-import { Category } from '@features/category/models';
+import { Category, CategoryWithProductsCount } from '@features/category/models';
 
 @Component({
   selector: 'shopify-category-table',
@@ -8,7 +8,7 @@ import { Category } from '@features/category/models';
   styleUrls: ['./category-table.component.scss'],
 })
 export class CategoryTableComponent implements OnInit {
-  public categories!: Category[];
+  public categories!: CategoryWithProductsCount[];
   public currentPage = 1;
 
   constructor(private categoryService: CategoryService) {}
@@ -26,8 +26,10 @@ export class CategoryTableComponent implements OnInit {
   }
 
   private setAllCategories(): void {
-    this.categoryService.getAll().subscribe((categories: Category[]) => {
-      this.categories = categories;
-    });
+    this.categoryService
+      .getAllWithProductCount()
+      .subscribe((categories: CategoryWithProductsCount[]) => {
+        this.categories = categories;
+      });
   }
 }

@@ -30,7 +30,6 @@ export class ProductService {
 
   public getAllBy(queryParams: Map<string, string | number>): Observable<ProductGetAllByResponse> {
     this.setDefaultUrlConfig();
-    this.segmentsUrl.push('findByFilter');
     for (const [key, value] of queryParams) {
       this.queryStringParameters.push(key, value.toString());
     }

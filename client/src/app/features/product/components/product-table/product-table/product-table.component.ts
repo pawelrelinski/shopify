@@ -115,8 +115,8 @@ export class ProductTableComponent implements OnInit {
     this.queryParams = new Map<string, string | number>()
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
-      .set('take', sortOptions.take as number)
-      .set('skip', this.currentPage - 1);
+      .set('limit', sortOptions.take as number)
+      .set('offset', this.currentPage - 1);
 
     return this.queryParams;
   }

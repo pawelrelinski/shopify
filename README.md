@@ -40,6 +40,7 @@ Fullstack application as project to school. E-commerce shop with products relate
 - [NestJS 8](https://docs.nestjs.com)
 - [TypeORM](https://typeorm.delightful.studio)
 - [Passport JWT](http://www.passportjs.org/packages/passport-jwt/)
+- [Swagger UI Express](https://github.com/scottie1984/swagger-ui-express)
 #### Database
 - [MySQL](https://www.mysql.com)
 
@@ -71,36 +72,38 @@ These can be used alone like this
 
 <h4>Products</h4>
 
-| resource | description |
------------|-------------|
-`GET /products` | returns a list of all products |
-`GET /products/:id` | returns the product with the given id |
-`GET /products/findByFilter` | returns products through the given filters |
-`GET /products/count` | Return count of all products or products from given category |
-`POST /products` | creates a single product based on the provided data |
-`DELETE /products/:id` | removes the product with the given id |
+| resource | description                                            |
+-----------|--------------------------------------------------------|
+`GET /products` | Get all products                                       |
+`GET /products/:id` | Get product by id                                      |
+`GET /products/count` | Get count of all products or product in given category |
+`POST /products` | Create product                                         |
+`DELETE /products/:id` | Delete product by given id                             |
 
 <h4>Users</h4>
 
 | resource | description                    |
 -----------|--------------------------------|
-`GET /users` | returns a list of all users |
-`GET /users/:id` | returns the users with the given id |
-`GET /users/count` | Return count of all users |
-`PATCH /users/:id/attribute` | update given attribute |
+`GET /users` | Get all users                  |
+`GET /users/:id` | Get user by given id           |
+`GET /users/count` | Get count of all users         |
+`PATCH /users/:id/attribute` | Update specific user attribute |
 
 <h4>Auth</h4>
 
-| resource | description                    |
------------|--------------------------------|
-`POST /auth/register` | create new user account |
-`POST /auth/login` | returns email and access token |
+| resource | description |
+-----------|-------------|
+`POST /auth/register` | Register    |
+`POST /auth/login` | Login       |
 
 <h4>Categories</h4>
 
 | resource | description                    |
 -----------|--------------------------------|
-`GET /categories` | returns a list of all categories |
+`GET /categories` | Get all categories             |
+`GET /categories/productsCount` | Get products count in category |
+`GET /categories/count` | Get count of categories        |
+`GET /categories/:id` | Get category by given id       |
 
 <h4>Database Diahgram</h4>
 
