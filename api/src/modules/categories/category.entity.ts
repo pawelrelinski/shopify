@@ -1,5 +1,12 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Product } from '../products/product.entity';
+import { CategoryView } from './category-view.entity';
 
 @Entity()
 export class Category {
@@ -27,6 +34,16 @@ export class Category {
   })
   heroIconAsSvg: string;
 
+  @Column({
+    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
+  })
+  createdAt: string;
+
   @OneToMany(() => Product, (product: Product) => product.category)
   products: Product[];
+
+  @OneToMany(() => CategoryView, (view: CategoryView) => view.category)
+  @JoinColumn()
+  views: CategoryView[];
 }

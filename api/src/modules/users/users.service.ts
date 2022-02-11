@@ -6,7 +6,6 @@ import { UserDto } from './dto/user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
-import { FindOneById } from './dto/find-one-by-id.dto';
 
 @Injectable()
 export class UsersService {
@@ -26,7 +25,7 @@ export class UsersService {
     return this.userRepository.findOne(id);
   }
 
-  public async findOneByIdAndUpdateOperation(
+  public async findOneByIdAndUpdate(
     id: User['id'],
     attributeName: string,
     attributeValue: string,

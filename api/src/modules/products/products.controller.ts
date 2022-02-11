@@ -15,33 +15,39 @@ import {
 import { Express } from 'express';
 import { ProductsService } from './products.service';
 import { Product } from './product.entity';
-import { FindOneParams } from './classes/find-one-params';
 import { CreateProductDto } from './dto/create-product.dto';
-import { ListAllProductsDto } from './dto/list-all-products.dto';
 import { CreateProductResponseDto } from './dto/create-product-response.dto';
 import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { HOST_ADDRESS } from '../../config/configuration';
+import { ErrorResponse } from '../../models/error-response';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
   private uploadsUrl: string = `http://${HOST_ADDRESS}:${process.env.SERVER_PORT}/uploads/`;
+
   constructor(private productsService: ProductsService) {}
 
+  @ApiOperation({ summary: 'Get all products' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Return all products.' })
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async findAll(): Promise<{ products: Product[] }> {
-    const products: Product[] = await this.productsService.findAll();
-    products.forEach((product: Product) => {
-      product.image = `${this.uploadsUrl}${product.image}`;
-    });
-    return {
-      products: products,
-    };
+  public async findAll(@Query() query): Promise<{ products: Product[] }> {
+    const products: Product[] = await this.productsService.findAll(query);
+    return { products };
   }
 
+  @ApiOperation({ summary: 'Add image' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description:
+      'Return object containing file metadata and access information.',
+  })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
   @Post('image')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(
@@ -64,30 +70,10 @@ export class ProductsController {
     return image;
   }
 
-  @Get('findByFilter')
-  @HttpCode(HttpStatus.OK)
-  public async findAllByFilter(
-    @Query('sortBy') sortBy: ListAllProductsDto['sortBy'],
-    @Query('sortMethod') sortMethod: ListAllProductsDto['sortMethod'],
-    @Query('take') take: ListAllProductsDto['take'],
-    @Query('skip') skip: ListAllProductsDto['skip'],
-    @Query('category') category: ListAllProductsDto['category'],
-  ): Promise<{ products: Product[] }> {
-    const products: Product[] = await this.productsService.findAllByFilter(
-      sortBy,
-      sortMethod.toUpperCase() as ListAllProductsDto['sortMethod'],
-      take,
-      skip,
-      category,
-    );
-    products.forEach((product: Product) => {
-      product.image = `${this.uploadsUrl}${product.image}`;
-    });
-    return {
-      products: products,
-    };
-  }
-
+  @ApiOperation({
+    summary: 'Get count of all products or products from given category',
+  })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Return products count.' })
   @Get('count')
   @HttpCode(HttpStatus.OK)
   public async count(
@@ -97,15 +83,31 @@ export class ProductsController {
     return { count };
   }
 
+  @ApiOperation({ summary: 'Get product by id' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Return product.' })
   @Get(':id')
   @Header('Cross-Origin-Embedder-Policy', 'unsafe-none')
   @HttpCode(HttpStatus.OK)
-  public async findOne(@Param('id') id: FindOneParams['id']): Promise<Product> {
-    const product: Product = await this.productsService.findOne(id);
+  public async findOne(
+    @Param('id') id: string,
+  ): Promise<Product | ErrorResponse> {
+    const product: Product | null = await this.productsService.findOne(id);
+    if (!product) {
+      return {
+        statusCode: HttpStatus.NOT_FOUND,
+        message: 'Not found product',
+      };
+    }
     product.image = `${this.uploadsUrl}${product.image}`;
     return product;
   }
 
+  @ApiOperation({ summary: 'Create product' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'The product has been successfully created.',
+  })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
   @Post()
   @HttpCode(HttpStatus.CREATED)
   public async create(
@@ -121,10 +123,16 @@ export class ProductsController {
     };
   }
 
-  @Delete()
+  @ApiOperation({ summary: 'Delete product by given id' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'The product has been successfully deleted.',
+  })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
+  @Delete(':id')
   @HttpCode(HttpStatus.OK)
   public async findOneAndDelete(
-    @Param('id') id: FindOneParams['id'],
+    @Param('id') id: string,
   ): Promise<DeleteProductResponseDto> {
     await this.productsService.delete(id);
     return {

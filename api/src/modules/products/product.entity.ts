@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Category } from '../categories/category.entity';
-import { View } from './view.entity';
+import { ProductView } from './product-view.entity';
 
 @Entity()
 export class Product {
@@ -75,9 +75,9 @@ export class Product {
   @Column('json')
   dataSheet: string;
 
-  @OneToMany(() => View, (view: View) => view.product)
+  @OneToMany(() => ProductView, (view: ProductView) => view.product)
   @JoinColumn()
-  views: View[];
+  views: ProductView[];
 
   @Column({
     default: true,
@@ -86,4 +86,9 @@ export class Product {
 
   @Column('json')
   shippingMethods: string;
+
+  @Column({
+    default: false,
+  })
+  isDeleted: boolean;
 }

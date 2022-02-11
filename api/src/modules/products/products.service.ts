@@ -2,87 +2,103 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import {
-  DeleteResult,
-  FindManyOptions,
+  Brackets,
+  DeepPartial,
   FindOneOptions,
+  getRepository,
   Repository,
 } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
-import { ListAllProductsDto } from './dto/list-all-products.dto';
 import { Category } from '../categories/category.entity';
 import { CategoriesService } from '../categories/categories.service';
-import { View } from './view.entity';
+import { ProductView } from './product-view.entity';
+import { HOST_ADDRESS } from '../../config/configuration';
 
 @Injectable()
 export class ProductsService {
+  private uploadsUrl: string = `http://${HOST_ADDRESS}:${process.env.SERVER_PORT}/uploads/`;
+
   constructor(
     @InjectRepository(Product)
     private readonly productsRepository: Repository<Product>,
-    @InjectRepository(View)
-    private readonly viewsRepository: Repository<View>,
+    @InjectRepository(ProductView)
+    private readonly viewsRepository: Repository<ProductView>,
     private readonly categoriesService: CategoriesService,
   ) {}
 
-  public async findAll(): Promise<Product[]> {
-    return await this.productsRepository.find({
-      relations: ['category'],
-    });
-  }
+  public async findAll(query): Promise<Product[]> {
+    const qb = await getRepository(Product)
+      .createQueryBuilder('product')
+      .innerJoinAndSelect('product.category', 'category')
+      .where('product.isDeleted=0');
 
-  public async findAllByFilter(
-    sortBy: ListAllProductsDto['sortBy'],
-    sortMethod: ListAllProductsDto['sortMethod'],
-    take: ListAllProductsDto['take'],
-    skip: ListAllProductsDto['skip'],
-    category: ListAllProductsDto['category'],
-  ): Promise<Product[]> {
-    let whereClauseCondition = {};
-    if (category) {
-      const categoryEntityObject =
-        await this.categoriesService.findByFormatName(category);
-      whereClauseCondition = { category: categoryEntityObject };
+    if ('category' in query) {
+      const category: Category = await this.categoriesService.findByFormatName(
+        query.category,
+      );
+      qb.andWhere(
+        new Brackets((qb) => {
+          qb.where('product.category = :id', { id: category.id });
+        }),
+      );
     }
-    const recordsToSkip = skip * take;
-    const findOptions: FindManyOptions<Product> = {
-      where: whereClauseCondition,
-      order: {
-        [sortBy]: sortMethod,
-      },
-      skip: recordsToSkip,
-      take,
-      relations: ['category'],
-    };
 
-    return this.productsRepository.find(findOptions);
+    if ('sortBy' in query) {
+      const order: 'ASC' | 'DESC' =
+        'sortMethod' in query ? query.sortMethod.toUpperCase() : 'DESC';
+      qb.orderBy(`product.${query.sortBy}`, order);
+    }
+
+    if ('limit' in query) {
+      qb.limit(query.limit);
+    }
+
+    if ('offset' in query) {
+      const offset: number =
+        'limit' in query ? query.limit * query.offset : query.offset;
+      qb.offset(offset);
+    }
+
+    const products = await qb.getMany();
+    products.forEach((product: Product) => {
+      product.image = `${this.uploadsUrl}${product.image}`;
+    });
+
+    return products;
   }
 
-  public async findOne(id: string): Promise<Product> {
+  public async findOne(id: string): Promise<Product | null> {
     const options: FindOneOptions<Product> = {
-      where: { id },
+      where: { id, isDeleted: false },
       relations: ['category', 'views'],
     };
     const product = await this.productsRepository.findOne(options);
-    const view = new View();
+    if (!product) {
+      return null;
+    }
+    const view = new ProductView();
     view.product = product;
     await this.viewsRepository.save(view);
     return this.productsRepository.findOne(options);
   }
 
   public async count(category?: string): Promise<number> {
-    const options = category ? { where: { category } } : {};
-    return this.productsRepository.count(options);
+    const wereOptions = { isDeleted: false };
+    category ? Object.assign(wereOptions, { category }) : null;
+    return this.productsRepository.count(wereOptions);
   }
 
   public async create(product: CreateProductDto): Promise<Product> {
     const category: Category = await this.categoriesService.findByFormatName(
-      product.category,
+      product.category as string,
     );
     product.category = category.id;
-    return this.productsRepository.save(product);
+    return this.productsRepository.save(product as DeepPartial<Product>);
   }
 
-  public async delete(id: string): Promise<DeleteResult> {
+  public async delete(id: string): Promise<Product> {
     const product: Product = await this.findOne(id);
-    return this.productsRepository.delete({ id: product.id });
+    product.isDeleted = true;
+    return this.productsRepository.save(product);
   }
 }

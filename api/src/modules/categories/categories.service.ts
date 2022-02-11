@@ -1,17 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './category.entity';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
+import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
+import { CategoryView } from './category-view.entity';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(CategoryView)
+    private readonly categoryViewRepository: Repository<CategoryView>,
   ) {}
 
   public async findAll(): Promise<Category[]> {
     return this.categoryRepository.find();
+  }
+
+  public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
+    const categories = await getRepository<Category>(Category).query(
+      `SELECT COUNT(p.id) as productsCount, c.*
+              FROM category c
+              INNER JOIN product p
+              ON p.categoryId = c.id
+              WHERE p.isDeleted = 0
+              GROUP BY c.id;
+              `,
+    );
+    return categories;
   }
 
   public async findByFormatName(formatName: string): Promise<Category> {
@@ -20,7 +37,18 @@ export class CategoriesService {
     });
   }
 
-  public async findById(id: number): Promise<Category> {
-    return this.categoryRepository.findOne(id);
+  public async findById(id: number): Promise<Category | null> {
+    const category: Category = await this.categoryRepository.findOne(id);
+    if (!category) {
+      return null;
+    }
+    const view = new CategoryView();
+    view.category = category;
+    await this.categoryViewRepository.save(view);
+    return category;
+  }
+
+  public async count(): Promise<number> {
+    return this.categoryRepository.count();
   }
 }
