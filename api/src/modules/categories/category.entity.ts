@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Product } from '../products/product.entity';
+import { Product } from '../products/enities/product.entity';
 import { CategoryView } from './category-view.entity';
 
 @Entity()

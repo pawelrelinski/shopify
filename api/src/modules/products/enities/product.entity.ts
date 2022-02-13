@@ -8,7 +8,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Category } from '../categories/category.entity';
+import { Category } from '../../categories/category.entity';
 import { ProductView } from './product-view.entity';
 
 @Entity()

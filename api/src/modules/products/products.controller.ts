@@ -14,16 +14,15 @@ import {
 } from '@nestjs/common';
 import { Express } from 'express';
 import { ProductsService } from './products.service';
-import { Product } from './product.entity';
+import { Product } from './enities/product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { CreateProductResponseDto } from './dto/create-product-response.dto';
 import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
 import { HOST_ADDRESS } from '../../config/configuration';
 import { ErrorResponse } from '../../models/error-response';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
 
 @ApiTags('products')
 @Controller('products')
@@ -50,20 +49,7 @@ export class ProductsController {
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
   @Post('image')
   @HttpCode(HttpStatus.CREATED)
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, cb) => {
-          const randomName = Array(32)
-            .fill(null)
-            .map(() => Math.round(Math.random() * 16).toString(16))
-            .join('');
-          cb(null, `${randomName}${extname(file.originalname)}`);
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor('image', localOptions))
   public async addImage(
     @UploadedFile() image: Express.Multer.File,
   ): Promise<Express.Multer.File> {

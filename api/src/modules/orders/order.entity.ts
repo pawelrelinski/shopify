@@ -1,13 +1,13 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from '../users/user.entity';
-import { OrderProduct } from '../products/order-product.entity';
+import { OrderProduct } from '../products/enities/order-product.entity';
+import { OrderStatus } from './models/order-status';
 
 @Entity()
 export class Order {
@@ -33,6 +33,19 @@ export class Order {
     nullable: true,
   })
   comments?: string;
+
+  @Column()
+  summaryPrice: number;
+
+  @Column({
+    type: 'enum',
+    enum: OrderStatus,
+    default: OrderStatus.IN_PROGRESS,
+  })
+  status: OrderStatus;
+
+  @Column()
+  payment: string;
 
   @ManyToOne(() => User, (user: User) => user.orders, {
     eager: true,
