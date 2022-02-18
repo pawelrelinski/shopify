@@ -9,8 +9,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.use(helmet());
-  app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
-
+  app.use(
+    '/uploads',
+    express.static(join(__dirname, '..', 'uploads'), {
+      setHeaders: (
+        res: express.Response<any, Record<string, any>>,
+        path: string,
+      ) => {
+        res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+      },
+    }),
+  );
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Shopify API')
     .setDescription('RESTful API for shopify client')
