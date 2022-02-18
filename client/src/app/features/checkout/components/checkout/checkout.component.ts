@@ -21,6 +21,7 @@ export class CheckoutComponent implements OnInit {
 
   public setCheckoutData(checkoutData: Checkout): void {
     this.checkoutData = checkoutData;
+    console.log(this.checkoutData);
   }
 
   private setShippingCartItems(): void {

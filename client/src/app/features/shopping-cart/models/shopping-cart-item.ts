@@ -6,5 +6,6 @@ export interface ShoppingCartItem {
   price: number;
   quantity: number;
   category: Category;
+  image: string;
   refNumber?: string;
 }

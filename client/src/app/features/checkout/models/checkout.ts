@@ -6,4 +6,5 @@ export interface Checkout {
   shippingAddress: ShippingAddress;
   paymentDetails: PaymentDetails;
   contactInformation: ContactInformation;
+  deliveryMethod: Object;
 }

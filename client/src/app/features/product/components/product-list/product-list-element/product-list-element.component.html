@@ -2,7 +2,19 @@
   <a
     [routerLink]="['/products/', product.category.formatName, product.id]"
     class='block h-64 rounded-lg shadow-lg bg-white'
-  ></a>
+  >
+    <div *ngIf='isLoading' class='w-full h-full flex items-center justify-center'>
+      <mat-spinner></mat-spinner>
+    </div>
+    <img (load)='onLoadImageEventHandler()'
+         (error)='onErrorEventHandler()'
+         [src]='product.image'
+         [class.hidden]='isError'
+         alt='Product image'
+         class='h-inherit mx-auto'
+         loading='lazy'
+    >
+  </a>
   <div class='flex items-center justify-between mt-3'>
     <div>
       <a href='#' class='font-medium'>{{ product.name | truncate: 12 }}</a>

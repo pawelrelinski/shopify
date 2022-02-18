@@ -36,6 +36,7 @@ export class ProductOverviewComponent implements OnInit {
         price: this.product.defaultPrice as number,
         category: this.product.category,
         quantity: event.quantity,
+        image: this.product.image,
       },
     };
     this.store.dispatch(add(shoppingCartItem));

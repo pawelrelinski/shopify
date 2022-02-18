@@ -1,14 +1,12 @@
-import { OrderProduct, OrderStatus, Payment } from '@features/order/models';
+import { OrderProduct } from '@features/order/models/order-product';
 import { User } from '@features/user/models';
+import { Payment } from '@features/order/models/payment/payment';
 
-export interface Order {
-  id: number;
-  createdAt: string;
+export interface CreateOrder {
   shippingMethod: string;
   products: OrderProduct[];
   comments?: string;
   user: User;
-  status: OrderStatus;
   payment: Payment;
   summaryPrice: number;
 }

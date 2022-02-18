@@ -18,9 +18,9 @@ import { PipesModule } from '@core/pipes/pipes.module';
 @NgModule({
   declarations: [
     CheckoutComponent,
-    CheckoutFormComponent,
     CheckoutSummaryComponent,
     CheckoutItemsListComponent,
+    CheckoutFormComponent,
     CheckoutItemsListElementComponent,
   ],
   imports: [
@@ -34,6 +34,6 @@ import { PipesModule } from '@core/pipes/pipes.module';
     MatInputModule,
     RouterModule,
   ],
-  exports: [CheckoutComponent],
+  exports: [CheckoutFormComponent, CheckoutComponent],
 })
 export class CheckoutModule {}

@@ -6,6 +6,7 @@ import { ProductListPaginationComponent } from './product-list-pagination/produc
 import { ProductListHeaderComponent } from './product-list-header/product-list-header.component';
 import { PipesModule } from '@core/pipes/pipes.module';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { RouterModule } from '@angular/router';
     ProductListHeaderComponent,
     ProductListPaginationComponent,
   ],
-  imports: [CommonModule, PipesModule, RouterModule],
+  imports: [CommonModule, PipesModule, RouterModule, MatProgressSpinnerModule],
   exports: [ProductListComponent],
 })
 export class ProductListModule {}

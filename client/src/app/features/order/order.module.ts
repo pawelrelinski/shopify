@@ -7,6 +7,7 @@ import {
   OrderListTableComponent,
   OrderListTableRowComponent,
 } from '@features/order/components';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import {
     OrderCardListComponent,
     OrderCardListElementComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   exports: [OrderListTableComponent, OrderCardListComponent],
 })
 export class OrderModule {}

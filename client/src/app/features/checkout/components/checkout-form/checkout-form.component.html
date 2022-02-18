@@ -316,13 +316,13 @@
     </form>
   </mat-step>
   <mat-step>
-    <form>
+    <form [formGroup]='deliveryMethodGroup'>
       <ng-template matStepLabel>Delivery method</ng-template>
       <div class='flex flex-col gap-5'>
         <div class='flex flex-row gap-5'>
           <div class='w-full flex flex-col gap-5'>
-            <label *ngFor='let method of deliveryMethods'>
-              <input checked type='radio' name='deliveryMethod' [id]='method.name' class='hidden' />
+            <label *ngFor='let method of deliveryMethods' (click)='setDeliveryMethodValue(method)'>
+              <input type='radio' [id]='method.name' class='hidden' />
               <div
                 class='label-checked:bg-green-50 label-checked:border-green-600 p-5 pr-12 rounded-md border-green px-5 cursor-pointer transition'>
                 <p class='text-gray-800 text-xl font-medium'>

@@ -15,6 +15,7 @@ export class CheckoutFormComponent implements OnInit {
   public shippingAddressGroup!: FormGroup;
   public paymentDetailsGroup!: FormGroup;
   public contactInformationGroup!: FormGroup;
+  public deliveryMethodGroup!: FormGroup;
 
   public checkoutData!: Checkout;
   public deliveryMethods: DeliveryMethod[] = [
@@ -28,6 +29,7 @@ export class CheckoutFormComponent implements OnInit {
     this.setShippingAddressGroup();
     this.setPaymentDetailsGroup();
     this.setContactInformationGroup();
+    this.setDeliveryMethodForm();
   }
 
   public confirmCheckoutData(): void {
@@ -38,6 +40,14 @@ export class CheckoutFormComponent implements OnInit {
 
   public setCheckoutData(): void {
     this.checkoutData = this.getCheckoutData();
+  }
+
+  public setDeliveryMethodValue(value: any): void {
+    this.deliveryMethodGroup.get('method')?.setValue(value);
+    this.deliveryMethodGroup.patchValue({
+      method: value,
+    });
+    console.log(this.deliveryMethodGroup.get('method')?.value);
   }
 
   private setShippingAddressGroup(): void {
@@ -93,6 +103,12 @@ export class CheckoutFormComponent implements OnInit {
     });
   }
 
+  private setDeliveryMethodForm(): void {
+    this.deliveryMethodGroup = this.fb.group({
+      method: this.fb.control({}, [Validators.required]),
+    });
+  }
+
   private getCheckoutData(): Checkout {
     return {
       shippingAddress: {
@@ -109,6 +125,9 @@ export class CheckoutFormComponent implements OnInit {
       contactInformation: {
         email: this.contactInformationGroup.get('email')?.value,
         phoneNumber: this.contactInformationGroup.get('phoneNumber')?.value,
+      },
+      deliveryMethod: {
+        method: this.deliveryMethodGroup.get('method')?.value,
       },
     };
   }
