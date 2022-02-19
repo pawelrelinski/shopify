@@ -6,9 +6,17 @@ import { DashboardComponent } from './dashboard.component';
 import { ProductModule } from '@features/product/product.module';
 import { UserModule } from '@features/user/user.module';
 import { CategoryModule } from '@features/category/category.module';
+import { OrderModule } from '@features/order/order.module';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule, ProductModule, UserModule, CategoryModule],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    ProductModule,
+    UserModule,
+    CategoryModule,
+    OrderModule,
+  ],
 })
 export class DashboardModule {}

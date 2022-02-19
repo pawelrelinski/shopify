@@ -1,141 +1,290 @@
-<header
-  class='w-full h-12 fixed top-0 left-0 flex items-center justify-between py-0 px-4 bg-gray-100 z-100 transition duration-500'
-  [class.body-pd]='menuIsOpen'>
-  <div [ngClass]="{'pl-20': !menuIsOpen}" class='text-green-700 text-2xl cursor-pointer' (click)='toggleMenu()'>
-    <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-      <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h7' />
-    </svg>
-  </div>
-</header>
+<div class='h-screen flex overflow-hidden bg-gray-100'>
+  <div *ngIf='sidebarIsOpen' class='fixed inset-0 flex z-40 md:hidden' role='dialog' aria-modal='true'>
+    <div class='fixed inset-0 bg-gray-600 bg-opacity-75' aria-hidden='true'></div>
+    <div class='relative flex-1 flex flex-col max-w-xs w-full bg-white'>
+      <div class='absolute top-0 right-0 -mr-12 pt-2'>
+        <button (click)='closeSidebar()' type='button'
+                class='ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
+          <span class='sr-only'>Close sidebar</span>
+          <svg class='h-6 w-6 text-white' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'
+               stroke='currentColor' aria-hidden='true'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
+          </svg>
+        </button>
+      </div>
 
-<div class='content' [class.content--active]='menuIsOpen'>
-  <ng-content></ng-content>
-</div>
+      <div class='flex-1 h-0 pt-5 pb-4 overflow-y-auto'>
+        <div class='flex-shrink-0 flex items-center px-4'>
+          <img class='h-8 w-auto' src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg'
+               alt='Workflow'>
+        </div>
+        <nav class='flex-1 bg-white space-y-1' aria-label='Sidebar'>
+          <a routerLink='/admin'
+             routerLinkActive='text-indigo-600'
+             class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+            <svg routerLinkActive='text-indigo-500'
+                 class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                 xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                 aria-hidden='true'>
+              <path stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+              />
+            </svg>
+            Dashboard
+          </a>
 
+          <a routerLink='/admin/products-manage'
+             routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+             class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+            <svg routerLinkActive='text-indigo-500'
+                 class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                 xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                 aria-hidden='true'>
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+              />
+            </svg>
+            Products
+          </a>
 
-<div [class.show]='menuIsOpen'
-     class='flex flex-col w-72 h-screen py-8 bg-white border-r dark:bg-gray-800 dark:border-gray-600 navbar'>
-  <h2 class='text-3xl font-semibold text-gray-800 dark:text-white'>
-    <svg
-      class='w-8 text-green-600'
-      viewBox='0 0 24 24'
-      stroke-linejoin='round'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-miterlimit='10'
-      stroke='currentColor'
-      fill='none'
-    >
-      <rect x='3' y='1' width='7' height='12'></rect>
-      <rect x='3' y='17' width='7' height='6'></rect>
-      <rect x='14' y='1' width='7' height='6'></rect>
-      <rect x='14' y='11' width='7' height='12'></rect>
-    </svg>
-  </h2>
+          <a routerLink='/admin/orders-manage'
+             routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+             class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+            <svg routerLinkActive='text-indigo-500'
+                 class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                 xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                 aria-hidden='true'>
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'
+              />
+            </svg>
+            Orders
+          </a>
 
-  <div *ngIf='menuIsOpen' class='relative mt-6'>
-    <span class='absolute inset-y-0 left-0 flex items-center pl-3'>
-      <svg class='w-5 h-5 text-gray-400' viewBox='0 0 24 24' fill='none'>
-        <path
-          d='M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z'
-          stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path>
-      </svg>
-    </span>
-    <input type='text'
-           class='w-full py-2 pl-10 pr-4 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring'
-           placeholder='Search' />
-  </div>
+          <a routerLink='/admin/customers-manage'
+             routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+             class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+            <svg routerLinkActive='text-indigo-500'
+                 class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                 xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                 aria-hidden='true'>
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+              />
+            </svg>
+            Users
+          </a>
 
-  <div class='flex flex-col justify-between flex-1 mt-6'>
-    <nav>
-      <a class='flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-700 dark:text-gray-200'
-         href='#'>
-        <svg class='w-5 h-5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-        </svg>
+          <a routerLink='/admin/categories-manage'
+             routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+             class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+            <svg routerLinkActive='text-indigo-500'
+                 class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                 xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                 aria-hidden='true'>
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
+              />
+            </svg>
+            Categories
+          </a>
 
-        <span *ngIf='menuIsOpen' class='mx-4 font-medium'>Dashboard</span>
-      </a>
+          <a href='#'
+             class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+            <svg class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                 xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                 aria-hidden='true'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2'
+                    d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' />
+            </svg>
+            Reports
+          </a>
+        </nav>
+      </div>
+      <div class='flex-shrink-0 flex border-t border-gray-200 p-4'>
+        <a href='#' class='flex-shrink-0 group block'>
+          <div class='flex items-center'>
+            <div>
+              <img class='inline-block h-10 w-10 rounded-full'
+                   src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                   alt=''>
+            </div>
+            <div class='ml-3'>
+              <p class='text-base font-medium text-gray-700 group-hover:text-gray-900'>
+                Tom Cook
+              </p>
+              <p class='text-sm font-medium text-gray-500 group-hover:text-gray-700'>
+                View profile
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
 
-      <a
-        class='flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700'
-        href='#'>
-        <svg class='w-5 h-5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-          <path d='M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z' stroke='currentColor' stroke-width='2'
-                stroke-linecap='round' stroke-linejoin='round' />
-        </svg>
-
-        <span *ngIf='menuIsOpen' class='mx-4 font-medium'>Accounts</span>
-      </a>
-
-      <a
-        class='flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700'
-        href='#'>
-        <svg class='w-5 h-5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-        </svg>
-
-        <span *ngIf='menuIsOpen' class='mx-4 font-medium'>Tickets</span>
-      </a>
-
-      <a
-        class='flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700'
-        href='#'>
-        <svg class='w-5 h-5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-          <path
-            d='M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-        </svg>
-
-        <span *ngIf='menuIsOpen' class='mx-4 font-medium'>Settings</span>
-      </a>
-
-      <hr class='my-6 border-gray-200 dark:border-gray-600' />
-
-      <a
-        class='flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700'
-        href='#'>
-        <svg class='w-5 h-5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-        </svg>
-
-        <span *ngIf='menuIsOpen' class='mx-4 font-medium'>Tickets</span>
-      </a>
-
-      <a
-        class='flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700'
-        href='#'>
-        <svg class='w-5 h-5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-          <path
-            d='M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z'
-            stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
-        </svg>
-
-        <span *ngIf='menuIsOpen' class='mx-4 font-medium'>Settings</span>
-      </a>
-    </nav>
-
-    <div class='flex items-center px-4 pb-4 -mx-2'>
-      <img class='object-cover mx-2 rounded-full h-9 w-9'
-           src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
-           alt='avatar' />
-      <h4 *ngIf='menuIsOpen' class='mx-2 font-medium text-gray-800 dark:text-gray-200 hover:underline'>John Doe</h4>
+    <div class='flex-shrink-0 w-14'>
     </div>
   </div>
-</div>
 
+  <!-- Sidebar for desktop -->
+  <div class='hidden md:flex md:flex-shrink-0'>
+    <div class='flex flex-col w-64'>
+      <div class='flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white'>
+        <div class='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
+          <div class='flex items-center flex-shrink-0 px-4'>
+            <img class='h-8 w-auto'
+                 src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg' alt='Workflow'>
+          </div>
+          <nav class='flex-1 bg-white space-y-1' aria-label='Sidebar'>
+            <a routerLink='/admin'
+               routerLinkActive='text-indigo-600'
+               class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+              <svg routerLinkActive='text-indigo-500'
+                   class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                   xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                   aria-hidden='true'>
+                <path stroke-linecap='round'
+                      stroke-linejoin='round'
+                      stroke-width='2'
+                      d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+                />
+              </svg>
+              Dashboard
+            </a>
+
+            <a routerLink='/admin/products-manage'
+               routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+               class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+              <svg routerLinkActive='text-indigo-500'
+                   class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                   xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                   aria-hidden='true'>
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+                />
+              </svg>
+              Products
+            </a>
+
+            <a routerLink='/admin/orders-manage'
+               routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+               class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+              <svg routerLinkActive='text-indigo-500'
+                   class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                   xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                   aria-hidden='true'>
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'
+                />
+              </svg>
+              Orders
+            </a>
+
+            <a routerLink='/admin/customers-manage'
+               routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+               class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+              <svg routerLinkActive='text-indigo-500'
+                   class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                   xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                   aria-hidden='true'>
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+                />
+              </svg>
+              Users
+            </a>
+
+            <a routerLink='/admin/categories-manage'
+               routerLinkActive='bg-indigo-50 border-indigo-600 text-indigo-600'
+               class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+              <svg routerLinkActive='text-indigo-500'
+                   class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                   xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                   aria-hidden='true'>
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
+                />
+              </svg>
+              Categories
+            </a>
+
+            <a href='#'
+               class='border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium border-l-4'>
+              <svg class='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
+                   xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+                   aria-hidden='true'>
+                <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2'
+                      d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' />
+              </svg>
+              Reports
+            </a>
+          </nav>
+        </div>
+        <div class='flex-shrink-0 flex border-t border-gray-200 p-4'>
+          <a href='#' class='flex-shrink-0 w-full group block'>
+            <div class='flex items-center'>
+              <div>
+                <img class='inline-block h-9 w-9 rounded-full'
+                     src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                     alt=''>
+              </div>
+              <div class='ml-3'>
+                <p class='text-sm font-medium text-gray-700 group-hover:text-gray-900'>
+                  Tom Cook
+                </p>
+                <p class='text-xs font-medium text-gray-500 group-hover:text-gray-700'>
+                  View profile
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='flex flex-col w-0 flex-1 overflow-hidden'>
+    <div class='md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3'>
+      <button (click)='openSidebar()' type='button'
+              class='-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
+        <span class='sr-only'>Open sidebar</span>
+        <svg class='h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
+             aria-hidden='true'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16' />
+        </svg>
+      </button>
+    </div>
+    <main class='flex-1 relative z-0 overflow-y-auto focus:outline-none'>
+      <div class='py-6'>
+        <div class='max-w-7xl mx-auto px-4 sm:px-6 md:px-8'>
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

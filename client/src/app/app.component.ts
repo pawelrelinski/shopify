@@ -3,6 +3,8 @@ import { NotificationService } from '@features/notification/services';
 import { NotificationData } from '@features/notification/models';
 import { NotificationDirective } from '@features/notification/directives';
 import { NotificationComponent } from '@features/notification/components/notification/notification.component';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'shopify-root',
@@ -12,9 +14,23 @@ import { NotificationComponent } from '@features/notification/components/notific
 export class AppComponent implements OnInit {
   @ViewChild(NotificationDirective, { static: true }) notificationHost!: NotificationDirective;
 
-  constructor(private notificationService: NotificationService) {}
+  public isAdminNavigation = false;
+
+  constructor(
+    private notificationService: NotificationService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   public ngOnInit(): void {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.url)
+      )
+      .subscribe((e: string) => {
+        this.isAdminNavigation = e.includes('admin');
+      });
     this.notificationService.notifications.subscribe((notification: NotificationData) => {
       this.loadNotificationComponent(notification);
     });

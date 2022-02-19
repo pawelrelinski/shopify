@@ -6,8 +6,10 @@ import {
   OrderCardListElementComponent,
   OrderListTableComponent,
   OrderListTableRowComponent,
+  OrderWidgetComponent,
 } from '@features/order/components';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     OrderListTableRowComponent,
     OrderCardListComponent,
     OrderCardListElementComponent,
+    OrderWidgetComponent,
   ],
-  imports: [CommonModule, HttpClientModule],
-  exports: [OrderListTableComponent, OrderCardListComponent],
+  imports: [CommonModule, HttpClientModule, RouterModule],
+  exports: [OrderListTableComponent, OrderCardListComponent, OrderWidgetComponent],
 })
 export class OrderModule {}

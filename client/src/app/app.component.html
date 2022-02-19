@@ -1,6 +1,16 @@
-<shopify-layout-structure></shopify-layout-structure>
 <ng-template shopifyNotification></ng-template>
-<div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-full'>
-  <router-outlet></router-outlet>
+
+<div *ngIf='!isAdminNavigation; else adminNavigation'>
+  <shopify-layout-structure></shopify-layout-structure>
+  <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-full'>
+    <router-outlet></router-outlet>
+  </div>
 </div>
+
+<ng-template #adminNavigation>
+  <shopify-layout-admin-navigation>
+    <router-outlet></router-outlet>
+  </shopify-layout-admin-navigation>
+</ng-template>
+
 <shopify-footer></shopify-footer>

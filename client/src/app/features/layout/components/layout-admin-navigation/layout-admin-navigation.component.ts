@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'shopify-layout-admin-navigation',
@@ -6,26 +6,34 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./layout-admin-navigation.component.scss'],
 })
 export class LayoutAdminNavigationComponent {
-  public menuIsOpen = true;
-  private windowWidth!: number;
+  public sidebarIsOpen = false;
 
-  ngOnInit(): void {
-    this.windowWidth = window.innerWidth;
+  public productsFlyoutIsOpen = false;
+  public categoriesFlyoutIsOpen = false;
+  public usersFlyoutIsOpen = false;
+  public ordersFlyoutIsOpen = false;
+
+  public closeSidebar(): void {
+    this.sidebarIsOpen = false;
   }
 
-  public toggleMenu(): void {
-    this.menuIsOpen = !this.menuIsOpen;
+  public openSidebar(): void {
+    this.sidebarIsOpen = true;
   }
 
-  public hiddenMenu(): void {
-    if (this.windowWidth >= 768) {
-      return;
-    }
-    this.toggleMenu();
+  public toggleProductsFlyout(): void {
+    this.productsFlyoutIsOpen = !this.productsFlyoutIsOpen;
   }
 
-  @HostListener('window:resize', ['$event'])
-  private onResize(event: Event): void {
-    this.windowWidth = window.innerWidth;
+  public toggleCategoriesFlyout(): void {
+    this.categoriesFlyoutIsOpen = !this.categoriesFlyoutIsOpen;
+  }
+
+  public toggleUsersFlyout(): void {
+    this.usersFlyoutIsOpen = !this.usersFlyoutIsOpen;
+  }
+
+  public toggleOrdersFlyout(): void {
+    this.ordersFlyoutIsOpen = !this.ordersFlyoutIsOpen;
   }
 }
