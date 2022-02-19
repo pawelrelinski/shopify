@@ -39,8 +39,8 @@
         Shipping methods<span class='text-red-700'>*</span>
       </dt>
       <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-        <div (click)='toggleShippingMethodsOptions()'>
-          <h3 class='-mx-2 -my-3 flow-root'>
+        <div>
+          <h3 (click)='openShippingMethodsOptions()' class='-mx-2 -my-3 flow-root'>
             <button
               type='button'
               class='px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500'
@@ -51,6 +51,7 @@
               <span class='ml-6 flex items-center'>
                     <svg
                       *ngIf='!moreShippingMethodsOptionsIsShow'
+                      (click)='openShippingMethodsOptions()'
                       xmlns='http://www.w3.org/2000/svg'
                       class='h-6 w-6'
                       fill='none'
@@ -66,7 +67,7 @@
                     </svg>
                     <svg
                       *ngIf='moreShippingMethodsOptionsIsShow'
-                      (click)='toggleShippingMethodsOptions()'
+                      (click)='closeShippingMethodsOptions()'
                       xmlns='http://www.w3.org/2000/svg'
                       class='h-6 w-6'
                       fill='none'

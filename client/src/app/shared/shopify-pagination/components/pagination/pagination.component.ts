@@ -16,9 +16,7 @@ export class PaginationComponent implements OnInit {
   currentPage!: number;
 
   @Output()
-  onChangePage: EventEmitter<number> = new EventEmitter<number>();
-
-  private readonly defaultRange = { from: 1, to: 10 };
+  onChangePage = new EventEmitter<number>();
 
   public range = { from: 1, to: 10 };
 
@@ -26,7 +24,7 @@ export class PaginationComponent implements OnInit {
     this.setRange();
   }
 
-  public getPageCount(): Array<number> {
+  public getPageCount(): number[] {
     return Array(this.pageCount).fill(1);
   }
 
@@ -75,9 +73,4 @@ export class PaginationComponent implements OnInit {
       return (this.currentPage - 1) * 10 + 10;
     }
   }
-
-  // private pageManipulation(): void {
-  //   const pageStatus: Map<number, () => void> = new Map<number, () => void>()
-  //     .set()
-  // }
 }

@@ -122,7 +122,7 @@ export class ProductTableComponent implements OnInit {
   }
 
   private setPaginationPageCount(): void {
-    this.pageCount = +(this.productCount / 10).toFixed(0);
+    this.pageCount = +Math.floor(this.productCount / 10).toFixed(0);
     this.productCount % 10 > 0 ? (this.pageCount += 1) : null;
   }
 }

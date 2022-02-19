@@ -15,11 +15,13 @@ import {
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  public products: Array<Product> = [];
+  public products: Product[] = [];
   public categoryName!: string;
+
   public productCount!: number;
   public pageCount!: number;
-  public currentPage: number = 1;
+  public currentPage = 1;
+  public productsRange = { from: 0, to: 0 };
 
   public productsListIsEmpty = false;
 
@@ -65,7 +67,26 @@ export class ProductListComponent implements OnInit {
       )
       .subscribe((response: ProductGetAllByResponse) => {
         this.products = response.products;
+        this.productCount = response.productsCountInCategory;
+        if (this.productCount > 10) {
+          this.pageCount = +(this.productCount / 10).toFixed(0);
+        } else {
+          this.pageCount = 1;
+        }
         this.productsListIsEmpty = this.products.length <= 0;
+
+        this.setProductsRange();
       });
+  }
+
+  private setProductsRange(): void {
+    if (this.currentPage === 1) {
+      this.productsRange.from = 1;
+      this.productsRange.to = this.productCount > 10 ? 10 : this.productCount;
+    } else {
+      this.productsRange.from = (this.currentPage - 1) * 10 + 1;
+      this.productsRange.to =
+        this.currentPage === this.pageCount ? this.productCount : (this.currentPage - 1) * 10 + 10;
+    }
   }
 }

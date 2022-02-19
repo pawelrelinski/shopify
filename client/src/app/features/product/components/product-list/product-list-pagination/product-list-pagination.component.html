@@ -1,5 +1,7 @@
 <div class="flex justify-center mt-10 space-x-1">
-  <button class="flex items-center justify-center h-8 w-8 rounded text-gray-400">
+  <button
+    (click)='previousPage()'
+    class="flex items-center justify-center h-8 w-8 rounded text-gray-400">
     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
       <path
         fill-rule="evenodd"
@@ -9,33 +11,30 @@
     </svg>
   </button>
   <button
+    (click)='previousPage()'
     class="flex items-center justify-center h-8 px-2 rounded text-sm font-medium text-gray-400"
     disabled
   >
     Prev
   </button>
   <button
-    class="flex items-center justify-center h-8 w-8 rounded bg-green-200 text-sm font-medium text-green-600"
-    disabled
-  >
-    1
-  </button>
-  <button
+    *ngFor='let page of getPageCount(); let i = index'
+    (click)='changePage(plusOne(i))'
+    [ngClass]="{
+      'bg-green-200 text-green-600': plusOne(i) == currentPage
+    }"
     class="flex items-center justify-center h-8 w-8 rounded hover:bg-green-200 text-sm font-medium text-gray-600 hover:text-green-600"
   >
-    2
+    {{ plusOne(i) }}
   </button>
   <button
-    class="flex items-center justify-center h-8 w-8 rounded hover:bg-green-200 text-sm font-medium text-gray-600 hover:text-green-600"
-  >
-    3
-  </button>
-  <button
+    (click)='nextPage()'
     class="flex items-center justify-center h-8 px-2 rounded hover:bg-green-200 text-sm font-medium text-gray-600 hover:text-green-600"
   >
     Next
   </button>
   <button
+    (click)='nextPage()'
     class="flex items-center justify-center h-8 w-8 rounded hover:bg-green-200 text-gray-600 hover:text-green-600"
   >
     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

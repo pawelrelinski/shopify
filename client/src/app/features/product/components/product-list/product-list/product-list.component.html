@@ -3,7 +3,9 @@
   Don't find any products...
 </h1>
 <ng-template #productsList>
-  <shopify-product-list-header (onSort)='sortProducts($event)'>
+  <shopify-product-list-header (onSort)='sortProducts($event)'
+                               [productsCount]='productCount'
+                               [productRange]='productsRange'>
   </shopify-product-list-header>
   <div
     class='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6'
@@ -12,5 +14,7 @@
                                   [product]='product'>
     </shopify-product-list-element>
   </div>
-  <shopify-product-list-pagination></shopify-product-list-pagination>
+  <shopify-product-list-pagination [pageCount]='pageCount'
+                                   [currentPage]='currentPage'>
+  </shopify-product-list-pagination>
 </ng-template>

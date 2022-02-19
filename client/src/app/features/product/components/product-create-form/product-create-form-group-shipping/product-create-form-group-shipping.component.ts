@@ -32,8 +32,12 @@ export class ProductCreateFormGroupShippingComponent implements OnInit {
     this.onFormReady.emit(this.shippingForm);
   }
 
-  public toggleShippingMethodsOptions(): void {
-    this.moreShippingMethodsOptionsIsShow = !this.moreShippingMethodsOptionsIsShow;
+  public openShippingMethodsOptions(): void {
+    this.moreShippingMethodsOptionsIsShow = true;
+  }
+
+  public closeShippingMethodsOptions(): void {
+    this.moreShippingMethodsOptionsIsShow = false;
   }
 
   public onCheckboxChange(event: any): void {

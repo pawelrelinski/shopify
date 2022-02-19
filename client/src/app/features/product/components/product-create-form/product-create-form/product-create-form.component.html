@@ -125,6 +125,7 @@
       class='flex flex-row order-3 px-4 py-5 mr-auto flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto sm:px-6'
     >
       <button
+        [disabled]='createProductForm.invalid'
         class='submit-btn flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 w-full sm:w-36 sm:flex-row hover:bg-green-700 transition delay-200'
         type='submit'
       >
