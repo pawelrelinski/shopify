@@ -84,7 +84,13 @@ export class ProductsService {
 
   public async count(category?: string): Promise<number> {
     const wereOptions = { isDeleted: false };
-    category ? Object.assign(wereOptions, { category }) : null;
+    if (category) {
+      const categoryEntity: Category =
+        await this.categoriesService.findByFormatName(category);
+      Object.assign(wereOptions, {
+        category: categoryEntity,
+      });
+    }
     return this.productsRepository.count(wereOptions);
   }
 

@@ -23,6 +23,7 @@ import { HOST_ADDRESS } from '../../config/configuration';
 import { ErrorResponse } from '../../models/error-response';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
+import { FindAllResponseDto } from './dto/find-all-response.dto';
 
 @ApiTags('products')
 @Controller('products')
@@ -35,9 +36,15 @@ export class ProductsController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Return all products.' })
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async findAll(@Query() query): Promise<{ products: Product[] }> {
+  public async findAll(@Query() query): Promise<FindAllResponseDto> {
     const products: Product[] = await this.productsService.findAll(query);
-    return { products };
+    const productsCountInCategory: number = await this.productsService.count(
+      query.category,
+    );
+    return {
+      productsCountInCategory,
+      products,
+    };
   }
 
   @ApiOperation({ summary: 'Add image' })
