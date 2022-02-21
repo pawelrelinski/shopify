@@ -67,6 +67,52 @@ export class ProductsService {
     return products;
   }
 
+  public async findMostPopularFromLastDays(query?: any): Promise<any> {
+    const qb = await getRepository(Product)
+      .createQueryBuilder('product')
+      .innerJoinAndSelect('product.views', 'product_views')
+      .select('product.id', 'productId')
+      .addSelect('product.name', 'productName')
+      .addSelect('product.image', 'productImage')
+      .addSelect('product.categoryId')
+      .addSelect('SUM(product_views.value)', 'productViews')
+      .where(
+        'product_views.createdAt > DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 7 DAY)',
+      )
+      .andWhere('product.isDeleted = 0');
+
+    if ('category' in query) {
+      const category: Category = await this.categoriesService.findByFormatName(
+        query.category,
+      );
+      qb.andWhere(
+        new Brackets((qb) => {
+          qb.where('product.category = :id', { id: category.id });
+        }),
+      );
+    }
+
+    if ('limit' in query) {
+      qb.limit(query.limit);
+    }
+
+    if ('offset' in query) {
+      const offset: number =
+        'limit' in query ? query.limit * query.offset : query.offset;
+      qb.offset(offset);
+    }
+
+    qb.groupBy('product.id');
+
+    let order: 'ASC' | 'DESC' = 'DESC';
+    if ('order' in query) {
+      order = query.order.toUpperCase();
+      qb.orderBy('productViews', order);
+    }
+    qb.orderBy('productViews', order);
+    return await qb.getRawMany();
+  }
+
   public async findOne(id: string): Promise<Product | null> {
     const options: FindOneOptions<Product> = {
       where: { id, isDeleted: false },

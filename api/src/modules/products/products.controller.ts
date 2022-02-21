@@ -24,6 +24,7 @@ import { ErrorResponse } from '../../models/error-response';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
 import { FindAllResponseDto } from './dto/find-all-response.dto';
+import { FindByViewsCountResponseDto } from './dto/find-by-views-count-response.dto';
 
 @ApiTags('products')
 @Controller('products')
@@ -45,6 +46,19 @@ export class ProductsController {
       productsCountInCategory,
       products,
     };
+  }
+
+  @ApiOperation({ summary: 'Get products by views count' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Return products by given filter.',
+  })
+  @Get('views')
+  @HttpCode(HttpStatus.OK)
+  public async findByViewsCount(
+    @Query() query,
+  ): Promise<FindByViewsCountResponseDto> {
+    return await this.productsService.findMostPopularFromLastDays(query);
   }
 
   @ApiOperation({ summary: 'Add image' })

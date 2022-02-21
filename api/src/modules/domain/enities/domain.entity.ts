@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Page } from './page.entity';
+import { DomainView } from './domain-view.entity';
 
 @Entity()
 export class Domain {
@@ -18,4 +19,7 @@ export class Domain {
   @OneToMany(() => Page, (page: Page) => page.domain)
   @JoinColumn()
   pages: Page[];
+
+  @OneToMany(() => DomainView, (domainView: DomainView) => domainView.domain)
+  views: DomainView[];
 }

@@ -12,6 +12,11 @@ export class ProductView {
   })
   createdAt: string;
 
+  @Column({
+    default: 1
+  })
+  value: number;
+
   @ManyToOne(() => Product, (product: Product) => product.views)
   product: Product;
 }

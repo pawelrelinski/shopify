@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './category.entity';
-import { Repository, getRepository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
 import { CategoryView } from './category-view.entity';
 
@@ -19,7 +19,7 @@ export class CategoriesService {
   }
 
   public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
-    const categories = await getRepository<Category>(Category).query(
+    return await getRepository<Category>(Category).query(
       `SELECT COUNT(p.id) as productsCount, c.*
               FROM category c
               INNER JOIN product p
@@ -28,7 +28,6 @@ export class CategoriesService {
               GROUP BY c.id;
               `,
     );
-    return categories;
   }
 
   public async findByFormatName(formatName: string): Promise<Category> {
