@@ -9,6 +9,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   ProductAvailableWidgetComponent,
   ProductFileUploadComponent,
+  ProductMostPopularComponent,
   ProductQuantityCounterComponent,
 } from '@features/product/components';
 import { StatusWidgetModule } from '@shared/status-widget/status-widget.module';
@@ -23,12 +24,14 @@ import { NotificationModule } from '@features/notification/notification.module';
 import { ProductCreateFormModule } from '@features/product/components/product-create-form/product-create-form.module';
 import { ProductDetailsModule } from '@features/product/components/product-details/product-details.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
     ProductAvailableWidgetComponent,
     ProductQuantityCounterComponent,
     ProductFileUploadComponent,
+    ProductMostPopularComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +52,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ProductCreateFormModule,
     ProductDetailsModule,
     MatProgressSpinnerModule,
+    NgxChartsModule,
   ],
   exports: [
     ProductAvailableWidgetComponent,
@@ -58,6 +62,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ProductTableModule,
     ProductCreateFormModule,
     ProductDetailsModule,
+    ProductMostPopularComponent,
   ],
 })
 export class ProductModule {}

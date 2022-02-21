@@ -5,6 +5,7 @@ import { NotificationDirective } from '@features/notification/directives';
 import { NotificationComponent } from '@features/notification/components/notification/notification.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
+import { DomainService } from '@core/services/domain/domain.service';
 
 @Component({
   selector: 'shopify-root',
@@ -19,21 +20,14 @@ export class AppComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private domainService: DomainService
   ) {}
 
   public ngOnInit(): void {
-    this.router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-        map((event: NavigationEnd) => event.url)
-      )
-      .subscribe((e: string) => {
-        this.isAdminNavigation = e.includes('admin');
-      });
-    this.notificationService.notifications.subscribe((notification: NotificationData) => {
-      this.loadNotificationComponent(notification);
-    });
+    this.setDomainData();
+    this.listenRouterEventsForAdminPath();
+    this.listenOnNotifications();
   }
 
   private loadNotificationComponent(notification: NotificationData): void {
@@ -46,5 +40,26 @@ export class AppComponent implements OnInit {
       title: notification.title,
       message: notification.message,
     };
+  }
+
+  private listenRouterEventsForAdminPath(): void {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.url)
+      )
+      .subscribe((e: string) => {
+        this.isAdminNavigation = e.includes('admin');
+      });
+  }
+
+  private listenOnNotifications(): void {
+    this.notificationService.notifications.subscribe((notification: NotificationData) => {
+      this.loadNotificationComponent(notification);
+    });
+  }
+
+  private setDomainData(): void {
+    this.domainService.enterToPage().subscribe((res: Object) => {});
   }
 }

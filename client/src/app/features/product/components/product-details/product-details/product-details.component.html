@@ -1,13 +1,12 @@
 <div *ngIf='views; else loading'>
   <div
     class='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-4 gap-y-4 w-full mt-6 ng-star-inserted'>
-    <shopify-product-details-views-counter-card [viewsCount]='viewsCount'>
-    </shopify-product-details-views-counter-card>
-    <shopify-product-details-quantity-card [quantity]='productQuantity'>
-    </shopify-product-details-quantity-card>
   </div>
-  <shopify-product-details-views-stats [views]='views'>
-  </shopify-product-details-views-stats>
+  <shopify-product-details-stats [productQuantity]='productQuantity'
+                                 [productViews]='viewsCount'>
+  </shopify-product-details-stats>
+  <shopify-product-details-views-chart [views]='views'>
+  </shopify-product-details-views-chart>
 </div>
 <ng-template #loading>
   <div class='w-full flex justify-center align-center pt-24'>

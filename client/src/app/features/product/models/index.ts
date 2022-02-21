@@ -10,3 +10,4 @@ export * from './product-delete-response';
 export * from './sort-action';
 export * from './shipping-method';
 export * from './view';
+export * from './product-with-views-count';

@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { View } from '@features/product/models';
 
 @Component({
-  selector: 'shopify-product-details-views-stats[views]',
-  templateUrl: './product-details-views-stats.component.html',
-  styleUrls: ['./product-details-views-stats.component.scss'],
+  selector: 'shopify-product-details-views-chart[views]',
+  templateUrl: './product-details-views-chart.component.html',
+  styleUrls: ['./product-details-views-chart.component.scss'],
 })
-export class ProductDetailsViewsStatsComponent implements OnInit {
+export class ProductDetailsViewsChartComponent implements OnInit {
   @Input() views!: View[];
 
   public viewsData!: { name: string; value: number }[];
@@ -79,10 +79,6 @@ export class ProductDetailsViewsStatsComponent implements OnInit {
       month: dateTwo.getMonth(),
       day: dateTwo.getDay(),
     };
-    if (JSON.stringify(formattedDateOne) === JSON.stringify(formattedDateTwo)) {
-      return true;
-    } else {
-      return false;
-    }
+    return JSON.stringify(formattedDateOne) === JSON.stringify(formattedDateTwo);
   }
 }

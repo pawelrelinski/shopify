@@ -8,6 +8,7 @@ import {
   ProductCreateResponse,
   ProductDeleteResponse,
   ProductGetAllByResponse,
+  ProductWithViewsCount,
 } from '@features/product/models';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -92,6 +93,13 @@ export class ProductService {
 
     url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     return this.http.get<{ count: number }>(url);
+  }
+
+  public getMostViewedProducts(): Observable<ProductWithViewsCount[]> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('views');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get<ProductWithViewsCount[]>(url);
   }
 
   private addImage(image: Blob): Observable<Object> {
