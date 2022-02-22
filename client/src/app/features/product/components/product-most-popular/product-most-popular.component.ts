@@ -10,11 +10,10 @@ import { ProductWithViewsCount } from '@features/product/models';
 export class ProductMostPopularComponent implements OnInit {
   public products!: any[];
 
-  // options
-  showXAxis: boolean = true;
-  showYAxis: boolean = true;
-  showXAxisLabel: boolean = true;
-  showYAxisLabel: boolean = true;
+  public showXAxis = true;
+  public showYAxis = true;
+  public showXAxisLabel = true;
+  public showYAxisLabel = true;
 
   constructor(private productService: ProductService) {}
 

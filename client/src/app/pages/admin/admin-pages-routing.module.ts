@@ -36,14 +36,8 @@ const routes: Routes = [
       import('./edit-product/edit-product.module').then((m) => m.EditProductModule),
   },
   {
-    path: 'categories-manage',
-    loadChildren: () =>
-      import('./categories-manage/categories-manage.module').then((m) => m.CategoriesManageModule),
-  },
-  {
-    path: 'category-details',
-    loadChildren: () =>
-      import('./category-details/category-details.module').then((m) => m.CategoryDetailsModule),
+    path: 'categories',
+    loadChildren: () => import('./categories/categories.module').then((m) => m.CategoriesModule),
   },
 ];
 

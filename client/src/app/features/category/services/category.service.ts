@@ -22,6 +22,13 @@ export class CategoryService {
       .pipe(map((value: GetAllCategories) => value.categories));
   }
 
+  public getAllWithViewsCount(): Observable<(Category & { viewsCount: number })[]> {
+    this.setDefaultUrlConfig();
+    this.segmentsUrl.push('views');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    return this.http.get<(Category & { viewsCount: number })[]>(url);
+  }
+
   public getCount(): Observable<number> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('count');
