@@ -51,7 +51,7 @@ export class ProductsController {
   @ApiOperation({ summary: 'Get products by views count' })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Return products by given filter.',
+    description: 'Return products views by given filter.',
   })
   @Get('views')
   @HttpCode(HttpStatus.OK)

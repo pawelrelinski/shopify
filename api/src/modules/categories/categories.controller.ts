@@ -1,4 +1,11 @@
-import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { FindAllCategoriesDto } from './dto/find-all-categories.dto';
@@ -18,6 +25,17 @@ export class CategoriesController {
   public async findAll(): Promise<FindAllCategoriesDto> {
     const categories: Category[] = await this.categoriesService.findAll();
     return { categories };
+  }
+
+  @ApiOperation({ summary: 'Get categories by views count' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Return categories views by given filter.',
+  })
+  @Get('views')
+  @HttpCode(HttpStatus.OK)
+  public async findByViewsCount(@Query() query) {
+    return await this.categoriesService.findAllWithViewsCount(query);
   }
 
   @ApiOperation({ summary: 'Get product count in category' })

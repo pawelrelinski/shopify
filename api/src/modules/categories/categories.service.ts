@@ -18,6 +18,18 @@ export class CategoriesService {
     return this.categoryRepository.find();
   }
 
+  public async findAllWithViewsCount(query?: any) {
+    const qb = getRepository(Category)
+      .createQueryBuilder('category')
+      .innerJoinAndSelect('category.views', 'category_views')
+      .select('category.*')
+      .addSelect('COUNT(category_views.id)', 'viewsCount')
+      .groupBy('category.id')
+      .orderBy('viewsCount', 'DESC');
+
+    return qb.getRawMany();
+  }
+
   public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
     return await getRepository<Category>(Category).query(
       `SELECT COUNT(p.id) as productsCount, c.*

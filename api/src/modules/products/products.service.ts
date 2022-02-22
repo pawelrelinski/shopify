@@ -13,6 +13,7 @@ import { Category } from '../categories/category.entity';
 import { CategoriesService } from '../categories/categories.service';
 import { ProductView } from './enities/product-view.entity';
 import { HOST_ADDRESS } from '../../config/configuration';
+import { CategoryViewService } from '../categories/category-view.service';
 
 @Injectable()
 export class ProductsService {
@@ -24,6 +25,7 @@ export class ProductsService {
     @InjectRepository(ProductView)
     private readonly viewsRepository: Repository<ProductView>,
     private readonly categoriesService: CategoriesService,
+    private readonly categoryViewService: CategoryViewService,
   ) {}
 
   public async findAll(query): Promise<Product[]> {
@@ -41,6 +43,7 @@ export class ProductsService {
           qb.where('product.category = :id', { id: category.id });
         }),
       );
+      await this.categoryViewService.addToCategory(category);
     }
 
     if ('sortBy' in query) {
@@ -122,9 +125,13 @@ export class ProductsService {
     if (!product) {
       return null;
     }
+    const category = await this.categoriesService.findById(product.category.id);
+    await this.categoryViewService.addToCategory(category);
+
     const view = new ProductView();
     view.product = product;
     await this.viewsRepository.save(view);
+
     return this.productsRepository.findOne(options);
   }
 
