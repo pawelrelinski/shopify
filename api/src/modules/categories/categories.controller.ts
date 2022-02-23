@@ -22,8 +22,8 @@ export class CategoriesController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Return all categories.' })
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async findAll(): Promise<FindAllCategoriesDto> {
-    const categories: Category[] = await this.categoriesService.findAll();
+  public async findAll(@Query() query): Promise<FindAllCategoriesDto> {
+    const categories: Category[] = await this.categoriesService.findAll(query);
     return { categories };
   }
 

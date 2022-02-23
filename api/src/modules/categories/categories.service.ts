@@ -4,6 +4,7 @@ import { Category } from './category.entity';
 import { getRepository, Repository } from 'typeorm';
 import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
 import { CategoryView } from './category-view.entity';
+import { query } from 'express';
 
 @Injectable()
 export class CategoriesService {
@@ -14,8 +15,18 @@ export class CategoriesService {
     private readonly categoryViewRepository: Repository<CategoryView>,
   ) {}
 
-  public async findAll(): Promise<Category[]> {
-    return this.categoryRepository.find();
+  public async findAll(query?: any): Promise<Category[]> {
+    const qb = getRepository(Category).createQueryBuilder('category');
+
+    if ('formatName' in query) {
+      qb.where('category.formatName = :fName', { fName: query.formatName });
+    }
+
+    if ('limit' in query) {
+      qb.limit(query.limit);
+    }
+
+    return qb.getMany();
   }
 
   public async findAllWithViewsCount(query?: any) {

@@ -25,6 +25,7 @@ export class Category {
 
   @Column({
     nullable: true,
+    type: 'text',
   })
   description: string;
 
