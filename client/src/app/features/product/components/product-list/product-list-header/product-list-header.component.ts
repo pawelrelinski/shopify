@@ -1,30 +1,48 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SortAction } from '@features/product/models';
+import { Category } from '@features/category/models';
 
 @Component({
-  selector: 'shopify-product-list-header[productsCount][productRange]',
+  selector: 'shopify-product-list-header',
   templateUrl: './product-list-header.component.html',
 })
 export class ProductListHeaderComponent {
-  @Input() productsCount!: number;
-  @Input() productRange!: { from: number; to: number };
+  @Input() category!: Category | null;
+  @Input() categories!: Category[] | null;
+  @Input() showCategoryDropdownMenu!: boolean;
   @Output() onSort: EventEmitter<SortAction> = new EventEmitter<SortAction>();
 
-  public dropDownMenuIsOpen = false;
+  public sortDropdownMenuIsOpen = false;
+  public categoryDropdownMenuIsOpen = false;
+  public mobileFiltersIsOpen = false;
 
-  public toggleMenu(): void {
-    this.dropDownMenuIsOpen = !this.dropDownMenuIsOpen;
+  public selectedSortMethod = '';
+
+  public toggleSortDropDownMenu(): void {
+    this.sortDropdownMenuIsOpen = !this.sortDropdownMenuIsOpen;
   }
 
-  public showMenu(): void {
-    this.dropDownMenuIsOpen = true;
+  public toggleCategoryDropdownMenuIsOpen(): void {
+    this.categoryDropdownMenuIsOpen = !this.categoryDropdownMenuIsOpen;
   }
 
-  public hideMenu(): void {
-    this.dropDownMenuIsOpen = false;
+  public openMobileFilters(): void {
+    this.mobileFiltersIsOpen = true;
   }
 
-  public emitSort(name: SortAction['name'], method: SortAction['method']): void {
+  public closeMobileFilters(): void {
+    this.mobileFiltersIsOpen = false;
+  }
+
+  public emitSort(
+    name: SortAction['name'],
+    method: SortAction['method'],
+    selectedSortMethod?: string
+  ): void {
     this.onSort.emit({ name, method });
+    this.sortDropdownMenuIsOpen = false;
+    if (selectedSortMethod) {
+      this.selectedSortMethod = selectedSortMethod;
+    }
   }
 }

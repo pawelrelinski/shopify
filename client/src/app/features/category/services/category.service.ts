@@ -22,6 +22,17 @@ export class CategoryService {
       .pipe(map((value: GetAllCategories) => value.categories));
   }
 
+  public getByFormatName(category: string): Observable<Category> {
+    this.setDefaultUrlConfig();
+    this.queryStringParameters.push('formatName', category);
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
+    return this.http.get<{ categories: Category[] }>(url).pipe(
+      map(({ categories }) => {
+        return categories[0];
+      })
+    );
+  }
+
   public getAllWithViewsCount(): Observable<(Category & { viewsCount: number })[]> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('views');

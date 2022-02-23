@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsPageComponent } from './products-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductsPageComponent,
+    loadChildren: () =>
+      import('./subpages/products-category-page/products-category-page.module').then(
+        (m) => m.ProductsCategoryPageModule
+      ),
   },
   {
     path: ':category',

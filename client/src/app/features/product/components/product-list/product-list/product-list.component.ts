@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '@features/product/services';
-import { switchMap } from 'rxjs';
-import {
-  Product,
-  ProductGetAllByResponse,
-  SortAction,
-  SortOptions,
-} from '@features/product/models';
+import { Observable, switchMap } from 'rxjs';
+import { Product, SortAction, SortOptions } from '@features/product/models';
+import { CategoryService } from '@features/category/services';
+import { Category } from '@features/category/models';
 
 @Component({
   selector: 'shopify-product-list',
@@ -16,16 +13,24 @@ import {
 })
 export class ProductListComponent implements OnInit {
   public products: Product[] = [];
-  public categoryName!: string;
+  public categoryFormatName!: string;
+  public category$!: Observable<Category>;
+  public categories$!: Observable<Category[]>;
 
-  public productCount!: number;
-  public pageCount!: number;
-  public currentPage = 1;
-  public productsRange = { from: 0, to: 0 };
+  public pageRules = {
+    products: {
+      count: 0,
+      range: { from: 0, to: 0 },
+    },
+    page: { current: 1, count: 0 },
+  };
 
   public productsListIsEmpty = false;
+  public isAllProducts = false;
+  public isLoading = true;
+  public isError = false;
 
-  private queryParams!: Map<string, string>;
+  private queryParams = new Map<string, string>();
   private sortOptions: SortOptions = {
     by: 'id',
     method: 'ASC',
@@ -33,7 +38,11 @@ export class ProductListComponent implements OnInit {
     skip: 0,
   };
 
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private categoryService: CategoryService
+  ) {}
 
   public ngOnInit(): void {
     this.getProducts();
@@ -46,13 +55,21 @@ export class ProductListComponent implements OnInit {
     this.getProducts();
   }
 
+  public changePage(pageNumber: number): void {
+    this.pageRules.page.current = pageNumber;
+    this.getProducts();
+  }
+
   private getQueryMap(sortOptions: SortOptions = this.sortOptions): Map<string, string> {
-    this.queryParams = new Map<string, string>()
+    this.queryParams
       .set('sortBy', sortOptions.by)
       .set('sortMethod', sortOptions.method)
       .set('limit', sortOptions.take + '')
-      .set('offset', (this.currentPage - 1).toString())
-      .set('category', this.categoryName);
+      .set('offset', (this.pageRules.page.current - 1).toString());
+
+    if (this.categoryFormatName) {
+      this.queryParams.set('category', this.categoryFormatName);
+    }
 
     return this.queryParams;
   }
@@ -61,32 +78,53 @@ export class ProductListComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         switchMap((params: Params) => {
-          this.categoryName = params.category;
+          this.categoryFormatName = params.category;
+          if (!this.categoryFormatName) {
+            this.isAllProducts = true;
+          }
+          this.category$ = this.categoryService.getByFormatName(this.categoryFormatName);
+          this.categories$ = this.categoryService.getAll();
           return this.productService.getAllBy(this.getQueryMap());
         })
       )
-      .subscribe((response: ProductGetAllByResponse) => {
-        this.products = response.products;
-        this.productCount = response.productsCountInCategory;
-        if (this.productCount > 10) {
-          this.pageCount = +(this.productCount / 10).toFixed(0);
-        } else {
-          this.pageCount = 1;
-        }
-        this.productsListIsEmpty = this.products.length <= 0;
+      .subscribe(
+        ({ products, productsCountInCategory }) => {
+          this.products = products;
+          this.pageRules.products.count = productsCountInCategory;
+          this.setPageCount();
+          this.productsListIsEmpty = this.products.length <= 0;
 
-        this.setProductsRange();
-      });
+          this.setProductsRange();
+          this.isLoading = false;
+        },
+        (error: any) => {
+          if (error) {
+            this.isLoading = false;
+            this.isError = true;
+          }
+        }
+      );
+  }
+
+  private setPageCount(): void {
+    if (this.pageRules.products.count > 10) {
+      this.pageRules.page.count = +(this.pageRules.products.count / 10).toFixed(0);
+    } else {
+      this.pageRules.page.count = 1;
+    }
   }
 
   private setProductsRange(): void {
-    if (this.currentPage === 1) {
-      this.productsRange.from = 1;
-      this.productsRange.to = this.productCount > 10 ? 10 : this.productCount;
+    if (this.pageRules.page.current === 1) {
+      this.pageRules.products.range.from = 1;
+      this.pageRules.products.range.to =
+        this.pageRules.products.count > 10 ? 10 : this.pageRules.products.count;
     } else {
-      this.productsRange.from = (this.currentPage - 1) * 10 + 1;
-      this.productsRange.to =
-        this.currentPage === this.pageCount ? this.productCount : (this.currentPage - 1) * 10 + 10;
+      this.pageRules.products.range.from = (this.pageRules.page.current - 1) * 10 + 1;
+      this.pageRules.products.range.to =
+        this.pageRules.page.current === this.pageRules.page.count
+          ? this.pageRules.products.count
+          : (this.pageRules.page.current - 1) * 10 + 10;
     }
   }
 }

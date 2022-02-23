@@ -7,7 +7,7 @@ import { ProductModule } from '@features/product/product.module';
 import { ShopifyButtonsModule } from '@shared/shopify-buttons/shopify-buttons.module';
 
 @NgModule({
-	declarations: [ProductsManageComponent],
-	imports: [CommonModule, ProductsManageRoutingModule, ProductModule, ShopifyButtonsModule],
+  declarations: [ProductsManageComponent],
+  imports: [CommonModule, ProductsManageRoutingModule, ProductModule, ShopifyButtonsModule],
 })
 export class ProductsManageModule {}

@@ -31,6 +31,7 @@ export class ProductService {
 
   public getAllBy(queryParams: Map<string, string | number>): Observable<ProductGetAllByResponse> {
     this.setDefaultUrlConfig();
+
     for (const [key, value] of queryParams) {
       this.queryStringParameters.push(key, value.toString());
     }
@@ -98,7 +99,8 @@ export class ProductService {
   public getMostViewedProducts(): Observable<ProductWithViewsCount[]> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('views');
-    const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
+    this.queryStringParameters.push('limit', '5');
+    const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     return this.http.get<ProductWithViewsCount[]>(url);
   }
 

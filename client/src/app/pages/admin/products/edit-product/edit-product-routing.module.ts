@@ -4,14 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditProductComponent } from './edit-product.component';
 
 const routes: Routes = [
-	{
-		path: ':productId',
-		component: EditProductComponent,
-	},
+  {
+    path: ':productId',
+    component: EditProductComponent,
+  },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class EditProductRoutingModule {}

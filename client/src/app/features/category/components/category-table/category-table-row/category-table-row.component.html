@@ -18,7 +18,7 @@
     </a>
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-    {{ (category.description) ? category.description : 'No description' }}
+    {{ (category.description) ? (category.description | truncate:20) : 'No description' }}
   </td>
   <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
     {{ category.productsCount }}

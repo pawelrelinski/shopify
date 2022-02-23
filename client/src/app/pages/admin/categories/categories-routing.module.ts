@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'manage',
+  },
+  {
     path: 'manage',
     loadChildren: () =>
       import('./categories-manage/categories-manage.module').then((m) => m.CategoriesManageModule),

@@ -9,6 +9,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   ProductAvailableWidgetComponent,
   ProductFileUploadComponent,
+  ProductHeaderWithTabsComponent,
   ProductMostPopularComponent,
   ProductQuantityCounterComponent,
 } from '@features/product/components';
@@ -32,6 +33,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ProductQuantityCounterComponent,
     ProductFileUploadComponent,
     ProductMostPopularComponent,
+    ProductHeaderWithTabsComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +65,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ProductCreateFormModule,
     ProductDetailsModule,
     ProductMostPopularComponent,
+    ProductHeaderWithTabsComponent,
   ],
 })
 export class ProductModule {}
