@@ -12,12 +12,11 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { Category } from '../categories/category.entity';
 import { CategoriesService } from '../categories/categories.service';
 import { ProductView } from './enities/product-view.entity';
-import { HOST_ADDRESS } from '../../config/configuration';
 import { CategoryViewService } from '../categories/category-view.service';
 
 @Injectable()
 export class ProductsService {
-  private uploadsUrl: string = `http://${HOST_ADDRESS}:${process.env.SERVER_PORT}/uploads/`;
+  private uploadsUrl = `http://${process.env.HOST_ADDRESS}:${process.env.SERVER_PORT}/${process.env.UPLOADS_DIRECTORY}/`;
 
   constructor(
     @InjectRepository(Product)
@@ -47,9 +46,10 @@ export class ProductsService {
     }
 
     if ('sortBy' in query) {
-      const order: 'ASC' | 'DESC' =
-        'sortMethod' in query ? query.sortMethod.toUpperCase() : 'DESC';
-      qb.orderBy(`product.${query.sortBy}`, order);
+      const sort = `product.${query.sortBy}`;
+      const order: 'ASC' | 'DESC' = query.sortMethod.toUpperCase();
+
+      qb.orderBy(sort, order);
     }
 
     if ('limit' in query) {
@@ -57,9 +57,7 @@ export class ProductsService {
     }
 
     if ('offset' in query) {
-      const offset: number =
-        'limit' in query ? query.limit * query.offset : query.offset;
-      qb.offset(offset);
+      qb.offset(query.offset);
     }
 
     const products = await qb.getMany();

@@ -2,7 +2,6 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateProductDto } from './dto/create-product.dto';
-import { HOST_ADDRESS } from '../../config/configuration';
 import { HttpStatus } from '@nestjs/common';
 
 describe('ProductsController', () => {
@@ -118,7 +117,7 @@ describe('ProductsController', () => {
   });
 
   describe('findOne', () => {
-    const uploadsUrl = `http://${HOST_ADDRESS}:${process.env.SERVER_PORT}/uploads/`;
+    const uploadsUrl = `http://${process.env.HOST_ADDRESS}:${process.env.SERVER_PORT}/${process.env.UPLOADS_DIRECTORY}/`;
     let id = 1;
 
     it('should return product', async () => {

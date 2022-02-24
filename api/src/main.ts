@@ -4,9 +4,11 @@ import { join } from 'path';
 import * as express from 'express';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   app.use(helmet());
   app.use(
