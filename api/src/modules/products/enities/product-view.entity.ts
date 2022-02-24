@@ -13,7 +13,7 @@ export class ProductView {
   createdAt: string;
 
   @Column({
-    default: 1
+    default: 1,
   })
   value: number;
 
