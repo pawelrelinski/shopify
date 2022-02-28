@@ -5,46 +5,46 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Product } from '../products/enities/product.entity';
+import { Product } from '../../products/entities/product.entity';
 import { CategoryView } from './category-view.entity';
 
 @Entity()
 export class Category {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     comment: 'Full category name which we can display as slug',
   })
-  name: string;
+  public name: string;
 
   @Column({
     comment: 'Format name is name which we can use as link in url',
   })
-  formatName: string;
+  public formatName: string;
 
   @Column({
     nullable: true,
     type: 'text',
   })
-  description: string;
+  public description: string;
 
   @Column({
     comment: 'Icon from heroicons package as svg',
     type: 'text',
   })
-  heroIconAsSvg: string;
+  public heroIconAsSvg: string;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
   @OneToMany(() => Product, (product: Product) => product.category)
-  products: Product[];
+  public products: Product[];
 
   @OneToMany(() => CategoryView, (view: CategoryView) => view.category)
   @JoinColumn()
-  views: CategoryView[];
+  public views: CategoryView[];
 }

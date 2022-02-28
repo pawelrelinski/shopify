@@ -1,4 +1,4 @@
-import { Product } from '../enities/product.entity';
+import { Product } from '../entities/product.entity';
 import { HttpStatus } from '@nestjs/common';
 
 export interface CreateProductResponseDto {

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Category } from '../../categories/category.entity';
+import { Category } from '../../categories/entities/category.entity';
 import { DeepPartial } from 'typeorm';
 
 export class CreateProductDto {

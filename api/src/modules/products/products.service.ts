@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from './enities/product.entity';
+import { Product } from './entities/product.entity';
 import {
   Brackets,
   DeepPartial,
@@ -9,9 +9,9 @@ import {
   Repository,
 } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
-import { Category } from '../categories/category.entity';
+import { Category } from '../categories/entities/category.entity';
 import { CategoriesService } from '../categories/categories.service';
-import { ProductView } from './enities/product-view.entity';
+import { ProductView } from './entities/product-view.entity';
 import { HOST_ADDRESS } from '../../config/configuration';
 import { CategoryViewService } from '../categories/category-view.service';
 

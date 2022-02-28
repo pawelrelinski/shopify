@@ -5,50 +5,50 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
-import { OrderProduct } from '../products/enities/order-product.entity';
-import { OrderStatus } from './models/order-status';
+import { User } from '../../users/entities/user.entity';
+import { OrderProduct } from '../../products/entities/order-product.entity';
+import { OrderStatus } from '../models/order-status';
 
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
   @Column()
-  shippingMethod: string;
+  public shippingMethod: string;
 
   @OneToMany(
     () => OrderProduct,
     (orderProduct: OrderProduct) => orderProduct.order,
   )
-  products: OrderProduct[];
+  public products: OrderProduct[];
 
   @Column({
     nullable: true,
   })
-  comments?: string;
+  public comments?: string;
 
   @Column()
-  summaryPrice: number;
+  public summaryPrice: number;
 
   @Column({
     type: 'enum',
     enum: OrderStatus,
     default: OrderStatus.IN_PROGRESS,
   })
-  status: OrderStatus;
+  public status: OrderStatus;
 
   @Column()
-  payment: string;
+  public payment: string;
 
   @ManyToOne(() => User, (user: User) => user.orders, {
     eager: true,
   })
-  user: User;
+  public user: User;
 }

@@ -4,6 +4,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -11,6 +12,7 @@ import { RegistrationStatus } from './dto/registration-status';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { LoginStatus } from './dto/login-status';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @ApiTags('auth')
 @Controller('auth')

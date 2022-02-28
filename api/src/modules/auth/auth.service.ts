@@ -6,7 +6,7 @@ import { RegistrationStatus } from './dto/registration-status';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { LoginStatus } from './dto/login-status';
 import { UserDto } from '../users/dto/user.dto';
-import { User } from '../users/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -44,7 +44,7 @@ export class AuthService {
     } as LoginStatus;
   }
 
-  public async validateUser(payload: User['email']): Promise<UserDto> {
+  public async validateUser(payload: any): Promise<UserDto> {
     const user: UserDto = await this.usersService.findByPayload(payload);
     if (!user) {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);

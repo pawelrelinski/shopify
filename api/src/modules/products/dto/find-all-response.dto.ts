@@ -1,4 +1,4 @@
-import { Product } from '../enities/product.entity';
+import { Product } from '../entities/product.entity';
 
 export interface FindAllResponseDto {
   productsCountInCategory: number;

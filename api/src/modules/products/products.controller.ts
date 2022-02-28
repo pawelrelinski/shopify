@@ -14,17 +14,19 @@ import {
 } from '@nestjs/common';
 import { Express } from 'express';
 import { ProductsService } from './products.service';
-import { Product } from './enities/product.entity';
+import { Product } from './entities/product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { CreateProductResponseDto } from './dto/create-product-response.dto';
 import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { HOST_ADDRESS } from '../../config/configuration';
 import { ErrorResponse } from '../../models/error-response';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
 import { FindAllResponseDto } from './dto/find-all-response.dto';
 import { FindByViewsCountResponseDto } from './dto/find-by-views-count-response.dto';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Role } from '../auth/enums/role.enum';
 
 @ApiTags('products')
 @Controller('products')
@@ -53,7 +55,12 @@ export class ProductsController {
     status: HttpStatus.OK,
     description: 'Return products views by given filter.',
   })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Get('views')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async findByViewsCount(
     @Query() query,
@@ -67,8 +74,12 @@ export class ProductsController {
     description:
       'Return object containing file metadata and access information.',
   })
-  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Post('image')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('image', localOptions))
   public async addImage(
@@ -81,7 +92,12 @@ export class ProductsController {
     summary: 'Get count of all products or products from given category',
   })
   @ApiResponse({ status: HttpStatus.OK, description: 'Return products count.' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Get('count')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async count(
     @Query('category') category: string,
@@ -92,6 +108,13 @@ export class ProductsController {
 
   @ApiOperation({ summary: 'Get product by id' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Return product.' })
+  @ApiParam({
+    type: 'string',
+    name: 'id',
+    description: 'Product id.',
+    allowEmptyValue: false,
+    required: true,
+  })
   @Get(':id')
   @Header('Cross-Origin-Embedder-Policy', 'unsafe-none')
   @HttpCode(HttpStatus.OK)
@@ -114,8 +137,12 @@ export class ProductsController {
     status: HttpStatus.CREATED,
     description: 'The product has been successfully created.',
   })
-  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Post()
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.CREATED)
   public async create(
     @Body() createProductDto: CreateProductDto,
@@ -135,8 +162,12 @@ export class ProductsController {
     status: HttpStatus.CREATED,
     description: 'The product has been successfully deleted.',
   })
-  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Delete(':id')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async findOneAndDelete(
     @Param('id') id: string,

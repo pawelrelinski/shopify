@@ -11,6 +11,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { OrdersModule } from './modules/orders/orders.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { DomainModule } from './modules/domain/domain.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './modules/auth/roles.guard';
 
 @Module({
   imports: [
@@ -38,7 +40,13 @@ import { DomainModule } from './modules/domain/domain.module';
     DomainModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {
   constructor(private connection: Connection) {}

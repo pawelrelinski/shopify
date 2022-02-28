@@ -2,42 +2,49 @@ import {
   BeforeInsert,
   Column,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Order } from '../orders/order.entity';
+import { Order } from '../../orders/entities/order.entity';
+import { Role } from '../../auth/enums/role.enum';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
-  firstName: string;
+  public firstName: string;
 
   @Column()
-  lastName: string;
+  public lastName: string;
 
   @Column({
     type: 'varchar',
     nullable: false,
     unique: true,
   })
-  email: string;
+  public email: string;
 
   @Column()
-  password: string;
+  public password: string;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
+
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.USER,
+  })
+  public role: Role;
 
   @OneToMany(() => Order, (order: Order) => order.user)
-  orders: Order[];
+  public orders: Order[];
 
   @BeforeInsert()
   public async hashPassword(): Promise<void> {

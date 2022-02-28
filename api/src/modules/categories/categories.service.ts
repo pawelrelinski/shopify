@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from './category.entity';
+import { Category } from './entities/category.entity';
 import { getRepository, Repository } from 'typeorm';
 import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
-import { CategoryView } from './category-view.entity';
+import { CategoryView } from './entities/category-view.entity';
 import { query } from 'express';
 
 @Injectable()

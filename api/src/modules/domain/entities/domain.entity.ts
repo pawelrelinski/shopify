@@ -11,15 +11,15 @@ import { DomainView } from './domain-view.entity';
 @Entity()
 export class Domain {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column('text')
-  description: string;
+  public description: string;
 
   @OneToMany(() => Page, (page: Page) => page.domain)
   @JoinColumn()
-  pages: Page[];
+  public pages: Page[];
 
   @OneToMany(() => DomainView, (domainView: DomainView) => domainView.domain)
-  views: DomainView[];
+  public views: DomainView[];
 }

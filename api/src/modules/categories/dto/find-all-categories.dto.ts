@@ -1,4 +1,4 @@
-import { Category } from '../category.entity';
+import { Category } from '../entities/category.entity';
 
 export interface FindAllCategoriesDto {
   categories: Category[];

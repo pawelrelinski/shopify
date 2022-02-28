@@ -4,56 +4,56 @@ import { Domain } from './domain.entity';
 @Entity()
 export class DomainView {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
   @Column({
     comment: 'Header data about user-agent',
     nullable: true,
   })
-  userAgent: string;
+  public userAgent: string;
 
   @Column({
     comment: 'Header data about origin',
     nullable: true,
   })
-  origin: string;
+  public origin: string;
 
   @Column({
     comment: 'Header data about referer',
     nullable: true,
   })
-  referer: string;
+  public referer: string;
 
   @Column({
     comment: 'Header data about sec-ch-ua-platform',
     nullable: true,
   })
-  secChUaPlatform: string;
+  public secChUaPlatform: string;
 
   @Column({
     comment: 'Header data about sec-ch-ua',
     nullable: true,
   })
-  secChUa: string;
+  public secChUa: string;
 
   @Column({
     comment: 'Header data about sec-ch-ua-mobile',
     nullable: true,
   })
-  secChUaMobile: string;
+  public secChUaMobile: string;
 
   @Column({
     comment: 'Header data about accept-language',
     nullable: true,
   })
-  acceptLanguage: string;
+  public acceptLanguage: string;
 
   @ManyToOne(() => Domain, (domain: Domain) => domain.views)
-  domain: Domain;
+  public domain: Domain;
 }

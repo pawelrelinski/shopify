@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { FindOneOptions, Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -56,7 +56,8 @@ export class UsersService {
     return user as UserDto;
   }
 
-  public async findByPayload(email: User['email']): Promise<UserDto> {
+  public async findByPayload(payload: any): Promise<UserDto> {
+    const { email } = payload;
     return await this.userRepository.findOne({
       where: { email },
     });

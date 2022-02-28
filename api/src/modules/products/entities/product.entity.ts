@@ -8,35 +8,35 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Category } from '../../categories/category.entity';
+import { Category } from '../../categories/entities/category.entity';
 import { ProductView } from './product-view.entity';
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     type: 'varchar',
     length: 100,
   })
-  name: string;
+  public name: string;
 
   @Column('text')
-  shortDescription: string;
+  public shortDescription: string;
 
   @Column('text')
-  description: string;
+  public description: string;
 
   @Column({
     type: 'decimal',
     precision: 9,
     scale: 2,
   })
-  defaultPrice: number;
+  public defaultPrice: number;
 
   @Column()
-  image: string;
+  public image: string;
 
   @Column({
     type: 'decimal',
@@ -44,51 +44,51 @@ export class Product {
     scale: 2,
     default: 0,
   })
-  promotionPrice: number;
+  public promotionPrice: number;
 
   @Column({
     default: true,
   })
-  isAvailable: boolean;
+  public isAvailable: boolean;
 
   @ManyToOne(() => Category, (category: Category) => category)
-  category: Category;
+  public category: Category;
 
   @Column()
-  quantity: number;
+  public quantity: number;
 
   @Column()
-  producer: string;
+  public producer: string;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
   @Column()
-  expectedDeliveryTime: number;
+  public expectedDeliveryTime: number;
 
   @Column()
-  refNumber: string;
+  public refNumber: string;
 
   @Column('json')
-  dataSheet: string;
+  public dataSheet: string;
 
   @OneToMany(() => ProductView, (view: ProductView) => view.product)
   @JoinColumn()
-  views: ProductView[];
+  public views: ProductView[];
 
   @Column({
     default: true,
   })
-  isPublished: boolean;
+  public isPublished: boolean;
 
   @Column('json')
-  shippingMethods: string;
+  public shippingMethods: string;
 
   @Column({
     default: false,
   })
-  isDeleted: boolean;
+  public isDeleted: boolean;
 }

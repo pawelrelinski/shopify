@@ -12,21 +12,21 @@ import { PageView } from './page-view.entity';
 @Entity()
 export class Page {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
-  name: string;
+  public name: string;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
   @ManyToOne(() => Domain, (domain: Domain) => domain.pages)
-  domain: Domain;
+  public domain: Domain;
 
   @OneToMany(() => PageView, (pageView: PageView) => pageView.page)
   @JoinColumn()
-  views: PageView[];
+  public views: PageView[];
 }

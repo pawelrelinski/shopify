@@ -4,19 +4,19 @@ import { Product } from './product.entity';
 @Entity()
 export class ProductView {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
   @Column({
-    default: 1
+    default: 1,
   })
-  value: number;
+  public value: number;
 
   @ManyToOne(() => Product, (product: Product) => product.views)
-  product: Product;
+  public product: Product;
 }

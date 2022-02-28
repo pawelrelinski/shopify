@@ -1,17 +1,17 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Category } from './category.entity';
+import { Page } from './page.entity';
 
 @Entity()
-export class CategoryView {
+export class PageView {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',
   })
-  createdAt: string;
+  public createdAt: string;
 
-  @ManyToOne(() => Category, (category: Category) => category.views)
-  category: Category;
+  @ManyToOne(() => Page, (page: Page) => page.views)
+  public page: Page;
 }

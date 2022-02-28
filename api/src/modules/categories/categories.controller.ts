@@ -7,11 +7,13 @@ import {
   Query,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { Category } from './category.entity';
+import { Category } from './entities/category.entity';
 import { FindAllCategoriesDto } from './dto/find-all-categories.dto';
 import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
 import { ErrorResponse } from '../../models/error-response';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Role } from '../auth/enums/role.enum';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -32,7 +34,12 @@ export class CategoriesController {
     status: HttpStatus.OK,
     description: 'Return categories views by given filter.',
   })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Get('views')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async findByViewsCount(@Query() query) {
     return await this.categoriesService.findAllWithViewsCount(query);
@@ -43,7 +50,12 @@ export class CategoriesController {
     status: HttpStatus.OK,
     description: 'Return count of products in categories.',
   })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Get('productsCount')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
     return this.categoriesService.findAllWithProductsCount();
@@ -54,7 +66,12 @@ export class CategoriesController {
     status: HttpStatus.OK,
     description: 'Return count of categories.',
   })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
   @Get('count')
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async count(): Promise<{ count: number }> {
     const count = await this.categoriesService.count();
