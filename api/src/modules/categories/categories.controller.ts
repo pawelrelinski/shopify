@@ -13,7 +13,16 @@ import { Category } from './entities/category.entity';
 import { FindAllCategoriesDto } from './dto/find-all-categories.dto';
 import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
 import { ErrorResponse } from '../../models/error-response';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiForbiddenResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../auth/enums/role.enum';
 
@@ -23,9 +32,20 @@ export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
   @ApiOperation({ summary: 'Get all categories' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return all categories.' })
+  @ApiQuery({
+    name: 'formatName',
+    type: 'string',
+    required: false,
+    example: 'solar-panels',
+    description: 'Format name of category',
+  })
+  @ApiQuery({ name: 'limit', type: 'number', required: false })
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    description: 'Return all categories.',
+    isArray: true,
+  })
   @Get()
-  @HttpCode(HttpStatus.OK)
   public async findAll(
     @Query('formatName') formatName?: string,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
@@ -36,63 +56,70 @@ export class CategoriesController {
   }
 
   @ApiOperation({ summary: 'Get categories by views count' })
-  @ApiResponse({
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'Return categories views by given filter.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Get('views')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.OK)
-  public async findByViewsCount(@Query() query) {
+  public async findByViewsCount(@Query() query): Promise<any[]> {
     return await this.categoriesService.findAllWithViewsCount(query);
   }
 
   @ApiOperation({ summary: 'Get product count in category' })
-  @ApiResponse({
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'Return count of products in categories.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Get('productsCount')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.OK)
   public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
     return this.categoriesService.findAllWithProductsCount();
   }
 
   @ApiOperation({ summary: 'Get count of categories' })
-  @ApiResponse({
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'Return count of categories.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Get('count')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.OK)
   public async count(): Promise<{ count: number }> {
     const count = await this.categoriesService.count();
     return { count };
   }
 
   @ApiOperation({ summary: 'Get category by id' })
-  @ApiResponse({
+  @ApiParam({
+    type: 'number',
+    name: 'id',
+    description: 'Category id.',
+    allowEmptyValue: false,
+    required: true,
+  })
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'Return category by given id.',
   })
+  @ApiNotFoundResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Category not found',
+  })
   @Get(':id')
-  @HttpCode(HttpStatus.OK)
   public async finById(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<Category | ErrorResponse> {
     const category: Category | null = await this.categoriesService.findById(id);
     if (!category) {

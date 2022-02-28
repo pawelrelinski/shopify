@@ -1,5 +1,10 @@
 import { Controller, Get, HttpStatus, Post, Query, Req } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiForbiddenResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { DomainService } from './domain.service';
 import { Domain } from './entities/domain.entity';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -11,8 +16,12 @@ export class DomainController {
   constructor(private domainService: DomainService) {}
 
   @ApiOperation({ summary: 'Get all pages' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return all pages.' })
-  @ApiResponse({
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    description: 'Return all pages.',
+    isArray: true,
+  })
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
@@ -24,11 +33,11 @@ export class DomainController {
   }
 
   @ApiOperation({ summary: 'Add view to domain views' })
-  @ApiResponse({
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'View has been added successfully.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
@@ -40,11 +49,11 @@ export class DomainController {
   }
 
   @ApiOperation({ summary: "Get domain's views from last days" })
-  @ApiResponse({
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: "Return all domain's views from last days",
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })

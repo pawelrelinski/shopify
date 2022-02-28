@@ -11,12 +11,7 @@ import {
 import { CreateProductDto } from './dto/create-product.dto';
 import { Category } from '../categories/entities/category.entity';
 import { CategoriesService } from '../categories/categories.service';
-<<<<<<< HEAD
 import { ProductView } from './entities/product-view.entity';
-import { HOST_ADDRESS } from '../../config/configuration';
-=======
-import { ProductView } from './enities/product-view.entity';
->>>>>>> api_testing
 import { CategoryViewService } from '../categories/category-view.service';
 
 @Injectable()

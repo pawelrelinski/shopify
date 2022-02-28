@@ -4,15 +4,19 @@ import {
   HttpException,
   HttpStatus,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { RegistrationStatus } from './dto/registration-status';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { LoginStatus } from './dto/login-status';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -20,7 +24,11 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({ summary: 'Register' })
-  @ApiResponse({
+  @ApiBody({
+    type: CreateUserDto,
+    required: true,
+  })
+  @ApiCreatedResponse({
     status: HttpStatus.CREATED,
     description: 'User has been successfully created.',
   })
@@ -38,7 +46,11 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Login' })
-  @ApiResponse({
+  @ApiBody({
+    type: LoginUserDto,
+    required: true,
+  })
+  @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'User has been successfully login',
   })

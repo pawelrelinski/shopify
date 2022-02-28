@@ -1,10 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-<<<<<<< HEAD
 import { OrderProduct } from '../../products/entities/order-product.entity';
 import { User } from '../../users/entities/user.entity';
-=======
-import { OrderProduct } from '../../products/enities/order-product.entity';
-import { User } from '../../users/user.entity';
 import {
   ArrayMaxSize,
   ArrayMinSize,
@@ -18,7 +14,6 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
->>>>>>> api_testing
 
 export class CreateOrderDto {
   @ApiProperty()

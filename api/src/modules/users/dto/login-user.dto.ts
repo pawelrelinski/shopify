@@ -9,9 +9,6 @@ export class LoginUserDto {
 
   @ApiProperty()
   @IsNotEmpty()
-<<<<<<< HEAD
-=======
   @IsString()
->>>>>>> api_testing
   public readonly password: string;
 }

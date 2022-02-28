@@ -22,7 +22,18 @@ import { CreateProductResponseDto } from './dto/create-product-response.dto';
 import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ErrorResponse } from '../../models/error-response';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
 import { FindAllResponseDto } from './dto/find-all-response.dto';
 import { FindByViewsCountResponseDto } from './dto/find-by-views-count-response.dto';
@@ -37,9 +48,34 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @ApiOperation({ summary: 'Get all products' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return all products.' })
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    isArray: true,
+    description: 'Return all products.',
+  })
+  @ApiQuery({
+    name: 'category',
+    type: 'string',
+    required: false,
+    example: 'solar-panels',
+    description: 'Format name of category',
+  })
+  @ApiQuery({
+    name: 'sortBy',
+    type: 'string',
+    required: false,
+    example: 'defaultPrice',
+    description: 'Name of column by which rows will sort',
+  })
+  @ApiQuery({
+    name: 'sortMethod',
+    type: 'string',
+    required: false,
+    example: 'ASC',
+  })
+  @ApiQuery({ name: 'limit', type: 'number', required: false })
+  @ApiQuery({ name: 'offset', type: 'number', required: false })
   @Get()
-  @HttpCode(HttpStatus.OK)
   public async findAll(
     @Query('category') category?: string,
     @Query('sortBy', new DefaultValuePipe('createdAt')) sortBy?: string,
@@ -72,17 +108,39 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Get products by views count' })
-  @ApiResponse({
+  @ApiOkResponse({
     status: HttpStatus.OK,
+    isArray: true,
     description: 'Return products views by given filter.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiQuery({
+    name: 'category',
+    type: 'string',
+    required: false,
+    example: 'solar-panels',
+    description: 'Format name of category',
+  })
+  @ApiQuery({
+    name: 'sortBy',
+    type: 'string',
+    required: false,
+    example: 'defaultPrice',
+    description: 'Name of column by which rows will sort',
+  })
+  @ApiQuery({
+    name: 'sortMethod',
+    type: 'string',
+    required: false,
+    example: 'ASC',
+  })
+  @ApiQuery({ name: 'limit', type: 'number', required: false })
+  @ApiQuery({ name: 'offset', type: 'number', required: false })
   @Get('views')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.OK)
   public async findByViewsCount(
     @Query('category') category?: string,
     @Query('sortBy', new DefaultValuePipe('createdAt')) sortBy?: string,
@@ -100,18 +158,17 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Add image' })
-  @ApiResponse({
+  @ApiCreatedResponse({
     status: HttpStatus.CREATED,
     description:
       'Return object containing file metadata and access information.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Post('image')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('image', localOptions))
   public async addImage(
     @UploadedFile() image: Express.Multer.File,
@@ -122,14 +179,23 @@ export class ProductsController {
   @ApiOperation({
     summary: 'Get count of all products or products from given category',
   })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return products count.' })
-  @ApiResponse({
+  @ApiQuery({
+    name: 'category',
+    type: 'string',
+    required: false,
+    example: 'solar-panels',
+    description: 'Format name of category',
+  })
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    description: 'Return products count.',
+  })
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Get('count')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.OK)
   public async count(
     @Query('category') category: string,
   ): Promise<{ count: number }> {
@@ -138,7 +204,11 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Get product by id' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return product.' })
+  @ApiOkResponse({ status: HttpStatus.OK, description: 'Return product.' })
+  @ApiNotFoundResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Not found product.',
+  })
   @ApiParam({
     type: 'string',
     name: 'id',
@@ -148,7 +218,6 @@ export class ProductsController {
   })
   @Get(':id')
   @Header('Cross-Origin-Embedder-Policy', 'unsafe-none')
-  @HttpCode(HttpStatus.OK)
   public async findOne(
     @Param('id') id: string,
   ): Promise<Product | ErrorResponse> {
@@ -164,17 +233,20 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Create product' })
-  @ApiResponse({
+  @ApiBody({
+    type: CreateProductDto,
+    required: true,
+  })
+  @ApiCreatedResponse({
     status: HttpStatus.CREATED,
     description: 'The product has been successfully created.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Post()
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.CREATED)
   public async create(
     @Body() createProductDto: CreateProductDto,
   ): Promise<CreateProductResponseDto> {
@@ -189,17 +261,23 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Delete product by given id' })
-  @ApiResponse({
+  @ApiParam({
+    type: 'string',
+    name: 'id',
+    description: 'Product id.',
+    allowEmptyValue: false,
+    required: true,
+  })
+  @ApiCreatedResponse({
     status: HttpStatus.CREATED,
     description: 'The product has been successfully deleted.',
   })
-  @ApiResponse({
+  @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
   @Delete(':id')
   @Roles(Role.ADMIN)
-  @HttpCode(HttpStatus.OK)
   public async findOneAndDelete(
     @Param('id') id: string,
   ): Promise<DeleteProductResponseDto> {
