@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 import { Category, CategoryWithProductsCount, GetAllCategories } from '@features/category/models';
 import { map, Observable } from 'rxjs';
@@ -11,6 +11,8 @@ export class CategoryService {
   private segmentsUrl!: SegmentsUrl;
   private urlBuilder!: UrlBuilder;
   private queryStringParameters!: QueryStringParameters;
+
+  private userRolesHeaderKey = 'User-Roles';
 
   constructor(private http: HttpClient) {}
 
@@ -37,21 +39,35 @@ export class CategoryService {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('views');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<(Category & { viewsCount: number })[]>(url);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.get<(Category & { viewsCount: number })[]>(url, requestOptions);
   }
 
   public getCount(): Observable<number> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('count');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<{ count: number }>(url).pipe(map((res: { count: number }) => res.count));
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http
+      .get<{ count: number }>(url, requestOptions)
+      .pipe(map((res: { count: number }) => res.count));
   }
 
   public getAllWithProductCount(): Observable<CategoryWithProductsCount[]> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('productsCount');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<CategoryWithProductsCount[]>(url);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.get<CategoryWithProductsCount[]>(url, requestOptions);
   }
 
   private setDefaultUrlConfig(): void {

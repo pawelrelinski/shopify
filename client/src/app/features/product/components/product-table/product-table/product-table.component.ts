@@ -105,10 +105,13 @@ export class ProductTableComponent implements OnInit {
     this.productService
       .getCount(options)
       .pipe(take(1))
-      .subscribe(({ count }) => {
-        this.productCount = count;
-        this.setPaginationPageCount();
-      });
+      .subscribe(
+        (data: any) => {
+          this.productCount = data.count;
+          this.setPaginationPageCount();
+        },
+        (error) => {}
+      );
   }
 
   private getQueryMap(sortOptions: SortOptions = this.sortOptions): Map<string, string | number> {

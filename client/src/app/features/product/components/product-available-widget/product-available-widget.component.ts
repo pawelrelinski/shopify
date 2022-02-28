@@ -23,8 +23,11 @@ export class ProductAvailableWidgetComponent implements OnInit {
     this.productService
       .getCount(options)
       .pipe(take(1))
-      .subscribe((data) => {
-        this.count = data.count;
-      });
+      .subscribe(
+        (data: any) => {
+          this.count = data.count;
+        },
+        (error) => {}
+      );
   }
 }

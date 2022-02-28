@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { map, Observable, switchMap } from 'rxjs';
 
 import {
@@ -20,6 +20,8 @@ export class ProductService {
   private segmentsUrl!: SegmentsUrl;
   private urlBuilder!: UrlBuilder;
   private queryStringParameters!: QueryStringParameters;
+
+  private userRolesHeaderKey = 'User-Roles';
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
@@ -64,12 +66,16 @@ export class ProductService {
   public create(product: ProductCreateDto): Observable<HttpEvent<ProductCreateResponse>> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl) + '/';
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+
     return this.addImage(product.image).pipe(
       switchMap((image: any) => {
         product.image = image.filename;
         return this.http.post<ProductCreateResponse>(url, product, {
           reportProgress: true,
           observe: 'events',
+          headers,
         });
       })
     );
@@ -79,21 +85,26 @@ export class ProductService {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.delete<ProductDeleteResponse>(url);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.delete<ProductDeleteResponse>(url, requestOptions);
   }
 
-  public getCount(options: Map<string, string>): Observable<{ count: number }> {
+  public getCount(options: Map<string, string>) {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('count');
-    let url!: string;
 
     if (options.has('category')) {
       this.queryStringParameters.push('category', options.get('category'));
-      url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
     }
+    const url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
 
-    url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
-    return this.http.get<{ count: number }>(url);
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.get(url, requestOptions);
   }
 
   public getMostViewedProducts(): Observable<ProductWithViewsCount[]> {
@@ -101,7 +112,11 @@ export class ProductService {
     this.segmentsUrl.push('views');
     this.queryStringParameters.push('limit', '5');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
-    return this.http.get<ProductWithViewsCount[]>(url);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.get<ProductWithViewsCount[]>(url, requestOptions);
   }
 
   private addImage(image: Blob): Observable<Object> {
@@ -110,7 +125,11 @@ export class ProductService {
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post(url, formData);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.post(url, formData, requestOptions);
   }
 
   private setDefaultUrlConfig(): void {

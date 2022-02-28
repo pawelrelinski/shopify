@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { GetOneById, User } from '@features/user/models';
 
@@ -12,19 +12,29 @@ export class UserService {
   private urlBuilder!: UrlBuilder;
   private queryStringParameters!: QueryStringParameters;
 
+  private userRolesHeaderKey = 'User-Roles';
+
   constructor(private http: HttpClient) {}
 
   public getAll(): Observable<Array<User>> {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<Array<User>>(url);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.get<Array<User>>(url, requestOptions);
   }
 
   public getCount(): Observable<{ count: number }> {
     this.setDefaultUrlConfig();
     this.segmentsUrl.push('count');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
-    return this.http.get<{ count: number }>(url);
+
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const requestOptions = { headers };
+
+    return this.http.get<{ count: number }>(url, requestOptions);
   }
 
   public updateOneAttribute(id: number, attributeName: string, attributeValue: string) {
