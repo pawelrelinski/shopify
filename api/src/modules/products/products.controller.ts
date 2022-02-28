@@ -1,12 +1,14 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Header,
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
   Query,
   UploadedFile,
@@ -19,7 +21,6 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { CreateProductResponseDto } from './dto/create-product-response.dto';
 import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { HOST_ADDRESS } from '../../config/configuration';
 import { ErrorResponse } from '../../models/error-response';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
@@ -31,7 +32,7 @@ import { Role } from '../auth/enums/role.enum';
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
-  private uploadsUrl: string = `http://${HOST_ADDRESS}:${process.env.SERVER_PORT}/uploads/`;
+  private uploadsUrl = `http://${process.env.HOST_ADDRESS}:${process.env.SERVER_PORT}/${process.env.UPLOADS_DIRECTORY}/`;
 
   constructor(private productsService: ProductsService) {}
 
@@ -39,11 +40,31 @@ export class ProductsController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Return all products.' })
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async findAll(@Query() query): Promise<FindAllResponseDto> {
+  public async findAll(
+    @Query('category') category?: string,
+    @Query('sortBy', new DefaultValuePipe('createdAt')) sortBy?: string,
+    @Query('sortMethod', new DefaultValuePipe('DESC')) sortMethod?: string,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
+    @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset?: number,
+  ): Promise<FindAllResponseDto> {
+    const query = {
+      sortBy,
+      sortMethod,
+      limit,
+      offset,
+    };
     const products: Product[] = await this.productsService.findAll(query);
-    const productsCountInCategory: number = await this.productsService.count(
-      query.category,
-    );
+
+    let productsCountInCategory: number;
+    if (category) {
+      productsCountInCategory = await this.productsService.count(category);
+      return {
+        productsCountInCategory,
+        products,
+      };
+    }
+
+    productsCountInCategory = await this.productsService.count();
     return {
       productsCountInCategory,
       products,
@@ -63,8 +84,18 @@ export class ProductsController {
   @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   public async findByViewsCount(
-    @Query() query,
+    @Query('category') category?: string,
+    @Query('sortBy', new DefaultValuePipe('createdAt')) sortBy?: string,
+    @Query('sortMethod', new DefaultValuePipe('DESC')) sortMethod?: string,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
+    @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset?: number,
   ): Promise<FindByViewsCountResponseDto> {
+    const query = {
+      sortBy,
+      sortMethod,
+      limit,
+      offset,
+    };
     return await this.productsService.findMostPopularFromLastDays(query);
   }
 

@@ -25,6 +25,7 @@
 </details>
 
 <hr>
+
 ## About The Project
 
 Fullstack application as project to school. E-commerce shop with products related to renewable energy.
@@ -67,6 +68,14 @@ Major resource components supported by the API are:
 - Users
 - Auth
 - Categories
+
+<br>
+
+API Features:
+- Authentication ([Passport JWT](http://www.passportjs.org/packages/passport-jwt/))
+- Basic RBAC implementation
+- [Helmet](https://github.com/helmetjs/helmet)
+- CORS
 
 These can be used alone like this
 

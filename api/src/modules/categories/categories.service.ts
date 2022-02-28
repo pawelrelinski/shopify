@@ -41,16 +41,16 @@ export class CategoriesService {
     return qb.getRawMany();
   }
 
-  public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
-    return await getRepository<Category>(Category).query(
-      `SELECT COUNT(p.id) as productsCount, c.*
-              FROM category c
-              INNER JOIN product p
-              ON p.categoryId = c.id
-              WHERE p.isDeleted = 0
-              GROUP BY c.id;
-              `,
-    );
+  public async findAllWithProductsCount(): Promise<any> {
+    const qb = getRepository(Category)
+      .createQueryBuilder('category')
+      .innerJoinAndSelect('category.products', 'product')
+      .select('category.*')
+      .addSelect('COUNT(product.id) as productsCount')
+      .where('product.isDeleted = 0')
+      .groupBy('category.id');
+
+    return await qb.getRawMany();
   }
 
   public async findByFormatName(formatName: string): Promise<Category> {

@@ -1,9 +1,11 @@
 import {
   Controller,
+  DefaultValuePipe,
   Get,
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Query,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
@@ -24,7 +26,11 @@ export class CategoriesController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Return all categories.' })
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async findAll(@Query() query): Promise<FindAllCategoriesDto> {
+  public async findAll(
+    @Query('formatName') formatName?: string,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
+  ): Promise<FindAllCategoriesDto> {
+    const query = { formatName, limit };
     const categories: Category[] = await this.categoriesService.findAll(query);
     return { categories };
   }
