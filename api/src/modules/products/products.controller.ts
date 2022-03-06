@@ -5,13 +5,13 @@ import {
   Delete,
   Get,
   Header,
-  HttpCode,
   HttpStatus,
   Param,
   ParseIntPipe,
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Express } from 'express';
@@ -26,12 +26,12 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
+  ApiHeader,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
@@ -39,6 +39,7 @@ import { FindAllResponseDto } from './dto/find-all-response.dto';
 import { FindByViewsCountResponseDto } from './dto/find-by-views-count-response.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../auth/enums/role.enum';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('products')
 @Controller('products')
@@ -89,6 +90,7 @@ export class ProductsController {
       limit,
       offset,
     };
+    category ? Object.assign(query, { category }) : null;
     const products: Product[] = await this.productsService.findAll(query);
 
     let productsCountInCategory: number;
@@ -116,6 +118,12 @@ export class ProductsController {
   @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
+  })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
   })
   @ApiQuery({
     name: 'category',
@@ -167,6 +175,12 @@ export class ProductsController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @Post('image')
   @Roles(Role.ADMIN)
   @UseInterceptors(FileInterceptor('image', localOptions))
@@ -194,9 +208,21 @@ export class ProductsController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
-  @Get('count')
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
+  @ApiHeader({
+    name: 'Authorization',
+    required: true,
+    description: 'JWT token',
+  })
+  @Get('metrics')
   @Roles(Role.ADMIN)
-  public async count(
+  @UseGuards(JwtAuthGuard)
+  public async metrics(
     @Query('category') category: string,
   ): Promise<{ count: number }> {
     const count: number = await this.productsService.count(category);
@@ -245,6 +271,12 @@ export class ProductsController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @Post()
   @Roles(Role.ADMIN)
   public async create(
@@ -276,8 +308,20 @@ export class ProductsController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: true,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
+  @ApiHeader({
+    name: 'Authorization',
+    required: true,
+    description: 'JWT token',
+  })
   @Delete(':id')
   @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard)
   public async findOneAndDelete(
     @Param('id') id: string,
   ): Promise<DeleteProductResponseDto> {

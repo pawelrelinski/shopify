@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Category } from '../../categories/entities/category.entity';
 import { ProductView } from './product-view.entity';
+import { ProductAttributes } from './product-attributes.entity';
 
 @Entity()
 export class Product {
@@ -74,6 +75,13 @@ export class Product {
 
   @Column('json')
   public dataSheet: string;
+
+  @OneToMany(
+    () => ProductAttributes,
+    (attributes: ProductAttributes) => attributes.product,
+  )
+  @JoinColumn()
+  public attributes: ProductAttributes[];
 
   @OneToMany(() => ProductView, (view: ProductView) => view.product)
   @JoinColumn()

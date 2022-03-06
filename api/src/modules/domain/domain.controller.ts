@@ -1,6 +1,7 @@
 import { Controller, Get, HttpStatus, Post, Query, Req } from '@nestjs/common';
 import {
   ApiForbiddenResponse,
+  ApiHeader,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -25,6 +26,12 @@ export class DomainController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @Get()
   @Roles(Role.ADMIN)
   public async findAll(): Promise<{}> {
@@ -41,6 +48,12 @@ export class DomainController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @Post()
   @Roles(Role.ADMIN)
   public async addViewToDomain(@Req() request) {
@@ -56,6 +69,12 @@ export class DomainController {
   @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
+  })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
   })
   @Get('views')
   @Roles(Role.ADMIN)

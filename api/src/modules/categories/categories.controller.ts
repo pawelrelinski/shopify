@@ -15,6 +15,7 @@ import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories
 import { ErrorResponse } from '../../models/error-response';
 import {
   ApiForbiddenResponse,
+  ApiHeader,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -50,7 +51,8 @@ export class CategoriesController {
     @Query('formatName') formatName?: string,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
   ): Promise<FindAllCategoriesDto> {
-    const query = { formatName, limit };
+    const query = { limit };
+    formatName ? Object.assign(query, { formatName }) : null;
     const categories: Category[] = await this.categoriesService.findAll(query);
     return { categories };
   }
@@ -63,6 +65,12 @@ export class CategoriesController {
   @ApiForbiddenResponse({
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
+  })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
   })
   @Get('views')
   @Roles(Role.ADMIN)
@@ -79,6 +87,12 @@ export class CategoriesController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @Get('productsCount')
   @Roles(Role.ADMIN)
   public async findAllWithProductsCount(): Promise<FindAllCategoriesWithProductsCountDto> {
@@ -94,9 +108,15 @@ export class CategoriesController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
-  @Get('count')
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
+  @Get('metrics')
   @Roles(Role.ADMIN)
-  public async count(): Promise<{ count: number }> {
+  public async metrics(): Promise<{ count: number }> {
     const count = await this.categoriesService.count();
     return { count };
   }

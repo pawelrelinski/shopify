@@ -14,6 +14,7 @@ import { FindOneById } from './dto/find-one-by-id.dto';
 import {
   ApiCreatedResponse,
   ApiForbiddenResponse,
+  ApiHeader,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -32,6 +33,12 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @ApiOperation({ summary: 'Get all users.' })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'Return all users.',
@@ -53,10 +60,16 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Get count of all users' })
+  @ApiHeader({
+    name: 'User-Roles',
+    required: false,
+    description: 'User role, if they is the admin they has access to data',
+    example: 'admin',
+  })
   @ApiOkResponse({ status: HttpStatus.OK, description: 'Return users count.' })
-  @Get('count')
+  @Get('metrics')
   @Roles(Role.ADMIN)
-  public async count(): Promise<{ count: number }> {
+  public async metrics(): Promise<{ count: number }> {
     const count: number = await this.usersService.count();
     return { count };
   }

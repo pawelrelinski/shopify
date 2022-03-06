@@ -2,12 +2,16 @@ import {
   BeforeInsert,
   Column,
   Entity,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  JoinTable,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Order } from '../../orders/entities/order.entity';
 import { Role } from '../../auth/enums/role.enum';
+import { UserRole } from './user-role.entity';
+import { IsEmail, Length } from 'class-validator';
 
 @Entity()
 export class User {
@@ -25,6 +29,7 @@ export class User {
     nullable: false,
     unique: true,
   })
+  @IsEmail()
   public email: string;
 
   @Column()
@@ -42,6 +47,10 @@ export class User {
     default: Role.USER,
   })
   public role: Role;
+
+  @ManyToMany(() => UserRole)
+  @JoinTable()
+  public roles: UserRole[];
 
   @OneToMany(() => Order, (order: Order) => order.user)
   public orders: Order[];

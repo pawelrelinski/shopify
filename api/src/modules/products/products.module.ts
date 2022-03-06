@@ -8,11 +8,17 @@ import { CategoriesModule } from '../categories/categories.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductView } from './entities/product-view.entity';
 import { OrderProductsService } from './order-products.service';
+import { ProductAttributes } from './entities/product-attributes.entity';
 
 @Module({
   imports: [
     ConfigModule,
-    TypeOrmModule.forFeature([Product, OrderProduct, ProductView]),
+    TypeOrmModule.forFeature([
+      Product,
+      OrderProduct,
+      ProductView,
+      ProductAttributes,
+    ]),
     CategoriesModule,
   ],
   providers: [ProductsService, OrderProductsService],

@@ -1,13 +1,13 @@
 import { ProductsService } from './products.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Product } from './enities/product.entity';
-import { ProductView } from './enities/product-view.entity';
 import { CategoriesService } from '../categories/categories.service';
 import { CategoryViewService } from '../categories/category-view.service';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
-import { Category } from '../categories/category.entity';
+import { Product } from './entities/product.entity';
+import { ProductView } from './entities/product-view.entity';
+import { Category } from '../categories/entities/category.entity';
 
 describe('ProductsService', () => {
   const categoryFormatName = 'solar-panels';

@@ -13,6 +13,7 @@ import { Category } from '../categories/entities/category.entity';
 import { CategoriesService } from '../categories/categories.service';
 import { ProductView } from './entities/product-view.entity';
 import { CategoryViewService } from '../categories/category-view.service';
+import { ProductAttributes } from './entities/product-attributes.entity';
 
 @Injectable()
 export class ProductsService {
@@ -23,6 +24,8 @@ export class ProductsService {
     private readonly productsRepository: Repository<Product>,
     @InjectRepository(ProductView)
     private readonly viewsRepository: Repository<ProductView>,
+    @InjectRepository(ProductAttributes)
+    private readonly productAttributesRepository: ProductAttributes,
     private readonly categoriesService: CategoriesService,
     private readonly categoryViewService: CategoryViewService,
   ) {}
@@ -45,25 +48,24 @@ export class ProductsService {
       await this.categoryViewService.addToCategory(category);
     }
 
-    if ('sortBy' in query) {
-      const sort = `product.${query.sortBy}`;
-      const order: 'ASC' | 'DESC' = query.sortMethod.toUpperCase();
+    const sort = `product.${query.sortBy}`;
+    const order: 'ASC' | 'DESC' = query.sortMethod.toUpperCase();
+    qb.orderBy(sort, order);
 
-      qb.orderBy(sort, order);
-    }
-
-    if ('limit' in query) {
-      qb.limit(query.limit);
-    }
-
-    if ('offset' in query) {
-      qb.offset(query.offset);
-    }
+    qb.limit(query.limit);
+    qb.offset(query.offset * query.limit);
 
     const products = await qb.getMany();
     products.forEach((product: Product) => {
       product.image = `${this.uploadsUrl}${product.image}`;
     });
+
+    for (const product of products) {
+      const productAttributesQb = await getRepository(ProductAttributes)
+        .createQueryBuilder('attribute')
+        .where('attribute.productId = :id', { id: product.id });
+      product.attributes = await productAttributesQb.getMany();
+    }
 
     return products;
   }
