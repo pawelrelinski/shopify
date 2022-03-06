@@ -1,7 +1,8 @@
 import { DEFAULT_CURRENCY_CODE, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
+import { ErrorInterceptor } from '@core/interceptors/error/error.interceptor';
+import { AuthInterceptor } from '@core/interceptors/auth/auth.interceptor';
 
 @NgModule({
   imports: [CommonModule],
@@ -9,6 +10,11 @@ import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'PLN',
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,

@@ -27,7 +27,9 @@ export class ProductAvailableWidgetComponent implements OnInit {
         (data: any) => {
           this.count = data.count;
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
   }
 }

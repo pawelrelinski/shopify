@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductTableRemoveDialogComponent } from '@features/product/components/product-table/product-table-remove-dialog/product-table-remove-dialog.component';
 import { NotificationService } from '@features/notification/services';
 import { NotificationType } from '@features/notification/models';
+import { Router } from '@angular/router';
+import { AuthService } from '@core/services';
 
 @Component({
   selector: 'shopify-product-table',
@@ -36,7 +38,9 @@ export class ProductTableComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private dialog: MatDialog,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   public ngOnInit(): void {
@@ -85,12 +89,10 @@ export class ProductTableComponent implements OnInit {
                 this.setProductsCount();
                 break;
               case 404:
-                //! TODO
                 break;
             }
           },
           (error) => {
-            console.log(error);
             if (error.status === 401) {
               this.notificationService.show({
                 title: error.error.message,
@@ -98,6 +100,8 @@ export class ProductTableComponent implements OnInit {
                 type: NotificationType.ERROR,
               });
             }
+            this.authService.logout();
+            this.router.navigate(['/sign-in']);
           }
         );
       }

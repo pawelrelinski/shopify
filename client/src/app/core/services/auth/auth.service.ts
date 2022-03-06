@@ -70,6 +70,10 @@ export class AuthService {
     this._isLoggedIn.next(true);
   }
 
+  public getToken(): string | null {
+    return localStorage.getItem(AuthLocalStorageItem.ACCESS_TOKEN);
+  }
+
   private isBeforeExpiration(): boolean {
     return moment().isBefore(this.getExpiration());
   }

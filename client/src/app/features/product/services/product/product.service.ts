@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { map, Observable, switchMap } from 'rxjs';
+import {
+  catchError,
+  delayWhen,
+  map,
+  Observable,
+  retryWhen,
+  shareReplay,
+  switchMap,
+  timer,
+} from 'rxjs';
 
 import {
   Product,
@@ -12,6 +21,9 @@ import {
 } from '@features/product/models';
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '@core/services';
+import { Router } from '@angular/router';
+import { NotificationService } from '@features/notification/services';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +35,13 @@ export class ProductService {
 
   private userRolesHeaderKey = 'User-Roles';
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
+  constructor(
+    private http: HttpClient,
+    private sanitizer: DomSanitizer,
+    private authService: AuthService,
+    private notificationService: NotificationService,
+    private router: Router
+  ) {}
 
   public getAll(): Observable<Product[]> {
     this.setDefaultUrlConfig();
@@ -39,7 +57,12 @@ export class ProductService {
     }
 
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
-    return this.http.get<ProductGetAllByResponse>(url);
+    return this.http.get<ProductGetAllByResponse>(url).pipe(
+      shareReplay(),
+      retryWhen((errors) => {
+        return errors.pipe(delayWhen(() => timer(5_000)));
+      })
+    );
   }
 
   public getById(id: number): Observable<Product> {
@@ -47,6 +70,10 @@ export class ProductService {
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
     return this.http.get<Product>(url).pipe(
+      shareReplay(),
+      retryWhen((errors) => {
+        return errors.pipe(delayWhen(() => timer(5_000)));
+      }),
       map((product: Product) => {
         const trustedHTMLShortDescription = this.sanitizer.bypassSecurityTrustHtml(
           product.shortDescription as string
@@ -86,10 +113,20 @@ export class ProductService {
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
 
-    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders()
+      .append(this.userRolesHeaderKey, 'admin')
+      .append('Authorization', `Bearer ${token}`);
+
     const requestOptions = { headers };
 
-    return this.http.delete<ProductDeleteResponse>(url, requestOptions);
+    return this.http.delete<ProductDeleteResponse>(url, requestOptions).pipe(
+      shareReplay(),
+      retryWhen((errors) => {
+        return errors.pipe(delayWhen(() => timer(5_000)));
+      })
+    );
   }
 
   public getCount(options: Map<string, string>) {
@@ -101,10 +138,19 @@ export class ProductService {
     }
     const url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
 
-    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders()
+      .append(this.userRolesHeaderKey, 'admin')
+      .append('Authorization', `Bearer ${token}`);
     const requestOptions = { headers };
 
-    return this.http.get(url, requestOptions);
+    return this.http.get(url, requestOptions).pipe(
+      shareReplay(),
+      retryWhen((errors) => {
+        return errors.pipe(delayWhen(() => timer(5_000)));
+      })
+    );
   }
 
   public getMostViewedProducts(): Observable<ProductWithViewsCount[]> {
@@ -113,10 +159,19 @@ export class ProductService {
     this.queryStringParameters.push('limit', '5');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
 
-    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders()
+      .append(this.userRolesHeaderKey, 'admin')
+      .append('Authorization', `Bearer ${token}`);
     const requestOptions = { headers };
 
-    return this.http.get<ProductWithViewsCount[]>(url, requestOptions);
+    return this.http.get<ProductWithViewsCount[]>(url, requestOptions).pipe(
+      shareReplay(),
+      retryWhen((errors) => {
+        return errors.pipe(delayWhen(() => timer(5_000)));
+      })
+    );
   }
 
   private addImage(image: Blob): Observable<Object> {
@@ -129,7 +184,12 @@ export class ProductService {
     const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
     const requestOptions = { headers };
 
-    return this.http.post(url, formData, requestOptions);
+    return this.http.post(url, formData, requestOptions).pipe(
+      shareReplay(),
+      retryWhen((errors) => {
+        return errors.pipe(delayWhen(() => timer(5_000)));
+      })
+    );
   }
 
   private setDefaultUrlConfig(): void {
