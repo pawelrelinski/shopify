@@ -81,8 +81,9 @@ export class ProductListComponent implements OnInit {
           this.categoryFormatName = params.category;
           if (!this.categoryFormatName) {
             this.isAllProducts = true;
+          } else {
+            this.category$ = this.categoryService.getByFormatName(this.categoryFormatName);
           }
-          this.category$ = this.categoryService.getByFormatName(this.categoryFormatName);
           this.categories$ = this.categoryService.getAll();
           return this.productService.getAllBy(this.getQueryMap());
         })

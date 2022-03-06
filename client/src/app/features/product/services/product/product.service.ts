@@ -94,7 +94,7 @@ export class ProductService {
 
   public getCount(options: Map<string, string>) {
     this.setDefaultUrlConfig();
-    this.segmentsUrl.push('count');
+    this.segmentsUrl.push('metrics');
 
     if (options.has('category')) {
       this.queryStringParameters.push('category', options.get('category'));

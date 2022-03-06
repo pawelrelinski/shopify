@@ -36,10 +36,8 @@ export class AppComponent implements OnInit {
 
     const componentRef =
       viewContainerRef.createComponent<NotificationComponent>(NotificationComponent);
-    componentRef.instance.data = {
-      title: notification.title,
-      message: notification.message,
-    };
+
+    componentRef.instance.data = notification;
   }
 
   private listenRouterEventsForAdminPath(): void {

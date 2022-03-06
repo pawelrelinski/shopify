@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class UserSignInFormComponent implements OnInit {
   public form!: FormGroup;
 
+  public isError = false;
+  public errorMessage = '';
+
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   public ngOnInit(): void {
@@ -23,12 +26,18 @@ export class UserSignInFormComponent implements OnInit {
       password: this.form.get('password')?.value,
       email: this.form.get('email')?.value,
     };
-    this.authService.login(loginData).subscribe((response: LoginResponse) => {
-      if (response.accessToken) {
-        this.authService.setSession(response);
-        this.router.navigate(['/profile']);
+    this.authService.login(loginData).subscribe(
+      (response: LoginResponse) => {
+        if (response.accessToken) {
+          this.authService.setSession(response);
+          this.router.navigate(['/profile']);
+        }
+      },
+      (error) => {
+        this.isError = true;
+        this.errorMessage = error.error.message;
       }
-    });
+    );
   }
 
   private setForm(): void {

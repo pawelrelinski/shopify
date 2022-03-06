@@ -1,0 +1,27 @@
+.z-99 {
+  z-index: 99;
+}
+
+.warning {
+  @apply bg-yellow-50;
+
+  &-container {
+    @apply text-yellow-800;
+  }
+
+  &-btn {
+    @apply bg-yellow-50 text-yellow-400 hover:bg-yellow-100 focus:ring-offset-yellow-50 focus:ring-yellow-600;
+  }
+}
+
+.error {
+  @apply bg-red-50;
+
+  &-container {
+    @apply text-red-800;
+  }
+
+  &-btn {
+    @apply bg-red-50 text-red-400 hover:bg-red-100 focus:ring-offset-red-50 focus:ring-red-600;
+  }
+}

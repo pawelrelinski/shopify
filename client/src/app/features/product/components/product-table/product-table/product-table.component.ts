@@ -13,6 +13,7 @@ import { ProductService } from '@features/product/services';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductTableRemoveDialogComponent } from '@features/product/components/product-table/product-table-remove-dialog/product-table-remove-dialog.component';
 import { NotificationService } from '@features/notification/services';
+import { NotificationType } from '@features/notification/models';
 
 @Component({
   selector: 'shopify-product-table',
@@ -68,25 +69,37 @@ export class ProductTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: MatDialogCloseRemoveDialog) => {
       if (result === MatDialogCloseRemoveDialog.DELETE) {
-        this.productService.delete(id).subscribe((res: ProductDeleteResponse) => {
-          switch (res.status) {
-            case 200:
+        this.productService.delete(id).subscribe(
+          (res: ProductDeleteResponse) => {
+            switch (res.status) {
+              case 200:
+                this.notificationService.show({
+                  title: 'Product has been deleted',
+                  message: '',
+                });
+                this.setAllProducts();
+                this.setProductsCount();
+                break;
+              case 204:
+                this.setAllProducts();
+                this.setProductsCount();
+                break;
+              case 404:
+                //! TODO
+                break;
+            }
+          },
+          (error) => {
+            console.log(error);
+            if (error.status === 401) {
               this.notificationService.show({
-                title: 'Product has been deleted',
+                title: error.error.message,
                 message: '',
+                type: NotificationType.ERROR,
               });
-              this.setAllProducts();
-              this.setProductsCount();
-              break;
-            case 204:
-              this.setAllProducts();
-              this.setProductsCount();
-              break;
-            case 404:
-              //! TODO
-              break;
+            }
           }
-        });
+        );
       }
     });
   }

@@ -1,10 +1,31 @@
-<div class="h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+<div class='h-full flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8'>
   <div
-    class="h-auto bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden"
+    class='h-auto bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden'
   >
-    <div class="h-auto px-4 py-8 sm:px-10">
-      <h1 class="text-gray-900 font-bold text-2xl">Login to your account</h1>
-      <div class="mt-6 h-96">
+    <div *ngIf='isError' class='rounded-md bg-yellow-50 p-4'>
+      <div class='flex'>
+        <div class='flex-shrink-0'>
+          <svg class='h-5 w-5 text-yellow-400' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'
+               fill='currentColor' aria-hidden='true'>
+            <path fill-rule='evenodd'
+                  d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z'
+                  clip-rule='evenodd' />
+          </svg>
+        </div>
+        <div class='ml-3'>
+          <h3 class='text-sm font-medium text-yellow-800'>
+            Attention needed
+          </h3>
+          <div class='mt-2 text-sm text-yellow-700'>
+            <p>{{ errorMessage }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='h-auto px-4 py-8 sm:px-10'>
+      <h1 class='text-gray-900 font-bold text-2xl'>Login to your account</h1>
+      <div class='mt-6 h-96'>
         <form [formGroup]='form' (ngSubmit)='login()' class='w-full space-y-6'>
           <div class='w-full'>
             <div class='relative'>
@@ -16,32 +37,32 @@
                 formControlName='email'
                 type='email'
                 id='required-email'
-                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                name="email"
-                placeholder="john@gmail.com"
+                class='rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent'
+                name='email'
+                placeholder='john@gmail.com'
                 required
               />
             </div>
           </div>
-          <div class="w-full">
-            <div class="relative">
-              <label for="required-password" class="text-gray-700">
+          <div class='w-full'>
+            <div class='relative'>
+              <label for='required-password' class='text-gray-700'>
                 Password
-                <span class="text-red-500 required-dot">*</span>
+                <span class='text-red-500 required-dot'>*</span>
               </label>
               <input
                 formControlName='password'
                 type='password'
-                id="required-password"
-                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                name="email"
-                placeholder="********"
+                id='required-password'
+                class='rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent'
+                name='email'
+                placeholder='********'
                 required
               />
             </div>
           </div>
           <div>
-            <span class="block w-full rounded-md shadow-sm">
+            <span class='block w-full rounded-md shadow-sm'>
               <button
                 type='submit'
                 [disabled]="form.status === 'INVALID'"
@@ -52,45 +73,45 @@
             </span>
           </div>
         </form>
-        <div class="relative flex justify-center text-sm leading-5 mt-8 mb-8">
-          <span class="px-2 text-gray-500 bg-white">or</span>
+        <div class='relative flex justify-center text-sm leading-5 mt-8 mb-8'>
+          <span class='px-2 text-gray-500 bg-white'>or</span>
         </div>
       </div>
-      <div class="relative h-auto mt-6">
-        <div class="absolute h-auto inset-0 flex items-center">
-          <div class="w-full h-36 -mt-20">
+      <div class='relative h-auto mt-6'>
+        <div class='absolute h-auto inset-0 flex items-center'>
+          <div class='w-full h-36 -mt-20'>
             <button
-              type="button"
-              class="py-2 px-4 mb-5 flex justify-center items-center bg-white hover:bg-gray-100 focus:ring-gray-500 focus:ring-offset-gray-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              type='button'
+              class='py-2 px-4 mb-5 flex justify-center items-center bg-white hover:bg-gray-100 focus:ring-gray-500 focus:ring-offset-gray-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg'
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="mr-2"
-                viewBox="0 0 1792 1792"
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                fill='currentColor'
+                class='mr-2'
+                viewBox='0 0 1792 1792'
               >
                 <path
-                  d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z"
+                  d='M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z'
                 ></path>
               </svg>
               Sign in with GitHub
             </button>
             <button
-              type="button"
-              class="py-2 px-4 flex justify-center items-center bg-white hover:bg-gray-100 focus:ring-blue-500 focus:ring-offset-blue-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              type='button'
+              class='py-2 px-4 flex justify-center items-center bg-white hover:bg-gray-100 focus:ring-blue-500 focus:ring-offset-blue-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg'
             >
               <svg
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="mr-2"
-                viewBox="0 0 1792 1792"
-                xmlns="http://www.w3.org/2000/svg"
+                width='20'
+                height='20'
+                fill='currentColor'
+                class='mr-2'
+                viewBox='0 0 1792 1792'
+                xmlns='http://www.w3.org/2000/svg'
               >
                 <path
-                  d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"
+                  d='M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z'
                 ></path>
               </svg>
               Sign in with Facebook
@@ -99,10 +120,10 @@
         </div>
       </div>
     </div>
-    <div class="px-4 py-6 border-t-2 border-gray-200 bg-gray-50 sm:px-10">
-      <p class="text-xs leading-5 text-gray-500">
+    <div class='px-4 py-6 border-t-2 border-gray-200 bg-gray-50 sm:px-10'>
+      <p class='text-xs leading-5 text-gray-500'>
         If you do not have an account yet, please
-        <a class="text-green-600 font-bold cursor-pointer" routerLink="/sign-up">register</a>
+        <a class='text-green-600 font-bold cursor-pointer' routerLink='/sign-up'>register</a>
       </p>
     </div>
   </div>

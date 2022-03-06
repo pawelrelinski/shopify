@@ -9,7 +9,6 @@
                 type='button'
                 class='-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400'>
           <span class='sr-only'>Close menu</span>
-          <!-- Heroicon name: outline/x -->
           <svg class='h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'
                aria-hidden='true'>
             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
@@ -17,12 +16,10 @@
         </button>
       </div>
 
-      <!-- Filters -->
       <form class='mt-4'>
         <div *ngIf='showCategoryDropdownMenu'
              class='border-t border-gray-200 px-4 py-6'>
           <h3 class='-mx-2 -my-3 flow-root'>
-            <!-- Expand/collapse section button -->
             <button type='button'
                     class='px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400'
                     aria-controls='filter-section-0' aria-expanded='false'>
@@ -30,13 +27,6 @@
                 Category
               </span>
               <span class='ml-6 flex items-center'>
-                <!--
-                  Expand/collapse icon, toggle classes based on section open state.
-
-                  Heroicon name: solid/chevron-down
-
-                  Open: "-rotate-180", Closed: "rotate-0"
-                -->
                 <svg class='rotate-0 h-5 w-5 transform' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'
                      fill='currentColor' aria-hidden='true'>
                   <path fill-rule='evenodd'
@@ -46,7 +36,6 @@
               </span>
             </button>
           </h3>
-          <!-- Filter section, show/hide based on section state. -->
           <div class='pt-6' id='filter-section-0'>
             <div class='space-y-6'>
               <div *ngIf='!categories; else categoriesFilterList'>
@@ -179,7 +168,6 @@
       </div>
     </div>
 
-    <!-- Active filters -->
     <div class='bg-gray-100'>
       <div class='max-w-7xl mx-auto py-3 px-4 sm:flex sm:items-center sm:px-6 lg:px-8'>
         <h3 class='text-xs font-semibold uppercase tracking-wide text-gray-500'>

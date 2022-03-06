@@ -48,7 +48,7 @@ export class CategoryService {
 
   public getCount(): Observable<number> {
     this.setDefaultUrlConfig();
-    this.segmentsUrl.push('count');
+    this.segmentsUrl.push('metrics');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
 
     const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
