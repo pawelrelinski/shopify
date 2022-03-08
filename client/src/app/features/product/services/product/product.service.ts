@@ -1,15 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
-import {
-  catchError,
-  delayWhen,
-  map,
-  Observable,
-  retryWhen,
-  shareReplay,
-  switchMap,
-  timer,
-} from 'rxjs';
+import { delayWhen, map, Observable, retry, retryWhen, shareReplay, switchMap, timer } from 'rxjs';
 
 import {
   Product,
@@ -22,8 +13,7 @@ import {
 import { QueryStringParameters, SegmentsUrl, UrlBuilder } from '@core/utils';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '@core/services';
-import { Router } from '@angular/router';
-import { NotificationService } from '@features/notification/services';
+import { UserRole } from '@features/user/models';
 
 @Injectable({
   providedIn: 'root',
@@ -38,9 +28,7 @@ export class ProductService {
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    private authService: AuthService,
-    private notificationService: NotificationService,
-    private router: Router
+    private authService: AuthService
   ) {}
 
   public getAll(): Observable<Product[]> {
@@ -94,7 +82,7 @@ export class ProductService {
     this.setDefaultUrlConfig();
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl) + '/';
 
-    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, UserRole.ADMIN);
 
     return this.addImage(product.image).pipe(
       switchMap((image: any) => {
@@ -113,11 +101,7 @@ export class ProductService {
     this.segmentsUrl.push(id.toString());
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl);
 
-    const token = this.authService.getToken();
-
-    const headers = new HttpHeaders()
-      .append(this.userRolesHeaderKey, 'admin')
-      .append('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, UserRole.ADMIN);
 
     const requestOptions = { headers };
 
@@ -138,19 +122,10 @@ export class ProductService {
     }
     const url = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
 
-    const token = this.authService.getToken();
-
-    const headers = new HttpHeaders()
-      .append(this.userRolesHeaderKey, 'admin')
-      .append('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, UserRole.ADMIN);
     const requestOptions = { headers };
 
-    return this.http.get(url, requestOptions).pipe(
-      shareReplay(),
-      retryWhen((errors) => {
-        return errors.pipe(delayWhen(() => timer(5_000)));
-      })
-    );
+    return this.http.get(url, requestOptions).pipe(retry(3));
   }
 
   public getMostViewedProducts(): Observable<ProductWithViewsCount[]> {
@@ -159,11 +134,7 @@ export class ProductService {
     this.queryStringParameters.push('limit', '5');
     const url: string = this.urlBuilder.getUrl(this.segmentsUrl, this.queryStringParameters);
 
-    const token = this.authService.getToken();
-
-    const headers = new HttpHeaders()
-      .append(this.userRolesHeaderKey, 'admin')
-      .append('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().append(this.userRolesHeaderKey, UserRole.ADMIN);
     const requestOptions = { headers };
 
     return this.http.get<ProductWithViewsCount[]>(url, requestOptions).pipe(
@@ -181,15 +152,7 @@ export class ProductService {
     const formData = new FormData();
     formData.append('image', image);
 
-    const headers = new HttpHeaders().append(this.userRolesHeaderKey, 'admin');
-    const requestOptions = { headers };
-
-    return this.http.post(url, formData, requestOptions).pipe(
-      shareReplay(),
-      retryWhen((errors) => {
-        return errors.pipe(delayWhen(() => timer(5_000)));
-      })
-    );
+    return this.http.post(url, formData);
   }
 
   private setDefaultUrlConfig(): void {

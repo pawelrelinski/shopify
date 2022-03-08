@@ -58,6 +58,11 @@ export class AppComponent implements OnInit {
   }
 
   private setDomainData(): void {
-    this.domainService.enterToPage().subscribe((res: Object) => {});
+    this.domainService.enterToPage().subscribe(
+      (res: Object) => {},
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

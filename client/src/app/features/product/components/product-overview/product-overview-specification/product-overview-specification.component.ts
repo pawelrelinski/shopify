@@ -1,10 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '@features/product/models';
 
 @Component({
-  selector: 'shopify-product-overview-specification[specification]',
+  selector: 'shopify-product-overview-specification[attributes]',
   templateUrl: './product-overview-specification.component.html',
 })
-export class ProductOverviewSpecificationComponent {
-  @Input() specification!: Product['dataSheet'];
+export class ProductOverviewSpecificationComponent implements OnInit {
+  @Input() attributes!: Product['attributes'];
+
+  ngOnInit() {
+    console.log(this.attributes);
+  }
 }

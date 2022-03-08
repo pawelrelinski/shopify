@@ -5,6 +5,8 @@ import { ProductService } from '@features/product/services';
 import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
 import { NotificationService } from '@features/notification/services';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { NotificationType } from '@features/notification/models';
+import { ViewportScroller } from '@angular/common';
 
 interface ErrorResponse {
   ok: boolean;
@@ -19,13 +21,16 @@ interface ErrorResponse {
 })
 export class ProductCreateFormComponent implements OnInit {
   public createProductForm!: FormGroup;
+  public isError = false;
+  public errorMessages: string[] = [];
 
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private viewport: ViewportScroller
   ) {}
 
   public ngOnInit(): void {
@@ -34,9 +39,8 @@ export class ProductCreateFormComponent implements OnInit {
 
   public onSubmit(): void {
     console.log(this.createProductForm);
-    this.productService
-      .create(this.createProductObjectToSend())
-      .subscribe((event: HttpEvent<ProductCreateResponse>) => {
+    this.productService.create(this.createProductObjectToSend()).subscribe(
+      (event: HttpEvent<ProductCreateResponse>) => {
         if (event.type === HttpEventType.Response) {
           const body = event.body as ProductCreateResponse;
           this.handleSuccessResponse(body.status);
@@ -45,7 +49,21 @@ export class ProductCreateFormComponent implements OnInit {
             message: body.product.name,
           });
         }
-      });
+        this.isError = false;
+      },
+      (error) => {
+        this.notificationService.show({
+          title: 'Something gone wrong',
+          message: '',
+          type: NotificationType.ERROR,
+        });
+        if ('message' in error.error) {
+          this.isError = true;
+          this.errorMessages = error.error.message;
+        }
+        this.viewport.scrollToPosition([0, 0]);
+      }
+    );
   }
 
   public setCreateProductForm(): void {
@@ -90,12 +108,11 @@ export class ProductCreateFormComponent implements OnInit {
     const inventory = this.createProductForm.get('inventory');
     const shipping = this.createProductForm.get('shipping');
 
-    return {
+    const newProduct = {
       name: general?.get('name')?.value,
       shortDescription: general?.get('shortDescription')?.value,
       description: general?.get('description')?.value,
       defaultPrice: general?.get('regularPrice')?.value,
-      promotionPrice: general?.get('salePrice')?.value ? general?.get('salePrice')?.value : 0.0,
       category: variations?.get('category')?.value,
       quantity: inventory?.get('stockQuantity')?.value,
       producer: general?.get('producer')?.value,
@@ -104,7 +121,16 @@ export class ProductCreateFormComponent implements OnInit {
       dataSheet: JSON.stringify(this.getSpecification()?.value),
       shippingMethods: JSON.stringify(shipping?.get('shippingMethods')?.value),
       image: general?.get('image')?.value,
-    } as ProductCreateDto;
+    };
+
+    const promotionPrice = general?.get('salePrice');
+    if (promotionPrice?.value !== 0 && promotionPrice) {
+      Object.assign(newProduct, {
+        promotionPrice: promotionPrice.value,
+      });
+    }
+
+    return newProduct as ProductCreateDto;
   }
 
   private handleSuccessResponse(code: number): void {

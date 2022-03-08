@@ -16,6 +16,7 @@ export interface Product {
   createdAt: string;
   refNumber: string;
   dataSheet: { key: string; value: string }[];
+  attributes?: { id: number; name: string; value: string }[];
   views: View[];
   isPublished: boolean;
   image: string;
