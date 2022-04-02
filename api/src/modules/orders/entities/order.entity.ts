@@ -1,6 +1,8 @@
 import {
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -8,6 +10,7 @@ import {
 import { User } from '../../users/entities/user.entity';
 import { OrderProduct } from '../../products/entities/order-product.entity';
 import { OrderStatus } from '../models/order-status';
+import { DeliveryMethodEntity } from './delivery-method.entity';
 
 @Entity()
 export class Order {
@@ -22,6 +25,10 @@ export class Order {
 
   @Column()
   public shippingMethod: string;
+
+  @ManyToMany(() => DeliveryMethodEntity)
+  @JoinTable()
+  public deliveryMethods: DeliveryMethodEntity[];
 
   @OneToMany(
     () => OrderProduct,

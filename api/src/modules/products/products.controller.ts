@@ -175,14 +175,7 @@ export class ProductsController {
     status: HttpStatus.FORBIDDEN,
     description: 'Forbidden resource.',
   })
-  @ApiHeader({
-    name: 'User-Roles',
-    required: false,
-    description: 'User role, if they is the admin they has access to data',
-    example: 'admin',
-  })
   @Post('image')
-  @Roles(Role.ADMIN)
   @UseInterceptors(FileInterceptor('image', localOptions))
   public async addImage(
     @UploadedFile() image: Express.Multer.File,

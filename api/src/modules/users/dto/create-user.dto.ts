@@ -11,4 +11,14 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   public readonly password: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public readonly firstName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public readonly lastName: string;
 }

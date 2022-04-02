@@ -25,7 +25,7 @@ export class ProductsService {
     @InjectRepository(ProductView)
     private readonly viewsRepository: Repository<ProductView>,
     @InjectRepository(ProductAttributes)
-    private readonly productAttributesRepository: ProductAttributes,
+    private readonly productAttributesRepository: Repository<ProductAttributes>,
     private readonly categoriesService: CategoriesService,
     private readonly categoryViewService: CategoryViewService,
   ) {}
@@ -119,7 +119,7 @@ export class ProductsService {
   public async findOne(id: string): Promise<Product | null> {
     const options: FindOneOptions<Product> = {
       where: { id, isDeleted: false },
-      relations: ['category', 'views'],
+      relations: ['category', 'views', 'attributes'],
     };
     const product = await this.productsRepository.findOne(options);
     if (!product) {
@@ -152,7 +152,34 @@ export class ProductsService {
       product.category as string,
     );
     product.category = category.id;
-    return this.productsRepository.save(product as DeepPartial<Product>);
+
+    const newProduct = await this.productsRepository.save(
+      product as DeepPartial<Product>,
+    );
+
+    const attributes = JSON.parse(product.dataSheet);
+    const productAttributes = [];
+    console.log(attributes);
+
+    if (attributes.length > 0) {
+      for (const attribute of attributes) {
+        const { key, value } = attribute;
+        const newAttribute = new ProductAttributes();
+
+        newAttribute.name = key;
+        newAttribute.value = value;
+        newAttribute.product = newProduct;
+
+        const createdAttribute = await this.productAttributesRepository.save(
+          newAttribute,
+        );
+        productAttributes.push(createdAttribute);
+      }
+    }
+    newProduct.attributes = productAttributes;
+    await this.productsRepository.save(newProduct);
+
+    return newProduct;
   }
 
   public async delete(id: string): Promise<Product> {

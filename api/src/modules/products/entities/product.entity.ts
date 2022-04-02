@@ -1,11 +1,9 @@
 import {
-  AfterLoad,
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Category } from '../../categories/entities/category.entity';
@@ -44,6 +42,7 @@ export class Product {
     precision: 9,
     scale: 2,
     default: 0,
+    nullable: true,
   })
   public promotionPrice: number;
 

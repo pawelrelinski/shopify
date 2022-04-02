@@ -38,7 +38,7 @@ export class CreateProductDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber({ maxDecimalPlaces: 2 })
-  @Min(0.01)
+  @Min(0)
   @Max(1_000_000.0)
   readonly defaultPrice: number;
 
@@ -48,7 +48,7 @@ export class CreateProductDto {
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0.01)
   @Max(1_000_000.0)
-  readonly promotionPrice?: number;
+  promotionPrice?: number;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -88,7 +88,7 @@ export class CreateProductDto {
   readonly dataSheet: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   readonly isPublished: boolean;
 
