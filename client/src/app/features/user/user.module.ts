@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ShopifyErrorModule } from '@shared/shopify-error/shopify-error.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ShopifyPaginationModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    ShopifyErrorModule,
   ],
   exports: [
     UserSignInFormComponent,

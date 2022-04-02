@@ -5,7 +5,7 @@
         <a [routerLink]="['/products', item.category, item.id]" class='block relative'>
           <img
             alt='Photo of product'
-            src='https://randomuser.me/api/portraits/lego/1.jpg'
+            [src]='item.image'
             class='mx-auto object-cover h-10 w-10'
           />
         </a>

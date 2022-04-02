@@ -2,6 +2,10 @@
   <div
     class="h-auto bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden"
   >
+    <ng-template [ngIf]='isError'>
+      <shopify-response-error-list [errors]='errors'>
+      </shopify-response-error-list>
+    </ng-template>
     <div class="h-auto px-4 py-8 sm:px-10">
       <h1 class="text-gray-900 font-bold text-2xl">Create a new account</h1>
       <div class="mt-6 h-auto">
@@ -19,6 +23,40 @@
                 class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 name="email"
                 placeholder="john@gmail.com"
+                required
+              />
+            </div>
+          </div>
+          <div class='w-full'>
+            <div class='relative'>
+              <label for='required-firstName' class='text-gray-700'>
+                First name
+                <span class='text-red-500 required-dot'>*</span>
+              </label>
+              <input
+                formControlName='firstName'
+                type='text'
+                id='required-firstName'
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                name="firstName"
+                placeholder="John"
+                required
+              />
+            </div>
+          </div>
+          <div class='w-full'>
+            <div class='relative'>
+              <label for='required-lastName' class='text-gray-700'>
+                Last name
+                <span class='text-red-500 required-dot'>*</span>
+              </label>
+              <input
+                formControlName='lastName'
+                type='text'
+                id='required-lastName'
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                name="lastName"
+                placeholder="Smith"
                 required
               />
             </div>

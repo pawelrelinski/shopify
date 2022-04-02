@@ -56,7 +56,6 @@ export class ProductOverviewComponent implements OnInit {
       )
       .subscribe((product: Product) => {
         this.product = product;
-        console.log(this.product);
       });
   }
 }

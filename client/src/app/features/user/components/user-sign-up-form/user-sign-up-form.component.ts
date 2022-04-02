@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services';
 import { RegisterData, RegisterResponse } from '@core/models';
 import { Router } from '@angular/router';
+import { NotificationService } from '@features/notification/services';
+import { NotificationType } from '@features/notification/models';
 
 @Component({
   selector: 'shopify-user-sign-up-form',
@@ -11,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class UserSignUpFormComponent implements OnInit {
   public form!: FormGroup;
+  public isError = false;
+  public errors: string[] = [];
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -22,18 +26,30 @@ export class UserSignUpFormComponent implements OnInit {
     const registerData: RegisterData = {
       email: this.form.get('email')?.value,
       password: this.form.get('password')?.value,
+      firstName: this.form.get('firstName')?.value,
+      lastName: this.form.get('lastName')?.value,
     };
-    this.authService.register(registerData).subscribe((response: RegisterResponse) => {
-      if (response.success) {
-        this.router.navigate(['/sign-in']);
+    this.authService.register(registerData).subscribe(
+      (response: RegisterResponse) => {
+        if (response.success) {
+          this.router.navigate(['/sign-in']);
+        }
+        this.isError = false;
+      },
+      (error) => {
+        this.isError = true;
+        this.errors = error.error.message;
+        console.log(error);
       }
-    });
+    );
   }
 
   private setForm(): void {
     this.form = this.fb.group(
       {
         email: this.fb.control('', [Validators.required, Validators.email]),
+        firstName: this.fb.control('', [Validators.required]),
+        lastName: this.fb.control('', [Validators.required]),
         password: this.fb.control('', [Validators.required, Validators.minLength(8)]),
         confirmPassword: this.fb.control('', [Validators.required, Validators.minLength(8)]),
       },
