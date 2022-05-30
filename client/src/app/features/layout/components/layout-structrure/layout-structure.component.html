@@ -1,4 +1,4 @@
-<shopify-shopping-cart *ngIf='shoppingCartIsOpen'></shopify-shopping-cart>
+<shopify-shopping-cart [@slideOver]='shoppingCartIsOpenTrigger'></shopify-shopping-cart>
 <div class='relative bg-white'>
   <div class='max-w-7xl mx-auto px-4 sm:px-6'>
     <div
@@ -73,9 +73,8 @@
           </button>
 
           <shopify-layout-solutions-flyout-menu
-            *ngIf='solutionsFlyoutMenuIsOpen'
             (click)='toggleSolutionsFlyoutMenu()'
-            [@flyoutMenu]='solutionsFlyoutMenuIsOpen'
+            [@flyoutMenu]="solutionsFlyoutMenuIsOpen ? 'open' : 'close'"
           >
           </shopify-layout-solutions-flyout-menu>
         </div>
@@ -109,9 +108,8 @@
           </button>
 
           <shopify-layout-products-flyout-menu
-            *ngIf='productsFlyoutMenuIsOpen'
             (click)='toggleProductsFlyoutMenu()'
-            [@flyoutMenu]='productsFlyoutMenuIsOpen'
+            [@flyoutMenu]="productsFlyoutMenuIsOpen ? 'open' : 'close'"
           >
           </shopify-layout-products-flyout-menu>
         </div>
@@ -139,9 +137,8 @@
             </svg>
           </button>
           <shopify-layout-more-flyout-menu
-            *ngIf='moreFlyoutMenuIsOpen'
             (click)='toggleMoreFlyoutMenu()'
-            [@flyoutMenu]="moreFlyoutMenuIsOpen ? 'show' : 'hide'"
+            [@flyoutMenu]="moreFlyoutMenuIsOpen ? 'open' : 'close'"
           >
           </shopify-layout-more-flyout-menu>
         </div>
@@ -179,7 +176,7 @@
             />
           </svg>
         </button>
-        <shopify-layout-profile-flyout-menu *ngIf='profileFlyoutMenuIsOpen'
+        <shopify-layout-profile-flyout-menu [@dropdownMenu]="profileFlyoutMenuIsOpen ? 'open' : 'close'"
                                             (onSignOut)='signOut()'
                                             (onClickLink)='toggleProfileFlyoutMenu()'>
         </shopify-layout-profile-flyout-menu>

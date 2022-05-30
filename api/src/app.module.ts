@@ -13,6 +13,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { DomainModule } from './modules/domain/domain.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './modules/auth/roles.guard';
+import { ShippingMethodsModule } from './modules/shipping-methods/shipping-methods.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { RolesGuard } from './modules/auth/roles.guard';
     AuthModule,
     OrdersModule,
     DomainModule,
+    ShippingMethodsModule,
   ],
   controllers: [AppController],
   providers: [

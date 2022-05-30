@@ -1,36 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlyoutMenuService, MobileMenuService } from '@features/layout/services';
 import { FlyoutMenu } from '@features/layout/models';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '@core/services';
 import { Router } from '@angular/router';
+import {
+  triggerDropdownMenu,
+  triggerFlyoutMenu,
+  triggerSlideOver,
+} from '@features/layout/components/layout-structrure/animations';
 
 @Component({
   selector: 'shopify-layout-structure',
   templateUrl: './layout-structure.component.html',
-  animations: [
-    trigger('flyoutMenu', [
-      state(
-        'show',
-        style({
-          opacity: 100,
-        })
-      ),
-      state(
-        'hide',
-        style({
-          opacity: 0,
-        })
-      ),
-      transition('show => hide', animate('150ms ease-in')),
-      transition('hide => show', animate('200ms ease-out')),
-    ]),
-  ],
+  animations: [triggerSlideOver, triggerFlyoutMenu, triggerDropdownMenu],
 })
 export class LayoutStructureComponent implements OnInit, OnDestroy {
-  public mobileMenuIsOpen!: boolean;
+  public mobileMenuIsOpen = false;
   public shoppingCartIsOpen!: boolean;
 
   public solutionsFlyoutMenuIsOpen = false;
@@ -59,6 +46,10 @@ export class LayoutStructureComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroyed.next(true);
     this.destroyed.complete();
+  }
+
+  public get shoppingCartIsOpenTrigger(): 'open' | 'close' {
+    return this.shoppingCartIsOpen ? 'open' : 'close';
   }
 
   public signOut(): void {

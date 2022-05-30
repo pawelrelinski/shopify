@@ -20,7 +20,6 @@
         <li><a href="#client">Client</a></li>
       </ul>
     </li>
-    <li><a href='#models'>Models</a></li>
   </ol>
 </details>
 
@@ -41,12 +40,13 @@ Fullstack application as project to school. E-commerce shop with products relate
 - [NestJS 8](https://docs.nestjs.com)
 - [TypeORM](https://typeorm.delightful.studio)
 - [Passport JWT](http://www.passportjs.org/packages/passport-jwt/)
-- [Swagger UI Express](https://github.com/scottie1984/swagger-ui-express)
+
 #### Database
 - [MySQL](https://www.mysql.com)
 
 #### Documentation
 - [Compodoc](https://compodoc.github.io/compodoc/)
+- [Swagger UI Express](https://github.com/scottie1984/swagger-ui-express)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -114,11 +114,13 @@ These can be used alone like this
 `GET /categories/count` | Get count of categories        |
 `GET /categories/:id` | Get category by given id       |
 
-<h4>Database Diahgram</h4>
+<h4>Database Diagram</h4>
 
-![Imgur](https://i.imgur.com/QJaLl1m.png)
+![Imgur](https://i.imgur.com/oJ3ePOA.png)
 
 <br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Client
 
@@ -140,57 +142,9 @@ Angular application for users with admin dashboard to manage. <br>
 10. Sign In/Sign Up
 
 <br>
+
 ##### Admin has following features:
 1. Add/remove products
 2. Product details (stats etc)
 3. Users list
 4. Orders manage
-
-
-### Models
-
-#### Product
-
-```typescript
-interface Product {
-  id: number;
-  name: string;
-  shortDescription: string | SafeHtml;
-  description: string | SafeHtml;
-  defaultPrice: number;
-  promotionPrice: number;
-  isAvailable: boolean;
-  category: {
-    id: number;
-    name: string;
-    formatName: string;
-    description: string | SafeHtml | null;
-    heroIconAsSvg: SafeHtml;
-  };
-  quantity: number;
-  producer: string;
-  createdAt: string;
-  refNumber: string;
-  dataSheet: {
-    key: string; value: string
-    }[];
-  views: {
-    id: number;
-    createdAt: string;
-  }[];
-  isPublished: boolean;
-  image: string;
-}
-```
-
-#### User
-
-```typescript
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  createdAt: string;
-}
-```

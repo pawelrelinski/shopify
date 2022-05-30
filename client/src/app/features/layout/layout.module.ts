@@ -11,9 +11,10 @@ import {
   LayoutProfileFlyoutMenuComponent,
   LayoutSolutionsFlyoutMenuComponent,
   LayoutStructureComponent,
-  LayoutUserNavigationComponent,
 } from '@features/layout/components';
 import { ShoppingCartModule } from '@features/shopping-cart/shopping-cart.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,10 @@ import { ShoppingCartModule } from '@features/shopping-cart/shopping-cart.module
     LayoutMoreFlyoutMenuComponent,
     LayoutSolutionsFlyoutMenuComponent,
     LayoutProductsFlyoutMenuComponent,
-    LayoutUserNavigationComponent,
     LayoutAdminNavigationComponent,
     LayoutProfileFlyoutMenuComponent,
   ],
-  imports: [CommonModule, RouterModule, ShoppingCartModule],
+  imports: [CommonModule, RouterModule, ShoppingCartModule, BrowserModule, BrowserAnimationsModule],
   exports: [LayoutStructureComponent, LayoutAdminNavigationComponent],
 })
 export class LayoutModule {}
