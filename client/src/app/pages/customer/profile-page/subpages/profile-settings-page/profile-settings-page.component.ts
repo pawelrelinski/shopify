@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserModule } from '@features/user/user.module';
+import { ShopifyButtonsModule } from '@shared/shopify-buttons/shopify-buttons.module';
 
 @Component({
   selector: 'shopify-profile-settings-page',
   templateUrl: './profile-settings-page.component.html',
-  styleUrls: ['./profile-settings-page.component.scss'],
+  standalone: true,
+  imports: [UserModule, ShopifyButtonsModule],
 })
-export class ProfileSettingsPageComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class ProfileSettingsPageComponent {}

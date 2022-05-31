@@ -1,18 +1,18 @@
-<div *ngIf='formatCategoriesData; else loading' class='pt-10 h-64'>
-  <h3 class='text-lg leading-6 font-medium text-gray-900 pb-3'>Most visited categories</h3>
+<div *ngIf="formatCategoriesData; else loading" class="pt-10 h-64">
+  <h3 class="text-lg leading-6 font-medium text-gray-900 pb-3">Most visited categories</h3>
   <ngx-charts-bar-horizontal
-    [results]='formatCategoriesData'
-    [xAxis]='showXAxis'
-    [yAxis]='showYAxis'
-    [showXAxisLabel]='showXAxisLabel'
-    [showYAxisLabel]='showYAxisLabel'
-    [showGridLines]='true'
-    xAxisLabel='Views'
+    [results]="formatCategoriesData"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [showGridLines]="true"
+    xAxisLabel="Views"
   >
   </ngx-charts-bar-horizontal>
 </div>
 <ng-template #loading>
-  <div class='w-full flex justify-center align-center pt-24'>
+  <div class="w-full flex justify-center align-center pt-24">
     <mat-spinner></mat-spinner>
   </div>
 </ng-template>

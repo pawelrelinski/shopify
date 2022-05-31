@@ -10,75 +10,81 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () =>
-      import('./pages/customer/home-page/home-page.module').then((m) => m.HomePageModule),
+    loadComponent: () =>
+      import('@pages/customer/home-page/home-page.component').then((c) => c.HomePageComponent),
   },
   {
     path: 'products',
     loadChildren: () =>
-      import('./pages/customer/products-page/products-page.module').then(
+      import('@pages/customer/products-page/products-page.module').then(
         (m) => m.ProductsPageModule
       ),
   },
   {
     path: 'sign-in',
     loadChildren: () =>
-      import('./pages/customer/sign-in-page/sign-in-page.module').then((m) => m.SignInPageModule),
+      import('@pages/customer/sign-in-page/sign-in-page.component').then(
+        (c) => c.SignInPageComponent
+      ),
   },
   {
     path: 'sign-up',
     loadChildren: () =>
-      import('./pages/customer/sign-up-page/sign-up-page.module').then((m) => m.SignUpPageModule),
+      import('@pages/customer/sign-up-page/sign-up-page.component').then(
+        (c) => c.SignUpPageComponent
+      ),
   },
   {
     path: 'shopping-cart',
-    loadChildren: () =>
-      import('./pages/customer/shopping-cart-page/shopping-cart-page.module').then(
-        (m) => m.ShoppingCartPageModule
+    loadComponent: () =>
+      import('@pages/customer/shopping-cart-page/shopping-cart-page.component').then(
+        (c) => c.ShoppingCartPageComponent
       ),
     canActivate: [AuthGuard],
   },
   {
     path: 'checkout',
     loadChildren: () =>
-      import('./pages/customer/checkout-page/checkout-page.module').then(
-        (m) => m.CheckoutPageModule
+      import('@pages/customer/checkout-page/checkout-page.component').then(
+        (c) => c.CheckoutPageComponent
       ),
     canActivate: [AuthGuard],
   },
   {
     path: 'articles',
-    loadChildren: () =>
-      import('./pages/customer/articles-page/articles-page.module').then(
-        (m) => m.ArticlesPageModule
+    loadComponent: () =>
+      import('@pages/customer/articles-page/articles-page.component').then(
+        (c) => c.ArticlesPageComponent
       ),
   },
   {
     path: 'faq',
-    loadChildren: () =>
-      import('./pages/customer/faq-page/faq-page.module').then((m) => m.FaqPageModule),
+    loadComponent: () =>
+      import('@pages/customer/faq-page/faq-page.component').then((c) => c.FaqPageComponent),
   },
   {
     path: 'pricing',
-    loadChildren: () =>
-      import('./pages/customer/pricing-page/pricing-page.module').then((m) => m.PricingPageModule),
+    loadComponent: () =>
+      import('@pages/customer/pricing-page/pricing-page.component').then(
+        (c) => c.PricingPageComponent
+      ),
   },
   {
     path: 'profile',
     loadChildren: () =>
-      import('./pages/customer/profile-page/profile-page.module').then((m) => m.ProfilePageModule),
+      import('@pages/customer/profile-page/profile-page.module').then((m) => m.ProfilePageModule),
     canActivate: [AuthGuard],
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin-pages.module').then((m) => m.AdminPagesModule),
+    loadChildren: () => import('@pages/admin/admin-pages.module').then((m) => m.AdminPagesModule),
     canActivate: [AuthGuard],
   },
   {
     path: '**',
-    loadChildren: () =>
-      import('./pages/customer/not-found-page/not-found-page.module').then(
-        (m) => m.NotFoundPageModule
+    loadComponent: () =>
+      import('@pages/customer/not-found-page/not-found-page.component').then(
+        (c) => c.NotFoundPageComponent
       ),
   },
 ];

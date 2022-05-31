@@ -1,43 +1,48 @@
-<div *ngIf='isLoading; else loaded'>
-  <div class='w-full flex justify-center py-20'>
-    <mat-spinner diameter='100'></mat-spinner>
+<div *ngIf="isLoading; else loaded">
+  <div class="w-full flex justify-center py-20">
+    <mat-spinner diameter="100"></mat-spinner>
   </div>
 </div>
 <ng-template #loaded>
-  <div *ngIf='isError; else notFailed' class='w-full py-20'>
-    <main class='flex-grow mx-auto max-w-7xl w-full flex flex-col px-4 sm:px-6 lg:px-8'>
-      <div class='flex-shrink-0 my-auto py-16 sm:py-32'>
-        <p class='text-sm font-semibold text-green-600 uppercase tracking-wide'>Error</p>
-        <h1 class='mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl'>Something went wrong</h1>
-        <p class='mt-2 text-base text-gray-500'>Sorry, we could not get data which you want.</p>
-        <div class='mt-6'>
-          <a routerLink='/' class='text-base font-medium text-green-600 hover:text-green-500'>
-            Go back home<span aria-hidden='true'> &rarr;</span>
+  <div *ngIf="isError; else notFailed" class="w-full py-20">
+    <main class="flex-grow mx-auto max-w-7xl w-full flex flex-col px-4 sm:px-6 lg:px-8">
+      <div class="flex-shrink-0 my-auto py-16 sm:py-32">
+        <p class="text-sm font-semibold text-green-600 uppercase tracking-wide">Error</p>
+        <h1 class="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+          Something went wrong
+        </h1>
+        <p class="mt-2 text-base text-gray-500">Sorry, we could not get data which you want.</p>
+        <div class="mt-6">
+          <a routerLink="/" class="text-base font-medium text-green-600 hover:text-green-500">
+            Go back home<span aria-hidden="true"> &rarr;</span>
           </a>
         </div>
       </div>
     </main>
   </div>
   <ng-template #notFailed>
-    <h1 *ngIf='productsListIsEmpty; else productsList' class='text-xl text-gray-600 mt-5'>
+    <h1 *ngIf="productsListIsEmpty; else productsList" class="text-xl text-gray-600 mt-5">
       Don't find any products...
     </h1>
     <ng-template #productsList>
-      <shopify-product-list-header (onSort)='sortProducts($event)'
-                                   [showCategoryDropdownMenu]='isAllProducts'
-                                   [category]='category$ | async'
-                                   [categories]='categories$ | async'>
+      <shopify-product-list-header
+        (onSort)="sortProducts($event)"
+        [showCategoryDropdownMenu]="isAllProducts"
+        [category]="category$ | async"
+        [categories]="categories$ | async"
+      >
       </shopify-product-list-header>
       <div
-        class='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6'
+        class="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6"
       >
-        <shopify-product-list-element *ngFor='let product of products'
-                                      [product]='product'>
+        <shopify-product-list-element *ngFor="let product of products" [product]="product">
         </shopify-product-list-element>
       </div>
-      <shopify-product-list-pagination [pageCount]='pageRules.page.count'
-                                       [currentPage]='pageRules.page.current'
-                                       (onChangePage)='changePage($event)'>
+      <shopify-product-list-pagination
+        [pageCount]="pageRules.page.count"
+        [currentPage]="pageRules.page.current"
+        (onChangePage)="changePage($event)"
+      >
       </shopify-product-list-pagination>
     </ng-template>
   </ng-template>

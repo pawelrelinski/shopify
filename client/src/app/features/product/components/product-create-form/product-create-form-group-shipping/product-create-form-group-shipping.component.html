@@ -1,32 +1,36 @@
-<div [formGroup]='shippingForm' class='border-t border-gray-200'>
+<div [formGroup]="shippingForm" class="border-t border-gray-200">
   <dl>
-    <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-      <dt class='text-sm font-medium text-gray-500'>
-        Expected delivery time (days)<span class='text-red-700'>*</span>
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Expected delivery time (days)<span class="text-red-700">*</span>
       </dt>
-      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         <input
-          formControlName='expectedDeliveryTime'
-          placeholder='1'
-          type='number'
-          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          formControlName="expectedDeliveryTime"
+          placeholder="1"
+          type="number"
+          class="bg-transparent rounded border-gray-300 border-2 w-full"
         />
         <div
           *ngIf="
-                shippingForm?.get('expectedDeliveryTime')?.invalid &&
-                (shippingForm?.get('expectedDeliveryTime')?.dirty || shippingForm?.get('expectedDeliveryTime')?.touched)
-              "
-          class='flex items-center mt-1 text-red-700'
+            shippingForm?.get('expectedDeliveryTime')?.invalid &&
+            (shippingForm?.get('expectedDeliveryTime')?.dirty ||
+              shippingForm?.get('expectedDeliveryTime')?.touched)
+          "
+          class="flex items-center mt-1 text-red-700"
         >
-          <p *ngIf="shippingForm?.get('expectedDeliveryTime')?.errors?.required" class='ml-1 text-xs'>
+          <p
+            *ngIf="shippingForm?.get('expectedDeliveryTime')?.errors?.required"
+            class="ml-1 text-xs"
+          >
             Please enter expected delivery time!
           </p>
-          <p *ngIf="shippingForm?.get('expectedDeliveryTime')?.errors?.min" class='ml-1 text-xs'>
+          <p *ngIf="shippingForm?.get('expectedDeliveryTime')?.errors?.min" class="ml-1 text-xs">
             Expected delivery time is too low! (min:
             {{ shippingForm?.get('expectedDeliveryTime')?.errors?.min?.min }}, actual:
             {{ shippingForm?.get('expectedDeliveryTime')?.errors?.min?.actual }})
           </p>
-          <p *ngIf="shippingForm?.get('expectedDeliveryTime')?.errors?.max" class='ml-1 text-xs'>
+          <p *ngIf="shippingForm?.get('expectedDeliveryTime')?.errors?.max" class="ml-1 text-xs">
             Expected delivery time is too long! (min:
             {{ shippingForm?.get('expectedDeliveryTime')?.errors?.max?.max }}, actual:
             {{ shippingForm?.get('expectedDeliveryTime')?.errors?.max?.actual }})
@@ -34,73 +38,69 @@
         </div>
       </dd>
     </div>
-    <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-      <dt class='text-sm font-medium text-gray-500'>
-        Shipping methods<span class='text-red-700'>*</span>
+    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Shipping methods<span class="text-red-700">*</span>
       </dt>
-      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         <div>
-          <h3 (click)='openShippingMethodsOptions()' class='-mx-2 -my-3 flow-root'>
+          <h3 (click)="openShippingMethodsOptions()" class="-mx-2 -my-3 flow-root">
             <button
-              type='button'
-              class='px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500'
-              aria-controls='filter-section-mobile-0'
-              aria-expanded='false'
+              type="button"
+              class="px-2 py-3 bg-white w-full flex items-center justify-between text-gray-400 hover:text-gray-500"
+              aria-controls="filter-section-mobile-0"
+              aria-expanded="false"
             >
-              <span class='font-medium text-gray-700'> Methods </span>
-              <span class='ml-6 flex items-center'>
-                    <svg
-                      *ngIf='!moreShippingMethodsOptionsIsShow'
-                      (click)='openShippingMethodsOptions()'
-                      xmlns='http://www.w3.org/2000/svg'
-                      class='h-6 w-6'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
-                        d='M19 9l-7 7-7-7'
-                      />
-                    </svg>
-                    <svg
-                      *ngIf='moreShippingMethodsOptionsIsShow'
-                      (click)='closeShippingMethodsOptions()'
-                      xmlns='http://www.w3.org/2000/svg'
-                      class='h-6 w-6'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
-                        d='M5 15l7-7 7 7'
-                      />
-                    </svg>
-                  </span>
+              <span class="font-medium text-gray-700"> Methods </span>
+              <span class="ml-6 flex items-center">
+                <svg
+                  *ngIf="!moreShippingMethodsOptionsIsShow"
+                  (click)="openShippingMethodsOptions()"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+                <svg
+                  *ngIf="moreShippingMethodsOptionsIsShow"
+                  (click)="closeShippingMethodsOptions()"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 15l7-7 7 7"
+                  />
+                </svg>
+              </span>
             </button>
           </h3>
-          <div
-            *ngIf='moreShippingMethodsOptionsIsShow'
-            class='pt-6'
-            id='filter-section-mobile-0'
-          >
-            <div class='space-y-6'>
+          <div *ngIf="moreShippingMethodsOptionsIsShow" class="pt-6" id="filter-section-mobile-0">
+            <div class="space-y-6">
               <div
-                *ngFor='let shippingMethod of shippingMethods; let index = index'
-                class='flex items-center'
+                *ngFor="let shippingMethod of shippingMethods; let index = index"
+                class="flex items-center"
               >
                 <input
-                  [value]='shippingMethod.value'
-                  (change)='onCheckboxChange($event)'
-                  type='checkbox'
-                  class='h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500'
+                  [value]="shippingMethod.value"
+                  (change)="onCheckboxChange($event)"
+                  type="checkbox"
+                  class="h-4 w-4 border-gray-300 rounded text-green-600 focus:ring-green-500"
                 />
-                <label class='ml-3 min-w-0 flex-1 text-gray-500'>
+                <label class="ml-3 min-w-0 flex-1 text-gray-500">
                   {{ shippingMethod.name }}
                 </label>
               </div>
@@ -109,16 +109,13 @@
         </div>
         <div
           *ngIf="
-                shippingForm?.get('shippingMethods')?.invalid &&
-                (shippingForm?.get('shippingMethods')?.dirty ||
-                  shippingForm?.get('shippingMethods')?.touched)
-              "
-          class='flex items-center mt-1 text-red-700'
+            shippingForm?.get('shippingMethods')?.invalid &&
+            (shippingForm?.get('shippingMethods')?.dirty ||
+              shippingForm?.get('shippingMethods')?.touched)
+          "
+          class="flex items-center mt-1 text-red-700"
         >
-          <p
-            *ngIf="shippingForm?.get('shippingMethods')?.errors?.required"
-            class='ml-1 text-xs'
-          >
+          <p *ngIf="shippingForm?.get('shippingMethods')?.errors?.required" class="ml-1 text-xs">
             Please enter shipping methods!
           </p>
         </div>

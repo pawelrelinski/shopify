@@ -1,10 +1,11 @@
-<div *ngIf='shoppingCartItemsIsEmpty; else checkout' class='w-full flex align-center justify-center mt-5'>
-  <h1 class='text-4xl text-gray-600'>Cart is empty</h1>
+<div
+  *ngIf="shoppingCartItemsIsEmpty; else checkout"
+  class="w-full flex align-center justify-center mt-5"
+>
+  <h1 class="text-4xl text-gray-600">Cart is empty</h1>
 </div>
 
 <ng-template #checkout>
-  <shopify-checkout-items-list [items]='shoppingCartItems'>
-  </shopify-checkout-items-list>
-  <shopify-checkout-form (onCheckoutData)='setCheckoutData($event)'>
-  </shopify-checkout-form>
+  <shopify-checkout-items-list [items]="shoppingCartItems"> </shopify-checkout-items-list>
+  <shopify-checkout-form (onCheckoutData)="setCheckoutData($event)"> </shopify-checkout-form>
 </ng-template>

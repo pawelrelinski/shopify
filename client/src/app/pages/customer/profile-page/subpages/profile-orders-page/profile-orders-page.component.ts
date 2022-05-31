@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { UserModule } from '@features/user/user.module';
+import { OrderModule } from '@features/order/order.module';
 
 @Component({
   selector: 'shopify-profile-orders-page',
   templateUrl: './profile-orders-page.component.html',
-  styleUrls: ['./profile-orders-page.component.scss'],
+  standalone: true,
+  imports: [UserModule, OrderModule],
 })
 export class ProfileOrdersPageComponent {}

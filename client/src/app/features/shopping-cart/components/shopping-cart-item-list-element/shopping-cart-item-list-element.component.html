@@ -1,9 +1,9 @@
 <li class="py-6 flex">
   <div class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
     <img
-      [src]='item.image'
-      alt='Product image'
-      class='w-full h-full object-center object-cover h-inherit'
+      [src]="item.image"
+      alt="Product image"
+      class="w-full h-full object-center object-cover h-inherit"
     />
   </div>
 
@@ -15,12 +15,12 @@
             {{ item.name | truncate: 20 }}
           </a>
         </h3>
-        <p class='ml-4'>{{ item.price | currency }}</p>
+        <p class="ml-4">{{ item.price | currency }}</p>
       </div>
       <p class="mt-1 text-sm text-gray-500">{{ item.refNumber }} id: {{ item.id }}</p>
     </div>
     <div class="flex-1 flex items-end justify-between text-sm">
-      <p class='text-gray-500'>Quantity: {{ item.quantity }}</p>
+      <p class="text-gray-500">Quantity: {{ item.quantity }}</p>
 
       <div class="flex">
         <button

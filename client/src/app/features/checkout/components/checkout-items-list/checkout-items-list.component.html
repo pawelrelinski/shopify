@@ -1,34 +1,32 @@
-<div class='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-  <div class='inline-block min-w-full rounded-lg overflow-hidden'>
-    <table class='min-w-full leading-normal'>
+<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+  <div class="inline-block min-w-full rounded-lg overflow-hidden">
+    <table class="min-w-full leading-normal">
       <thead>
-      <tr>
-        <th
-          scope='col'
-          class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
-        >
-          Product
-        </th>
-        <th
-          scope='col'
-          class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
-        >
-          Price
-        </th>
-        <th
-          scope='col'
-          class='px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal'
-        >
-          Quantity
-        </th>
-      </tr>
+        <tr>
+          <th
+            scope="col"
+            class="px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal"
+          >
+            Product
+          </th>
+          <th
+            scope="col"
+            class="px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal"
+          >
+            Price
+          </th>
+          <th
+            scope="col"
+            class="px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal"
+          >
+            Quantity
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <shopify-checkout-items-list-element *ngFor='let item of items'
-                                           [item]='item'>
-      </shopify-checkout-items-list-element>
+        <shopify-checkout-items-list-element *ngFor="let item of items" [item]="item">
+        </shopify-checkout-items-list-element>
       </tbody>
     </table>
   </div>
 </div>
-

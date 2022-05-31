@@ -1,203 +1,205 @@
-<shopify-shopping-cart [@slideOver]='shoppingCartIsOpenTrigger'></shopify-shopping-cart>
-<div class='relative bg-white'>
-  <div class='max-w-7xl mx-auto px-4 sm:px-6'>
+<shopify-shopping-cart [@slideOver]="shoppingCartIsOpenTrigger"></shopify-shopping-cart>
+<div class="relative bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div
-      class='flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10'
+      class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10"
     >
-      <div class='flex justify-start lg:w-0 lg:flex-1'>
-        <a routerLink='/'>
-          <span class='sr-only'>Workflow</span>
+      <div class="flex justify-start lg:w-0 lg:flex-1">
+        <a routerLink="/">
+          <span class="sr-only">Workflow</span>
           <svg
-            class='w-8 text-green-600'
-            viewBox='0 0 24 24'
-            stroke-linejoin='round'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke='currentColor'
-            fill='none'
+            class="w-8 text-green-600"
+            viewBox="0 0 24 24"
+            stroke-linejoin="round"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke="currentColor"
+            fill="none"
           >
-            <rect x='3' y='1' width='7' height='12'></rect>
-            <rect x='3' y='17' width='7' height='6'></rect>
-            <rect x='14' y='1' width='7' height='6'></rect>
-            <rect x='14' y='11' width='7' height='12'></rect>
+            <rect x="3" y="1" width="7" height="12"></rect>
+            <rect x="3" y="17" width="7" height="6"></rect>
+            <rect x="14" y="1" width="7" height="6"></rect>
+            <rect x="14" y="11" width="7" height="12"></rect>
           </svg>
         </a>
       </div>
-      <div class='-mr-2 -my-2 md:hidden'>
+      <div class="-mr-2 -my-2 md:hidden">
         <button
-          (click)='openMobileMenu()'
-          type='button'
-          class='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500'
-          aria-expanded='false'
+          (click)="openMobileMenu()"
+          type="button"
+          class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+          aria-expanded="false"
         >
-          <span class='sr-only'>Open menu</span>
+          <span class="sr-only">Open menu</span>
           <svg
-            xmlns='http://www.w3.org/2000/svg'
-            class='h-6 w-6'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              stroke-width='2'
-              d='M4 6h16M4 12h16m-7 6h7'
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
             />
           </svg>
         </button>
       </div>
-      <nav class='hidden md:flex space-x-10'>
-        <div class='relative'>
+      <nav class="hidden md:flex space-x-10">
+        <div class="relative">
           <button
-            (click)='toggleSolutionsFlyoutMenu()'
-            type='button'
-            class='text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
-            aria-expanded='false'
+            (click)="toggleSolutionsFlyoutMenu()"
+            type="button"
+            class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            aria-expanded="false"
           >
             <span>Solutions</span>
             <svg
-              class='text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500'
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 20 20'
-              fill='currentColor'
-              aria-hidden='true'
+              class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
             >
               <path
-                fill-rule='evenodd'
-                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                clip-rule='evenodd'
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
               />
             </svg>
           </button>
 
           <shopify-layout-solutions-flyout-menu
-            (click)='toggleSolutionsFlyoutMenu()'
+            (click)="toggleSolutionsFlyoutMenu()"
             [@flyoutMenu]="solutionsFlyoutMenuIsOpen ? 'open' : 'close'"
           >
           </shopify-layout-solutions-flyout-menu>
         </div>
 
-        <a routerLink='/pricing'
-           routerLinkActive='border-green-500 text-gray-900'
-           class='text-base font-medium text-gray-500 hover:text-gray-900'>
+        <a
+          routerLink="/pricing"
+          routerLinkActive="border-green-500 text-gray-900"
+          class="text-base font-medium text-gray-500 hover:text-gray-900"
+        >
           Pricing
         </a>
-        <div class='relative'>
+        <div class="relative">
           <button
-            (click)='toggleProductsFlyoutMenu()'
-            type='button'
-            class='text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
-            aria-expanded='false'
+            (click)="toggleProductsFlyoutMenu()"
+            type="button"
+            class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            aria-expanded="false"
           >
             <span>Products</span>
             <svg
-              class='text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500'
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 20 20'
-              fill='currentColor'
-              aria-hidden='true'
+              class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
             >
               <path
-                fill-rule='evenodd'
-                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                clip-rule='evenodd'
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
               />
             </svg>
           </button>
 
           <shopify-layout-products-flyout-menu
-            (click)='toggleProductsFlyoutMenu()'
+            (click)="toggleProductsFlyoutMenu()"
             [@flyoutMenu]="productsFlyoutMenuIsOpen ? 'open' : 'close'"
           >
           </shopify-layout-products-flyout-menu>
         </div>
 
-        <div class='relative'>
+        <div class="relative">
           <button
-            (click)='toggleMoreFlyoutMenu()'
-            type='button'
-            class='text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
-            aria-expanded='false'
+            (click)="toggleMoreFlyoutMenu()"
+            type="button"
+            class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            aria-expanded="false"
           >
             <span>More</span>
             <svg
-              class='text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500'
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 20 20'
-              fill='currentColor'
-              aria-hidden='true'
+              class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
             >
               <path
-                fill-rule='evenodd'
-                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                clip-rule='evenodd'
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
               />
             </svg>
           </button>
           <shopify-layout-more-flyout-menu
-            (click)='toggleMoreFlyoutMenu()'
+            (click)="toggleMoreFlyoutMenu()"
             [@flyoutMenu]="moreFlyoutMenuIsOpen ? 'open' : 'close'"
           >
           </shopify-layout-more-flyout-menu>
         </div>
       </nav>
-      <div class='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
+      <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
         <a
-          *ngIf='!isLoggedIn'
-          routerLink='/sign-in'
-          class='whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900'
+          *ngIf="!isLoggedIn"
+          routerLink="/sign-in"
+          class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
         >
           Sign in
         </a>
         <a
-          *ngIf='!isLoggedIn'
-          routerLink='/sign-up'
-          class='ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700'
+          *ngIf="!isLoggedIn"
+          routerLink="/sign-up"
+          class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
         >
           Sign up
         </a>
-        <button *ngIf='isLoggedIn'
-                (click)='toggleProfileFlyoutMenu()'
-                class='mr-5'>
+        <button *ngIf="isLoggedIn" (click)="toggleProfileFlyoutMenu()" class="mr-5">
           <svg
-            xmlns='http://www.w3.org/2000/svg'
-            class='h-6 w-6 text-green-600'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              stroke-width='2'
-              d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
             />
           </svg>
         </button>
-        <shopify-layout-profile-flyout-menu [@dropdownMenu]="profileFlyoutMenuIsOpen ? 'open' : 'close'"
-                                            (onSignOut)='signOut()'
-                                            (onClickLink)='toggleProfileFlyoutMenu()'>
+        <shopify-layout-profile-flyout-menu
+          [@dropdownMenu]="profileFlyoutMenuIsOpen ? 'open' : 'close'"
+          (onSignOut)="signOut()"
+          (onClickLink)="toggleProfileFlyoutMenu()"
+        >
         </shopify-layout-profile-flyout-menu>
-        <button *ngIf='isLoggedIn' (click)='openShoppingCart()'>
+        <button *ngIf="isLoggedIn" (click)="openShoppingCart()">
           <svg
-            xmlns='http://www.w3.org/2000/svg'
-            class='h-6 w-6 text-green-600'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              stroke-width='2'
-              d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
         </button>
       </div>
     </div>
   </div>
-  <shopify-layout-mobile-menu *ngIf='mobileMenuIsOpen'></shopify-layout-mobile-menu>
+  <shopify-layout-mobile-menu *ngIf="mobileMenuIsOpen"></shopify-layout-mobile-menu>
 </div>

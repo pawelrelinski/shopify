@@ -1,8 +1,8 @@
 <ng-template shopifyNotification></ng-template>
 
-<div *ngIf='!isAdminNavigation; else adminNavigation'>
+<div *ngIf="!isAdminNavigation; else adminNavigation">
   <shopify-layout-structure></shopify-layout-structure>
-  <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-full'>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-full">
     <router-outlet></router-outlet>
   </div>
   <shopify-footer></shopify-footer>

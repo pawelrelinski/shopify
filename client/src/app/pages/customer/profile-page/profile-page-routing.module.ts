@@ -9,24 +9,24 @@ const routes: Routes = [
   },
   {
     path: 'orders',
-    loadChildren: () =>
-      import('./subpages/profile-orders-page/profile-orders-page.module').then(
-        (m) => m.ProfileOrdersPageModule
-      ),
+    loadComponent: () =>
+      import(
+        '@pages/customer/profile-page/subpages/profile-orders-page/profile-orders-page.component'
+      ).then((c) => c.ProfileOrdersPageComponent),
   },
   {
     path: 'favourites',
-    loadChildren: () =>
-      import('./subpages/profile-favourites-page/profile-favourites-page.module').then(
-        (m) => m.ProfileFavouritesPageModule
-      ),
+    loadComponent: () =>
+      import(
+        '@pages/customer/profile-page/subpages/profile-favourites-page/profile-favourites-page.component'
+      ).then((c) => c.ProfileFavouritesPageComponent),
   },
   {
     path: 'settings',
-    loadChildren: () =>
-      import('./subpages/profile-settings-page/profile-settings-page.module').then(
-        (m) => m.ProfileSettingsPageModule
-      ),
+    loadComponent: () =>
+      import(
+        '@pages/customer/profile-page/subpages/profile-settings-page/profile-settings-page.component'
+      ).then((c) => c.ProfileSettingsPageComponent),
   },
 ];
 

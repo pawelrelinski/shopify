@@ -4,24 +4,24 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./subpages/products-category-page/products-category-page.module').then(
-        (m) => m.ProductsCategoryPageModule
-      ),
+    loadComponent: () =>
+      import(
+        '@pages/customer/products-page/subpages/products-category-page/products-category-page.component'
+      ).then((c) => c.ProductsCategoryPageComponent),
   },
   {
     path: ':category',
-    loadChildren: () =>
-      import('./subpages/products-category-page/products-category-page.module').then(
-        (m) => m.ProductsCategoryPageModule
-      ),
+    loadComponent: () =>
+      import(
+        '@pages/customer/products-page/subpages/products-category-page/products-category-page.component'
+      ).then((c) => c.ProductsCategoryPageComponent),
   },
   {
     path: ':category/:productId',
-    loadChildren: () =>
-      import('./subpages/product-overview-page/product-overview-page.module').then(
-        (m) => m.ProductOverviewPageModule
-      ),
+    loadComponent: () =>
+      import(
+        '@pages/customer/products-page/subpages/product-overview-page/product-overview-page.component'
+      ).then((c) => c.ProductOverviewPageComponent),
   },
 ];
 

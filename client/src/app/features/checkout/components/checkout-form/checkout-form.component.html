@@ -1,35 +1,40 @@
-<mat-stepper orientation='vertical' linear='false' #stepper>
-  <mat-step [stepControl]='shippingAddressGroup'>
-    <form [formGroup]='shippingAddressGroup'>
+<mat-stepper orientation="vertical" linear="false" #stepper>
+  <mat-step [stepControl]="shippingAddressGroup">
+    <form [formGroup]="shippingAddressGroup">
       <ng-template matStepLabel>Shipping address</ng-template>
-      <div class='flex flex-col gap-5'>
+      <div class="flex flex-col gap-5">
         <div>
-          <label class='block text-sm font-medium text-gray-700'>Address</label>
-          <div class='mt-1 relative rounded-md shadow-sm'>
-            <input formControlName='address'
-                   type='text'
-                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                   [class.border-red-500]="shippingAddressGroup?.get('address')?.invalid &&
-                                          (shippingAddressGroup?.get('address')?.dirty || shippingAddressGroup?.get('address')?.touched)"
-                   required
-            >
+          <label class="block text-sm font-medium text-gray-700">Address</label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              formControlName="address"
+              type="text"
+              class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+              [class.border-red-500]="
+                shippingAddressGroup?.get('address')?.invalid &&
+                (shippingAddressGroup?.get('address')?.dirty ||
+                  shippingAddressGroup?.get('address')?.touched)
+              "
+              required
+            />
           </div>
           <div
             *ngIf="
-                shippingAddressGroup?.get('address')?.invalid &&
-                (shippingAddressGroup?.get('address')?.dirty || shippingAddressGroup?.get('address')?.touched)
-              "
-            class='flex items-center mt-1 text-red-700'
+              shippingAddressGroup?.get('address')?.invalid &&
+              (shippingAddressGroup?.get('address')?.dirty ||
+                shippingAddressGroup?.get('address')?.touched)
+            "
+            class="flex items-center mt-1 text-red-700"
           >
-            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.required" class='ml-1 text-xs'>
+            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.required" class="ml-1 text-xs">
               Please enter address!
             </p>
-            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.minlength" class='ml-1 text-xs'>
+            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.minlength" class="ml-1 text-xs">
               Address is too short! (min:
               {{ shippingAddressGroup?.get('address')?.errors?.minlength?.requiredLength }}, actual:
               {{ shippingAddressGroup?.get('address')?.errors?.minlength?.actualLength }})
             </p>
-            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.maxlength" class='ml-1 text-xs'>
+            <p *ngIf="shippingAddressGroup?.get('address')?.errors?.maxlength" class="ml-1 text-xs">
               Address is too long! (min:
               {{ shippingAddressGroup?.get('address')?.errors?.maxlength?.requiredLength }}, actual:
               {{ shippingAddressGroup?.get('address')?.errors?.maxlength?.actualLength }})
@@ -37,32 +42,37 @@
           </div>
         </div>
         <div>
-          <label class='block text-sm font-medium text-gray-700'>City</label>
-          <div class='mt-1 relative rounded-md shadow-sm'>
-            <input formControlName='city'
-                   type='text'
-                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                   [class.border-red-500]="shippingAddressGroup?.get('city')?.invalid &&
-                                          (shippingAddressGroup?.get('city')?.dirty || shippingAddressGroup?.get('city')?.touched)"
-                   required
-            >
+          <label class="block text-sm font-medium text-gray-700">City</label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              formControlName="city"
+              type="text"
+              class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+              [class.border-red-500]="
+                shippingAddressGroup?.get('city')?.invalid &&
+                (shippingAddressGroup?.get('city')?.dirty ||
+                  shippingAddressGroup?.get('city')?.touched)
+              "
+              required
+            />
           </div>
           <div
             *ngIf="
-                shippingAddressGroup?.get('city')?.invalid &&
-                (shippingAddressGroup?.get('city')?.dirty || shippingAddressGroup?.get('city')?.touched)
-              "
-            class='flex items-center mt-1 text-red-700'
+              shippingAddressGroup?.get('city')?.invalid &&
+              (shippingAddressGroup?.get('city')?.dirty ||
+                shippingAddressGroup?.get('city')?.touched)
+            "
+            class="flex items-center mt-1 text-red-700"
           >
-            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.required" class='ml-1 text-xs'>
+            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.required" class="ml-1 text-xs">
               Please enter city name!
             </p>
-            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.minlength" class='ml-1 text-xs'>
+            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.minlength" class="ml-1 text-xs">
               City name is too short! (min:
               {{ shippingAddressGroup?.get('city')?.errors?.minlength?.requiredLength }}, actual:
               {{ shippingAddressGroup?.get('city')?.errors?.minlength?.actualLength }})
             </p>
-            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.maxlength" class='ml-1 text-xs'>
+            <p *ngIf="shippingAddressGroup?.get('city')?.errors?.maxlength" class="ml-1 text-xs">
               City name is too long! (min:
               {{ shippingAddressGroup?.get('city')?.errors?.maxlength?.requiredLength }}, actual:
               {{ shippingAddressGroup?.get('city')?.errors?.maxlength?.actualLength }})
@@ -70,281 +80,369 @@
           </div>
         </div>
         <div>
-          <label class='block text-sm font-medium text-gray-700'>Postal code</label>
-          <div class='mt-1 relative rounded-md shadow-sm'>
-            <input formControlName='postalCode'
-                   type='text'
-                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                   [class.border-red-500]="shippingAddressGroup?.get('postalCode')?.invalid &&
-                                          (shippingAddressGroup?.get('postalCode')?.dirty || shippingAddressGroup?.get('postalCode')?.touched)"
-                   required
-            >
+          <label class="block text-sm font-medium text-gray-700">Postal code</label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              formControlName="postalCode"
+              type="text"
+              class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+              [class.border-red-500]="
+                shippingAddressGroup?.get('postalCode')?.invalid &&
+                (shippingAddressGroup?.get('postalCode')?.dirty ||
+                  shippingAddressGroup?.get('postalCode')?.touched)
+              "
+              required
+            />
           </div>
           <div
             *ngIf="
-                shippingAddressGroup?.get('postalCode')?.invalid &&
-                (shippingAddressGroup?.get('postalCode')?.dirty || shippingAddressGroup?.get('postalCode')?.touched)
-              "
-            class='flex items-center mt-1 text-red-700'
+              shippingAddressGroup?.get('postalCode')?.invalid &&
+              (shippingAddressGroup?.get('postalCode')?.dirty ||
+                shippingAddressGroup?.get('postalCode')?.touched)
+            "
+            class="flex items-center mt-1 text-red-700"
           >
-            <p *ngIf="shippingAddressGroup?.get('postalCode')?.errors?.required" class='ml-1 text-xs'>
+            <p
+              *ngIf="shippingAddressGroup?.get('postalCode')?.errors?.required"
+              class="ml-1 text-xs"
+            >
               Please enter postal code!
             </p>
-            <p *ngIf="shippingAddressGroup?.get('postalCode')?.errors?.pattern" class='ml-1 text-xs'>
+            <p
+              *ngIf="shippingAddressGroup?.get('postalCode')?.errors?.pattern"
+              class="ml-1 text-xs"
+            >
               Postal code is invalid!
             </p>
           </div>
         </div>
         <div>
-          <label class='block text-sm font-medium text-gray-700'>Flat number</label>
-          <div class='mt-1 relative rounded-md shadow-sm'>
-            <input formControlName='flatNumber'
-                   type='text'
-                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                   [class.border-red-500]="shippingAddressGroup?.get('flatNumber')?.invalid &&
-                                          (shippingAddressGroup?.get('flatNumber')?.dirty || shippingAddressGroup?.get('flatNumber')?.touched)"
-                   required
-            >
+          <label class="block text-sm font-medium text-gray-700">Flat number</label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              formControlName="flatNumber"
+              type="text"
+              class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+              [class.border-red-500]="
+                shippingAddressGroup?.get('flatNumber')?.invalid &&
+                (shippingAddressGroup?.get('flatNumber')?.dirty ||
+                  shippingAddressGroup?.get('flatNumber')?.touched)
+              "
+              required
+            />
           </div>
           <div
             *ngIf="
-                shippingAddressGroup?.get('flatNumber')?.invalid &&
-                (shippingAddressGroup?.get('flatNumber')?.dirty || shippingAddressGroup?.get('flatNumber')?.touched)
-              "
-            class='flex items-center mt-1 text-red-700'
+              shippingAddressGroup?.get('flatNumber')?.invalid &&
+              (shippingAddressGroup?.get('flatNumber')?.dirty ||
+                shippingAddressGroup?.get('flatNumber')?.touched)
+            "
+            class="flex items-center mt-1 text-red-700"
           >
-            <p *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.required" class='ml-1 text-xs'>
+            <p
+              *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.required"
+              class="ml-1 text-xs"
+            >
               Please enter city name!
             </p>
-            <p *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.minlength" class='ml-1 text-xs'>
+            <p
+              *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.minlength"
+              class="ml-1 text-xs"
+            >
               City name is too short! (min:
-              {{ shippingAddressGroup?.get('flatNumber')?.errors?.minlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('flatNumber')?.errors?.minlength?.requiredLength }},
+              actual:
               {{ shippingAddressGroup?.get('flatNumber')?.errors?.minlength?.actualLength }})
             </p>
-            <p *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.maxlength" class='ml-1 text-xs'>
+            <p
+              *ngIf="shippingAddressGroup?.get('flatNumber')?.errors?.maxlength"
+              class="ml-1 text-xs"
+            >
               City name is too long! (min:
-              {{ shippingAddressGroup?.get('flatNumber')?.errors?.maxlength?.requiredLength }}, actual:
+              {{ shippingAddressGroup?.get('flatNumber')?.errors?.maxlength?.requiredLength }},
+              actual:
               {{ shippingAddressGroup?.get('flatNumber')?.errors?.maxlength?.actualLength }})
             </p>
           </div>
         </div>
       </div>
-      <div class='mt-5'>
-        <button matStepperNext
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+      <div class="mt-5">
+        <button
+          matStepperNext
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+        >
           <div>Next</div>
         </button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]='paymentDetailsGroup'>
-    <form [formGroup]='paymentDetailsGroup'>
+  <mat-step [stepControl]="paymentDetailsGroup">
+    <form [formGroup]="paymentDetailsGroup">
       <ng-template matStepLabel>Payment details</ng-template>
-      <div class='flex flex-col gap-5'>
+      <div class="flex flex-col gap-5">
         <div>
-          <label class='block text-sm font-medium text-gray-700'>Card number</label>
-          <div class='mt-1 relative rounded-md shadow-sm'>
-            <input formControlName='cardNumber'
-                   type='number'
-                   class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                   [class.border-red-500]="paymentDetailsGroup?.get('cardNumber')?.invalid &&
-                                          (paymentDetailsGroup?.get('cardNumber')?.dirty || paymentDetailsGroup?.get('cardNumber')?.touched)"
-                   required
-            >
+          <label class="block text-sm font-medium text-gray-700">Card number</label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              formControlName="cardNumber"
+              type="number"
+              class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+              [class.border-red-500]="
+                paymentDetailsGroup?.get('cardNumber')?.invalid &&
+                (paymentDetailsGroup?.get('cardNumber')?.dirty ||
+                  paymentDetailsGroup?.get('cardNumber')?.touched)
+              "
+              required
+            />
           </div>
           <div
             *ngIf="
-                paymentDetailsGroup?.get('cardNumber')?.invalid &&
-                (paymentDetailsGroup?.get('cardNumber')?.dirty || paymentDetailsGroup?.get('cardNumber')?.touched)
-              "
-            class='flex items-center mt-1 text-red-700'
+              paymentDetailsGroup?.get('cardNumber')?.invalid &&
+              (paymentDetailsGroup?.get('cardNumber')?.dirty ||
+                paymentDetailsGroup?.get('cardNumber')?.touched)
+            "
+            class="flex items-center mt-1 text-red-700"
           >
-            <p *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.required" class='ml-1 text-xs'>
+            <p
+              *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.required"
+              class="ml-1 text-xs"
+            >
               Please enter card number!
             </p>
-            <p *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.minlength" class='ml-1 text-xs'>
+            <p
+              *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.minlength"
+              class="ml-1 text-xs"
+            >
               Card number is too short! (min:
-              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.minlength?.requiredLength }}, actual:
-              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.minlength?.actualLength }})
+              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.minlength?.requiredLength }},
+              actual: {{ paymentDetailsGroup?.get('cardNumber')?.errors?.minlength?.actualLength }})
             </p>
-            <p *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.minlength" class='ml-1 text-xs'>
+            <p
+              *ngIf="paymentDetailsGroup?.get('cardNumber')?.errors?.minlength"
+              class="ml-1 text-xs"
+            >
               Card number is too long! (min:
-              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.maxlength?.requiredLength }}, actual:
-              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.maxlength?.actualLength }})
+              {{ paymentDetailsGroup?.get('cardNumber')?.errors?.maxlength?.requiredLength }},
+              actual: {{ paymentDetailsGroup?.get('cardNumber')?.errors?.maxlength?.actualLength }})
             </p>
           </div>
         </div>
-        <div class='flex flex-row gap-5'>
-          <div class='w-full'>
-            <label class='block text-sm font-medium text-gray-700'>Expiration date</label>
-            <div class='mt-1 relative rounded-md shadow-sm'>
-              <input formControlName='expirationDate'
-                     type='text'
-                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                     [class.border-red-500]="paymentDetailsGroup?.get('expirationDate')?.invalid &&
-                                          (paymentDetailsGroup?.get('expirationDate')?.dirty || paymentDetailsGroup?.get('expirationDate')?.touched)"
-                     required
-              >
+        <div class="flex flex-row gap-5">
+          <div class="w-full">
+            <label class="block text-sm font-medium text-gray-700">Expiration date</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <input
+                formControlName="expirationDate"
+                type="text"
+                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                [class.border-red-500]="
+                  paymentDetailsGroup?.get('expirationDate')?.invalid &&
+                  (paymentDetailsGroup?.get('expirationDate')?.dirty ||
+                    paymentDetailsGroup?.get('expirationDate')?.touched)
+                "
+                required
+              />
             </div>
             <div
               *ngIf="
                 paymentDetailsGroup?.get('expirationDate')?.invalid &&
-                (paymentDetailsGroup?.get('expirationDate')?.dirty || paymentDetailsGroup?.get('expirationDate')?.touched)
+                (paymentDetailsGroup?.get('expirationDate')?.dirty ||
+                  paymentDetailsGroup?.get('expirationDate')?.touched)
               "
-              class='flex items-center mt-1 text-red-700'
+              class="flex items-center mt-1 text-red-700"
             >
-              <p *ngIf="paymentDetailsGroup?.get('expirationDate')?.errors?.required" class='ml-1 text-xs'>
+              <p
+                *ngIf="paymentDetailsGroup?.get('expirationDate')?.errors?.required"
+                class="ml-1 text-xs"
+              >
                 Please enter expiration date!
               </p>
-              <p *ngIf="paymentDetailsGroup?.get('expirationDate')?.errors?.pattern" class='ml-1 text-xs'>
+              <p
+                *ngIf="paymentDetailsGroup?.get('expirationDate')?.errors?.pattern"
+                class="ml-1 text-xs"
+              >
                 Expiration date is invalid!
               </p>
             </div>
           </div>
-          <div class='w-full'>
-            <label class='block text-sm font-medium text-gray-700'>CVV</label>
-            <div class='mt-1 relative rounded-md shadow-sm'>
-              <input formControlName='cvv'
-                     type='number'
-                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                     [class.border-red-500]="paymentDetailsGroup?.get('cvv')?.invalid &&
-                                          (paymentDetailsGroup?.get('cvv')?.dirty || paymentDetailsGroup?.get('cvv')?.touched)"
-                     required
-              >
+          <div class="w-full">
+            <label class="block text-sm font-medium text-gray-700">CVV</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <input
+                formControlName="cvv"
+                type="number"
+                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                [class.border-red-500]="
+                  paymentDetailsGroup?.get('cvv')?.invalid &&
+                  (paymentDetailsGroup?.get('cvv')?.dirty ||
+                    paymentDetailsGroup?.get('cvv')?.touched)
+                "
+                required
+              />
             </div>
             <div
               *ngIf="
                 paymentDetailsGroup?.get('cvv')?.invalid &&
                 (paymentDetailsGroup?.get('cvv')?.dirty || paymentDetailsGroup?.get('cvv')?.touched)
               "
-              class='flex items-center mt-1 text-red-700'
+              class="flex items-center mt-1 text-red-700"
             >
-              <p *ngIf="paymentDetailsGroup?.get('cvv')?.errors?.required" class='ml-1 text-xs'>
+              <p *ngIf="paymentDetailsGroup?.get('cvv')?.errors?.required" class="ml-1 text-xs">
                 Please enter CVV number!
               </p>
-              <p *ngIf="paymentDetailsGroup?.get('cvv')?.errors?.pattern" class='ml-1 text-xs'>
+              <p *ngIf="paymentDetailsGroup?.get('cvv')?.errors?.pattern" class="ml-1 text-xs">
                 CVV number is invalid!
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class='flex flex-row mt-5 gap-5'>
-        <button matStepperPrevious
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors'>
+      <div class="flex flex-row mt-5 gap-5">
+        <button
+          matStepperPrevious
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
+        >
           <div>Previous</div>
         </button>
-        <button matStepperNext
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+        <button
+          matStepperNext
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+        >
           <div>Next</div>
         </button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]='contactInformationGroup'>
-    <form [formGroup]='contactInformationGroup'>
+  <mat-step [stepControl]="contactInformationGroup">
+    <form [formGroup]="contactInformationGroup">
       <ng-template matStepLabel>Contact information</ng-template>
-      <div class='flex flex-col gap-5'>
-        <div class='flex flex-row gap-5'>
-          <div class='w-full'>
-            <label class='block text-sm font-medium text-gray-700'>Email</label>
-            <div class='mt-1 relative rounded-md shadow-sm'>
-              <input formControlName='email'
-                     type='email'
-                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                     placeholder='john@gmail.com'
-                     [class.border-red-500]="contactInformationGroup?.get('email')?.invalid &&
-                                          (contactInformationGroup?.get('email')?.dirty || contactInformationGroup?.get('email')?.touched)"
-                     required
-              >
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-row gap-5">
+          <div class="w-full">
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <input
+                formControlName="email"
+                type="email"
+                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                placeholder="john@gmail.com"
+                [class.border-red-500]="
+                  contactInformationGroup?.get('email')?.invalid &&
+                  (contactInformationGroup?.get('email')?.dirty ||
+                    contactInformationGroup?.get('email')?.touched)
+                "
+                required
+              />
             </div>
             <div
               *ngIf="
                 contactInformationGroup?.get('email')?.invalid &&
-                (contactInformationGroup?.get('email')?.dirty || contactInformationGroup?.get('email')?.touched)
+                (contactInformationGroup?.get('email')?.dirty ||
+                  contactInformationGroup?.get('email')?.touched)
               "
-              class='flex items-center mt-1 text-red-700'
+              class="flex items-center mt-1 text-red-700"
             >
-              <p *ngIf="contactInformationGroup?.get('email')?.errors?.required" class='ml-1 text-xs'>
+              <p
+                *ngIf="contactInformationGroup?.get('email')?.errors?.required"
+                class="ml-1 text-xs"
+              >
                 Please enter email!
               </p>
-              <p *ngIf="contactInformationGroup?.get('email')?.errors?.email" class='ml-1 text-xs'>
+              <p *ngIf="contactInformationGroup?.get('email')?.errors?.email" class="ml-1 text-xs">
                 Email is invalid!
               </p>
             </div>
           </div>
-          <div class='w-full'>
-            <label class='block text-sm font-medium text-gray-700'>Phone number</label>
-            <div class='mt-1 relative rounded-md shadow-sm'>
-              <input formControlName='phoneNumber'
-                     type='text'
-                     class='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
-                     placeholder='111-222-333'
-                     [class.border-red-500]="contactInformationGroup?.get('phoneNumber')?.invalid &&
-                                          (contactInformationGroup?.get('phoneNumber')?.dirty || contactInformationGroup?.get('phoneNumber')?.touched)"
-                     required
-              >
+          <div class="w-full">
+            <label class="block text-sm font-medium text-gray-700">Phone number</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <input
+                formControlName="phoneNumber"
+                type="text"
+                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                placeholder="111-222-333"
+                [class.border-red-500]="
+                  contactInformationGroup?.get('phoneNumber')?.invalid &&
+                  (contactInformationGroup?.get('phoneNumber')?.dirty ||
+                    contactInformationGroup?.get('phoneNumber')?.touched)
+                "
+                required
+              />
             </div>
             <div
               *ngIf="
                 contactInformationGroup?.get('phoneNumber')?.invalid &&
-                (contactInformationGroup?.get('phoneNumber')?.dirty || contactInformationGroup?.get('phoneNumber')?.touched)
+                (contactInformationGroup?.get('phoneNumber')?.dirty ||
+                  contactInformationGroup?.get('phoneNumber')?.touched)
               "
-              class='flex items-center mt-1 text-red-700'
+              class="flex items-center mt-1 text-red-700"
             >
-              <p *ngIf="contactInformationGroup?.get('phoneNumber')?.errors?.required" class='ml-1 text-xs'>
+              <p
+                *ngIf="contactInformationGroup?.get('phoneNumber')?.errors?.required"
+                class="ml-1 text-xs"
+              >
                 Please enter phone number!
               </p>
-              <p *ngIf="contactInformationGroup?.get('phoneNumber')?.errors?.pattern" class='ml-1 text-xs'>
+              <p
+                *ngIf="contactInformationGroup?.get('phoneNumber')?.errors?.pattern"
+                class="ml-1 text-xs"
+              >
                 Phone number is invalid!
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class='flex flex-row mt-5 gap-5'>
-        <button matStepperPrevious
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors'>
+      <div class="flex flex-row mt-5 gap-5">
+        <button
+          matStepperPrevious
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
+        >
           <div>Previous</div>
         </button>
-        <button matStepperNext
-                (click)='setCheckoutData()'
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+        <button
+          matStepperNext
+          (click)="setCheckoutData()"
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+        >
           <div>Next</div>
         </button>
       </div>
     </form>
   </mat-step>
   <mat-step>
-    <form [formGroup]='deliveryMethodGroup'>
+    <form [formGroup]="deliveryMethodGroup">
       <ng-template matStepLabel>Delivery method</ng-template>
-      <div class='flex flex-col gap-5'>
-        <div class='flex flex-row gap-5'>
-          <div class='w-full flex flex-col gap-5'>
-            <label *ngFor='let method of deliveryMethods' (click)='setDeliveryMethodValue(method)'>
-              <input type='radio' [id]='method.name' class='hidden' />
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-row gap-5">
+          <div class="w-full flex flex-col gap-5">
+            <label *ngFor="let method of deliveryMethods" (click)="setDeliveryMethodValue(method)">
+              <input type="radio" [id]="method.name" class="hidden" />
               <div
-                class='label-checked:bg-green-50 label-checked:border-green-600 p-5 pr-12 rounded-md border-green px-5 cursor-pointer transition'>
-                <p class='text-gray-800 text-xl font-medium'>
+                class="label-checked:bg-green-50 label-checked:border-green-600 p-5 pr-12 rounded-md border-green px-5 cursor-pointer transition"
+              >
+                <p class="text-gray-800 text-xl font-medium">
                   {{ method.name }}
                 </p>
-                <p class='text-gray-400  mb-4'>
-                  {{ method.deliveryTime }} business days
-                </p>
+                <p class="text-gray-400 mb-4">{{ method.deliveryTime }} business days</p>
                 <p>{{ method.price | currency }}</p>
               </div>
             </label>
           </div>
         </div>
       </div>
-      <div class='flex flex-row mt-5 gap-5'>
-        <button matStepperPrevious
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors'>
+      <div class="flex flex-row mt-5 gap-5">
+        <button
+          matStepperPrevious
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
+        >
           <div>Previous</div>
         </button>
-        <button matStepperNext
-                (click)='setCheckoutData()'
-                class='inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+        <button
+          matStepperNext
+          (click)="setCheckoutData()"
+          class="inline-flex items-center justify-center space-x-2 py-3 px-7 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+        >
           <div>Next</div>
         </button>
       </div>
@@ -352,112 +450,86 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Confirm shipping information</ng-template>
-    <div class='bg-white shadow mt-5 overflow-hidden sm:rounded-lg'>
-      <div class='px-4 py-5 sm:px-6'>
-        <h3 class='text-lg leading-6 font-medium text-gray-900'>
-          Shipping address
-        </h3>
-        <p class='mt-1 max-w-2xl text-sm text-gray-500'>
+    <div class="bg-white shadow mt-5 overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Shipping address</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
           Address, city, postal number and flat number
         </p>
       </div>
-      <div class='border-t border-gray-200'>
+      <div class="border-t border-gray-200">
         <dl>
-          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Address
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Address</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ shippingAddressGroup?.get('address')?.value }}
             </dd>
           </div>
-          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              City
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">City</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ shippingAddressGroup?.get('city')?.value }}
             </dd>
           </div>
-          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Postal code
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Postal code</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ shippingAddressGroup?.get('postalCode')?.value }}
             </dd>
           </div>
-          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Flat number
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Flat number</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ shippingAddressGroup?.get('flatNumber')?.value }}
             </dd>
           </div>
         </dl>
       </div>
 
-      <div class='px-4 py-5 sm:px-6'>
-        <h3 class='text-lg leading-6 font-medium text-gray-900'>
-          Payment details
-        </h3>
-        <p class='mt-1 max-w-2xl text-sm text-gray-500'>
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Payment details</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
           Card number, expiration date and CVV number
         </p>
       </div>
-      <div class='border-t border-gray-200'>
+      <div class="border-t border-gray-200">
         <dl>
-          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Card number
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Card number</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ paymentDetailsGroup?.get('cardNumber')?.value }}
             </dd>
           </div>
-          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Expiration date
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Expiration date</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ paymentDetailsGroup?.get('expirationDate')?.value }}
             </dd>
           </div>
-          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              CVV number
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">CVV number</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ paymentDetailsGroup?.get('cvv')?.value }}
             </dd>
           </div>
         </dl>
       </div>
 
-      <div class='px-4 py-5 sm:px-6'>
-        <h3 class='text-lg leading-6 font-medium text-gray-900'>
-          Contact information
-        </h3>
-        <p class='mt-1 max-w-2xl text-sm text-gray-500'>
-          Email and phone number
-        </p>
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Contact information</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Email and phone number</p>
       </div>
-      <div class='border-t border-gray-200'>
+      <div class="border-t border-gray-200">
         <dl>
-          <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Email
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Email</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ contactInformationGroup?.get('email')?.value }}
             </dd>
           </div>
-          <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-            <dt class='text-sm font-medium text-gray-500'>
-              Phone number
-            </dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">Phone number</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ contactInformationGroup?.get('phoneNumber')?.value }}
             </dd>
           </div>
@@ -465,9 +537,11 @@
       </div>
     </div>
 
-    <button matStepperNext
-            (click)='confirmCheckoutData()'
-            class='inline-flex items-center justify-center space-x-2 py-3 px-7 mt-5 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors'>
+    <button
+      matStepperNext
+      (click)="confirmCheckoutData()"
+      class="inline-flex items-center justify-center space-x-2 py-3 px-7 mt-5 border border-transparent text-sm font-medium rounded text-white bg-green-600 hover:bg-green-700 transition-colors"
+    >
       <div>Confirm data</div>
     </button>
   </mat-step>

@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserModule } from '@features/user/user.module';
 
 @Component({
   selector: 'shopify-sign-up-page',
   templateUrl: './sign-up-page.component.html',
-  styleUrls: ['./sign-up-page.component.scss']
+  standalone: true,
+  imports: [UserModule],
 })
-export class SignUpPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class SignUpPageComponent {}

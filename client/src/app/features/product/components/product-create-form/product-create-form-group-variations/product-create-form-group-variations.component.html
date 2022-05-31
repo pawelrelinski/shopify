@@ -1,30 +1,29 @@
-<div [formGroup]='varationsForm' class='border-t border-gray-200'>
+<div [formGroup]="varationsForm" class="border-t border-gray-200">
   <dl>
-    <div class='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-      <dt class='text-sm font-medium text-gray-500'>
-        Category <span class='text-red-700'>*</span>
+    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Category <span class="text-red-700">*</span>
       </dt>
-      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         <select
-          formControlName='category'
-          name='category'
-          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          formControlName="category"
+          name="category"
+          class="bg-transparent rounded border-gray-300 border-2 w-full"
           required
         >
-          <option value='' selected disabled hidden class='text-gray-300'>Choose here</option>
-          <option *ngFor='let category of categories' [value]='category.formatName'>
+          <option value="" selected disabled hidden class="text-gray-300">Choose here</option>
+          <option *ngFor="let category of categories" [value]="category.formatName">
             {{ category.name | firstLetterTitleCase }}
           </option>
         </select>
         <div
           *ngIf="
-                varationsForm?.get('category')?.invalid &&
-                (varationsForm?.get('category')?.dirty ||
-                  varationsForm?.get('category')?.touched)
-              "
-          class='flex items-center mt-1 text-red-700'
+            varationsForm?.get('category')?.invalid &&
+            (varationsForm?.get('category')?.dirty || varationsForm?.get('category')?.touched)
+          "
+          class="flex items-center mt-1 text-red-700"
         >
-          <p *ngIf="varationsForm?.get('category')?.errors?.required" class='ml-1 text-xs'>
+          <p *ngIf="varationsForm?.get('category')?.errors?.required" class="ml-1 text-xs">
             Please choose category!
           </p>
         </div>

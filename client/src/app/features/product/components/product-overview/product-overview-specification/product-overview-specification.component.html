@@ -1,17 +1,19 @@
-<section class='container mx-auto px-5 md:py-5 py-10 text-gray-700 body-font border-t border-gray-200'>
-  <h1 class='text-3xl mt-10'>Specification</h1>
-  <div class='container rounded-lg pb-10 pt-5 mx-auto flex flex-wrap'>
-    <div class='bg-white w-full overflow-hidden sm:rounded-lg'>
+<section
+  class="container mx-auto px-5 md:py-5 py-10 text-gray-700 body-font border-t border-gray-200"
+>
+  <h1 class="text-3xl mt-10">Specification</h1>
+  <div class="container rounded-lg pb-10 pt-5 mx-auto flex flex-wrap">
+    <div class="bg-white w-full overflow-hidden sm:rounded-lg">
       <div>
         <dl>
           <div
-            *ngFor='let attribute of attributes; odd as isOdd; even as isEven'
-            [class.bg-gray-50]='isEven'
-            [class.bg-white]='isOdd'
-            class='px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'
+            *ngFor="let attribute of attributes; odd as isOdd; even as isEven"
+            [class.bg-gray-50]="isEven"
+            [class.bg-white]="isOdd"
+            class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
           >
-            <dt class='text-sm font-medium text-gray-500'>{{ attribute.name }}</dt>
-            <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{{ attribute.value }}</dd>
+            <dt class="text-sm font-medium text-gray-500">{{ attribute.name }}</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ attribute.value }}</dd>
           </div>
         </dl>
       </div>

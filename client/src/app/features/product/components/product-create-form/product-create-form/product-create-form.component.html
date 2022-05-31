@@ -1,20 +1,28 @@
-<div *ngIf='isError' class='rounded-md bg-red-50 p-4 mb-5'>
-  <div class='flex'>
-    <div class='flex-shrink-0'>
-      <svg class='h-5 w-5 text-red-400' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'
-           aria-hidden='true'>
-        <path fill-rule='evenodd'
-              d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
-              clip-rule='evenodd' />
+<div *ngIf="isError" class="rounded-md bg-red-50 p-4 mb-5">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <svg
+        class="h-5 w-5 text-red-400"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+          clip-rule="evenodd"
+        />
       </svg>
     </div>
-    <div class='ml-3'>
-      <h3 class='text-sm font-medium text-red-800'>
-        There were {{ errorMessages.length }} {{ (errorMessages.length > 1 ? 'errors' : 'error') }} with your submission
+    <div class="ml-3">
+      <h3 class="text-sm font-medium text-red-800">
+        There were {{ errorMessages.length }}
+        {{ errorMessages.length > 1 ? 'errors' : 'error' }} with your submission
       </h3>
-      <div class='mt-2 text-sm text-red-700'>
-        <ul role='list' class='list-disc pl-5 space-y-1'>
-          <li *ngFor='let msg of errorMessages'>
+      <div class="mt-2 text-sm text-red-700">
+        <ul role="list" class="list-disc pl-5 space-y-1">
+          <li *ngFor="let msg of errorMessages">
             {{ msg }}
           </li>
         </ul>
@@ -23,121 +31,122 @@
   </div>
 </div>
 
-
-<div class='bg-white shadow overflow-hidden sm:rounded-lg'>
-  <form [formGroup]='createProductForm' (ngSubmit)='onSubmit()'>
-    <div class='px-4 py-5 sm:px-6'>
-      <h3 class='text-lg leading-6 font-medium text-gray-900'>General</h3>
-      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Simple information's about product.</p>
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">General</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">Simple information's about product.</p>
     </div>
     <shopify-product-create-form-group-general (onFormReady)="addChildForm('general', $event)">
     </shopify-product-create-form-group-general>
 
-    <div class='px-4 py-5 sm:px-6'>
-      <h3 class='text-lg leading-6 font-medium text-gray-900'>Inventory</h3>
-      <p class='mt-1 max-w-2xl text-sm text-gray-500'>
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Inventory</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">
         Information's about product inventory state
       </p>
     </div>
     <shopify-product-create-form-group-inventory (onFormReady)="addChildForm('inventory', $event)">
     </shopify-product-create-form-group-inventory>
 
-    <div class='px-4 py-5 sm:px-6'>
-      <h3 class='text-lg leading-6 font-medium text-gray-900'>Shipping</h3>
-      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Information's about shipping</p>
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Shipping</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">Information's about shipping</p>
     </div>
     <shopify-product-create-form-group-shipping (onFormReady)="addChildForm('shipping', $event)">
     </shopify-product-create-form-group-shipping>
 
-    <div class='px-4 py-5 sm:px-6'>
-      <h3 class='text-lg leading-6 font-medium text-gray-900'>Variations</h3>
-      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Variations of product</p>
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Variations</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">Variations of product</p>
     </div>
-    <shopify-product-create-form-group-variations (onFormReady)="addChildForm('variations', $event)">
+    <shopify-product-create-form-group-variations
+      (onFormReady)="addChildForm('variations', $event)"
+    >
     </shopify-product-create-form-group-variations>
 
-    <div class='px-4 py-5 sm:px-6'>
-      <h3 class='text-lg leading-6 font-medium text-gray-900'>Specification</h3>
-      <p class='mt-1 max-w-2xl text-sm text-gray-500'>Product's specification</p>
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Specification</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">Product's specification</p>
     </div>
-    <div formArrayName='specification' class='border-t border-gray-200'>
+    <div formArrayName="specification" class="border-t border-gray-200">
       <dl>
-        <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-          <dt class='text-sm font-medium text-gray-500'>
-            Properties <span class='text-red-700'>*</span>
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Properties <span class="text-red-700">*</span>
           </dt>
           <dd
-            class='flex flex-column mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 properties-wrapper'
+            class="flex flex-column mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 properties-wrapper"
           >
             <div
-              *ngFor='let specification of getSpecification().controls; let index = index'
-              [formGroupName]='index'
-              class='flex flex-row justify-between sm:col-span-2 w-full'
+              *ngFor="let specification of getSpecification().controls; let index = index"
+              [formGroupName]="index"
+              class="flex flex-row justify-between sm:col-span-2 w-full"
             >
-              <div class='properties-input-width'>
+              <div class="properties-input-width">
                 <input
-                  formControlName='key'
-                  placeholder='Property name'
-                  type='text'
-                  class='bg-transparent rounded border-gray-300 border-2 w-full property-value-input'
+                  formControlName="key"
+                  placeholder="Property name"
+                  type="text"
+                  class="bg-transparent rounded border-gray-300 border-2 w-full property-value-input"
                   required
                   #specificationInputKey
                 />
                 <p
                   *ngIf="specificationInputKey.value === ''"
-                  class='ml-1 text-xs mt-1 text-red-700'
+                  class="ml-1 text-xs mt-1 text-red-700"
                 >
                   Please enter property name!
                 </p>
               </div>
-              <div class='properties-input-width'>
+              <div class="properties-input-width">
                 <input
-                  formControlName='value'
-                  placeholder='Property value'
-                  type='text'
-                  class='bg-transparent rounded border-gray-300 border-2 w-full property-value-input'
+                  formControlName="value"
+                  placeholder="Property value"
+                  type="text"
+                  class="bg-transparent rounded border-gray-300 border-2 w-full property-value-input"
                   required
                   #specificationInputValue
                 />
                 <p
                   *ngIf="specificationInputValue.value === ''"
-                  class='ml-1 text-xs mt-1 text-red-700'
+                  class="ml-1 text-xs mt-1 text-red-700"
                 >
                   Please enter property value!
                 </p>
               </div>
-              <div (click)='removeSpecification(index)' class='remove-spec-btn flex items-center'>
+              <div (click)="removeSpecification(index)" class="remove-spec-btn flex items-center">
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  class='h-8 w-8'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='rgb(239 68 68)'
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="rgb(239 68 68)"
                 >
                   <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M6 18L18 6M6 6l12 12'
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               </div>
             </div>
             <button
-              (click)='addSpecification()'
-              type='button'
-              class='inline-flex items-center justify-center space-x-2 py-3 px-4 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-50 hover:bg-green-100 transition-colors'
+              (click)="addSpecification()"
+              type="button"
+              class="inline-flex items-center justify-center space-x-2 py-3 px-4 border border-transparent text-sm font-medium rounded text-green-600 hover:text-green-700 bg-green-50 hover:bg-green-100 transition-colors"
             >
               <svg
-                xmlns='http://www.w3.org/2000/svg'
-                class='h-5 w-5'
-                viewBox='0 0 20 20'
-                fill='currentColor'
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
                 <path
-                  fill-rule='evenodd'
-                  d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
-                  clip-rule='evenodd'
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                  clip-rule="evenodd"
                 />
               </svg>
               <div>Add property</div>
@@ -148,18 +157,18 @@
     </div>
 
     <div
-      class='flex flex-row order-3 px-4 py-5 mr-auto flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto sm:px-6'
+      class="flex flex-row order-3 px-4 py-5 mr-auto flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto sm:px-6"
     >
       <button
-        [disabled]='createProductForm.invalid'
-        class='submit-btn flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 w-full sm:w-36 sm:flex-row hover:bg-green-700 transition delay-200'
-        type='submit'
+        [disabled]="createProductForm.invalid"
+        class="submit-btn flex flex-col items-center justify-center w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 w-full sm:w-36 sm:flex-row hover:bg-green-700 transition delay-200"
+        type="submit"
       >
         Add
       </button>
       <button
-        (click)='resetForm()'
-        class='flex items-center justify-center ml-5 w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-green-700 bg-green-100 hover:bg-green-200 w-full sm:w-36 transition delay-200'
+        (click)="resetForm()"
+        class="flex items-center justify-center ml-5 w-36 mt-5 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-green-700 bg-green-100 hover:bg-green-200 w-full sm:w-36 transition delay-200"
       >
         Reset
       </button>

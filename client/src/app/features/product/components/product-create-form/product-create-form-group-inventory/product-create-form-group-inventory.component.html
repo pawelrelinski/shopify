@@ -1,36 +1,33 @@
-<div [formGroup]='inventoryForm' class='border-t border-gray-200'>
+<div [formGroup]="inventoryForm" class="border-t border-gray-200">
   <dl>
-    <div class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-      <dt class='text-sm font-medium text-gray-500'>
-        Stock quantity <span class='text-red-700'>*</span>
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Stock quantity <span class="text-red-700">*</span>
       </dt>
-      <dd class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         <input
-          formControlName='stockQuantity'
-          type='number'
-          class='bg-transparent rounded border-gray-300 border-2 w-full'
+          formControlName="stockQuantity"
+          type="number"
+          class="bg-transparent rounded border-gray-300 border-2 w-full"
           required
         />
         <div
           *ngIf="
-                inventoryForm?.get('stockQuantity')?.invalid &&
-                (inventoryForm?.get('stockQuantity')?.dirty ||
-                  inventoryForm?.get('stockQuantity')?.touched)
-              "
-          class='flex items-center mt-1 text-red-700'
+            inventoryForm?.get('stockQuantity')?.invalid &&
+            (inventoryForm?.get('stockQuantity')?.dirty ||
+              inventoryForm?.get('stockQuantity')?.touched)
+          "
+          class="flex items-center mt-1 text-red-700"
         >
-          <p
-            *ngIf="inventoryForm?.get('stockQuantity')?.errors?.required"
-            class='ml-1 text-xs'
-          >
+          <p *ngIf="inventoryForm?.get('stockQuantity')?.errors?.required" class="ml-1 text-xs">
             Please enter stock quantity!
           </p>
-          <p *ngIf="inventoryForm?.get('stockQuantity')?.errors?.min" class='ml-1 text-xs'>
+          <p *ngIf="inventoryForm?.get('stockQuantity')?.errors?.min" class="ml-1 text-xs">
             Stock quantity is too low! (min:
             {{ inventoryForm?.get('stockQuantity')?.errors?.min?.min }}, actual:
             {{ inventoryForm?.get('stockQuantity')?.errors?.min?.actual }})
           </p>
-          <p *ngIf="inventoryForm?.get('stockQuantity')?.errors?.max" class='ml-1 text-xs'>
+          <p *ngIf="inventoryForm?.get('stockQuantity')?.errors?.max" class="ml-1 text-xs">
             Stock quantity is too high! (max:
             {{ inventoryForm?.get('stockQuantity')?.errors?.max?.max }}, actual:
             {{ inventoryForm?.get('stockQuantity')?.errors?.max?.actual }})

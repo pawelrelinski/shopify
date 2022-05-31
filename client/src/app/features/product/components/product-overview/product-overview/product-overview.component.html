@@ -1,15 +1,15 @@
 <shopify-product-overview-header
-  [name]='product.name'
-  [shortDescription]='product.shortDescription'
-  [id]='product.id'
-  [price]='product.defaultPrice'
-  [image]='product.image'
-  (onEmitItemData)='addItemToShoppingCart($event)'
+  [name]="product.name"
+  [shortDescription]="product.shortDescription"
+  [id]="product.id"
+  [price]="product.defaultPrice"
+  [image]="product.image"
+  (onEmitItemData)="addItemToShoppingCart($event)"
 >
 </shopify-product-overview-header>
-<shopify-product-full-description [description]='product.description'>
+<shopify-product-full-description [description]="product.description">
 </shopify-product-full-description>
 <shopify-product-overview-specification
-  [attributes]='product.attributes'
+  [attributes]="product.attributes"
 ></shopify-product-overview-specification>
 <shopify-product-overview-map></shopify-product-overview-map>
