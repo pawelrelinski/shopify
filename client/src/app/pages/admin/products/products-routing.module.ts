@@ -5,22 +5,30 @@ const routes: Routes = [
   {
     path: 'manage',
     loadChildren: () =>
-      import('./products-manage/products-manage.module').then((m) => m.ProductsManageModule),
+      import('@pages/admin/products/products-manage/products-manage.module').then(
+        (m) => m.ProductsManageModule
+      ),
   },
   {
     path: 'create',
-    loadChildren: () =>
-      import('./create-product/create-product.module').then((m) => m.CreateProductModule),
+    loadComponent: () =>
+      import('@pages/admin/products/create-product/create-product.component').then(
+        (c) => c.CreateProductComponent
+      ),
   },
   {
-    path: 'edit',
-    loadChildren: () =>
-      import('./edit-product/edit-product.module').then((m) => m.EditProductModule),
+    path: 'edit/:productId',
+    loadComponent: () =>
+      import('@pages/admin/products/edit-product/edit-product.component').then(
+        (c) => c.EditProductComponent
+      ),
   },
   {
-    path: 'details',
-    loadChildren: () =>
-      import('./product-details/product-details.module').then((m) => m.ProductDetailsModule),
+    path: 'details/:productId',
+    loadComponent: () =>
+      import('@pages/admin/products/product-details/product-details.component').then(
+        (c) => c.ProductDetailsComponent
+      ),
   },
 ];
 

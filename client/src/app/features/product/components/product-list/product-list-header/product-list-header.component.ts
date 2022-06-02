@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SortAction } from '@features/product/models';
 import { Category } from '@features/category/models';
+import { triggerDropdownMenu } from '@features/product/components';
 
 @Component({
   selector: 'shopify-product-list-header',
   templateUrl: './product-list-header.component.html',
+  animations: [triggerDropdownMenu],
 })
 export class ProductListHeaderComponent {
   @Input() category!: Category | null;

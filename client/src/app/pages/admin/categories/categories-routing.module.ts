@@ -8,18 +8,24 @@ const routes: Routes = [
   },
   {
     path: 'manage',
-    loadChildren: () =>
-      import('./categories-manage/categories-manage.module').then((m) => m.CategoriesManageModule),
+    loadComponent: () =>
+      import('@pages/admin/categories/categories-manage/categories-manage.component').then(
+        (c) => c.CategoriesManageComponent
+      ),
   },
   {
-    path: 'details',
-    loadChildren: () =>
-      import('./category-details/category-details.module').then((m) => m.CategoryDetailsModule),
+    path: 'details/:id',
+    loadComponent: () =>
+      import('@pages/admin/categories/category-details/category-details.component').then(
+        (c) => c.CategoryDetailsComponent
+      ),
   },
   {
     path: 'stats',
-    loadChildren: () =>
-      import('./categories-stats/categories-stats.module').then((m) => m.CategoriesStatsModule),
+    loadComponent: () =>
+      import('@pages/admin/categories/categories-stats/categories-stats.component').then(
+        (c) => c.CategoriesStatsComponent
+      ),
   },
 ];
 

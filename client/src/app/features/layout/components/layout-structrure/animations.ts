@@ -13,10 +13,16 @@ export const triggerSlideOver = trigger('slideOver', [
     style({
       opacity: 0,
       transform: 'translateX(100%)',
+      display: 'none',
     })
   ),
   transition('open => close', [animate('300ms ease-out')]),
-  transition('close => open', [animate('300ms ease-in')]),
+  transition('close => open', [
+    style({
+      display: 'block',
+    }),
+    animate('300ms ease-in'),
+  ]),
 ]);
 
 export const triggerFlyoutMenu = trigger('flyoutMenu', [

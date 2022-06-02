@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-	selector: 'shopify-orders-manage',
-	templateUrl: './orders-manage.component.html',
-	styleUrls: ['./orders-manage.component.scss'],
+  selector: 'shopify-orders-manage',
+  templateUrl: './orders-manage.component.html',
 })
-export class OrdersManageComponent implements OnInit {
-	constructor() {}
-
-	ngOnInit(): void {}
-}
+export class OrdersManageComponent {}

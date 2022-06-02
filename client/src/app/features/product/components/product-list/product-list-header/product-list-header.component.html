@@ -99,7 +99,7 @@
   <section aria-labelledby="filter-heading">
     <h2 id="filter-heading" class="sr-only">Filters</h2>
 
-    <div class="relative bg-white border-b border-gray-200 pb-4">
+    <div class="bg-white border-b border-gray-200 pb-4">
       <div class="max-w-7xl mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8">
         <div class="relative inline-block text-left">
           <div>
@@ -129,7 +129,7 @@
           </div>
 
           <div
-            *ngIf="sortDropdownMenuIsOpen"
+            [@dropdownMenu]="sortDropdownMenuIsOpen ? 'open' : 'close'"
             class="origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"

@@ -22,14 +22,14 @@ const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: () =>
+    loadComponent: () =>
       import('@pages/customer/sign-in-page/sign-in-page.component').then(
         (c) => c.SignInPageComponent
       ),
   },
   {
     path: 'sign-up',
-    loadChildren: () =>
+    loadComponent: () =>
       import('@pages/customer/sign-up-page/sign-up-page.component').then(
         (c) => c.SignUpPageComponent
       ),
