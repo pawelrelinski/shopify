@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { DomainController } from './domain.controller';
-import { DomainService } from './domain.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Domain } from './entities/domain.entity';
-import { Page } from './entities/page.entity';
-import { PageView } from './entities/page-view.entity';
 import { ConfigModule } from '@nestjs/config';
-import { DomainView } from './entities/domain-view.entity';
+import { DomainController } from '@modules/domain/domain.controller';
+import { DomainService } from '@modules/domain/domain.service';
+import { Domain } from '@modules/domain/entities/domain.entity';
+import { Page } from '@modules/domain/entities/page.entity';
+import { PageView } from '@modules/domain/entities/page-view.entity';
+import { DomainView } from '@modules/domain/entities/domain-view.entity';
 
 @Module({
   imports: [

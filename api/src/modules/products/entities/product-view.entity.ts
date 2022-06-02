@@ -1,11 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Product } from './product.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { Product } from '@modules/products/entities/product.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class ProductView {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class ProductView extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',

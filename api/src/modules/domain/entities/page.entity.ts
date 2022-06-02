@@ -1,19 +1,10 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Domain } from './domain.entity';
-import { PageView } from './page-view.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Domain } from '@modules/domain/entities/domain.entity';
+import { PageView } from '@modules/domain/entities/page-view.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class Page {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class Page extends BaseEntity {
   @Column()
   public name: string;
 

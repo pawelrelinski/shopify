@@ -14,14 +14,14 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { Express } from 'express';
-import { ProductsService } from './products.service';
-import { Product } from './entities/product.entity';
-import { CreateProductDto } from './dto/create-product.dto';
-import { CreateProductResponseDto } from './dto/create-product-response.dto';
-import { DeleteProductResponseDto } from './dto/delete-product-response.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ErrorResponse } from '../../models/error-response';
+import { Express } from 'express';
+import { ProductsService } from '@modules/products/products.service';
+import { Product } from '@modules/products/entities/product.entity';
+import { CreateProductDto } from '@modules/products/dto/create-product.dto';
+import { CreateProductResponseDto } from '@modules/products/dto/create-product-response.dto';
+import { DeleteProductResponseDto } from '@modules/products/dto/delete-product-response.dto';
+import { ErrorResponse } from '@models/error-response';
 import {
   ApiBody,
   ApiCreatedResponse,
@@ -35,11 +35,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
-import { FindAllResponseDto } from './dto/find-all-response.dto';
-import { FindByViewsCountResponseDto } from './dto/find-by-views-count-response.dto';
-import { Roles } from '../auth/decorators/roles.decorator';
-import { Role } from '../auth/enums/role.enum';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { FindAllResponseDto } from '@modules/products/dto/find-all-response.dto';
+import { FindByViewsCountResponseDto } from '@modules/products/dto/find-by-views-count-response.dto';
+import { Roles } from '@modules/auth/decorators/roles.decorator';
+import { Role } from '@modules/auth/enums/role.enum';
+import { JwtAuthGuard } from '@modules/auth/jwt-auth.guard';
 
 @ApiTags('products')
 @Controller('products')

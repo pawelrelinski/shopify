@@ -5,11 +5,11 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-import { RegistrationStatus } from './dto/registration-status';
-import { LoginUserDto } from '../users/dto/login-user.dto';
-import { LoginStatus } from './dto/login-status';
+import { AuthService } from '@modules/auth/auth.service';
+import { CreateUserDto } from '@modules/users/dto/create-user.dto';
+import { RegistrationStatus } from '@modules/auth/dto/registration-status';
+import { LoginUserDto } from '@modules/users/dto/login-user.dto';
+import { LoginStatus } from '@modules/auth/dto/login-status';
 import {
   ApiBody,
   ApiCreatedResponse,

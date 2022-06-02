@@ -1,11 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Domain } from './domain.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { Domain } from '@modules/domain/entities/domain.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class DomainView {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class DomainView extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',

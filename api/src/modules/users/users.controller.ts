@@ -7,10 +7,10 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { FindAllUsersDto } from './dto/find-all-users.dto';
-import { User } from './entities/user.entity';
-import { FindOneById } from './dto/find-one-by-id.dto';
+import { UsersService } from '@modules/users/users.service';
+import { FindAllUsersDto } from '@modules/users/dto/find-all-users.dto';
+import { User } from '@modules/users/entities/user.entity';
+import { FindOneById } from '@modules/users/dto/find-one-by-id.dto';
 import {
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -22,10 +22,10 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { ErrorResponse } from '../../models/error-response';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Roles } from '../auth/decorators/roles.decorator';
-import { Role } from '../auth/enums/role.enum';
+import { ErrorResponse } from '@models/error-response';
+import { JwtAuthGuard } from '@modules/auth/jwt-auth.guard';
+import { Roles } from '@modules/auth/decorators/roles.decorator';
+import { Role } from '@modules/auth/enums/role.enum';
 
 @ApiTags('users')
 @Controller('users')

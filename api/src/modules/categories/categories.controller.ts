@@ -2,17 +2,16 @@ import {
   Controller,
   DefaultValuePipe,
   Get,
-  HttpCode,
   HttpStatus,
   Param,
   ParseIntPipe,
   Query,
 } from '@nestjs/common';
-import { CategoriesService } from './categories.service';
-import { Category } from './entities/category.entity';
-import { FindAllCategoriesDto } from './dto/find-all-categories.dto';
-import { FindAllCategoriesWithProductsCountDto } from './dto/find-all-categories-with-products-count.dto';
-import { ErrorResponse } from '../../models/error-response';
+import { CategoriesService } from '@modules/categories/categories.service';
+import { Category } from '@modules/categories/entities/category.entity';
+import { FindAllCategoriesDto } from '@modules/categories/dto/find-all-categories.dto';
+import { FindAllCategoriesWithProductsCountDto } from '@modules/categories/dto/find-all-categories-with-products-count.dto';
+import { ErrorResponse } from '@models/error-response';
 import {
   ApiForbiddenResponse,
   ApiHeader,

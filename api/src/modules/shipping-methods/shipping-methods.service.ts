@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateShippingMethodDto } from './dto/create-shipping-method.dto';
-import { UpdateShippingMethodDto } from './dto/update-shipping-method.dto';
+import { CreateShippingMethodDto } from '@modules/shipping-methods/dto/create-shipping-method.dto';
+import { UpdateShippingMethodDto } from '@modules/shipping-methods/dto/update-shipping-method.dto';
 
 @Injectable()
 export class ShippingMethodsService {

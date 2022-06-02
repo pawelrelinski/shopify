@@ -5,18 +5,15 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
-import { OrderProduct } from '../../products/entities/order-product.entity';
-import { OrderStatus } from '../models/order-status';
-import { DeliveryMethodEntity } from './delivery-method.entity';
+import { User } from '@modules/users/entities/user.entity';
+import { OrderProduct } from '@modules/products/entities/order-product.entity';
+import { OrderStatus } from '@modules/orders/models/order-status';
+import { DeliveryMethodEntity } from '@modules/orders/entities/delivery-method.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class Order {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class Order extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',

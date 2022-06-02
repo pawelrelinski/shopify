@@ -9,8 +9,10 @@ const routes: Routes = [
   },
   {
     path: 'details',
-    loadChildren: () =>
-      import('../product-details/product-details.module').then((m) => m.ProductDetailsModule),
+    loadComponent: () =>
+      import('@pages/admin/products/product-details/product-details.component').then(
+        (c) => c.ProductDetailsComponent
+      ),
   },
 ];
 

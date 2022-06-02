@@ -6,9 +6,9 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { OrdersService } from './orders.service';
-import { Order } from './entities/order.entity';
+import { CreateOrderDto } from '@modules/orders/dto/create-order.dto';
+import { OrdersService } from '@modules/orders/orders.service';
+import { Order } from '@modules/orders/entities/order.entity';
 
 @ApiTags('orders')
 @Controller('orders')

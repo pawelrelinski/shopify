@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Domain } from './entities/domain.entity';
-import { Brackets, getRepository, Repository } from 'typeorm';
-import { Page } from './entities/page.entity';
-import { PageView } from './entities/page-view.entity';
-import { DomainView } from './entities/domain-view.entity';
+import { getRepository, Repository } from 'typeorm';
+import { Domain } from '@modules/domain/entities/domain.entity';
+import { Page } from '@modules/domain/entities/page.entity';
+import { PageView } from '@modules/domain/entities/page-view.entity';
+import { DomainView } from '@modules/domain/entities/domain-view.entity';
 
 @Injectable()
 export class DomainService {

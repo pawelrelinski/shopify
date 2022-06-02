@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { OrderProduct } from '../../products/entities/order-product.entity';
-import { User } from '../../users/entities/user.entity';
+import { OrderProduct } from '@modules/products/entities/order-product.entity';
+import { User } from '@modules/users/entities/user.entity';
 import {
   ArrayMaxSize,
   ArrayMinSize,

@@ -1,11 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Page } from './page.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { Page } from '@modules/domain/entities/page.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class PageView {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class PageView extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',

@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class ShippingMethod {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class ShippingMethod extends BaseEntity {
   @Column()
   name: string;
 

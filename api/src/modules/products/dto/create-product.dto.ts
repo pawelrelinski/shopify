@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Category } from '../../categories/entities/category.entity';
 import { DeepPartial } from 'typeorm';
+import { Category } from '@modules/categories/entities/category.entity';
 import {
   IsBoolean,
   IsJSON,

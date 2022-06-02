@@ -1,11 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Category } from './category.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { Category } from '@modules/categories/entities/category.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class CategoryView {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class CategoryView extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
     type: 'timestamp',

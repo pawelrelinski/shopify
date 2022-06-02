@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from '../../auth/enums/role.enum';
-import { Length } from 'class-validator';
+import { Role } from '@modules/auth/enums/role.enum';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class UserRole {
+export class UserRole extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 

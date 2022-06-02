@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CategoriesService } from './categories.service';
-import { CategoriesController } from './categories.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Category } from './entities/category.entity';
-import { CategoryView } from './entities/category-view.entity';
-import { CategoryViewService } from './category-view.service';
+import { CategoriesService } from '@modules/categories/categories.service';
+import { CategoriesController } from '@modules/categories/categories.controller';
+import { CategoryViewService } from '@modules/categories/category-view.service';
+import { Category } from '@modules/categories/entities/category.entity';
+import { CategoryView } from '@modules/categories/entities/category-view.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Category, CategoryView])],

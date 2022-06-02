@@ -1,18 +1,10 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Product } from '../../products/entities/product.entity';
-import { CategoryView } from './category-view.entity';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
+import { Product } from '@modules/products/entities/product.entity';
+import { CategoryView } from '@modules/categories/entities/category-view.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class Category {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class Category extends BaseEntity {
   @Column({
     comment: 'Full category name which we can display as slug',
   })

@@ -6,10 +6,10 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { DomainService } from './domain.service';
-import { Domain } from './entities/domain.entity';
-import { Roles } from '../auth/decorators/roles.decorator';
-import { Role } from '../auth/enums/role.enum';
+import { DomainService } from '@modules/domain/domain.service';
+import { Domain } from '@modules/domain/entities/domain.entity';
+import { Roles } from '@modules/auth/decorators/roles.decorator';
+import { Role } from '@modules/auth/enums/role.enum';
 
 @ApiTags('domain')
 @Controller('domain')

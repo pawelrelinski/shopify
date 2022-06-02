@@ -1,20 +1,11 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Category } from '../../categories/entities/category.entity';
-import { ProductView } from './product-view.entity';
-import { ProductAttributes } from './product-attributes.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Category } from '@modules/categories/entities/category.entity';
+import { ProductView } from '@modules/products/entities/product-view.entity';
+import { ProductAttributes } from '@modules/products/entities/product-attributes.entity';
+import { BaseEntity } from '@core/entities/base-entity';
 
 @Entity()
-export class Product {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
+export class Product extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 100,
