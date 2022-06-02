@@ -4,8 +4,6 @@ export * from './user-profile/user-profile.component';
 export * from './user-profile-reporting-tiles/user-profile-reporting-tiles.component';
 export * from './user-profile-orders/user-profile-orders.component';
 export * from './user-profile-favourites/user-profile-favourites.component';
-export * from './user-profile-settings/user-profile-settings.component';
-export * from './user-profile-settings-edit-first-name-dialog/user-profile-settings-edit-first-name-dialog.component';
 export * from './user-table/user-table.component';
 export * from './user-table-row/user-table-row.component';
 export * from './user-count-widget/user-count-widget.component';

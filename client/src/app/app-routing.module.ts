@@ -44,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    loadChildren: () =>
+    loadComponent: () =>
       import('@pages/customer/checkout-page/checkout-page.component').then(
         (c) => c.CheckoutPageComponent
       ),

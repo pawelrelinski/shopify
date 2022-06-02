@@ -8,13 +8,12 @@ import { Router } from '@angular/router';
 import {
   triggerDropdownMenu,
   triggerFlyoutMenu,
-  triggerSlideOver,
 } from '@features/layout/components/layout-structrure/animations';
 
 @Component({
   selector: 'shopify-layout-structure',
   templateUrl: './layout-structure.component.html',
-  animations: [triggerSlideOver, triggerFlyoutMenu, triggerDropdownMenu],
+  animations: [triggerFlyoutMenu, triggerDropdownMenu],
 })
 export class LayoutStructureComponent implements OnInit, OnDestroy {
   public mobileMenuIsOpen = false;

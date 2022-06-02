@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ShoppingCartItem } from '@features/shopping-cart/models';
 
 @Component({
@@ -12,10 +12,6 @@ import { ShoppingCartItem } from '@features/shopping-cart/models';
     `,
   ],
 })
-export class CheckoutItemsListElementComponent implements OnInit {
+export class CheckoutItemsListElementComponent {
   @Input() item!: ShoppingCartItem;
-
-  ngOnInit(): void {
-    console.log(this.item);
-  }
 }

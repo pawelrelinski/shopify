@@ -1,22 +1,21 @@
-<tr class="w-full">
-  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-    <div class="flex items-center">
-      <div class="flex-shrink-0">
-        <a [routerLink]="['/products', item.category, item.id]" class="block relative">
-          <img alt="Photo of product" [src]="item.image" class="mx-auto object-cover h-10 w-10" />
+<li class="flex py-6 space-x-6">
+  <img [src]="item.image" alt="Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps." class="flex-none w-40 h-40 object-center object-cover bg-gray-200 rounded-md">
+  <div class="flex flex-col justify-between space-y-4">
+    <div class="text-sm font-medium space-y-1">
+      <h3 class="text-gray-900">
+        <a [routerLink]="['/products', item.category, item.id]">
+          {{ item.name | truncate:30 }}
         </a>
-      </div>
-      <div class="ml-3">
-        <p class="text-gray-900 font-medium whitespace-no-wrap">
-          {{ item.name | truncate: 30 }}
-        </p>
+      </h3>
+      <p class="text-gray-900">{{ item.price | currency }}</p>
+      <p class="text-gray-500">{{ item.id }}</p>
+      <p class="text-gray-500">{{ item.quantity }}</p>
+    </div>
+    <div class="flex space-x-4">
+      <button type="button" class="text-sm font-medium text-green-600 hover:text-green-500">Edit</button>
+      <div class="flex border-l border-gray-300 pl-4">
+        <button type="button" class="text-sm font-medium text-green-600 hover:text-green-500">Remove</button>
       </div>
     </div>
-  </td>
-  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm align-middle">
-    <p class="mx-auto text-gray-500 whitespace-no-wrap">${{ item.price }}</p>
-  </td>
-  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm align-middle">
-    <p class="mx-auto text-gray-500 whitespace-no-wrap">{{ item.quantity }}</p>
-  </td>
-</tr>
+  </div>
+</li>

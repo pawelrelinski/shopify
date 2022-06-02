@@ -7,4 +7,10 @@ import { ShoppingCartItem } from '@features/shopping-cart/models';
 })
 export class CheckoutItemsListComponent {
   @Input() items!: ShoppingCartItem[] | null;
+
+  public fullSummaryIsOpen = false;
+
+  public toggleFullSummary(): void {
+    this.fullSummaryIsOpen = !this.fullSummaryIsOpen;
+  }
 }
