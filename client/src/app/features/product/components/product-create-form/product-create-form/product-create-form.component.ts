@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ProductService } from '@features/product/services';
@@ -7,6 +7,15 @@ import { NotificationService } from '@features/notification/services';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { NotificationType } from '@features/notification/models';
 import { ViewportScroller } from '@angular/common';
+
+abstract class ProductCreateFormInjectors {
+  protected readonly activatedRoute = inject(ActivatedRoute);
+  protected readonly router = inject(Router);
+  protected readonly productService = inject(ProductService);
+  protected readonly notificationService = inject(NotificationService);
+  protected readonly fb = inject(FormBuilder);
+  protected readonly viewport = inject(ViewportScroller);
+}
 
 interface ErrorResponse {
   ok: boolean;
@@ -19,26 +28,20 @@ interface ErrorResponse {
   templateUrl: './product-create-form.component.html',
   styleUrls: ['./product-create-form.component.scss'],
 })
-export class ProductCreateFormComponent implements OnInit {
+export class ProductCreateFormComponent extends ProductCreateFormInjectors implements OnInit {
   public createProductForm!: FormGroup;
   public isError = false;
   public errorMessages: string[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private productService: ProductService,
-    private notificationService: NotificationService,
-    private viewport: ViewportScroller
-  ) {}
+  constructor() {
+    super();
+  }
 
   public ngOnInit(): void {
     this.setCreateProductForm();
   }
 
   public onSubmit(): void {
-    console.log(this.createProductForm);
     this.productService.create(this.createProductObjectToSend()).subscribe(
       (event: HttpEvent<ProductCreateResponse>) => {
         if (event.type === HttpEventType.Response) {

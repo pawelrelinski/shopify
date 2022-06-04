@@ -4,7 +4,6 @@ import { View } from '@features/product/models';
 @Component({
   selector: 'shopify-product-details-views-chart[views]',
   templateUrl: './product-details-views-chart.component.html',
-  styleUrls: ['./product-details-views-chart.component.scss'],
 })
 export class ProductDetailsViewsChartComponent implements OnInit {
   @Input() views!: View[];
