@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class LayoutBannerComponent {
   @Output()
-  emitClickCloseBtn: EventEmitter<null> = new EventEmitter<null>();
+  emitClickCloseBtn = new EventEmitter<null>();
 
   public emitClose(): void {
     this.emitClickCloseBtn.emit();

@@ -1,21 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FlyoutMenuService, MobileMenuService } from '@features/layout/services';
 import { FlyoutMenu } from '@features/layout/models';
-import { ShoppingCartVisibilityService } from '@features/shopping-cart/services';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthService } from '@core/services';
-import { Router } from '@angular/router';
 import {
   triggerDropdownMenu,
   triggerFlyoutMenu,
 } from '@features/layout/components/layout-structrure/animations';
+import { LayoutStructureInjectors } from '@features/layout/components/layout-structrure/layout-structure-injectors';
+
+enum CartState {
+  OPEN = 'open',
+  CLOSE = 'close',
+}
 
 @Component({
   selector: 'shopify-layout-structure',
   templateUrl: './layout-structure.component.html',
   animations: [triggerFlyoutMenu, triggerDropdownMenu],
 })
-export class LayoutStructureComponent implements OnInit, OnDestroy {
+export class LayoutStructureComponent
+  extends LayoutStructureInjectors
+  implements OnInit, OnDestroy
+{
   public mobileMenuIsOpen = false;
   public shoppingCartIsOpen!: boolean;
 
@@ -28,13 +33,9 @@ export class LayoutStructureComponent implements OnInit, OnDestroy {
 
   private readonly destroyed = new Subject<boolean>();
 
-  constructor(
-    private mobileMenuService: MobileMenuService,
-    private flyoutMenuService: FlyoutMenuService,
-    private shoppingCartVisibility: ShoppingCartVisibilityService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor() {
+    super();
+  }
 
   public ngOnInit(): void {
     this.setIsLoggedIn();
@@ -47,8 +48,8 @@ export class LayoutStructureComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-  public get shoppingCartIsOpenTrigger(): 'open' | 'close' {
-    return this.shoppingCartIsOpen ? 'open' : 'close';
+  public get shoppingCartIsOpenTrigger(): CartState {
+    return this.shoppingCartIsOpen ? CartState.OPEN : CartState.CLOSE;
   }
 
   public signOut(): void {

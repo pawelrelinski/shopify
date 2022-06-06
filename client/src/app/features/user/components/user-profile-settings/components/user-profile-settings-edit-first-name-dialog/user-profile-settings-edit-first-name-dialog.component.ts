@@ -1,18 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'shopify-user-profile-settings-edit-first-name-dialog',
   templateUrl: './user-profile-settings-edit-first-name-dialog.component.html',
 })
 export class UserProfileSettingsEditFirstNameDialogComponent implements OnInit {
-  public userInfoForm!: FormGroup;
+  public userInfoForm!: UntypedFormGroup;
 
   constructor(
     private dialogRef: MatDialogRef<UserProfileSettingsEditFirstNameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   public ngOnInit(): void {

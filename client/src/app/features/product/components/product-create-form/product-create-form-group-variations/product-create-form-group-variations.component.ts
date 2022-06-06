@@ -1,20 +1,21 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Category } from '@features/category/models';
 import { CategoryService } from '@features/category/services';
 
 @Component({
   selector: 'shopify-product-create-form-group-variations',
   templateUrl: './product-create-form-group-variations.component.html',
-  styleUrls: ['./product-create-form-group-variations.component.scss'],
 })
 export class ProductCreateFormGroupVariationsComponent implements OnInit {
   @Output() onFormReady = new EventEmitter();
 
-  public varationsForm!: FormGroup;
+  public varationsForm!: UntypedFormGroup;
   public categories: Category[] = [];
 
-  constructor(private fb: FormBuilder, private categoryService: CategoryService) {}
+  private categoryService = inject(CategoryService);
+
+  constructor(private fb: UntypedFormBuilder) {}
 
   public ngOnInit(): void {
     this.setCategories();

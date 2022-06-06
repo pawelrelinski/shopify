@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MobileMenuService } from '@features/layout/services';
-import { AuthService } from '@core/services';
-import { Router } from '@angular/router';
+import { LayoutMobileMenuInjectors } from './layout-mobile-menu-injectors';
 
 @Component({
   selector: 'shopify-layout-mobile-menu',
   templateUrl: './layout-mobile-menu.component.html',
-  styleUrls: ['./layout-mobile-menu.component.scss'],
 })
-export class LayoutMobileMenuComponent implements OnInit {
+export class LayoutMobileMenuComponent extends LayoutMobileMenuInjectors implements OnInit {
   public isLoggedIn = false;
 
-  constructor(
-    private mobileMenuService: MobileMenuService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor() {
+    super();
+  }
 
   public ngOnInit(): void {
-    this.mobileMenuService.changeMenuState(false);
+    this.close();
     this.setIsLoggedIn();
   }
 

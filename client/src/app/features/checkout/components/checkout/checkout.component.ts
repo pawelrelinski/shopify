@@ -6,7 +6,6 @@ import { Checkout } from '@features/checkout/models';
 @Component({
   selector: 'shopify-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
   public shoppingCartItems!: ShoppingCartItem[];
@@ -21,7 +20,6 @@ export class CheckoutComponent implements OnInit {
 
   public setCheckoutData(checkoutData: Checkout): void {
     this.checkoutData = checkoutData;
-    console.log(this.checkoutData);
   }
 
   private setShippingCartItems(): void {

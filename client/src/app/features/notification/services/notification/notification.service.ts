@@ -6,7 +6,7 @@ import { NotificationData } from '@features/notification/models';
   providedIn: 'root',
 })
 export class NotificationService {
-  private _notifications: Subject<NotificationData> = new Subject<NotificationData>();
+  private _notifications = new Subject<NotificationData>();
   public readonly notifications = this._notifications.asObservable();
 
   public show(notification: NotificationData): void {

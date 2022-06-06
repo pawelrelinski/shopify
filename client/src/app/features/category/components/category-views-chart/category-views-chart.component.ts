@@ -6,7 +6,6 @@ import { Category } from '@features/category/models';
 @Component({
   selector: 'shopify-category-views-chart',
   templateUrl: './category-views-chart.component.html',
-  styleUrls: ['./category-views-chart.component.scss'],
 })
 export class CategoryViewsChartComponent implements OnInit {
   public formatCategoriesData!: { name: string; value: number }[];

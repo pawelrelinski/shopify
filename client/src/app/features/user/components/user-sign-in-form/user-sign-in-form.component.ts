@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services';
 import { LoginData, LoginResponse } from '@core/models';
 import { Router } from '@angular/router';
@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-sign-in-form.component.scss'],
 })
 export class UserSignInFormComponent implements OnInit {
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   public isError = false;
   public errorMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: UntypedFormBuilder, private authService: AuthService, private router: Router) {}
 
   public ngOnInit(): void {
     this.setForm();

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs/operators';
-
+import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '@features/product/services';
 import { map, Observable } from 'rxjs';
 
@@ -12,7 +10,7 @@ import { map, Observable } from 'rxjs';
 export class ProductAvailableWidgetComponent implements OnInit {
   public count$!: Observable<number>;
 
-  constructor(private productService: ProductService) {}
+  private productService = inject(ProductService);
 
   ngOnInit(): void {
     this.setProductsCount();
@@ -21,9 +19,6 @@ export class ProductAvailableWidgetComponent implements OnInit {
   private setProductsCount(): void {
     const options = new Map<string, string>();
 
-    this.count$ = this.productService.getCount(options).pipe(
-      take(1),
-      map((data: any) => data.count)
-    );
+    this.count$ = this.productService.getCount(options).pipe(map((data: any) => data.count));
   }
 }

@@ -1,7 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Checkout, DeliveryMethod } from '@features/checkout/models';
-import { Router } from '@angular/router';
+import {
+  ContactInformationForm,
+  DeliveryMethodForm,
+  PaymentDetailsForm,
+  ShippingAddressForm,
+} from '@features/checkout/components/checkout-form/checkout-form';
 
 @Component({
   selector: 'shopify-checkout-form',
@@ -10,12 +15,12 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckoutFormComponent implements OnInit {
-  @Output() onCheckoutData: EventEmitter<Checkout> = new EventEmitter<Checkout>();
+  @Output() onCheckoutData = new EventEmitter<Checkout>();
 
-  public shippingAddressGroup!: FormGroup;
-  public paymentDetailsGroup!: FormGroup;
-  public contactInformationGroup!: FormGroup;
-  public deliveryMethodGroup!: FormGroup;
+  public shippingAddressGroup!: FormGroup<ShippingAddressForm>;
+  public paymentDetailsGroup!: FormGroup<PaymentDetailsForm>;
+  public contactInformationGroup!: FormGroup<ContactInformationForm>;
+  public deliveryMethodGroup!: FormGroup<DeliveryMethodForm>;
 
   public checkoutData!: Checkout;
   public deliveryMethods: DeliveryMethod[] = [
@@ -23,7 +28,7 @@ export class CheckoutFormComponent implements OnInit {
     { name: 'Express', deliveryTime: '2-5', price: 16.0 },
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   public ngOnInit(): void {
     this.setShippingAddressGroup();
@@ -35,7 +40,6 @@ export class CheckoutFormComponent implements OnInit {
   public confirmCheckoutData(): void {
     this.setCheckoutData();
     this.onCheckoutData.emit(this.checkoutData);
-    // this.router.navigate(['']);
   }
 
   public setCheckoutData(): void {
@@ -112,19 +116,19 @@ export class CheckoutFormComponent implements OnInit {
   private getCheckoutData(): Checkout {
     return {
       shippingAddress: {
-        address: this.shippingAddressGroup.get('address')?.value,
-        city: this.shippingAddressGroup.get('city')?.value,
-        postalCode: this.shippingAddressGroup.get('postalCode')?.value,
-        flatNumber: this.shippingAddressGroup.get('flatNumber')?.value,
+        address: this.shippingAddressGroup.get('address')?.value as string,
+        city: this.shippingAddressGroup.get('city')?.value as string,
+        postalCode: this.shippingAddressGroup.get('postalCode')?.value as string,
+        flatNumber: this.shippingAddressGroup.get('flatNumber')?.value as string,
       },
       paymentDetails: {
-        cardNumber: this.paymentDetailsGroup.get('cardNumber')?.value,
-        expirationDate: this.paymentDetailsGroup.get('expirationDate')?.value,
-        cvv: this.paymentDetailsGroup.get('cvv')?.value,
+        cardNumber: this.paymentDetailsGroup.get('cardNumber')?.value as number,
+        expirationDate: this.paymentDetailsGroup.get('expirationDate')?.value as string,
+        cvv: this.paymentDetailsGroup.get('cvv')?.value as number,
       },
       contactInformation: {
-        email: this.contactInformationGroup.get('email')?.value,
-        phoneNumber: this.contactInformationGroup.get('phoneNumber')?.value,
+        email: this.contactInformationGroup.get('email')?.value as string,
+        phoneNumber: this.contactInformationGroup.get('phoneNumber')?.value as string,
       },
       deliveryMethod: {
         method: this.deliveryMethodGroup.get('method')?.value,

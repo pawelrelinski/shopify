@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services';
 import { RegisterData, RegisterResponse } from '@core/models';
 import { Router } from '@angular/router';
@@ -12,11 +12,11 @@ import { NotificationType } from '@features/notification/models';
   styleUrls: ['./user-sign-up-form.component.scss'],
 })
 export class UserSignUpFormComponent implements OnInit {
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   public isError = false;
   public errors: string[] = [];
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: UntypedFormBuilder, private authService: AuthService, private router: Router) {}
 
   public ngOnInit(): void {
     this.setForm();
@@ -60,7 +60,7 @@ export class UserSignUpFormComponent implements OnInit {
   }
 
   private confirmPasswordValidator(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       let control = formGroup.controls[controlName];
       let matchingControl = formGroup.controls[matchingControlName];
       if (matchingControl.errors && !matchingControl.errors.confirmPasswordValidator) {

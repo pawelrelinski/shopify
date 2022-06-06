@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ShippingMethod } from '@features/product/models';
@@ -12,12 +12,11 @@ import { ShippingMethod } from '@features/product/models';
 @Component({
   selector: 'shopify-product-create-form-group-shipping',
   templateUrl: './product-create-form-group-shipping.component.html',
-  styleUrls: ['./product-create-form-group-shipping.component.scss'],
 })
 export class ProductCreateFormGroupShippingComponent implements OnInit {
   @Output() onFormReady = new EventEmitter();
 
-  public shippingForm!: FormGroup;
+  public shippingForm!: UntypedFormGroup;
   public moreShippingMethodsOptionsIsShow = false;
   public readonly shippingMethods: ShippingMethod[] = [
     { name: 'Collection in person', value: 'collection-in-person' },
@@ -25,7 +24,7 @@ export class ProductCreateFormGroupShippingComponent implements OnInit {
     { name: 'Courier consignment', value: 'courier-consignment' },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   public ngOnInit(): void {
     this.setShippingForm();
@@ -41,12 +40,14 @@ export class ProductCreateFormGroupShippingComponent implements OnInit {
   }
 
   public onCheckboxChange(event: any): void {
-    const checkArray: FormArray = this.shippingForm.get('shippingMethods') as FormArray;
+    const checkArray: UntypedFormArray = this.shippingForm.get(
+      'shippingMethods'
+    ) as UntypedFormArray;
 
     if (event.target.checked) {
-      checkArray.push(new FormControl(event.target.value));
+      checkArray.push(new UntypedFormControl(event.target.value));
     } else {
-      let index: number = 0;
+      let index = 0;
       checkArray.controls.forEach((item: AbstractControl) => {
         if (item.value == event.target.value) {
           checkArray.removeAt(index);
