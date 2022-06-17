@@ -13,6 +13,7 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
@@ -29,7 +30,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
-import { MappedType } from '@nestjs/mapped-types';
+import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('products')
 @Controller('products')
@@ -60,6 +62,24 @@ export class ProductsController {
       status: HttpStatus.CREATED,
       message: 'Product has been created',
     };
+  }
+
+  @ApiOperation({ summary: 'Add image' })
+  @ApiCreatedResponse({
+    status: HttpStatus.CREATED,
+    description:
+      'Return object containing file metadata and access information.',
+  })
+  @ApiForbiddenResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource.',
+  })
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('image', localOptions))
+  public async addImage(
+    @UploadedFile() image: Express.Multer.File,
+  ): Promise<Express.Multer.File> {
+    return image;
   }
 
   @ApiOperation({ summary: 'Get all products' })
@@ -133,7 +153,7 @@ export class ProductsController {
       };
     }
 
-    return product;
+    return { product };
   }
 
   @ApiOperation({ summary: 'Update product by id' })
@@ -144,11 +164,12 @@ export class ProductsController {
   @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
   @UseInterceptors(ClassSerializerInterceptor)
   @Patch(':id')
-  public update(
+  public async update(
     @Param('id') id: Product['id'],
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    return this.productsService.update(id, updateProductDto);
+    const product = await this.productsService.update(id, updateProductDto);
+    return { product };
   }
 
   @ApiOperation({ summary: 'Delete product' })
@@ -159,7 +180,10 @@ export class ProductsController {
   @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
   @UseInterceptors(ClassSerializerInterceptor)
   @Delete(':id')
-  public remove(@Param('id') id: Product['id']) {
-    return this.productsService.remove(id);
+  public async remove(@Param('id') id: Product['id']) {
+    await this.productsService.remove(id);
+    return {
+      message: 'The product has been successfully deleted.',
+    };
   }
 }

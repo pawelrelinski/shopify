@@ -102,6 +102,11 @@ export class Product extends Base {
 
   @Column({
     nullable: true,
+  })
+  image_path: string;
+
+  @Column({
+    nullable: true,
     comment: 'A blocked product will not list on a marketplace.',
   })
   is_blocked: boolean;

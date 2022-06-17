@@ -1,16 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import {
-  Brackets,
-  DataSource,
-  getConnection,
-  getRepository,
-  Repository,
-} from 'typeorm';
-import { MappedType } from '@nestjs/mapped-types';
+import { Brackets, DataSource, Repository } from 'typeorm';
 import { ProductView } from './entities/productView.entity';
 import { CategoriesService } from './categories.service';
 import { ProductAttribute } from './entities/productAttribute.entity';
@@ -18,6 +11,8 @@ import { Category } from './entities/category.entity';
 
 @Injectable()
 export class ProductsService {
+  private readonly BASE_URL = process.env.BASE_URL;
+
   constructor(
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
@@ -31,7 +26,9 @@ export class ProductsService {
     private dataSource: DataSource,
   ) {}
 
-  public async create(createProductDto: CreateProductDto) {
+  public async create(
+    createProductDto: CreateProductDto,
+  ): Promise<Product | { message: string }> {
     const { name, default_price, category_id } = createProductDto;
     const category = await this.categoriesService.findById(category_id);
     if (!category) {
@@ -70,18 +67,21 @@ export class ProductsService {
 
     const sort = `product.${query.sortBy}`;
     const order = query.sortMethod.toUpperCase();
-    qb.orderBy(sort, order);
 
-    qb.take(query.limit);
-    qb.skip(query.offset);
+    qb.orderBy(sort, order).take(query.limit).skip(query.offset);
 
-    qb.printSql();
-    return await qb.getMany();
+    const products = await qb.getMany();
+
+    products.forEach((product) => {
+      product.image_path = `${this.BASE_URL}/${product.image_path}`;
+    });
+
+    return products;
   }
 
   public async findOneById(id: Product['id']): Promise<Product | null> {
     const options = {
-      where: { id },
+      where: { id, is_deleted: false },
       relations: ['category', 'views', 'attributes'],
     };
     let product = await this.productsRepository.findOne(options);
@@ -97,11 +97,24 @@ export class ProductsService {
     return await this.productsRepository.findOne(options);
   }
 
-  public update(id: Product['id'], updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  public async update(
+    id: Product['id'],
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product & UpdateProductDto> {
+    const options = {
+      where: { id },
+    };
+    const product = await this.productsRepository.findOne(options);
+    const toUpdate = Object.assign(product, updateProductDto);
+    return await this.productsRepository.save(toUpdate);
   }
 
-  public remove(id: Product['id']) {
-    return `This action removes a #${id} product`;
+  public async remove(id: Product['id']): Promise<Product> {
+    const options = {
+      where: { id },
+    };
+    const product = await this.productsRepository.findOne(options);
+    product.is_deleted = true;
+    return await this.productsRepository.save(product);
   }
 }
