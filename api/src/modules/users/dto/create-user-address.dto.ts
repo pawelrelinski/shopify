@@ -1,8 +1,22 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { User } from '../entities/user.entity';
+
 export class CreateUserAddressDto {
-  country?: string;
-  city?: string;
-  postal_code?: string;
-  street_name?: string;
-  house_number?: string;
-  user?: string;
+  @ApiProperty()
+  country: string;
+
+  @ApiProperty()
+  city: string;
+
+  @ApiProperty()
+  postal_code: string;
+
+  @ApiProperty()
+  street_name: string;
+
+  @ApiProperty()
+  house_number: string;
+
+  @ApiProperty()
+  user: User;
 }

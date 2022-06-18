@@ -159,7 +159,7 @@ export class ProductsController {
   @ApiOperation({ summary: 'Update product by id' })
   @ApiCreatedResponse({
     status: 201,
-    description: 'The article has been successfully updated.',
+    description: 'The product has been successfully updated.',
   })
   @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
   @UseInterceptors(ClassSerializerInterceptor)

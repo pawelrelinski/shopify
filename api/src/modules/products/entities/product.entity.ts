@@ -1,9 +1,9 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Base } from '../../../core/entities/base.entity';
-import { ProductView } from './productView.entity';
+import { ProductView } from './product-view.entity';
 import { Exclude } from 'class-transformer';
 import { Category } from './category.entity';
-import { ProductAttribute } from './productAttribute.entity';
+import { ProductAttribute } from './product-attribute.entity';
 
 @Entity()
 export class Product extends Base {

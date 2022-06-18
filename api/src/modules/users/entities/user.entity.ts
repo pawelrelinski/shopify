@@ -29,6 +29,11 @@ export class User extends Base {
   })
   phone_number: string;
 
+  @Column({
+    default: false,
+  })
+  is_deleted: boolean;
+
   @OneToMany(() => UserAddress, (userAddress) => userAddress.user)
   address: UserAddress[];
 }

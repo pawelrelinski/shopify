@@ -29,6 +29,11 @@ export class UserAddress extends Base {
   })
   house_number: string;
 
+  @Column({
+    default: false,
+  })
+  is_deleted: boolean;
+
   @ManyToOne(() => User, (user) => user.address)
   user: User;
 }
