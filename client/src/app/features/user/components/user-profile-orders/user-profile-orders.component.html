@@ -1,1 +1,11 @@
-<p>customer-profile-orders works!</p>
+<shopify-user-profile-orders-tabs></shopify-user-profile-orders-tabs>
+<div class='bg-white overflow-hidden mt-5'>
+  <div [ngSwitch]='currentSelectedTab'>
+    <shopify-user-profile-orders-active *ngSwitchCase="'active'"
+                                        [@enterTrigger]="'fadeIn'">
+    </shopify-user-profile-orders-active>
+    <shopify-user-profile-orders-history *ngSwitchCase="'history'"
+                                         [@enterTrigger]="'fadeIn'">
+    </shopify-user-profile-orders-history>
+  </div>
+</div>

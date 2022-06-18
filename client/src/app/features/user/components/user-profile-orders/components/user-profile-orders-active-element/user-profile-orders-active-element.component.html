@@ -28,6 +28,32 @@
     </a>
   </div>
 
+  <nav aria-label="Progress" class="mt-2">
+    <ol role="list" class="space-y-4 md:flex md:space-y-0 md:space-x-8">
+      <li class="md:flex-1">
+        <a href="#" class="group pl-4 py-2 flex flex-col border-l-4 border-green-600 hover:border-green-800 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4">
+          <span class="text-xs text-green-600 font-semibold tracking-wide uppercase group-hover:text-green-800">Step 1</span>
+          <span class="text-sm font-medium">Pending</span>
+        </a>
+      </li>
+
+      <li class="md:flex-1">
+        <a href="#" class="pl-4 py-2 flex flex-col border-l-4 border-green-600 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4" aria-current="step">
+          <span class="text-xs text-green-600 font-semibold tracking-wide uppercase">Step 2</span>
+          <span class="text-sm font-medium">Processing</span>
+        </a>
+      </li>
+
+      <li class="md:flex-1">
+        <a href="#" class="group pl-4 py-2 flex flex-col border-l-4 border-gray-200 hover:border-gray-300 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4">
+          <span class="text-xs text-gray-500 font-semibold tracking-wide uppercase group-hover:text-gray-700">Step 3</span>
+          <span class="text-sm font-medium">Submitted</span>
+        </a>
+      </li>
+    </ol>
+  </nav>
+
+
   <button (click)='toggleProductsList()' type="button" class="inline-flex items-center px-4 py-2 mt-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
     {{ productsListIsVisible ? 'Hide' : 'Show' }} products
   </button>
