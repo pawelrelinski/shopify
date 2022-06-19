@@ -1,4 +1,5 @@
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -9,10 +10,10 @@ import {
 } from '@nestjs/swagger';
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { CreateProductDto } from './dto/create-product.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { MappedType } from '@nestjs/mapped-types';
 import { Category } from './entities/category.entity';
+import { Public } from '../auth/public.decorator';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -20,6 +21,7 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @ApiOperation({ summary: 'Create category' })
+  @ApiBearerAuth()
   @ApiBody({
     type: CreateCategoryDto,
     required: true,
@@ -49,6 +51,7 @@ export class CategoriesController {
     status: HttpStatus.OK,
     description: 'Return all categories.',
   })
+  @Public()
   @Get()
   public async findAll() {
     const categories = await this.categoriesService.findAll();
@@ -64,6 +67,7 @@ export class CategoriesController {
     status: HttpStatus.OK,
     description: 'Return category',
   })
+  @Public()
   @Get(':id')
   public findOne(@Param('id') id: Category['id']) {
     return this.categoriesService.findById(id);

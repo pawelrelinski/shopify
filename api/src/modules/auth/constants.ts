@@ -1,3 +1,3 @@
 export const JWT_CONSTANTS = {
-  secret: 'secretKey',
+  secret: 'angular-secret-key',
 };

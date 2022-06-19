@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -30,6 +31,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @ApiOperation({ summary: 'Create user' })
+  @ApiBearerAuth()
   @ApiBody({
     type: CreateUserDto,
     required: true,
@@ -53,6 +55,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Get all users' })
+  @ApiBearerAuth()
   @ApiOkResponse({ status: HttpStatus.OK, description: 'Return all users.' })
   @Get()
   public async findAll() {
@@ -64,6 +67,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Get user by id' })
+  @ApiBearerAuth()
   @ApiQuery({ name: 'email', type: String, required: false })
   @ApiQuery({ name: 'email', type: String, required: false })
   @ApiNotFoundResponse({
@@ -96,6 +100,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Update user by id' })
+  @ApiBearerAuth()
   @ApiBody({
     type: UpdateUserDto,
     required: true,
@@ -115,6 +120,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Delete user' })
+  @ApiBearerAuth()
   @ApiOkResponse({
     status: 201,
     description: 'The user has been successfully deleted.',

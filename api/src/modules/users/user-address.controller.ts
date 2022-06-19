@@ -1,4 +1,5 @@
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -27,6 +28,7 @@ export class UserAddressController {
   constructor(private readonly userAddressService: UserAddressService) {}
 
   @ApiOperation({ summary: 'Create user address' })
+  @ApiBearerAuth()
   @ApiBody({
     type: CreateUserAddressDto,
     required: true,
@@ -52,6 +54,7 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Get all user addresses' })
+  @ApiBearerAuth()
   @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'Return all user addresses.',
@@ -66,6 +69,7 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Get user address by id' })
+  @ApiBearerAuth()
   @ApiOkResponse({ status: HttpStatus.OK, description: 'Return user address.' })
   @ApiNotFoundResponse({
     status: HttpStatus.NOT_FOUND,
@@ -87,6 +91,7 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Get user address by user id' })
+  @ApiBearerAuth()
   @ApiOkResponse({ status: HttpStatus.OK, description: 'Return user address.' })
   @ApiNotFoundResponse({
     status: HttpStatus.NOT_FOUND,
@@ -108,6 +113,7 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Update user address by id' })
+  @ApiBearerAuth()
   @ApiBody({
     type: UpdateUserAddressDto,
     required: true,
@@ -138,6 +144,7 @@ export class UserAddressController {
   }
 
   @ApiOperation({ summary: 'Delete user address by id' })
+  @ApiBearerAuth()
   @ApiOkResponse({
     status: HttpStatus.OK,
     description: 'User address has been deleted.',

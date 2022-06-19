@@ -20,6 +20,7 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -32,6 +33,7 @@ import {
 import { Product } from './entities/product.entity';
 import { options as localOptions } from '../../utils/fileInterceptorLocalOptions';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Public } from '../auth/public.decorator';
 
 @ApiTags('products')
 @Controller('products')
@@ -39,6 +41,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @ApiOperation({ summary: 'Create product' })
+  @ApiBearerAuth()
   @ApiBody({
     type: CreateProductDto,
     required: true,
@@ -65,6 +68,7 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Add image' })
+  @ApiBearerAuth()
   @ApiCreatedResponse({
     status: HttpStatus.CREATED,
     description:
@@ -106,6 +110,7 @@ export class ProductsController {
   })
   @ApiQuery({ name: 'limit', type: 'number', required: false })
   @ApiQuery({ name: 'offset', type: 'number', required: false })
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   public async findAll(
@@ -142,6 +147,7 @@ export class ProductsController {
     status: HttpStatus.OK,
     description: 'Return product',
   })
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   public async findOne(@Param('id') id: Product['id']) {
@@ -157,6 +163,7 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Update product by id' })
+  @ApiBearerAuth()
   @ApiCreatedResponse({
     status: 201,
     description: 'The product has been successfully updated.',
@@ -173,6 +180,7 @@ export class ProductsController {
   }
 
   @ApiOperation({ summary: 'Delete product' })
+  @ApiBearerAuth()
   @ApiOkResponse({
     status: 201,
     description: 'The product has been successfully deleted.',
