@@ -6,6 +6,11 @@
 </div>
 
 <ng-template #checkout>
-  <shopify-checkout-items-list [items]="shoppingCartItems"> </shopify-checkout-items-list>
-  <shopify-checkout-form (onCheckoutData)="setCheckoutData($event)"> </shopify-checkout-form>
+  <div class="w-full bg-white">
+    <main class="lg:min-h-screen lg:overflow-hidden lg:flex lg:flex-row-reverse">
+      <h1 class="sr-only">Checkout</h1>
+      <shopify-checkout-items-list [items]="shoppingCartItems"> </shopify-checkout-items-list>
+      <shopify-checkout-form (onCheckoutData)="setCheckoutData($event)"> </shopify-checkout-form>
+    </main>
+  </div>
 </ng-template>

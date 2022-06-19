@@ -1,92 +1,134 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
-import { Category } from '@modules/categories/entities/category.entity';
-import { ProductView } from '@modules/products/entities/product-view.entity';
-import { ProductAttributes } from '@modules/products/entities/product-attributes.entity';
-import { BaseEntity } from '@core/entities/base-entity';
+import { Base } from '../../../core/entities/base.entity';
+import { ProductView } from './product-view.entity';
+import { Exclude } from 'class-transformer';
+import { Category } from './category.entity';
+import { ProductAttribute } from './product-attribute.entity';
 
 @Entity()
-export class Product extends BaseEntity {
-  @Column({
-    type: 'varchar',
-    length: 100,
-  })
-  public name: string;
-
-  @Column('text')
-  public shortDescription: string;
-
-  @Column('text')
-  public description: string;
-
-  @Column({
-    type: 'decimal',
-    precision: 9,
-    scale: 2,
-  })
-  public defaultPrice: number;
-
+export class Product extends Base {
   @Column()
-  public image: string;
+  name: string;
 
   @Column({
-    type: 'decimal',
-    precision: 9,
-    scale: 2,
-    default: 0,
+    type: 'money',
+  })
+  default_price: number;
+
+  @Column({
+    nullable: true,
+    type: 'money',
+  })
+  promotional_price: number;
+
+  @Column({
+    nullable: true,
+    comment: 'The date the product was received in inventory.',
+  })
+  received_date: Date;
+
+  @Column({
+    nullable: true,
+    comment: 'The date the product was last sold.',
+  })
+  last_sale_date: Date;
+
+  @Column({
+    nullable: true,
+    comment: 'The date any quantity of the product was last updated.',
+  })
+  quantity_update_date: Date;
+
+  @Column({
     nullable: true,
   })
-  public promotionPrice: number;
+  description: string;
 
   @Column({
-    default: true,
+    nullable: true,
   })
-  public isAvailable: boolean;
-
-  @ManyToOne(() => Category, (category: Category) => category)
-  public category: Category;
-
-  @Column()
-  public quantity: number;
-
-  @Column()
-  public producer: string;
+  short_description: string;
 
   @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    type: 'timestamp',
+    nullable: true,
+    comment: 'Universal Product Code',
   })
-  public createdAt: string;
-
-  @Column()
-  public expectedDeliveryTime: number;
-
-  @Column()
-  public refNumber: string;
-
-  @Column('json')
-  public dataSheet: string;
-
-  @OneToMany(
-    () => ProductAttributes,
-    (attributes: ProductAttributes) => attributes.product,
-  )
-  @JoinColumn()
-  public attributes: ProductAttributes[];
-
-  @OneToMany(() => ProductView, (view: ProductView) => view.product)
-  @JoinColumn()
-  public views: ProductView[];
+  upc: string;
 
   @Column({
-    default: true,
+    nullable: true,
   })
-  public isPublished: boolean;
+  warehouse_location: string;
 
-  @Column('json')
-  public shippingMethods: string;
+  @Column({
+    nullable: true,
+    comment: 'Default unit is centimeters',
+    type: 'decimal',
+  })
+  height: number;
+
+  @Column({
+    nullable: true,
+    comment: 'Default unit is centimeters',
+    type: 'decimal',
+  })
+  width: number;
+
+  @Column({
+    nullable: true,
+    comment: 'Default unit is centimeters',
+    type: 'decimal',
+  })
+  depth: number;
+
+  @Column({
+    nullable: true,
+    comment: 'Default unit is kilograms',
+    type: 'decimal',
+  })
+  weight: number;
+
+  @Column({
+    nullable: true,
+    type: 'int',
+  })
+  quantity: number;
+
+  @Column({
+    nullable: true,
+    type: 'int',
+  })
+  available_quantity: number;
+
+  @Column({
+    nullable: true,
+  })
+  image_path: string;
+
+  @Column({
+    nullable: true,
+    comment: 'A blocked product will not list on a marketplace.',
+  })
+  is_blocked: boolean;
 
   @Column({
     default: false,
   })
-  public isDeleted: boolean;
+  @Exclude()
+  is_deleted: boolean;
+
+  @OneToMany(() => ProductView, (productView) => productView.product)
+  views: ProductView[];
+
+  @ManyToOne(() => Category, (category) => category)
+  category: Category;
+
+  @OneToMany(() => ProductAttribute, (attribute) => attribute.product)
+  @JoinColumn()
+  attributes: ProductAttribute[];
+
+  constructor(partial?: Partial<Product>) {
+    super();
+    Object.assign(this, partial);
+  }
 }

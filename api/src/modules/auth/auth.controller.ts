@@ -1,61 +1,41 @@
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
-  HttpException,
-  HttpStatus,
+  Get,
   Post,
+  Request,
+  UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
-import { AuthService } from '@modules/auth/auth.service';
-import { CreateUserDto } from '@modules/users/dto/create-user.dto';
-import { RegistrationStatus } from '@modules/auth/dto/registration-status';
-import { LoginUserDto } from '@modules/users/dto/login-user.dto';
-import { LoginStatus } from '@modules/auth/dto/login-status';
-import {
-  ApiBody,
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-} from '@nestjs/swagger';
+import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { Public } from './public.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  @ApiOperation({ summary: 'Register' })
-  @ApiBody({
-    type: CreateUserDto,
-    required: true,
-  })
-  @ApiCreatedResponse({
-    status: HttpStatus.CREATED,
-    description: 'User has been successfully created.',
-  })
-  @Post('register')
-  public async register(
-    @Body() createUserDto: CreateUserDto,
-  ): Promise<RegistrationStatus> {
-    const result: RegistrationStatus = await this.authService.register(
-      createUserDto,
+  @ApiOperation({ summary: 'Login to service.' })
+  @Public()
+  @Post('login')
+  public async login(@Body('user') user: any) {
+    const validatedUser = await this.authService.validateUser(
+      user.email,
+      user.password,
     );
-    if (!result.success) {
-      throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+
+    if (!validatedUser) {
+      throw new UnauthorizedException();
     }
-    return result;
+    return this.authService.login(user);
   }
 
-  @ApiOperation({ summary: 'Login' })
-  @ApiBody({
-    type: LoginUserDto,
-    required: true,
-  })
-  @ApiOkResponse({
-    status: HttpStatus.OK,
-    description: 'User has been successfully login',
-  })
-  @Post('login')
-  public async login(@Body() loginUserDto: LoginUserDto): Promise<LoginStatus> {
-    return await this.authService.login(loginUserDto);
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }

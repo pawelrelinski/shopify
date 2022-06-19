@@ -1,83 +1,62 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { User } from '@modules/users/entities/user.entity';
-import { UserDto } from '@modules/users/dto/user.dto';
-import { LoginUserDto } from '@modules/users/dto/login-user.dto';
-import { CreateUserDto } from '@modules/users/dto/create-user.dto';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
-  public findAll(): Promise<User[]> {
+  public create(createUserDto: CreateUserDto) {
+    return this.userRepository.save(createUserDto);
+  }
+
+  public findAll() {
     return this.userRepository.find();
   }
 
-  public findOne(options: FindOneOptions<User>): Promise<UserDto> {
+  public findOneById(id: User['id']) {
+    const options = {
+      where: { id },
+    };
     return this.userRepository.findOne(options);
   }
 
-  public findOneById(id: User['id']): Promise<User> {
-    return this.userRepository.findOne(id);
-  }
-
-  public async findOneByIdAndUpdate(
-    id: User['id'],
-    attributeName: string,
-    attributeValue: string,
-  ): Promise<User> {
-    const user: User = await this.userRepository.findOne(id);
-    user[attributeName] = attributeValue;
-    return this.userRepository.save(user);
-  }
-
-  public async findByEmail({
-    email,
-    password,
-  }: LoginUserDto): Promise<UserDto> {
-    const user: User = await this.userRepository.findOne({
+  public findOneByEmail(email: User['email']) {
+    const options = {
       where: { email },
-    });
+    };
+    return this.userRepository.findOne(options);
+  }
 
+  public async update(id: User['id'], updateUserDto: UpdateUserDto) {
+    const options = {
+      where: { id },
+    };
+    const user = await this.userRepository.findOne(options);
     if (!user) {
-      throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+      return null;
     }
 
-    const areEqual = await bcrypt.compare(password, user.password);
+    const toUpdate = Object.assign(user, updateUserDto);
+    return await this.userRepository.save(toUpdate);
+  }
 
-    if (!areEqual) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+  public async remove(id: User['id']) {
+    const options = {
+      where: { id },
+    };
+    const user = await this.userRepository.findOne(options);
+    if (!user) {
+      return null;
     }
 
-    return user as UserDto;
-  }
-
-  public async findByPayload(payload: any): Promise<UserDto> {
-    const { email } = payload;
-    return await this.userRepository.findOne({
-      where: { email },
-    });
-  }
-
-  public count(): Promise<number> {
-    return this.userRepository.count();
-  }
-
-  public async create(userDto: CreateUserDto): Promise<UserDto> {
-    const { email, password } = userDto;
-    const userInDb = await this.userRepository.findOne({
-      where: { email },
-    });
-
-    if (userInDb) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
-    }
-
-    const user: User = await this.userRepository.create(userDto);
-    return (await this.userRepository.save(user)) as UserDto;
+    const toRemove = Object.assign(user, { is_deleted: true });
+    return await this.userRepository.save(toRemove);
   }
 }

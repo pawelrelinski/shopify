@@ -6,8 +6,6 @@ import {
   UserProfileFavouritesComponent,
   UserProfileOrdersComponent,
   UserProfileReportingTilesComponent,
-  UserProfileSettingsComponent,
-  UserProfileSettingsEditFirstNameDialogComponent,
   UserSignInFormComponent,
   UserSignUpFormComponent,
   UserTableComponent,
@@ -20,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopifyPaginationModule } from '@shared/shopify-pagination/shopify-pagination.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShopifyErrorModule } from '@shared/shopify-error/shopify-error.module';
+import { UserProfileSettingsModule } from '@features/user/components/user-profile-settings/user-profile-settings.module';
 
 @NgModule({
   declarations: [
@@ -29,8 +28,6 @@ import { ShopifyErrorModule } from '@shared/shopify-error/shopify-error.module';
     UserProfileReportingTilesComponent,
     UserProfileOrdersComponent,
     UserProfileFavouritesComponent,
-    UserProfileSettingsComponent,
-    UserProfileSettingsEditFirstNameDialogComponent,
     UserTableComponent,
     UserTableRowComponent,
     UserCountWidgetComponent,
@@ -45,6 +42,7 @@ import { ShopifyErrorModule } from '@shared/shopify-error/shopify-error.module';
     MatTooltipModule,
     MatProgressSpinnerModule,
     ShopifyErrorModule,
+    UserProfileSettingsModule,
   ],
   exports: [
     UserSignInFormComponent,
@@ -52,9 +50,9 @@ import { ShopifyErrorModule } from '@shared/shopify-error/shopify-error.module';
     UserProfileComponent,
     UserProfileOrdersComponent,
     UserProfileFavouritesComponent,
-    UserProfileSettingsComponent,
     UserTableComponent,
     UserCountWidgetComponent,
+    UserProfileSettingsModule,
   ],
 })
 export class UserModule {}

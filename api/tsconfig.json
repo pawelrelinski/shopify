@@ -10,13 +10,6 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "paths": {
-      "@core/*": ["src/core/*"],
-      "@config/*": ["src/config/*"],
-      "@models/*": ["src/models/*"],
-      "@modules/*": ["src/modules/*"],
-      "@utils/*": ["src/utils/*"],
-    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

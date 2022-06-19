@@ -1,32 +1,98 @@
-<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-  <div class="inline-block min-w-full rounded-lg overflow-hidden">
-    <table class="min-w-full leading-normal">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            class="px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal"
-          >
-            Product
-          </th>
-          <th
-            scope="col"
-            class="px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal"
-          >
-            Price
-          </th>
-          <th
-            scope="col"
-            class="px-5 py-3 bg-white border-b border-gray-200 text-gray-500 text-left text-sm font-normal"
-          >
-            Quantity
-          </th>
-        </tr>
-      </thead>
-      <tbody>
+<section aria-labelledby="order-heading" class="bg-gray-50 px-4 py-6 sm:px-6 lg:hidden">
+  <div class="max-w-lg mx-auto">
+    <div class="flex items-center justify-between">
+      <h2 id="order-heading" class="text-lg font-medium text-gray-900">Your Order</h2>
+      <button type="button" class="font-medium text-green-600 hover:text-green-500" aria-controls="disclosure-1" aria-expanded="false">
+        <span *ngIf='fullSummaryIsOpen' (click)='toggleFullSummary()'>Hide full summary</span>
+        <span *ngIf='!fullSummaryIsOpen' (click)='toggleFullSummary()'>Show full summary</span>
+      </button>
+    </div>
+
+    <div id="disclosure-1">
+      <ul *ngIf='fullSummaryIsOpen' role="list" class="divide-y divide-gray-200 border-b border-gray-200">
         <shopify-checkout-items-list-element *ngFor="let item of items" [item]="item">
         </shopify-checkout-items-list-element>
-      </tbody>
-    </table>
+      </ul>
+
+      <form class="mt-10">
+        <label for="discount-code-mobile" class="block text-sm font-medium text-gray-700">Discount code</label>
+        <div class="flex space-x-4 mt-1">
+          <input type="text" id="discount-code-mobile" name="discount-code-mobile" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <button type="submit" class="bg-gray-200 text-sm font-medium text-gray-600 rounded-md px-4 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Apply</button>
+        </div>
+      </form>
+
+      <dl class="text-sm font-medium text-gray-500 mt-10 space-y-6">
+        <div class="flex justify-between">
+          <dt>Subtotal</dt>
+          <dd class="text-gray-900">$210.00</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="flex">
+            Discount
+            <span class="ml-2 rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 tracking-wide">CHEAPSKATE</span>
+          </dt>
+          <dd class="text-gray-900">-$24.00</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt>Taxes</dt>
+          <dd class="text-gray-900">$23.68</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt>Shipping</dt>
+          <dd class="text-gray-900">$22.00</dd>
+        </div>
+      </dl>
+    </div>
+
+    <p class="flex items-center justify-between text-sm font-medium text-gray-900 border-t border-gray-200 pt-6 mt-6">
+      <span class="text-base">Total</span>
+      <span class="text-base">$341.68</span>
+    </p>
   </div>
-</div>
+</section>
+
+<section aria-labelledby="summary-heading" class="hidden bg-gray-50 w-full max-w-md flex-col lg:flex">
+  <h2 id="summary-heading" class="sr-only">Order summary</h2>
+
+  <ul role="list" class="flex-auto overflow-y-auto divide-y divide-gray-200 px-6">
+    <shopify-checkout-items-list-element *ngFor="let item of items" [item]="item">
+    </shopify-checkout-items-list-element>
+  </ul>
+
+  <div class="sticky bottom-0 flex-none bg-gray-50 border-t border-gray-200 p-6">
+    <form>
+      <label for="discount-code" class="block text-sm font-medium text-gray-700">Discount code</label>
+      <div class="flex space-x-4 mt-1">
+        <input type="text" id="discount-code" name="discount-code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <button type="submit" class="bg-gray-200 text-sm font-medium text-gray-600 rounded-md px-4 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Apply</button>
+      </div>
+    </form>
+
+    <dl class="text-sm font-medium text-gray-500 mt-10 space-y-6">
+      <div class="flex justify-between">
+        <dt>Subtotal</dt>
+        <dd class="text-gray-900">$210.00</dd>
+      </div>
+      <div class="flex justify-between">
+        <dt class="flex">
+          Discount
+          <span class="ml-2 rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 tracking-wide">CHEAPSKATE</span>
+        </dt>
+        <dd class="text-gray-900">-$24.00</dd>
+      </div>
+      <div class="flex justify-between">
+        <dt>Taxes</dt>
+        <dd class="text-gray-900">$23.68</dd>
+      </div>
+      <div class="flex justify-between">
+        <dt>Shipping</dt>
+        <dd class="text-gray-900">$22.00</dd>
+      </div>
+      <div class="flex items-center justify-between border-t border-gray-200 text-gray-900 pt-6">
+        <dt class="text-base">Total</dt>
+        <dd class="text-base">$341.68</dd>
+      </div>
+    </dl>
+  </div>
+</section>

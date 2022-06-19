@@ -1,43 +1,61 @@
 import { Injectable } from '@nestjs/common';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from '@modules/products/entities/product.entity';
-import {
-  Brackets,
-  DeepPartial,
-  FindOneOptions,
-  getRepository,
-  Repository,
-} from 'typeorm';
-import { CreateProductDto } from '@modules/products/dto/create-product.dto';
-import { Category } from '@modules/categories/entities/category.entity';
-import { CategoriesService } from '@modules/categories/categories.service';
-import { ProductView } from '@modules/products/entities/product-view.entity';
-import { CategoryViewService } from '@modules/categories/category-view.service';
-import { ProductAttributes } from '@modules/products/entities/product-attributes.entity';
+import { Product } from './entities/product.entity';
+import { Brackets, DataSource, Repository } from 'typeorm';
+import { ProductView } from './entities/product-view.entity';
+import { CategoriesService } from './categories.service';
+import { ProductAttribute } from './entities/product-attribute.entity';
+import { Category } from './entities/category.entity';
 
 @Injectable()
 export class ProductsService {
-  private uploadsUrl = `http://${process.env.HOST_ADDRESS}:${process.env.SERVER_PORT}/${process.env.UPLOADS_DIRECTORY}/`;
+  private readonly BASE_URL = process.env.BASE_URL;
 
   constructor(
     @InjectRepository(Product)
-    private readonly productsRepository: Repository<Product>,
+    private productsRepository: Repository<Product>,
     @InjectRepository(ProductView)
-    private readonly viewsRepository: Repository<ProductView>,
-    @InjectRepository(ProductAttributes)
-    private readonly productAttributesRepository: Repository<ProductAttributes>,
+    private productViewsRepository: Repository<ProductView>,
+    @InjectRepository(ProductAttribute)
+    private productAttributeRepository: Repository<ProductAttribute>,
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
     private readonly categoriesService: CategoriesService,
-    private readonly categoryViewService: CategoryViewService,
+    private dataSource: DataSource,
   ) {}
 
-  public async findAll(query): Promise<Product[]> {
-    const qb = await getRepository(Product)
+  public async create(
+    createProductDto: CreateProductDto,
+  ): Promise<Product | { message: string }> {
+    const { name, default_price, category_id } = createProductDto;
+    const category = await this.categoriesService.findById(category_id);
+    if (!category) {
+      return {
+        message: 'Invalid category id',
+      };
+    }
+
+    let product: Product = new Product();
+    product.category = category;
+    product.name = name;
+    product.default_price = default_price;
+
+    return await this.productsRepository.save(product);
+  }
+
+  public async findAll(query: any): Promise<Product[]> {
+    const qb = await this.dataSource
+      .getRepository(Product)
       .createQueryBuilder('product')
-      .innerJoinAndSelect('product.category', 'category')
-      .where('product.isDeleted=0');
+      .leftJoinAndSelect('product.attributes', 'attributes')
+      .leftJoinAndSelect('product.views', 'views')
+      .leftJoinAndSelect('product.category', 'category')
+      .where('product.is_deleted = :isDeleted', { isDeleted: false });
 
     if ('category' in query) {
-      const category: Category = await this.categoriesService.findByFormatName(
+      const category = await this.categoriesService.findByFormatName(
         query.category,
       );
       qb.andWhere(
@@ -45,146 +63,58 @@ export class ProductsService {
           qb.where('product.category = :id', { id: category.id });
         }),
       );
-      await this.categoryViewService.addToCategory(category);
     }
 
     const sort = `product.${query.sortBy}`;
-    const order: 'ASC' | 'DESC' = query.sortMethod.toUpperCase();
-    qb.orderBy(sort, order);
+    const order = query.sortMethod.toUpperCase();
 
-    qb.limit(query.limit);
-    qb.offset(query.offset * query.limit);
+    qb.orderBy(sort, order).take(query.limit).skip(query.offset);
 
     const products = await qb.getMany();
-    products.forEach((product: Product) => {
-      product.image = `${this.uploadsUrl}${product.image}`;
-    });
 
-    for (const product of products) {
-      const productAttributesQb = await getRepository(ProductAttributes)
-        .createQueryBuilder('attribute')
-        .where('attribute.productId = :id', { id: product.id });
-      product.attributes = await productAttributesQb.getMany();
-    }
+    products.forEach((product) => {
+      product.image_path = `${this.BASE_URL}/${product.image_path}`;
+    });
 
     return products;
   }
 
-  public async findMostPopularFromLastDays(query?: any): Promise<any> {
-    const qb = await getRepository(Product)
-      .createQueryBuilder('product')
-      .innerJoinAndSelect('product.views', 'product_views')
-      .select('product.id', 'productId')
-      .addSelect('product.name', 'productName')
-      .addSelect('product.image', 'productImage')
-      .addSelect('product.categoryId')
-      .addSelect('SUM(product_views.value)', 'productViews')
-      .where(
-        'product_views.createdAt > DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 7 DAY)',
-      )
-      .andWhere('product.isDeleted = 0');
-
-    if ('category' in query) {
-      const category: Category = await this.categoriesService.findByFormatName(
-        query.category,
-      );
-      qb.andWhere(
-        new Brackets((qb) => {
-          qb.where('product.category = :id', { id: category.id });
-        }),
-      );
-    }
-
-    if ('limit' in query) {
-      qb.limit(query.limit);
-    }
-
-    if ('offset' in query) {
-      const offset: number =
-        'limit' in query ? query.limit * query.offset : query.offset;
-      qb.offset(offset);
-    }
-
-    qb.groupBy('product.id');
-
-    let order: 'ASC' | 'DESC' = 'DESC';
-    if ('order' in query) {
-      order = query.order.toUpperCase();
-      qb.orderBy('productViews', order);
-    }
-    qb.orderBy('productViews', order);
-    return await qb.getRawMany();
-  }
-
-  public async findOne(id: string): Promise<Product | null> {
-    const options: FindOneOptions<Product> = {
-      where: { id, isDeleted: false },
+  public async findOneById(id: Product['id']): Promise<Product | null> {
+    const options = {
+      where: { id, is_deleted: false },
       relations: ['category', 'views', 'attributes'],
     };
-    const product = await this.productsRepository.findOne(options);
+    let product = await this.productsRepository.findOne(options);
+
     if (!product) {
       return null;
     }
-    const category = await this.categoriesService.findById(product.category.id);
-    await this.categoryViewService.addToCategory(category);
 
-    const view = new ProductView();
-    view.product = product;
-    await this.viewsRepository.save(view);
+    const productView = new ProductView();
+    productView.product = product;
+    await this.productViewsRepository.save(productView);
 
-    return this.productsRepository.findOne(options);
+    return await this.productsRepository.findOne(options);
   }
 
-  public async count(category?: string): Promise<number> {
-    const wereOptions = { isDeleted: false };
-    if (category) {
-      const categoryEntity: Category =
-        await this.categoriesService.findByFormatName(category);
-      Object.assign(wereOptions, {
-        category: categoryEntity,
-      });
-    }
-    return this.productsRepository.count(wereOptions);
+  public async update(
+    id: Product['id'],
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product & UpdateProductDto> {
+    const options = {
+      where: { id },
+    };
+    const product = await this.productsRepository.findOne(options);
+    const toUpdate = Object.assign(product, updateProductDto);
+    return await this.productsRepository.save(toUpdate);
   }
 
-  public async create(product: CreateProductDto): Promise<Product> {
-    const category: Category = await this.categoriesService.findByFormatName(
-      product.category as string,
-    );
-    product.category = category.id;
-
-    const newProduct = await this.productsRepository.save(
-      product as DeepPartial<Product>,
-    );
-
-    const attributes = JSON.parse(product.dataSheet);
-    const productAttributes = [];
-    console.log(attributes);
-
-    if (attributes.length > 0) {
-      for (const attribute of attributes) {
-        const { key, value } = attribute;
-        const newAttribute = new ProductAttributes();
-
-        newAttribute.name = key;
-        newAttribute.value = value;
-        newAttribute.product = newProduct;
-
-        const createdAttribute = await this.productAttributesRepository.save(
-          newAttribute,
-        );
-        productAttributes.push(createdAttribute);
-      }
-    }
-    newProduct.attributes = productAttributes;
-    await this.productsRepository.save(newProduct);
-
-    return newProduct;
-  }
-
-  public async delete(id: string): Promise<Product> {
-    const product: Product = await this.findOne(id);
-    product.isDeleted = true;
-    return this.productsRepository.save(product);
+  public async remove(id: Product['id']): Promise<Product> {
+    const options = {
+      where: { id },
+    };
+    const product = await this.productsRepository.findOne(options);
+    product.is_deleted = true;
+    return await this.productsRepository.save(product);
   }
 }

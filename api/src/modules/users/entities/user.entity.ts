@@ -1,63 +1,39 @@
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  JoinTable,
-} from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { IsEmail } from 'class-validator';
-import { Order } from '@modules/orders/entities/order.entity';
-import { Role } from '@modules/auth/enums/role.enum';
-import { UserRole } from '@modules/users/entities/user-role.entity';
-import { BaseEntity } from '@core/entities/base-entity';
+import { Base } from '../../../core/entities/base.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { UserAddress } from './user-address.entity';
 
-@Entity()
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  public id: number;
+@Entity('user')
+export class User extends Base {
+  @Column()
+  first_name: string;
 
   @Column()
-  public firstName: string;
-
-  @Column()
-  public lastName: string;
+  last_name: string;
 
   @Column({
-    type: 'varchar',
     nullable: false,
     unique: true,
   })
-  @IsEmail()
-  public email: string;
+  email: string;
 
   @Column()
-  public password: string;
+  password: string;
 
   @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    type: 'timestamp',
+    nullable: true,
   })
-  public createdAt: string;
+  last_login: Date;
 
   @Column({
-    type: 'enum',
-    enum: Role,
-    default: Role.USER,
+    nullable: true,
   })
-  public role: Role;
+  phone_number: string;
 
-  @ManyToMany(() => UserRole)
-  @JoinTable()
-  public roles: UserRole[];
+  @Column({
+    default: false,
+  })
+  is_deleted: boolean;
 
-  @OneToMany(() => Order, (order: Order) => order.user)
-  public orders: Order[];
-
-  @BeforeInsert()
-  public async hashPassword(): Promise<void> {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
+  @OneToMany(() => UserAddress, (userAddress) => userAddress.user)
+  address: UserAddress[];
 }

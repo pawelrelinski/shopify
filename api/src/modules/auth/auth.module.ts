@@ -1,29 +1,30 @@
 import { Module } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
+import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from '@modules/users/users.module';
-import { AuthService } from '@modules/auth/auth.service';
-import { JwtStrategy } from '@modules/auth/jwt.strategy';
-import { AuthController } from '@modules/auth/auth.controller';
+import { JWT_CONSTANTS } from './constants';
+import { JwtStrategy } from './jwt.strategy';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Module({
   imports: [
     UsersModule,
-    PassportModule.register({
-      defaultStrategy: 'jwt',
-      property: 'user',
-      session: false,
-    }),
+    PassportModule,
     JwtModule.register({
-      secret: process.env.SECRET_KEY,
-      secretOrPrivateKey: process.env.SECRET_KEY,
-      signOptions: {
-        expiresIn: process.env.EXPIRES_IN,
-      },
+      secret: JWT_CONSTANTS.secret,
+      signOptions: { expiresIn: '2h' },
     }),
   ],
-  providers: [AuthService, JwtStrategy],
-  exports: [PassportModule, JwtModule],
   controllers: [AuthController],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    {
+      provide: 'APP_GUARD',
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AuthModule {}

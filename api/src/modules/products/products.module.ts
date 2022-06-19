@@ -1,28 +1,24 @@
 import { Module } from '@nestjs/common';
+import { ProductsService } from './products.service';
+import { ProductsController } from './products.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { ProductsController } from '@modules/products/products.controller';
-import { ProductsService } from '@modules/products/products.service';
-import { Product } from '@modules/products/entities/product.entity';
-import { OrderProduct } from '@modules/products/entities/order-product.entity';
-import { CategoriesModule } from '@modules/categories/categories.module';
-import { ProductView } from '@modules/products/entities/product-view.entity';
-import { OrderProductsService } from '@modules/products/order-products.service';
-import { ProductAttributes } from '@modules/products/entities/product-attributes.entity';
+import { Product } from './entities/product.entity';
+import { ProductView } from './entities/product-view.entity';
+import { ProductAttribute } from './entities/product-attribute.entity';
+import { Category } from './entities/category.entity';
+import { CategoriesController } from './categories.controller';
+import { CategoriesService } from './categories.service';
 
 @Module({
   imports: [
-    ConfigModule,
     TypeOrmModule.forFeature([
       Product,
-      OrderProduct,
       ProductView,
-      ProductAttributes,
+      ProductAttribute,
+      Category,
     ]),
-    CategoriesModule,
   ],
-  providers: [ProductsService, OrderProductsService],
-  controllers: [ProductsController],
-  exports: [OrderProductsService],
+  controllers: [ProductsController, CategoriesController],
+  providers: [ProductsService, CategoriesService],
 })
 export class ProductsModule {}
