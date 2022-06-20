@@ -11,9 +11,7 @@ enum BannerVisibility {
 })
 export class BannerService {
   private readonly LOCAL_STORAGE_KEY: string = 'shopify_banner_is_open';
-  private _isOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    this.getLocalStorageKeyValue()
-  );
+  private _isOpen = new BehaviorSubject<boolean>(this.getLocalStorageKeyValue());
 
   public readonly isOpen: Observable<boolean> = this._isOpen.asObservable();
 

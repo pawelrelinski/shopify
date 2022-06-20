@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'shopify-order-card-list',
-  templateUrl: './order-card-list.component.html',
-  styleUrls: ['./order-card-list.component.scss'],
+  selector: "shopify-order-card-list",
+  templateUrl: "./order-card-list.component.html",
 })
-export class OrderCardListComponent {}
+export class OrderCardListComponent {
+  @Input() title!: string;
+}

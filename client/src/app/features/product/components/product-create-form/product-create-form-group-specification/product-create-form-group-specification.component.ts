@@ -1,24 +1,23 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'shopify-product-create-form-group-specification',
   templateUrl: './product-create-form-group-specification.component.html',
-  styleUrls: ['./product-create-form-group-specification.component.scss'],
 })
 export class ProductCreateFormGroupSpecificationComponent implements OnInit {
   @Output() onFormReady = new EventEmitter();
 
-  public specificationForm!: FormArray;
+  public specificationForm!: UntypedFormArray;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   public ngOnInit(): void {
     this.setSpecificationForm();
     this.onFormReady.emit(this.specificationForm);
   }
 
-  public newSpecification(): FormGroup {
+  public newSpecification(): UntypedFormGroup {
     return this.fb.group({
       key: '',
       value: '',

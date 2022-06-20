@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CategoryService } from '@features/category/services';
 import { Category, CategoryWithProductsCount } from '@features/category/models';
 
 @Component({
   selector: 'shopify-category-table',
   templateUrl: './category-table.component.html',
-  styleUrls: ['./category-table.component.scss'],
 })
 export class CategoryTableComponent implements OnInit {
   public categories!: CategoryWithProductsCount[];
   public currentPage = 1;
 
-  constructor(private categoryService: CategoryService) {}
+  private categoryService = inject(CategoryService);
 
   public ngOnInit(): void {
     this.setAllCategories();

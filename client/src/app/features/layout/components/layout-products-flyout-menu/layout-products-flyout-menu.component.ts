@@ -1,29 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlyoutMenu } from '@features/layout/models';
-import { FlyoutMenuService } from '@features/layout/services';
 import { Subject, takeUntil } from 'rxjs';
-import { CategoryService } from '@features/category/services';
 import { Category } from '@features/category/models';
-import { DomSanitizer } from '@angular/platform-browser';
+import { LayoutProductsFlyoutMenuInjectors } from '@features/layout/components/layout-products-flyout-menu/layout-products-flyout-menu-injectors';
 
 @Component({
   selector: 'shopify-layout-products-flyout-menu',
   templateUrl: './layout-products-flyout-menu.component.html',
-  styleUrls: ['./layout-products-flyout-menu.component.scss'],
 })
-export class LayoutProductsFlyoutMenuComponent implements OnInit, OnDestroy {
+export class LayoutProductsFlyoutMenuComponent
+  extends LayoutProductsFlyoutMenuInjectors
+  implements OnInit, OnDestroy
+{
   public flyoutMenuName!: FlyoutMenu;
   public showFlyoutMenu: boolean = false;
-
   public categories: Category[] = [];
 
   private readonly destroyed = new Subject<boolean>();
 
-  constructor(
-    private flyoutMenuService: FlyoutMenuService,
-    private categoryService: CategoryService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor() {
+    super();
+  }
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();

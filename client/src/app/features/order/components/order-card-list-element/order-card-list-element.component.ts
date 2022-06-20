@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'shopify-order-card-list-element',
-  templateUrl: './order-card-list-element.component.html',
-  styleUrls: ['./order-card-list-element.component.scss'],
+  selector: "shopify-order-card-list-element",
+  templateUrl: "./order-card-list-element.component.html",
 })
-export class OrderCardListElementComponent {}
+export class OrderCardListElementComponent {
+  public productsListIsVisible = false;
+
+  public toggleProductsList(): void {
+    this.productsListIsVisible = !this.productsListIsVisible;
+  }
+}

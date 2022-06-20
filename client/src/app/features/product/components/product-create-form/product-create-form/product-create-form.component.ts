@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ProductService } from '@features/product/services';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { ProductCreateDto, ProductCreateResponse } from '@features/product/models';
-import { NotificationService } from '@features/notification/services';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { NotificationType } from '@features/notification/models';
-import { ViewportScroller } from '@angular/common';
+import { ProductCreateFormInjectors } from '@features/product/components/product-create-form/product-create-form/product-create-form-injectors';
 
 interface ErrorResponse {
   ok: boolean;
@@ -19,26 +16,20 @@ interface ErrorResponse {
   templateUrl: './product-create-form.component.html',
   styleUrls: ['./product-create-form.component.scss'],
 })
-export class ProductCreateFormComponent implements OnInit {
-  public createProductForm!: FormGroup;
+export class ProductCreateFormComponent extends ProductCreateFormInjectors implements OnInit {
+  public createProductForm!: UntypedFormGroup;
   public isError = false;
   public errorMessages: string[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private productService: ProductService,
-    private notificationService: NotificationService,
-    private viewport: ViewportScroller
-  ) {}
+  constructor() {
+    super();
+  }
 
   public ngOnInit(): void {
     this.setCreateProductForm();
   }
 
   public onSubmit(): void {
-    console.log(this.createProductForm);
     this.productService.create(this.createProductObjectToSend()).subscribe(
       (event: HttpEvent<ProductCreateResponse>) => {
         if (event.type === HttpEventType.Response) {
@@ -72,11 +63,11 @@ export class ProductCreateFormComponent implements OnInit {
     });
   }
 
-  public addChildForm(name: string, group: FormGroup): void {
+  public addChildForm(name: string, group: UntypedFormGroup): void {
     this.createProductForm.addControl(name, group);
   }
 
-  public newSpecification(): FormGroup {
+  public newSpecification(): UntypedFormGroup {
     return this.fb.group({
       key: '',
       value: '',
@@ -91,8 +82,8 @@ export class ProductCreateFormComponent implements OnInit {
     this.getSpecification().removeAt(index);
   }
 
-  public getSpecification(): FormArray {
-    return this.createProductForm.get('specification') as FormArray;
+  public getSpecification(): UntypedFormArray {
+    return this.createProductForm.get('specification') as UntypedFormArray;
   }
 
   public resetForm(): void {

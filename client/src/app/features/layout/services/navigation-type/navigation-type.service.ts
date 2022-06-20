@@ -6,9 +6,7 @@ import { NavigationType } from '@features/layout/models';
   providedIn: 'root',
 })
 export class NavigationTypeService {
-  private _navigationType: BehaviorSubject<NavigationType> = new BehaviorSubject<NavigationType>(
-    NavigationType.USER
-  );
+  private _navigationType = new BehaviorSubject<NavigationType>(NavigationType.USER);
   public readonly navigationType: Observable<NavigationType> = this._navigationType.asObservable();
 
   public changeNavigationType(value: NavigationType): void {

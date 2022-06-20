@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '@features/product/services';
 import { ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -7,7 +7,6 @@ import { Product, View } from '@features/product/models';
 @Component({
   selector: 'shopify-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
   public views!: View[];
@@ -16,7 +15,8 @@ export class ProductDetailsComponent implements OnInit {
 
   private product!: Product;
 
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) {}
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private productService: ProductService = inject(ProductService);
 
   public ngOnInit(): void {
     this.setProduct();

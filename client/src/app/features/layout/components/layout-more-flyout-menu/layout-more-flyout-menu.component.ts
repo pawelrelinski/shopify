@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FlyoutMenuService } from '@features/layout/services';
 import { FlyoutMenu } from '@features/layout/models';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,8 +13,7 @@ export class LayoutMoreFlyoutMenuComponent implements OnInit, OnDestroy {
   public showFlyoutMenu: boolean = false;
 
   private readonly destroyed = new Subject<boolean>();
-
-  constructor(private flyoutMenuService: FlyoutMenuService) {}
+  private flyoutMenuService = inject(FlyoutMenuService);
 
   public ngOnInit(): void {
     this.updateFlyoutMenuName();

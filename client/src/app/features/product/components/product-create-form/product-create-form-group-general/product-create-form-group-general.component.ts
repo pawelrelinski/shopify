@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 interface ImageSnippet {
@@ -10,12 +10,11 @@ interface ImageSnippet {
 @Component({
   selector: 'shopify-product-create-form-group-general',
   templateUrl: './product-create-form-group-general.component.html',
-  styleUrls: ['./product-create-form-group-general.component.scss'],
 })
 export class ProductCreateFormGroupGeneralComponent implements OnInit {
-  @Output() onFormReady = new EventEmitter<FormGroup>();
+  @Output() onFormReady = new EventEmitter<UntypedFormGroup>();
 
-  public generalForm!: FormGroup;
+  public generalForm!: UntypedFormGroup;
   public selectedFile!: ImageSnippet;
   public readonly editorConfig: AngularEditorConfig = {
     editable: true,
@@ -23,7 +22,7 @@ export class ProductCreateFormGroupGeneralComponent implements OnInit {
     placeholder: 'Enter description here...',
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   public ngOnInit(): void {
     this.setGeneralForm();

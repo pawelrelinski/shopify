@@ -1,4 +1,4 @@
-<div>
+<div class="mb-10">
   <h3 class="sr-only">Order placed on <time datetime="2021-01-22">January 22, 2021</time></h3>
 
   <div class="bg-gray-50 rounded-lg py-6 px-4 sm:px-6 sm:flex sm:items-center sm:justify-between sm:space-x-6 lg:space-x-8">
@@ -28,7 +28,11 @@
     </a>
   </div>
 
-  <table class="mt-4 w-full text-gray-500 sm:mt-6">
+  <button (click)='toggleProductsList()' type="button" class="inline-flex items-center px-4 py-2 mt-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+    {{ productsListIsVisible ? 'Hide' : 'Show' }} products
+  </button>
+
+  <table *ngIf='productsListIsVisible' class="mt-4 w-full text-gray-500 sm:mt-6">
     <caption class="sr-only">
       Products
     </caption>
