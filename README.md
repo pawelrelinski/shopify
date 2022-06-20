@@ -32,7 +32,7 @@ Fullstack application as project to school. E-commerce shop with products relate
 ### Built With
 
 #### Client
-- [Angular 13](https://angular.io)
+- [Angular 14](https://angular.io)
 - [Tailwind](https://tailwindcss.com)
 - [NGRX](https://ngrx.io)
 
@@ -42,7 +42,7 @@ Fullstack application as project to school. E-commerce shop with products relate
 - [Passport JWT](http://www.passportjs.org/packages/passport-jwt/)
 
 #### Database
-- [MySQL](https://www.mysql.com)
+- [PostgreSQL](https://www.postgresql.org/)
 
 #### Documentation
 - [Compodoc](https://compodoc.github.io/compodoc/)
@@ -65,9 +65,10 @@ The API is generally RESTFULL and return results in JSON. <br>
 Major resource components supported by the API are:
 
 - Products
-- Users
-- Auth
 - Categories
+- Users
+- Users Address
+- Auth
 
 <br>
 
@@ -83,40 +84,48 @@ These can be used alone like this
 
 | resource | description                                            |
 -----------|--------------------------------------------------------|
-`GET /products` | Get all products                                       |
-`GET /products/:id` | Get product by id                                      |
-`GET /products/count` | Get count of all products or product in given category |
-`POST /products` | Create product                                         |
-`DELETE /products/:id` | Delete product by given id                             |
+<b style="color: red;">Private</b> `POST /products` | Create product |
+<b style="color: green;">Public</b> `GET /products` | Get all products |
+<b style="color: red;">Private</b> `POST /products/upload` | Add image |
+<b style="color: green;">Public</b> `GET /products/{id}` | Get product by id |
+<b style="color: red;">Private</b> `PATCH /products/{id}` | Update product by id |
+<b style="color: red;">Private</b> `DELETE /products/{id}` | Delete product |
+
+<h4>Categories</h4>
+
+| resource | description                                            |
+-----------|--------------------------------------------------------|
+<b style="color: red;">Private</b> `POST /categories` | Create category |
+<b style="color: green;">Public</b> `GET /categories` | Get all categories |
+<b style="color: green;">Public</b> `GET /categories/{id}` | Get category by id |
 
 <h4>Users</h4>
 
 | resource | description                    |
 -----------|--------------------------------|
-`GET /users` | Get all users                  |
-`GET /users/:id` | Get user by given id           |
-`GET /users/count` | Get count of all users         |
-`PATCH /users/:id/attribute` | Update specific user attribute |
+<b style="color: red;">Private</b> `POST /users` | Create user |
+<b style="color: red;">Private</b> `GET /users/` | Get all users |
+<b style="color: red;">Private</b> `GET /users/me` | Get user by id or email |
+<b style="color: red;">Private</b> `PATCH /users/{id}` | Update user by id |
+<b style="color: red;">Private</b> `DELETE /users/{id}` | Delete user by id |
+
+<h4>Users Address</h4>
+
+| resource | description                    |
+-----------|--------------------------------|
+<b style="color: red;">Private</b> `POST /users-address` | Create user address |
+<b style="color: red;">Private</b> `GET /users-address` | Get all user address |
+<b style="color: red;">Private</b> `GET /users-address/{id}` | Get user address by id |
+<b style="color: red;">Private</b> `POST /users-address/{id}` | Update user address by id |
+<b style="color: red;">Private</b> `DELETE /users-address/{id}` | Delete user address by id |
+<b style="color: red;">Private</b> `GET /users-address/{userId}` | Get user address by user id |
 
 <h4>Auth</h4>
 
 | resource | description |
 -----------|-------------|
-`POST /auth/register` | Register    |
-`POST /auth/login` | Login       |
+<b style="color: green;">Public</b> `POST /auth/login` | Login to service    |
 
-<h4>Categories</h4>
-
-| resource | description                    |
------------|--------------------------------|
-`GET /categories` | Get all categories             |
-`GET /categories/productsCount` | Get products count in category |
-`GET /categories/count` | Get count of categories        |
-`GET /categories/:id` | Get category by given id       |
-
-<h4>Database Diagram</h4>
-
-![Imgur](https://i.imgur.com/oJ3ePOA.png)
 
 <br>
 

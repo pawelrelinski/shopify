@@ -9,6 +9,7 @@ import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
 import { DataSource } from 'typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
 
@@ -16,6 +17,9 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
   imports: [
     ConfigModule.forRoot({ envFilePath, isGlobal: true }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    MulterModule.register({
+      dest: './uploads',
+    }),
     ProductsModule,
     UsersModule,
     AuthModule,
